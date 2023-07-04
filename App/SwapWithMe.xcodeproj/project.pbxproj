@@ -14,6 +14,7 @@
 		D431A8B12A4848EF00109710 /* SwapWithMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D431A8B02A4848EF00109710 /* SwapWithMeTests.swift */; };
 		D431A8BB2A4848EF00109710 /* SwapWithMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D431A8BA2A4848EF00109710 /* SwapWithMeUITests.swift */; };
 		D431A8BD2A4848EF00109710 /* SwapWithMeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D431A8BC2A4848EF00109710 /* SwapWithMeUITestsLaunchTests.swift */; };
+		D44C3A7F2A543AC700A634F1 /* Feature in Frameworks */ = {isa = PBXBuildFile; productRef = D44C3A7E2A543AC700A634F1 /* Feature */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D44C3A7F2A543AC700A634F1 /* Feature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +82,7 @@
 				D431A8B92A4848EF00109710 /* SwapWithMeUITests */,
 				D4BB2BE42A543271007C9ADB /* SwapWithMe */,
 				D431A89D2A4848EE00109710 /* Products */,
+				D44C3A7D2A543AC700A634F1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -129,6 +132,13 @@
 			path = SwapWithMeUITests;
 			sourceTree = "<group>";
 		};
+		D44C3A7D2A543AC700A634F1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -145,6 +155,9 @@
 			dependencies = (
 			);
 			name = SwapWithMe;
+			packageProductDependencies = (
+				D44C3A7E2A543AC700A634F1 /* Feature */,
+			);
 			productName = SwapWithMe;
 			productReference = D431A89C2A4848EE00109710 /* SwapWithMe.app */;
 			productType = "com.apple.product-type.application";
@@ -585,6 +598,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D44C3A7E2A543AC700A634F1 /* Feature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Feature;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D431A8942A4848EE00109710 /* Project object */;
 }
