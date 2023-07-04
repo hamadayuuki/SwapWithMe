@@ -44,6 +44,7 @@
 		D431A8B62A4848EF00109710 /* SwapWithMeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwapWithMeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D431A8BA2A4848EF00109710 /* SwapWithMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapWithMeUITests.swift; sourceTree = "<group>"; };
 		D431A8BC2A4848EF00109710 /* SwapWithMeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapWithMeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D4BB2BE42A543271007C9ADB /* SwapWithMe */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwapWithMe; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +78,7 @@
 				D431A89E2A4848EE00109710 /* SwapWithMe */,
 				D431A8AF2A4848EF00109710 /* SwapWithMeTests */,
 				D431A8B92A4848EF00109710 /* SwapWithMeUITests */,
+				D4BB2BE42A543271007C9ADB /* SwapWithMe */,
 				D431A89D2A4848EE00109710 /* Products */,
 			);
 			sourceTree = "<group>";
