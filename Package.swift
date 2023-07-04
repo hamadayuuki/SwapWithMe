@@ -5,19 +5,13 @@ import PackageDescription
 
 let package = Package(
     name: "SwapWithMe",
+    // モジュール の依存関係を定義
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
-        .library(
-            name: "SwapWithMe",
-            targets: ["SwapWithMe"]),
     ],
+    // ライブラリ の依存関係を定義
+    dependencies: [
+    ],
+    // target や test 用の target を追加していく
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
-        .target(
-            name: "SwapWithMe"),
-        .testTarget(
-            name: "SwapWithMeTests",
-            dependencies: ["SwapWithMe"]),
     ]
 )
