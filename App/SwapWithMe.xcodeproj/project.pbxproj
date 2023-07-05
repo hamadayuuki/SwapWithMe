@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		D431A8A02A4848EE00109710 /* SwapWithMeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D431A89F2A4848EE00109710 /* SwapWithMeApp.swift */; };
-		D431A8A22A4848EE00109710 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D431A8A12A4848EE00109710 /* ContentView.swift */; };
 		D431A8A42A4848EF00109710 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D431A8A32A4848EF00109710 /* Assets.xcassets */; };
 		D431A8A72A4848EF00109710 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D431A8A62A4848EF00109710 /* Preview Assets.xcassets */; };
 		D431A8B12A4848EF00109710 /* SwapWithMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D431A8B02A4848EF00109710 /* SwapWithMeTests.swift */; };
 		D431A8BB2A4848EF00109710 /* SwapWithMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D431A8BA2A4848EF00109710 /* SwapWithMeUITests.swift */; };
 		D431A8BD2A4848EF00109710 /* SwapWithMeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D431A8BC2A4848EF00109710 /* SwapWithMeUITestsLaunchTests.swift */; };
+		D44C3A7F2A543AC700A634F1 /* Feature in Frameworks */ = {isa = PBXBuildFile; productRef = D44C3A7E2A543AC700A634F1 /* Feature */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +36,6 @@
 /* Begin PBXFileReference section */
 		D431A89C2A4848EE00109710 /* SwapWithMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwapWithMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D431A89F2A4848EE00109710 /* SwapWithMeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapWithMeApp.swift; sourceTree = "<group>"; };
-		D431A8A12A4848EE00109710 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D431A8A32A4848EF00109710 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D431A8A62A4848EF00109710 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D431A8AC2A4848EF00109710 /* SwapWithMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwapWithMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +43,7 @@
 		D431A8B62A4848EF00109710 /* SwapWithMeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwapWithMeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D431A8BA2A4848EF00109710 /* SwapWithMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapWithMeUITests.swift; sourceTree = "<group>"; };
 		D431A8BC2A4848EF00109710 /* SwapWithMeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapWithMeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D4BB2BE42A543271007C9ADB /* SwapWithMe */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwapWithMe; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D44C3A7F2A543AC700A634F1 /* Feature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,7 +78,9 @@
 				D431A89E2A4848EE00109710 /* SwapWithMe */,
 				D431A8AF2A4848EF00109710 /* SwapWithMeTests */,
 				D431A8B92A4848EF00109710 /* SwapWithMeUITests */,
+				D4BB2BE42A543271007C9ADB /* SwapWithMe */,
 				D431A89D2A4848EE00109710 /* Products */,
+				D44C3A7D2A543AC700A634F1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -95,7 +98,6 @@
 			isa = PBXGroup;
 			children = (
 				D431A89F2A4848EE00109710 /* SwapWithMeApp.swift */,
-				D431A8A12A4848EE00109710 /* ContentView.swift */,
 				D431A8A32A4848EF00109710 /* Assets.xcassets */,
 				D431A8A52A4848EF00109710 /* Preview Content */,
 			);
@@ -127,6 +129,13 @@
 			path = SwapWithMeUITests;
 			sourceTree = "<group>";
 		};
+		D44C3A7D2A543AC700A634F1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +152,9 @@
 			dependencies = (
 			);
 			name = SwapWithMe;
+			packageProductDependencies = (
+				D44C3A7E2A543AC700A634F1 /* Feature */,
+			);
 			productName = SwapWithMe;
 			productReference = D431A89C2A4848EE00109710 /* SwapWithMe.app */;
 			productType = "com.apple.product-type.application";
@@ -257,7 +269,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D431A8A22A4848EE00109710 /* ContentView.swift in Sources */,
 				D431A8A02A4848EE00109710 /* SwapWithMeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -583,6 +594,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D44C3A7E2A543AC700A634F1 /* Feature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Feature;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D431A8942A4848EE00109710 /* Project object */;
 }
