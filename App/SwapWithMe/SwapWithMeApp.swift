@@ -12,7 +12,7 @@ import SwiftUI
 struct SwapWithMeApp: App {
     var body: some Scene {
         WindowGroup {
-            Feature.ContentView()
+            ContentView()
         }
     }
 }

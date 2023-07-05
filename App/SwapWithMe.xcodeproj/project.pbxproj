@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D431A8A02A4848EE00109710 /* SwapWithMeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D431A89F2A4848EE00109710 /* SwapWithMeApp.swift */; };
-		D431A8A22A4848EE00109710 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D431A8A12A4848EE00109710 /* ContentView.swift */; };
 		D431A8A42A4848EF00109710 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D431A8A32A4848EF00109710 /* Assets.xcassets */; };
 		D431A8A72A4848EF00109710 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D431A8A62A4848EF00109710 /* Preview Assets.xcassets */; };
 		D431A8B12A4848EF00109710 /* SwapWithMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D431A8B02A4848EF00109710 /* SwapWithMeTests.swift */; };
@@ -37,7 +36,6 @@
 /* Begin PBXFileReference section */
 		D431A89C2A4848EE00109710 /* SwapWithMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwapWithMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D431A89F2A4848EE00109710 /* SwapWithMeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapWithMeApp.swift; sourceTree = "<group>"; };
-		D431A8A12A4848EE00109710 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D431A8A32A4848EF00109710 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D431A8A62A4848EF00109710 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D431A8AC2A4848EF00109710 /* SwapWithMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwapWithMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,7 +98,6 @@
 			isa = PBXGroup;
 			children = (
 				D431A89F2A4848EE00109710 /* SwapWithMeApp.swift */,
-				D431A8A12A4848EE00109710 /* ContentView.swift */,
 				D431A8A32A4848EF00109710 /* Assets.xcassets */,
 				D431A8A52A4848EF00109710 /* Preview Content */,
 			);
@@ -272,7 +269,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D431A8A22A4848EE00109710 /* ContentView.swift in Sources */,
 				D431A8A02A4848EE00109710 /* SwapWithMeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
