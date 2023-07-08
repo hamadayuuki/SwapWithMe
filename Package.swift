@@ -36,7 +36,7 @@ let allTargets = featureTargets
 
 let package = Package(
     name: "SwapWithMe",
-    platforms: [.iOS(.v14)],
+    platforms: [.iOS(.v15)],
     products: allTargets
         .map{ $0.name }
         .map{ .library(name: $0, targets: [$0]) },
