@@ -3,6 +3,19 @@
 
 import PackageDescription
 
+typealias PackageDependency = PackageDescription.Package.Dependency
+typealias TargetDependency = PackageDescription.Target.Dependency
+
+// MARK: Dependency
+
+let packageDependencies: [PackageDependency] = [
+    .package(url: "https://github.com/yazio/ReadabilityModifier", from: .init(1, 0, 0)),
+]
+
+let readabilityModifier: TargetDependency = .product(name: "ReadabilityModifier", package: "ReadabilityModifier")
+
+// MARK: Package
+
 let package = Package(
     name: "SwapWithMe",
     // 対象とする Minバージョンを指定
@@ -12,10 +25,12 @@ let package = Package(
         .library(name: "Feature", targets: ["Feature"])
     ],
     // ライブラリ の依存関係を定義
-    dependencies: [
-    ],
+    dependencies: packageDependencies,
     // target や test 用の target を追加していく
     targets: [
-        .target(name: "Feature")
+        .target(
+            name: "Feature",
+            dependencies: [readabilityModifier]
+        )
     ]
 )
