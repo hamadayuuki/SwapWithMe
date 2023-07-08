@@ -13,7 +13,7 @@
 		D431A8B12A4848EF00109710 /* SwapWithMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D431A8B02A4848EF00109710 /* SwapWithMeTests.swift */; };
 		D431A8BB2A4848EF00109710 /* SwapWithMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D431A8BA2A4848EF00109710 /* SwapWithMeUITests.swift */; };
 		D431A8BD2A4848EF00109710 /* SwapWithMeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D431A8BC2A4848EF00109710 /* SwapWithMeUITestsLaunchTests.swift */; };
-		D44C3A7F2A543AC700A634F1 /* Feature in Frameworks */ = {isa = PBXBuildFile; productRef = D44C3A7E2A543AC700A634F1 /* Feature */; };
+		D45CA13D2A5929EE00C787D6 /* SignUp in Frameworks */ = {isa = PBXBuildFile; productRef = D45CA13C2A5929EE00C787D6 /* SignUp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D44C3A7F2A543AC700A634F1 /* Feature in Frameworks */,
+				D45CA13D2A5929EE00C787D6 /* SignUp in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,7 +153,7 @@
 			);
 			name = SwapWithMe;
 			packageProductDependencies = (
-				D44C3A7E2A543AC700A634F1 /* Feature */,
+				D45CA13C2A5929EE00C787D6 /* SignUp */,
 			);
 			productName = SwapWithMe;
 			productReference = D431A89C2A4848EE00109710 /* SwapWithMe.app */;
@@ -596,9 +596,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D44C3A7E2A543AC700A634F1 /* Feature */ = {
+		D45CA13C2A5929EE00C787D6 /* SignUp */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = Feature;
+			productName = SignUp;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
