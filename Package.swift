@@ -5,8 +5,10 @@ import PackageDescription
 
 typealias PackageDependency = PackageDescription.Package.Dependency
 typealias TargetDependency = PackageDescription.Target.Dependency
+typealias Target = PackageDescription.Target
+typealias Product = PackageDescription.Product
 
-// MARK: Dependency
+// MARK: - Library
 
 let packageDependencies: [PackageDependency] = [
     .package(url: "https://github.com/yazio/ReadabilityModifier", from: .init(1, 0, 0)),
@@ -14,23 +16,38 @@ let packageDependencies: [PackageDependency] = [
 
 let readabilityModifier: TargetDependency = .product(name: "ReadabilityModifier", package: "ReadabilityModifier")
 
-// MARK: Package
+// MARK: - Targets
+
+extension Target {
+    static func feature(name: String, dependencies: [TargetDependency], resources: [Resource]? = nil, plugins: [Target.PluginUsage]? = nil) -> Target {
+        .target(name: name, dependencies: dependencies, path: "Sources/Feature/\(name)", resources: resources, plugins: plugins)
+    }
+}
+
+// MARK: Feature
+
+let featureTargets: [Target] = [
+    .feature(name: "SignUp", dependencies: [readabilityModifier])
+]
+
+// MARK: - Package
+
+let allTargets = featureTargets
 
 let package = Package(
     name: "SwapWithMe",
-    // 対象とする Minバージョンを指定
-    platforms: [.iOS(.v13)],
-    // モジュール の依存関係を定義
-    products: [
-        .library(name: "Feature", targets: ["Feature"])
-    ],
-    // ライブラリ の依存関係を定義
+    platforms: [.iOS(.v14)],
+    products: allTargets
+        .map{ $0.name }
+        .map{ .library(name: $0, targets: [$0]) },
     dependencies: packageDependencies,
-    // target や test 用の target を追加していく
     targets: [
         .target(
-            name: "Feature",
-            dependencies: [readabilityModifier]
+            name: "SignUp",
+            dependencies: [
+                readabilityModifier
+            ],
+            path: "Sources/Feature/SignUp"
         )
     ]
 )
