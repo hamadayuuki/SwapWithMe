@@ -13,23 +13,25 @@ public struct SignUpView: View {
 
     public var body: some View {
         let signUpTypes: [SignUpButtonType] = [.phone, .apple, .google]
-
-        VStack(spacing: 24) {
-            ForEach(signUpTypes, id: \.id) { signUpType in
-                signUpButton(button: signUpType.model)
+        NavigationView {
+            VStack(spacing: 24) {
+                ForEach(signUpTypes, id: \.id) { signUpType in
+                    signUpButton(button: signUpType.model)
+                }
             }
+            .fitToReadableContentGuide(type: .width)
         }
-        .fitToReadableContentGuide(type: .width)
     }
     
     private func signUpButton(button: SignUpButton) -> some View {
-        Button(action: {
+        NavigationLink {
+            // TODO: 遷移先変更
             switch button.type {
-            case .phone: print("Phone")
-            case .apple: print("Apple")
-            case .google: print("Google")
+            case .phone: PhoneNumberAuthView()
+            case .apple: PhoneNumberAuthView()
+            case .google: PhoneNumberAuthView()
             }
-        }, label: {
+        } label: {
             ZStack {
                 Text(button.title)
                     .foregroundColor(button.foregroundColor)
@@ -42,7 +44,7 @@ public struct SignUpView: View {
             .frame(width: 300, height: 50)
             .background(button.backgroundColor)
             .cornerRadius(100)
-        })
+        }
     }
 }
 
