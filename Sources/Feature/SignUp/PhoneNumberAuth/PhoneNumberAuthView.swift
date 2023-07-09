@@ -10,6 +10,7 @@ import SwiftUI
 
 struct PhoneNumberAuthView: View {
     @State private var phoneNumber = ""
+    @State private var isShowConfirmVerificationCodeView = false
     
     private var isButtonEnable: Bool {
         if phoneNumber.count == 11 {
@@ -55,6 +56,10 @@ struct PhoneNumberAuthView: View {
             })
             .padding(.top, 40)
             .disabled(!isButtonEnable)
+
+            NavigationLink(destination: ConfirmVerificationCodeView(), isActive: $isShowConfirmVerificationCodeView) {
+                EmptyView()
+            }
         }
         .frame(maxHeight: .infinity, alignment: .top)
         .fitToReadableContentGuide()
@@ -71,6 +76,7 @@ struct PhoneNumberAuthView: View {
                   return
               }
               UserDefaults.standard.set(verificationID, forKey: "verificationID")
+              isShowConfirmVerificationCodeView = true
           }
     }
 }
