@@ -5,6 +5,7 @@
 //  Created by 濵田　悠樹 on 2023/07/08.
 //
 
+import FirebaseAuth
 import SwiftUI
 
 struct PhoneNumberAuthView: View {
@@ -43,7 +44,7 @@ struct PhoneNumberAuthView: View {
             }
             
             Button(action: {
-                
+                fetchSMS()
             }, label: {
                 Text("次へ")
                     .foregroundColor(.white)
@@ -59,6 +60,18 @@ struct PhoneNumberAuthView: View {
         .fitToReadableContentGuide()
         .padding(.top, 60)
         
+    }
+
+    private func fetchSMS() {
+        // Firebase Auth のテストデータとして私用の電話番号を設定済み
+        PhoneAuthProvider.provider()
+          .verifyPhoneNumber("+81" + phoneNumber, uiDelegate: nil) { verificationID, error in
+              if let error = error {
+                  fatalError(error.localizedDescription)
+                  return
+              }
+              UserDefaults.standard.set(verificationID, forKey: "verificationID")
+          }
     }
 }
 

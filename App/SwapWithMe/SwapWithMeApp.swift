@@ -5,9 +5,10 @@
 //  Created by 濵田　悠樹 on 2023/06/25.
 //
 
+import FirebaseAuth
+import FirebaseCore
 import SignUp
 import SwiftUI
-import FirebaseCore
 
 @main
 struct SwapWithMeApp: App {
@@ -22,10 +23,19 @@ struct SwapWithMeApp: App {
 // MARK: - AppDelegate
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        FirebaseApp.configure()
+        return true
+    }
 
-    return true
-  }
+    /// 電話番号認証
+    /// サイレントプッシュ通知を受け取る
+    func  application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        if Auth.auth().canHandleNotification(userInfo) {
+            completionHandler(.noData)
+            return
+        }
+    }
 }
+
+
