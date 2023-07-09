@@ -41,6 +41,7 @@ struct ConfirmVerificationCodeView: View {
             }
             
             Button(action: {
+                authWithSMS()
             }, label: {
                 Text("登録")
                     .foregroundColor(.white)
@@ -55,6 +56,26 @@ struct ConfirmVerificationCodeView: View {
         .frame(maxHeight: .infinity, alignment: .top)
         .fitToReadableContentGuide()
         .padding(.top, 60)
+    }
+
+    private func authWithSMS() {
+        guard let verificationID = UserDefaults.standard.string(forKey: "verificationID") else {
+            print("Error get verificationID")
+            return
+        }
+
+        let credential = PhoneAuthProvider.provider().credential(
+          withVerificationID: verificationID,
+          verificationCode: verificationCode
+        )
+        
+        Auth.auth().signIn(with: credential) { authResult, error in
+            if let error = error {
+                print("Error signIn with verificationID")
+                return
+            }
+            print("Success signIn with verificationID")
+        }
     }
 }
 
