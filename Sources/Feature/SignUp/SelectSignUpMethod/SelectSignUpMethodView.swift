@@ -1,5 +1,5 @@
 //
-//  SignUpView.swift
+//  SelectSignUpMethodView.swift
 //  
 //
 //  Created by 濵田　悠樹 on 2023/07/06.
@@ -8,7 +8,7 @@
 import ReadabilityModifier
 import SwiftUI
 
-public struct SignUpView: View {
+public struct SelectSignUpMethodView: View {
     public init() {}
 
     public var body: some View {
@@ -50,6 +50,6 @@ public struct SignUpView: View {
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView()
+        SelectSignUpMethodView()
     }
 }
