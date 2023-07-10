@@ -13,12 +13,14 @@ typealias Product = PackageDescription.Product
 let packageDependencies: [PackageDependency] = [
     .package(url: "https://github.com/firebase/firebase-ios-sdk", from: .init(10, 11, 0)),
     .package(url: "https://github.com/yazio/ReadabilityModifier", from: .init(1, 0, 0)),
+    .package(url: "https://github.com/exyte/PopupView", from: .init(2, 5, 7)),
 ]
 
 let readabilityModifier: TargetDependency = .product(name: "ReadabilityModifier", package: "ReadabilityModifier")
 let analytics: TargetDependency = .product(name: "FirebaseAnalytics", package: "firebase-ios-sdk")
 let fireAuth: TargetDependency = .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
 let fireStore: TargetDependency = .product(name: "FirebaseFirestore", package: "firebase-ios-sdk")
+let popupView: TargetDependency = .product(name: "PopupView", package: "PopupView")
 
 // MARK: - Targets
 
@@ -34,7 +36,8 @@ let featureTargets: [Target] = [
     .feature(name: "SignUp", dependencies: [
         fireAuth,
         fireStore,
-        readabilityModifier
+        readabilityModifier,
+        popupView
     ])
 ]
 
@@ -55,7 +58,8 @@ let package = Package(
             dependencies: [
                 fireAuth,
                 fireStore,
-                readabilityModifier
+                readabilityModifier,
+                popupView
             ],
             path: "Sources/Feature/SignUp"
         )
