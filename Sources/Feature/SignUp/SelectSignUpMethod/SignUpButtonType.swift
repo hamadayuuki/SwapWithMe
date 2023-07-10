@@ -32,7 +32,7 @@ struct SignUpButton {
     let icon: String
     let foregroundColor: Color
     let backgroundColor: Color
-    
+
     init(type: SignUpButtonType, title: String, icon: String, foregroundColor: Color, backgroundColor: Color) {
         self.type = type
         self.title = title
@@ -50,7 +50,7 @@ extension SignUpButton {
         foregroundColor: Color.white,
         backgroundColor: Color.green
     )
-    
+
     static let apple = SignUpButton(
         type: .apple,
         title: "Appleで続ける",
@@ -58,7 +58,7 @@ extension SignUpButton {
         foregroundColor: Color.white,
         backgroundColor: Color.black
     )
-    
+
     static let google = SignUpButton(
         type: .google,
         title: "Googleで続ける",

@@ -11,7 +11,7 @@ import SwiftUI
 struct PhoneNumberAuthView: View {
     @State private var phoneNumber = ""
     @State private var isShowConfirmVerificationCodeView = false
-    
+
     private var isButtonEnable: Bool {
         if phoneNumber.count == 11 {
             return true
@@ -30,10 +30,10 @@ struct PhoneNumberAuthView: View {
             VStack(alignment: .leading, spacing: 18) {
                 Text("電話番号を使用して登録")
                     .font(.system(size: 24, weight: .bold, design: .rounded))
-                
+
                 Text("間違った電話番号を登録すると、メッセージが届かずユーザー登録できません。")
                     .font(.system(size: 12, weight: .regular, design: .rounded))
-                
+
                 TextField("000-0000-0000", text: $phoneNumber)
                     .font(.system(size: 32, weight: .bold, design: .rounded))
                     .padding(.top, 40)
@@ -43,7 +43,7 @@ struct PhoneNumberAuthView: View {
                     .frame(height: 5)
                     .background(.gray)
             }
-            
+
             Button(action: {
                 fetchSMS()
             }, label: {
@@ -73,7 +73,6 @@ struct PhoneNumberAuthView: View {
           .verifyPhoneNumber("+81" + phoneNumber, uiDelegate: nil) { verificationID, error in
               if let error = error {
                   fatalError(error.localizedDescription)
-                  return
               }
               UserDefaults.standard.set(verificationID, forKey: "verificationID")
               isShowConfirmVerificationCodeView = true

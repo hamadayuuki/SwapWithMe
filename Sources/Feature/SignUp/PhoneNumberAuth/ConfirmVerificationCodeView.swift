@@ -74,7 +74,7 @@ struct ConfirmVerificationCodeView: View {
           withVerificationID: verificationID,
           verificationCode: verificationCode
         )
-        
+
         Auth.auth().signIn(with: credential) { authResult, error in
             if let error = error {
                 print("Error signIn with verificationID")
