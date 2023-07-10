@@ -7,20 +7,45 @@
 
 import ReadabilityModifier
 import SwiftUI
+import PopupView
 
 public struct SelectSignUpMethodView: View {
     public init() {}
 
+    @State private var isFloatButtom = false
+
     public var body: some View {
         let signUpTypes: [SignUpButtonType] = [.phone, .apple, .google]
+
         NavigationView {
             VStack(spacing: 24) {
                 ForEach(signUpTypes, id: \.id) { signUpType in
                     signUpButton(button: signUpType.model)
                 }
+                
+                Button(action: {
+                    isFloatButtom = true
+                }, label: {
+                    Text("Popup")
+                })
             }
             .fitToReadableContentGuide(type: .width)
         }
+        .popup(isPresented: $isFloatButtom) {
+            Text("The popup")
+                .frame(maxWidth: .infinity, maxHeight: 60)
+                .background(Color(red: 0.85, green: 0.8, blue: 0.95))
+                .cornerRadius(10.0)
+                .fitToReadableContentGuide()
+        } customize: {
+            $0
+                .type(.floater())
+                .position(.bottom)
+                .animation(.spring())
+                .closeOnTapOutside(true)
+                .backgroundColor(.black.opacity(0.5))
+        }
+        
     }
     
     private func signUpButton(button: SignUpButton) -> some View {
