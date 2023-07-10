@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ConfirmVerificationCodeView: View {
     @State private var verificationCode = ""
+    @State private var isShowUserSettingView = false
 
     private var isButtonEnable: Bool {
         if verificationCode.count == 6 {
@@ -52,6 +53,11 @@ struct ConfirmVerificationCodeView: View {
             })
             .padding(.top, 40)
             .disabled(!isButtonEnable)
+
+            // TODO: 遷移先のViewを変更
+            NavigationLink(destination: SelectSignUpMethodView(), isActive: $isShowUserSettingView) {
+                EmptyView()
+            }
         }
         .frame(maxHeight: .infinity, alignment: .top)
         .fitToReadableContentGuide()
@@ -75,6 +81,7 @@ struct ConfirmVerificationCodeView: View {
                 return
             }
             print("Success signIn with verificationID")
+            isShowUserSettingView = true
         }
     }
 }
