@@ -6,11 +6,14 @@
 //
 
 import FirebaseAuth
+import PopupView
 import SwiftUI
+import ViewComponents
 
 struct PhoneNumberAuthView: View {
     @State private var phoneNumber = ""
     @State private var isShowConfirmVerificationCodeView = false
+    @State private var isErrorBanner = false
 
     private var isButtonEnable: Bool {
         if phoneNumber.count == 11 {
@@ -64,7 +67,16 @@ struct PhoneNumberAuthView: View {
         .frame(maxHeight: .infinity, alignment: .top)
         .fitToReadableContentGuide()
         .padding(.top, 60)
-        
+        .popup(isPresented: $isErrorBanner) {
+            ErrorBanner(errorTitle: "電話番号の認証に失敗しました")
+        } customize: {
+            $0
+                .type(.floater())
+                .position(.bottom)
+                .animation(.spring())
+                .closeOnTapOutside(true)
+                .backgroundColor(.black.opacity(0.3))
+        }
     }
 
     private func fetchSMS() {
@@ -72,7 +84,8 @@ struct PhoneNumberAuthView: View {
         PhoneAuthProvider.provider()
           .verifyPhoneNumber("+81" + phoneNumber, uiDelegate: nil) { verificationID, error in
               if let error = error {
-                  fatalError(error.localizedDescription)
+                  isErrorBanner = true
+                  return
               }
               UserDefaults.standard.set(verificationID, forKey: "verificationID")
               isShowConfirmVerificationCodeView = true
