@@ -42,6 +42,7 @@ let coreTargets: [Target] = [
 
 let featureTargets: [Target] = [
     .feature(name: "SignUp", dependencies: [
+        "ViewComponents",
         fireAuth,
         fireStore,
         readabilityModifier,

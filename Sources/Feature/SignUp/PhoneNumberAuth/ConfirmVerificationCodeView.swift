@@ -6,11 +6,14 @@
 //
 
 import FirebaseAuth
+import PopupView
 import SwiftUI
+import ViewComponents
 
 struct ConfirmVerificationCodeView: View {
     @State private var verificationCode = ""
     @State private var isShowUserSettingView = false
+    @State private var isErrorBanner = false
 
     private var isButtonEnable: Bool {
         if verificationCode.count == 6 {
@@ -62,6 +65,16 @@ struct ConfirmVerificationCodeView: View {
         .frame(maxHeight: .infinity, alignment: .top)
         .fitToReadableContentGuide()
         .padding(.top, 60)
+        .popup(isPresented: $isErrorBanner) {
+            ErrorBanner(errorTitle: "認証コードが正しくありません")
+        } customize: {
+            $0
+                .type(.floater())
+                .position(.bottom)
+                .animation(.spring())
+                .closeOnTapOutside(true)
+                .backgroundColor(.black.opacity(0.3))
+        }
     }
 
     private func authWithSMS() {
@@ -78,6 +91,7 @@ struct ConfirmVerificationCodeView: View {
         Auth.auth().signIn(with: credential) { authResult, error in
             if let error = error {
                 print("Error signIn with verificationID")
+                isErrorBanner = true
                 return
             }
             print("Success signIn with verificationID")
