@@ -25,12 +25,20 @@ let popupView: TargetDependency = .product(name: "PopupView", package: "PopupVie
 // MARK: - Targets
 
 extension Target {
+    static func core(name: String, dependencies: [TargetDependency], resources: [Resource]? = nil, plugins: [Target.PluginUsage]? = nil) -> Target {
+        .target(name: name, dependencies: dependencies, path: "Sources/Core/\(name)", resources: resources, plugins: plugins)
+    }
+
     static func feature(name: String, dependencies: [TargetDependency], resources: [Resource]? = nil, plugins: [Target.PluginUsage]? = nil) -> Target {
         .target(name: name, dependencies: dependencies, path: "Sources/Feature/\(name)", resources: resources, plugins: plugins)
     }
 }
 
 // MARK: Feature
+
+let coreTargets: [Target] = [
+    .core(name: "ViewComponents", dependencies: [])
+]
 
 let featureTargets: [Target] = [
     .feature(name: "SignUp", dependencies: [
@@ -43,7 +51,7 @@ let featureTargets: [Target] = [
 
 // MARK: - Package
 
-let allTargets = featureTargets
+let allTargets = coreTargets + featureTargets
 
 let package = Package(
     name: "SwapWithMe",
@@ -53,6 +61,11 @@ let package = Package(
         .map{ .library(name: $0, targets: [$0]) },
     dependencies: packageDependencies,
     targets: [
+        .target(
+            name: "ViewComponents",
+            dependencies: [],
+            path: "Sources/Core/ViewComponents"
+        ),
         .target(
             name: "SignUp",
             dependencies: [
