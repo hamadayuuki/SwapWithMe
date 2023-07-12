@@ -69,6 +69,7 @@ struct PhoneNumberAuthView: View {
         .padding(.top, 60)
         .popup(isPresented: $isErrorBanner) {
             ErrorBanner(errorTitle: "電話番号の認証に失敗しました")
+                .fitToReadableContentGuide()
         } customize: {
             $0
                 .type(.floater())

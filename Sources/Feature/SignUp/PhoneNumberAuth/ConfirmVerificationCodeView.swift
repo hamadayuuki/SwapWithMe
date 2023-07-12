@@ -67,6 +67,7 @@ struct ConfirmVerificationCodeView: View {
         .padding(.top, 60)
         .popup(isPresented: $isErrorBanner) {
             ErrorBanner(errorTitle: "認証コードが正しくありません")
+                .fitToReadableContentGuide()
         } customize: {
             $0
                 .type(.floater())
