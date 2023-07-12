@@ -13,7 +13,9 @@
 		D431A8B12A4848EF00109710 /* SwapWithMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D431A8B02A4848EF00109710 /* SwapWithMeTests.swift */; };
 		D431A8BB2A4848EF00109710 /* SwapWithMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D431A8BA2A4848EF00109710 /* SwapWithMeUITests.swift */; };
 		D431A8BD2A4848EF00109710 /* SwapWithMeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D431A8BC2A4848EF00109710 /* SwapWithMeUITestsLaunchTests.swift */; };
-		D44C3A7F2A543AC700A634F1 /* Feature in Frameworks */ = {isa = PBXBuildFile; productRef = D44C3A7E2A543AC700A634F1 /* Feature */; };
+		D45CA13D2A5929EE00C787D6 /* SignUp in Frameworks */ = {isa = PBXBuildFile; productRef = D45CA13C2A5929EE00C787D6 /* SignUp */; };
+		D45CA13F2A597C3E00C787D6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D45CA13E2A597C3E00C787D6 /* GoogleService-Info.plist */; };
+		D4A1F78D2A5EF80B0053DB95 /* ViewComponents in Frameworks */ = {isa = PBXBuildFile; productRef = D4A1F78C2A5EF80B0053DB95 /* ViewComponents */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,9 @@
 		D431A8B62A4848EF00109710 /* SwapWithMeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwapWithMeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D431A8BA2A4848EF00109710 /* SwapWithMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapWithMeUITests.swift; sourceTree = "<group>"; };
 		D431A8BC2A4848EF00109710 /* SwapWithMeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapWithMeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D45CA13E2A597C3E00C787D6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D45CA1402A59C4E200C787D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D45CA1412A59C53400C787D6 /* SwapWithMe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwapWithMe.entitlements; sourceTree = "<group>"; };
 		D4BB2BE42A543271007C9ADB /* SwapWithMe */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwapWithMe; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -51,7 +56,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D44C3A7F2A543AC700A634F1 /* Feature in Frameworks */,
+				D45CA13D2A5929EE00C787D6 /* SignUp in Frameworks */,
+				D4A1F78D2A5EF80B0053DB95 /* ViewComponents in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,8 +103,11 @@
 		D431A89E2A4848EE00109710 /* SwapWithMe */ = {
 			isa = PBXGroup;
 			children = (
+				D45CA1412A59C53400C787D6 /* SwapWithMe.entitlements */,
+				D45CA1402A59C4E200C787D6 /* Info.plist */,
 				D431A89F2A4848EE00109710 /* SwapWithMeApp.swift */,
 				D431A8A32A4848EF00109710 /* Assets.xcassets */,
+				D45CA13E2A597C3E00C787D6 /* GoogleService-Info.plist */,
 				D431A8A52A4848EF00109710 /* Preview Content */,
 			);
 			path = SwapWithMe;
@@ -153,7 +162,8 @@
 			);
 			name = SwapWithMe;
 			packageProductDependencies = (
-				D44C3A7E2A543AC700A634F1 /* Feature */,
+				D45CA13C2A5929EE00C787D6 /* SignUp */,
+				D4A1F78C2A5EF80B0053DB95 /* ViewComponents */,
 			);
 			productName = SwapWithMe;
 			productReference = D431A89C2A4848EE00109710 /* SwapWithMe.app */;
@@ -245,6 +255,7 @@
 			files = (
 				D431A8A72A4848EF00109710 /* Preview Assets.xcassets in Resources */,
 				D431A8A42A4848EF00109710 /* Assets.xcassets in Resources */,
+				D45CA13F2A597C3E00C787D6 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,17 +436,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SwapWithMe/SwapWithMeDebug.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SwapWithMe/Preview Content\"";
 				DEVELOPMENT_TEAM = BR3T8YBB5L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SwapWithMe/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -443,6 +458,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.yuukirinnma.SwapWithMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -454,17 +470,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SwapWithMe/SwapWithMe.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SwapWithMe/Preview Content\"";
 				DEVELOPMENT_TEAM = BR3T8YBB5L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SwapWithMe/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -596,9 +615,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D44C3A7E2A543AC700A634F1 /* Feature */ = {
+		D45CA13C2A5929EE00C787D6 /* SignUp */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = Feature;
+			productName = SignUp;
+		};
+		D4A1F78C2A5EF80B0053DB95 /* ViewComponents */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ViewComponents;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
