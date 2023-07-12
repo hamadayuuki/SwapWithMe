@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct ErrorBanner: View {
-    private(set) var errorTitle = ""
+    private var errorTitle = ""
 
     public init(errorTitle: String) {
         self.errorTitle = errorTitle
