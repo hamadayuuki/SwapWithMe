@@ -11,6 +11,8 @@ import SwiftUI
 import ViewComponents
 
 struct ConfirmVerificationCodeView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
     @State private var verificationCode = ""
     @State private var isShowUserSettingView = false
     @State private var isErrorBanner = false
@@ -68,6 +70,9 @@ struct ConfirmVerificationCodeView: View {
         .popup(isPresented: $isErrorBanner) {
             ErrorBanner(errorTitle: "認証コードが正しくありません")
                 .fitToReadableContentGuide()
+                .onDisappear {
+                    presentationMode.wrappedValue.dismiss()
+                }
         } customize: {
             $0
                 .type(.floater())
