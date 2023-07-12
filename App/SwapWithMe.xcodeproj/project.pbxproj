@@ -15,6 +15,7 @@
 		D431A8BD2A4848EF00109710 /* SwapWithMeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D431A8BC2A4848EF00109710 /* SwapWithMeUITestsLaunchTests.swift */; };
 		D45CA13D2A5929EE00C787D6 /* SignUp in Frameworks */ = {isa = PBXBuildFile; productRef = D45CA13C2A5929EE00C787D6 /* SignUp */; };
 		D45CA13F2A597C3E00C787D6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D45CA13E2A597C3E00C787D6 /* GoogleService-Info.plist */; };
+		D4A1F78D2A5EF80B0053DB95 /* ViewComponents in Frameworks */ = {isa = PBXBuildFile; productRef = D4A1F78C2A5EF80B0053DB95 /* ViewComponents */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D45CA13D2A5929EE00C787D6 /* SignUp in Frameworks */,
+				D4A1F78D2A5EF80B0053DB95 /* ViewComponents in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,6 +163,7 @@
 			name = SwapWithMe;
 			packageProductDependencies = (
 				D45CA13C2A5929EE00C787D6 /* SignUp */,
+				D4A1F78C2A5EF80B0053DB95 /* ViewComponents */,
 			);
 			productName = SwapWithMe;
 			productReference = D431A89C2A4848EE00109710 /* SwapWithMe.app */;
@@ -615,6 +618,10 @@
 		D45CA13C2A5929EE00C787D6 /* SignUp */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SignUp;
+		};
+		D4A1F78C2A5EF80B0053DB95 /* ViewComponents */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ViewComponents;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
