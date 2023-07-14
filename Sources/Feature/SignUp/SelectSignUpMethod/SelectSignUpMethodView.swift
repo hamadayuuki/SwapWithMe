@@ -1,13 +1,13 @@
 //
 //  SelectSignUpMethodView.swift
-//  
+//
 //
 //  Created by 濵田　悠樹 on 2023/07/06.
 //
 
+import PopupView
 import ReadabilityModifier
 import SwiftUI
-import PopupView
 
 public struct SelectSignUpMethodView: View {
     public init() {}
@@ -24,7 +24,7 @@ public struct SelectSignUpMethodView: View {
             .fitToReadableContentGuide(type: .width)
         }
     }
-    
+
     private func signUpButton(button: SignUpButton) -> some View {
         NavigationLink {
             // TODO: 遷移先変更

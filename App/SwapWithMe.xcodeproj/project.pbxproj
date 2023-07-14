@@ -155,6 +155,7 @@
 				D431A8982A4848EE00109710 /* Sources */,
 				D431A8992A4848EE00109710 /* Frameworks */,
 				D431A89A2A4848EE00109710 /* Resources */,
+				D4BC152B2A61C65A0029787F /* Swift-format and Lint */,
 			);
 			buildRules = (
 			);
@@ -274,6 +275,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D4BC152B2A61C65A0029787F /* Swift-format and Lint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Swift-format and Lint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# `-p/--parallel` `-r/--recursive` `-i/--in-place` `-s/--strict`\n# ../Sources : SPM modules\nxcrun --sdk macosx mint run swift-format swift-format -p -r -i SwapWithMe ../Sources\nxcrun --sdk macosx mint run swift-format swift-format lint -p -r SwapWithMe ../Sources\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D431A8982A4848EE00109710 /* Sources */ = {

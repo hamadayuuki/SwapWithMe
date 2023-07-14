@@ -1,6 +1,6 @@
 //
 //  ErrorBanner.swift
-//  
+//
 //
 //  Created by 濵田　悠樹 on 2023/07/12.
 //

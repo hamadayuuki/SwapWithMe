@@ -1,6 +1,6 @@
 //
 //  PhoneNumberAuthView.swift
-//  
+//
 //
 //  Created by 濵田　悠樹 on 2023/07/08.
 //
@@ -41,22 +41,25 @@ struct PhoneNumberAuthView: View {
                     .font(.system(size: 32, weight: .bold, design: .rounded))
                     .padding(.top, 40)
                     .keyboardType(.numberPad)
-                
+
                 Divider()
                     .frame(height: 5)
                     .background(.gray)
             }
 
-            Button(action: {
-                fetchSMS()
-            }, label: {
-                Text("次へ")
-                    .foregroundColor(.white)
-                    .font(.system(size: 24, weight: .bold, design: .rounded))
-                    .frame(maxWidth: .infinity, maxHeight: 50)
-                    .background(transButtonBackground)
-                    .cornerRadius(10)
-            })
+            Button(
+                action: {
+                    fetchSMS()
+                },
+                label: {
+                    Text("次へ")
+                        .foregroundColor(.white)
+                        .font(.system(size: 24, weight: .bold, design: .rounded))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                        .background(transButtonBackground)
+                        .cornerRadius(10)
+                }
+            )
             .padding(.top, 40)
             .disabled(!isButtonEnable)
 
@@ -83,14 +86,14 @@ struct PhoneNumberAuthView: View {
     private func fetchSMS() {
         // Firebase Auth のテストデータとして私用の電話番号を設定済み
         PhoneAuthProvider.provider()
-          .verifyPhoneNumber("+81" + phoneNumber, uiDelegate: nil) { verificationID, error in
-              if let error = error {
-                  isErrorBanner = true
-                  return
-              }
-              UserDefaults.standard.set(verificationID, forKey: "verificationID")
-              isShowConfirmVerificationCodeView = true
-          }
+            .verifyPhoneNumber("+81" + phoneNumber, uiDelegate: nil) { verificationID, error in
+                if let error = error {
+                    isErrorBanner = true
+                    return
+                }
+                UserDefaults.standard.set(verificationID, forKey: "verificationID")
+                isShowConfirmVerificationCodeView = true
+            }
     }
 }
 
