@@ -1,54 +1,54 @@
 {
-  "fileScopedDeclarationPrivacy": {                   // ファイル内の宣言のアクセスレベルを設定
-    "accessLevel": "private"                          // ファイルスコープの宣言のアクセスレベルを設定
+  "fileScopedDeclarationPrivacy": {                   
+    "accessLevel": "private"                          
   },
-  "indentation": {                                    // インデントに使用するスペースの数を設定
-    "spaces": 4                                       // インデントに4つのスペースを使用
+  "indentation": {                                    
+    "spaces": 4                                       
   },
-  "indentConditionalCompilationBlocks": false,        // 条件付きコンパイルブロックのインデントを設定
-  "indentSwitchCaseLabels": false,                    // switch文のcaseラベルのインデントを設定
-  "lineBreakAroundMultilineExpressionChainComponents": false,   // 複数行の式チェーンコンポーネントの前後に改行を入れるかを設定
-  "lineBreakBeforeControlFlowKeywords": false,        // 制御フローキーワードの前に改行を入れるかを設定
-  "lineBreakBeforeEachArgument": false,               // 各引数の前に改行を入れるかを設定
-  "lineBreakBeforeEachGenericRequirement": false,     // 各ジェネリック要件の前に改行を入れるかを設定
-  "lineLength": 1000,                                 // 1行の最大文字数を設定
-  "maximumBlankLines": 1,                             // 空行の最大数を設定
-  "prioritizeKeepingFunctionOutputTogether": false,   // 関数の出力を一緒に保つことを優先するかを設定
-  "respectsExistingLineBreaks": true,                 // 既存の改行を尊重するかを設定
-  "rules": {                                          // コードの書き方や整形に関する各種ルールを設定
-    "AllPublicDeclarationsHaveDocumentation": false,  // すべてのパブリック宣言にドキュメンテーションがあるかをチェック
-    "AlwaysUseLowerCamelCase": false,                 // 常にローワーキャメルケースを使用するかをチェック
-    "AmbiguousTrailingClosureOverload": true,         // 曖昧なトレーリングクロージャーのオーバーロードをチェック
-    "BeginDocumentationCommentWithOneLineSummary": false,  // ドキュメンテーションコメントが一行の要約で始まるかをチェック
-    "DoNotUseSemicolons": true,                       // セミコロンの使用をチェック
-    "DontRepeatTypeInStaticProperties": true,          // 静的プロパティで型を繰り返さないことをチェック
-    "FileScopedDeclarationPrivacy": true,              // ファイルスコープの宣言のプライバシーをチェック
-    "FullyIndirectEnum": true,                         // 完全に間接的な列挙型をチェック
-    "GroupNumericLiterals": true,                      // 数値リテラルのグループ化をチェック
-    "IdentifiersMustBeASCII": true,                    // 識別子がASCIIであることをチェック
-    "NeverForceUnwrap": false,                         // 強制的なアンラップを行わないことをチェック
-    "NeverUseForceTry": false,                         // force tryの使用をチェック
-    "NeverUseImplicitlyUnwrappedOptionals": false,     // 暗黙的にアンラップされるオプショナルの使用をチェック
-    "NoAccessLevelOnExtensionDeclaration": true,       // 拡張宣言にアクセスレベルがないことをチェック
-    "NoBlockComments": true,                           // ブロックコメントの使用をチェック
-    "NoEmptyTrailingClosureParentheses": true,         // トレーリングクロージャーの空の括弧がないことをチェック
-    "NoLabelsInCasePatterns": true,                    // caseパターンにラベルがないことをチェック
-    "NoLeadingUnderscores": false,                     // 先頭のアンダースコアの使用をチェック
-    "NoParensAroundConditions": true,                  // 条件文の周りに括弧がないことをチェック
-    "NoVoidReturnOnFunctionSignature": true,           // 関数署名にvoidの返却がないことをチェック
-    "OneCasePerLine": true,                            // 1行に1つのケースが存在することをチェック
-    "OneVariableDeclarationPerLine": true,             // 1行に1つの変数宣言が存在することをチェック
-    "OnlyOneTrailingClosureArgument": true,            // 1つのトレーリングクロージャーアーギュメントのみ存在することをチェック
-    "OrderedImports": true,                            // インポートが順序付けられていることをチェック
-    "ReturnVoidInsteadOfEmptyTuple": true,             // 空のタプルの代わりにvoidを返すことをチェック
-    "UseEarlyExits": false,                            // 早期終了を使用することをチェック
-    "UseLetInEveryBoundCaseVariable": true,            // 全てのバウンドケース変数でletを使用することをチェック
-    "UseShorthandTypeNames": true,                     // 短縮型の名前を使用することをチェック
-    "UseSingleLinePropertyGetter": true,               // シングルラインのプロパティゲッターを使用することをチェック
-    "UseSynthesizedInitializer": true,                 // 合成初期化子を使用することをチェック
-    "UseTripleSlashForDocumentationComments": true,    // ドキュメンテーションコメントにトリプルスラッシュを使用することをチェック
-    "ValidateDocumentationComments": false              // ドキュメンテーションコメントの有効性を検証することをチェック
+  "indentConditionalCompilationBlocks": false,        
+  "indentSwitchCaseLabels": false,                    
+  "lineBreakAroundMultilineExpressionChainComponents": false,   
+  "lineBreakBeforeControlFlowKeywords": false,        
+  "lineBreakBeforeEachArgument": false,               
+  "lineBreakBeforeEachGenericRequirement": false,     
+  "lineLength": 1000,                                 
+  "maximumBlankLines": 1,                             
+  "prioritizeKeepingFunctionOutputTogether": false,   
+  "respectsExistingLineBreaks": true,                 
+  "rules": {                                          
+    "AllPublicDeclarationsHaveDocumentation": false,  
+    "AlwaysUseLowerCamelCase": false,                 
+    "AmbiguousTrailingClosureOverload": true,         
+    "BeginDocumentationCommentWithOneLineSummary": false,  
+    "DoNotUseSemicolons": true,                       
+    "DontRepeatTypeInStaticProperties": true,          
+    "FileScopedDeclarationPrivacy": true,              
+    "FullyIndirectEnum": true,                         
+    "GroupNumericLiterals": true,                      
+    "IdentifiersMustBeASCII": true,                    
+    "NeverForceUnwrap": false,                         
+    "NeverUseForceTry": false,                         
+    "NeverUseImplicitlyUnwrappedOptionals": false,     
+    "NoAccessLevelOnExtensionDeclaration": true,       
+    "NoBlockComments": true,                           
+    "NoEmptyTrailingClosureParentheses": true,         
+    "NoLabelsInCasePatterns": true,                    
+    "NoLeadingUnderscores": false,                     
+    "NoParensAroundConditions": true,                  
+    "NoVoidReturnOnFunctionSignature": true,           
+    "OneCasePerLine": true,                            
+    "OneVariableDeclarationPerLine": true,             
+    "OnlyOneTrailingClosureArgument": true,            
+    "OrderedImports": true,                            
+    "ReturnVoidInsteadOfEmptyTuple": true,             
+    "UseEarlyExits": false,                            
+    "UseLetInEveryBoundCaseVariable": true,            
+    "UseShorthandTypeNames": true,                     
+    "UseSingleLinePropertyGetter": true,               
+    "UseSynthesizedInitializer": true,                 
+    "UseTripleSlashForDocumentationComments": true,    
+    "ValidateDocumentationComments": false              
   },
-  "tabWidth": 8,                                      // タブの幅を設定
-  "version": 1                                        // .swift-format ファイルのバージョンを設定
+  "tabWidth": 8,                                      
+  "version": 1                                        
 }
