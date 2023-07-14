@@ -40,7 +40,7 @@ Appleが公開しているコード整形ライブラリ。swift-formatの整形
 brew install mint
 ```
 
-### 2. Mintfile を記述
+#### 2. Mintfile を記述
 
 Mintパッケージマネージャを使用してSwiftコマンドラインツールを管理する際に使用されるファイル
 
