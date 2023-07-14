@@ -61,6 +61,8 @@ mint bootstrap
 
 `Xcode > Bulid Target(iOSEngineerCodeCheck) > Bulid Phases > +`> New Run Script Phase > "Swift-format and Lint"
 
+<img width = 80% src = "README/xcode-swift-format.png">
+
 Bulid Phases に `Swift-format and Lint` という名称で、以下の自動実行用のスクリプトを書く。
 
 ビルドされるたびに以下のスクリプトが実行される。
