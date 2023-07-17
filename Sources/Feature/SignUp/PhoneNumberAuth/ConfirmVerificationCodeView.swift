@@ -88,7 +88,6 @@ struct ConfirmVerificationCodeView: View {
 
     private func authWithSMS() {
         guard let verificationID = UserDefaults.standard.string(forKey: "verificationID") else {
-            print("Error get verificationID")
             return
         }
 
@@ -99,11 +98,9 @@ struct ConfirmVerificationCodeView: View {
 
         Auth.auth().signIn(with: credential) { authResult, error in
             if let error = error {
-                print("Error signIn with verificationID")
                 isErrorBanner = true
                 return
             }
-            print("Success signIn with verificationID")
             isShowUserSettingView = true
         }
     }

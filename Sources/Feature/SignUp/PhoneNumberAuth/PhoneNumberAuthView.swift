@@ -96,19 +96,6 @@ struct PhoneNumberAuthView: View {
             }
         }
     }
-
-    //    private func fetchSMS() {
-    //        // Firebase Auth のテストデータとして私用の電話番号を設定済み
-    //        PhoneAuthProvider.provider()
-    //            .verifyPhoneNumber("+81" + phoneNumber, uiDelegate: nil) { verificationID, error in
-    //                if let error = error {
-    //                    isErrorBanner = true
-    //                    return
-    //                }
-    //                UserDefaults.standard.set(verificationID, forKey: "verificationID")
-    //                isShowConfirmVerificationCodeView = true
-    //            }
-    //    }
 }
 
 struct PhoneNumberAuthView_Previews: PreviewProvider {

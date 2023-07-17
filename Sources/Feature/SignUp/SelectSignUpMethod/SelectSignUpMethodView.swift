@@ -14,12 +14,11 @@ public struct SelectSignUpMethodView: View {
     let phoneNumberAuthStore = Store(initialState: PhoneNumberAuth.State()) {
         PhoneNumberAuth()
     }
+    private let signUpTypes: [SignUpButtonType] = [.phone, .apple, .google]
 
     public init() {}
 
     public var body: some View {
-        let signUpTypes: [SignUpButtonType] = [.phone, .apple, .google]
-
         NavigationView {
             VStack(spacing: 24) {
                 ForEach(signUpTypes, id: \.id) { signUpType in
