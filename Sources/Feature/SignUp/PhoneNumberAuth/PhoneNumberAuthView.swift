@@ -81,7 +81,7 @@ struct PhoneNumberAuthView: View {
             .popup(
                 isPresented: viewStore.binding(
                     get: { $0.isErrorBanner },
-                    send: .bindingIsErrorBanner(viewStore.isErrorBanner)
+                    send: .bindingIsErrorBanner(!viewStore.isErrorBanner)   // バナーを閉じるため
                 )
             ) {
                 ErrorBanner(errorTitle: "電話番号の認証に失敗しました")

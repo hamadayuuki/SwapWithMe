@@ -31,8 +31,7 @@ public struct PhoneNumberAuth: ReducerProtocol {
                 PhoneAuthProvider.provider()
                     .verifyPhoneNumber("+81" + phoneNumber, uiDelegate: nil) { verificationID, error in
                         if let verificationID = verificationID {
-                            send(.smsFailured)
-                            //                            send(.smsSuccessed(verificationID))
+                            send(.smsSuccessed(verificationID))
                         } else {
                             send(.smsFailured)
                         }
@@ -51,7 +50,7 @@ public struct PhoneNumberAuth: ReducerProtocol {
         case .bindingIsShowConfirmVerificationCodeView(let ver):
             state.isShowConfirmVerificationCodeView = ver
             return .none
-        case .bindingIsErrorBanner(let ver):
+        case .bindingIsErrorBanner(let ver):   // バナーを閉じる時呼ばれる
             state.isErrorBanner = ver
             return .none
         }
