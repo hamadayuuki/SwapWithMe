@@ -23,7 +23,7 @@ let analytics: TargetDependency = .product(name: "FirebaseAnalytics", package: "
 let fireAuth: TargetDependency = .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
 let fireStore: TargetDependency = .product(name: "FirebaseFirestore", package: "firebase-ios-sdk")
 let popupView: TargetDependency = .product(name: "PopupView", package: "PopupView")
-let composableArchitecture: TargetDependency = .product(name: "ComposableArchitecture", package: "ComposableArchitecture")
+let composableArchitecture: TargetDependency = .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
 let dependencies: TargetDependency = .product(name: "Dependencies", package: "Dependencies")
 
 // MARK: - Targets
