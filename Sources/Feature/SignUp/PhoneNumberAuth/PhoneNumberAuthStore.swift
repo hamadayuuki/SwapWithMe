@@ -50,7 +50,7 @@ public struct PhoneNumberAuth: ReducerProtocol {
         case .bindingIsShowConfirmVerificationCodeView(let ver):
             state.isShowConfirmVerificationCodeView = ver
             return .none
-        case .bindingIsErrorBanner(let ver):   // バナーを閉じる時呼ばれる
+        case .bindingIsErrorBanner(let ver):  // バナーを閉じる時呼ばれる
             state.isErrorBanner = ver
             return .none
         }
