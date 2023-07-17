@@ -51,6 +51,7 @@ let featureTargets: [Target] = [
         fireStore,
         readabilityModifier,
         popupView,
+        composableArchitecture
     ])
 ]
 
@@ -77,7 +78,8 @@ let package = Package(
                 fireAuth,
                 fireStore,
                 readabilityModifier,
-                popupView
+                popupView,
+                composableArchitecture
             ],
             path: "Sources/Feature/SignUp"
         )
