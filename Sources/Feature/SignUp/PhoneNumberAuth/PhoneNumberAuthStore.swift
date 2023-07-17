@@ -41,7 +41,7 @@ public struct PhoneNumberAuth: ReducerProtocol {
 
         case .smsSuccessed(let verificationID):
             UserDefaults.standard.set(verificationID, forKey: "verificationID")
-            state.isShowConfirmVerificationCodeView = true
+            state.isShowConfirmVerificationCodeView = !state.isShowConfirmVerificationCodeView
             return .none
 
         case .smsFailured:
