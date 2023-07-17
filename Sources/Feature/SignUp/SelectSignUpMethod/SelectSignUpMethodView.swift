@@ -5,11 +5,16 @@
 //  Created by 濵田　悠樹 on 2023/07/06.
 //
 
+import ComposableArchitecture
 import PopupView
 import ReadabilityModifier
 import SwiftUI
 
 public struct SelectSignUpMethodView: View {
+    let phoneNumberAuthStore = Store(initialState: PhoneNumberAuth.State()) {
+        PhoneNumberAuth()
+    }
+
     public init() {}
 
     public var body: some View {
@@ -29,9 +34,9 @@ public struct SelectSignUpMethodView: View {
         NavigationLink {
             // TODO: 遷移先変更
             switch button.type {
-            case .phone: PhoneNumberAuthView()
-            case .apple: PhoneNumberAuthView()
-            case .google: PhoneNumberAuthView()
+            case .phone: PhoneNumberAuthView(store: phoneNumberAuthStore)
+            case .apple: PhoneNumberAuthView(store: phoneNumberAuthStore)
+            case .google: PhoneNumberAuthView(store: phoneNumberAuthStore)
             }
         } label: {
             ZStack {
