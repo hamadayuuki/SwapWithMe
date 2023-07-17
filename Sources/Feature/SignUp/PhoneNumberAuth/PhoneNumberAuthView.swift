@@ -66,7 +66,10 @@ struct PhoneNumberAuthView: View {
                 .disabled(!isButtonEnable)
 
                 NavigationLink(
-                    destination: ConfirmVerificationCodeView(),
+                    destination: ConfirmVerificationCodeView(
+                        store: Store(initialState: ConfirmVerificationCode.State()) {
+                            ConfirmVerificationCode()
+                        }),
                     isActive: viewStore.binding(
                         get: { $0.isShowConfirmVerificationCodeView },
                         send: .bindingIsShowConfirmVerificationCodeView(viewStore.isShowConfirmVerificationCodeView)
