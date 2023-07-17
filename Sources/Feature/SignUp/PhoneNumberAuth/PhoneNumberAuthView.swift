@@ -97,6 +97,9 @@ struct PhoneNumberAuthView: View {
                     .closeOnTapOutside(true)
                     .backgroundColor(.black.opacity(0.3))
             }
+            .onDisappear {
+                viewStore.send(.onDisappear)
+            }
         }
     }
 }

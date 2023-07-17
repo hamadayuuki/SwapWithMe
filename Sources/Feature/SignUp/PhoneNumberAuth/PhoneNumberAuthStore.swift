@@ -21,6 +21,7 @@ public struct PhoneNumberAuth: ReducerProtocol {
         case smsFailured
         case bindingIsShowConfirmVerificationCodeView(Bool)
         case bindingIsErrorBanner(Bool)
+        case onDisappear
     }
 
     public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
@@ -52,6 +53,10 @@ public struct PhoneNumberAuth: ReducerProtocol {
             return .none
         case .bindingIsErrorBanner(let ver):  // バナーを閉じる時呼ばれる
             state.isErrorBanner = ver
+            return .none
+
+        case .onDisappear:
+            state.isErrorBanner = false
             return .none
         }
     }
