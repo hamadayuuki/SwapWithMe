@@ -52,6 +52,11 @@ let featureTargets: [Target] = [
         readabilityModifier,
         popupView,
         composableArchitecture
+    ]),
+    .feature(name: "UserInfo", dependencies: [
+        "ViewComponents",
+        readabilityModifier,
+        popupView,
     ])
 ]
 
@@ -82,6 +87,14 @@ let package = Package(
                 composableArchitecture
             ],
             path: "Sources/Feature/SignUp"
+        ),
+        .target(
+            name: "UserInfo",
+            dependencies: [
+                readabilityModifier,
+                popupView,
+            ],
+            path: "Sources/Feature/UserInfo"
         )
     ]
 )
