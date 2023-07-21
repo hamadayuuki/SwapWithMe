@@ -16,6 +16,19 @@ public struct UserBasicInfoView: View {
     @State var selectActivity: String = "-"
     @State var selectPersonality: String = "-"
 
+    private var isButtonEnable: Bool {
+        if selectAge != "-" && selectSex != "-" && selectAffiliation != "-" && selectDogOrCat != "-" && selectActivity != "-" && selectPersonality != "-" {
+            return true
+        }
+        return false
+    }
+    private var transButtonBackground: Color {
+        if isButtonEnable {
+            return Color.green
+        }
+        return Color.gray.opacity(0.5)
+    }
+
     public init() {}
 
     public var body: some View {
@@ -47,7 +60,7 @@ public struct UserBasicInfoView: View {
                         .foregroundColor(.white)
                         .font(.system(size: 24, weight: .bold, design: .rounded))
                         .frame(maxWidth: .infinity, maxHeight: 50)
-                        .background(.gray.opacity(0.3))
+                        .background(transButtonBackground)
                         .cornerRadius(10)
                 }
             )
