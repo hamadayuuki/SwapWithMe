@@ -20,6 +20,7 @@ public struct CropImage: UIViewControllerRepresentable {
     public func makeUIViewController(context: Context) -> some UIViewController {
         let img = self.image.wrappedValue ?? UIImage()
         let cropViewController = CropViewController(image: img)
+        setupCropViewController(cropViewController: cropViewController)
         cropViewController.delegate = context.coordinator
         return cropViewController
     }
@@ -45,26 +46,17 @@ public struct CropImage: UIViewControllerRepresentable {
             parent.image.wrappedValue = image
             cropViewController.dismiss(animated: true, completion: nil)
         }
+    }
 
-        public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-            let image = info[.originalImage] as! UIImage
-            guard let pickerImage = (info[UIImagePickerController.InfoKey.originalImage] as? UIImage) else { return }
+    private func setupCropViewController(cropViewController: CropViewController) {
+        cropViewController.customAspectRatio = CGSize(width: 100, height: 200)  // トリミングするアスペクト比
+        cropViewController.cropView.cropBoxResizeEnabled = false  // アスペクト比を固定する
 
-            let cropController = CropViewController(croppingStyle: .default, image: pickerImage)
-            cropController.delegate = self
-            cropController.customAspectRatio = CGSize(width: 100, height: 100)
+        // ボタンの表示/非表示
+        cropViewController.cancelButtonHidden = true
+        cropViewController.aspectRatioPickerButtonHidden = true
+        cropViewController.resetAspectRatioEnabled = false
+        cropViewController.rotateButtonsHidden = true
 
-            //今回は使わないボタン等を非表示にする。
-            cropController.aspectRatioPickerButtonHidden = true
-            cropController.resetAspectRatioEnabled = false
-            cropController.rotateButtonsHidden = true
-
-            //cropBoxのサイズを固定する。
-            cropController.cropView.cropBoxResizeEnabled = false
-            //pickerを閉じたら、cropControllerを表示する。
-            picker.dismiss(animated: true) {
-                self.parent.image.wrappedValue = image
-            }
-        }
     }
 }
