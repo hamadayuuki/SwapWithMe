@@ -62,14 +62,14 @@ extension Question {
     )
 
     static let dogOrCat = Self(
-        title: "犬 or 猫"
+        title: "好きなのは"
     )
     static let activity = Self(
-        title: "インドア or アウトドア"
+        title: "休日の過ごし方"
     )
 
     static let personality = Self(
-        title: "人見知り or フレンドリー"
+        title: "知らない人と"
     )
 }
 
