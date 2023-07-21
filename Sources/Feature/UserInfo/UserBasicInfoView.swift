@@ -9,8 +9,12 @@ import ReadabilityModifier
 import SwiftUI
 
 public struct UserBasicInfoView: View {
-    @State private var selectedValue = 0
-    @State var selectAge: String = "20"
+    @State var selectAge: String = "-"
+    @State var selectSex: String = "-"
+    @State var selectAffiliation: String = "-"
+    @State var selectDogOrCat: String = "-"
+    @State var selectActivity: String = "-"
+    @State var selectPersonality: String = "-"
 
     public init() {}
 
@@ -21,39 +25,45 @@ public struct UserBasicInfoView: View {
 
             Text("ユーザー情報を登録するための質問です。気軽に回答してください。")
                 .font(.system(size: 12, weight: .regular, design: .rounded))
+                .padding(.bottom, 24)
 
-            // TODO: 質問の内容を変更
-            ForEach(0..<5) { i in
-                VStack(spacing: 4) {
-                    HStack {
-                        Text("年齢")
-                        CustomPicker(selectionValue: $selectAge)
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                    }
-                    Divider()
-                        .frame(height: 1)
-                        .background(.gray)
-                }
-            }
+            QuestionView(type: .age, selectionValue: $selectAge)
+            QuestionView(type: .sex, selectionValue: $selectSex)
+            QuestionView(type: .affiliation, selectionValue: $selectAffiliation)
+            QuestionView(type: .dogOrCat, selectionValue: $selectDogOrCat)
+            QuestionView(type: .activity, selectionValue: $selectActivity)
+            QuestionView(type: .personality, selectionValue: $selectPersonality)
         }
         .fitToReadableContentGuide()
-        .onChange(of: selectAge) { value in
-            print(value)
+    }
+
+    private func QuestionView(type: UserBasicInfo, selectionValue: Binding<String>) -> some View {
+        VStack(spacing: 4) {
+            HStack {
+                Text(type.question.title)
+                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                CustomPicker(answers: type.answer.items, selectionValue: selectionValue)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+            }
+            Divider()
+                .frame(height: 1)
+                .background(.gray)
         }
     }
 }
 
 struct CustomPicker: View {
+    var answers: [String]
     @Binding var selectionValue: String
 
     var body: some View {
         VStack {
             HStack {
-                //ユーザを入力するピッカー
-                Picker("20", selection: $selectionValue) {
-                    ForEach(0..<80) { age in
-                        Text("\(age)")
-                            .tag("\(age)")
+                Picker("", selection: $selectionValue) {
+                    ForEach(answers, id: \.self) { answer in
+                        Text(answer)
+                            .font(.system(size: 16, weight: .semibold, design: .rounded))
+                            .tag(answer)
                     }
                 }
             }
