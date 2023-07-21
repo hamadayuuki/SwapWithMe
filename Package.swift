@@ -91,6 +91,7 @@ let package = Package(
         .target(
             name: "UserInfo",
             dependencies: [
+                "ViewComponents",
                 readabilityModifier,
                 popupView,
             ],

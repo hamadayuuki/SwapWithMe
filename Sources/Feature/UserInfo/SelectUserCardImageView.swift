@@ -7,6 +7,7 @@
 
 import ReadabilityModifier
 import SwiftUI
+import ViewComponents
 
 public struct SelectUserCardImageView: View {
     @State private var showImagePicker: Bool = false
@@ -67,41 +68,6 @@ public struct SelectUserCardImageView: View {
     func toImage() {
         guard let inputImage = inputImage else { return }
         image = Image(uiImage: inputImage)
-    }
-}
-
-struct ImagePicker: UIViewControllerRepresentable {
-    @Binding var image: UIImage?
-    @Environment(\.presentationMode) var presentationMode
-
-    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
-        let picker = UIImagePickerController()
-        picker.delegate = context.coordinator
-        picker.allowsEditing = true
-        return picker
-    }
-
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePicker>) {
-    }
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-
-    class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-        let parent: ImagePicker
-
-        init(_ parent: ImagePicker) {
-            self.parent = parent
-        }
-
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-            if let uiImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-                parent.image = uiImage
-            }
-
-            parent.presentationMode.wrappedValue.dismiss()
-        }
     }
 }
 
