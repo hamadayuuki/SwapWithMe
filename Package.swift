@@ -80,6 +80,7 @@ let package = Package(
         .target(
             name: "SignUp",
             dependencies: [
+                "ViewComponents",
                 fireAuth,
                 fireStore,
                 readabilityModifier,
