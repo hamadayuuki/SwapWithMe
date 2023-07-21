@@ -19,22 +19,44 @@ public struct UserBasicInfoView: View {
     public init() {}
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: 24) {
-            Text("基本情報")
-                .font(.system(size: 24, weight: .bold, design: .rounded))
+        VStack(spacing: 24) {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 24) {
+                    Text("基本情報")
+                        .font(.system(size: 24, weight: .bold, design: .rounded))
 
-            Text("ユーザー情報を登録するための質問です。気軽に回答してください。")
-                .font(.system(size: 12, weight: .regular, design: .rounded))
-                .padding(.bottom, 24)
+                    Text("ユーザー情報を登録するための質問です。気軽に回答してください。")
+                        .font(.system(size: 12, weight: .regular, design: .rounded))
+                        .padding(.bottom, 24)
 
-            QuestionView(type: .age, selectionValue: $selectAge)
-            QuestionView(type: .sex, selectionValue: $selectSex)
-            QuestionView(type: .affiliation, selectionValue: $selectAffiliation)
-            QuestionView(type: .dogOrCat, selectionValue: $selectDogOrCat)
-            QuestionView(type: .activity, selectionValue: $selectActivity)
-            QuestionView(type: .personality, selectionValue: $selectPersonality)
+                    QuestionView(type: .age, selectionValue: $selectAge)
+                    QuestionView(type: .sex, selectionValue: $selectSex)
+                    QuestionView(type: .affiliation, selectionValue: $selectAffiliation)
+                    QuestionView(type: .dogOrCat, selectionValue: $selectDogOrCat)
+                    QuestionView(type: .activity, selectionValue: $selectActivity)
+                    QuestionView(type: .personality, selectionValue: $selectPersonality)
+                }
+            }
+
+            Button(
+                action: {
+                    print("Tapped user basic info button")
+                },
+                label: {
+                    Text("次へ")
+                        .foregroundColor(.white)
+                        .font(.system(size: 24, weight: .bold, design: .rounded))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                        .background(.gray.opacity(0.3))
+                        .cornerRadius(10)
+                }
+            )
+            .padding(.top, 40)
+            .disabled(true)
         }
+
         .fitToReadableContentGuide()
+        .padding(.top, 24)
     }
 
     private func QuestionView(type: UserBasicInfo, selectionValue: Binding<String>) -> some View {
