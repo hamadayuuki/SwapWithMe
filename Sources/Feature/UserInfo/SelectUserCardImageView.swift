@@ -5,6 +5,7 @@
 //  Created by 濵田　悠樹 on 2023/07/21.
 //
 
+import ReadabilityModifier
 import SwiftUI
 
 public struct SelectUserCardImageView: View {
@@ -15,11 +16,22 @@ public struct SelectUserCardImageView: View {
     public init() {}
 
     public var body: some View {
-        ZStack(alignment: .bottomTrailing) {
-            cardImage()
-            selectCardPicButton()
+        VStack(spacing: 24) {
+            VStack(alignment: .leading, spacing: 24) {
+                Text("カード画像")
+                    .font(.system(size: 24, weight: .bold, design: .rounded))
+
+                Text("他のユーザーに表示する画像です。満足のいく1枚を選びましょう。登録後に変更可能です。")
+                    .font(.system(size: 12, weight: .regular, design: .rounded))
+            }
+
+            ZStack(alignment: .bottomTrailing) {
+                cardImage()
+                selectCardPicButton()
+            }
+            .frame(width: 250, height: 250)
         }
-        .frame(width: 250, height: 250)
+        .fitToReadableContentGuide()
         .sheet(isPresented: $showImagePicker, onDismiss: toImage) {
             ImagePicker(image: self.$inputImage)
         }
