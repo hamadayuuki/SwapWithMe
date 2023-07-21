@@ -11,6 +11,7 @@ import ViewComponents
 
 public struct SelectUserCardImageView: View {
     @State private var showImagePicker: Bool = false
+    @State private var showCropImage: Bool = false
     @State private var inputImage: UIImage?
     @State private var image: Image?
 
@@ -35,6 +36,9 @@ public struct SelectUserCardImageView: View {
         .fitToReadableContentGuide()
         .sheet(isPresented: $showImagePicker, onDismiss: toImage) {
             ImagePicker(image: self.$inputImage)
+        }
+        .sheet(isPresented: $showCropImage) {
+            CropImage(image: self.$inputImage)
         }
     }
 
@@ -68,6 +72,9 @@ public struct SelectUserCardImageView: View {
     func toImage() {
         guard let inputImage = inputImage else { return }
         image = Image(uiImage: inputImage)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {  // cropImage を表示させるため必要
+            showCropImage = true
+        }
     }
 }
 
