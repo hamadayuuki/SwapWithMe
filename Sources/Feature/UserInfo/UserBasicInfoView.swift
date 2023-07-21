@@ -9,6 +9,7 @@ import ReadabilityModifier
 import SwiftUI
 
 public struct UserBasicInfoView: View {
+    @State var nickName: String = ""
     @State var selectAge: String = "-"
     @State var selectSex: String = "-"
     @State var selectAffiliation: String = "-"
@@ -17,7 +18,7 @@ public struct UserBasicInfoView: View {
     @State var selectPersonality: String = "-"
 
     private var isButtonEnable: Bool {
-        if selectAge != "-" && selectSex != "-" && selectAffiliation != "-" && selectDogOrCat != "-" && selectActivity != "-" && selectPersonality != "-" {
+        if !nickName.isEmpty && nickName.count <= 8 && selectAge != "-" && selectSex != "-" && selectAffiliation != "-" && selectDogOrCat != "-" && selectActivity != "-" && selectPersonality != "-" {
             return true
         }
         return false
@@ -42,12 +43,13 @@ public struct UserBasicInfoView: View {
                         .font(.system(size: 12, weight: .regular, design: .rounded))
                         .padding(.bottom, 24)
 
-                    QuestionView(type: .age, selectionValue: $selectAge)
-                    QuestionView(type: .sex, selectionValue: $selectSex)
-                    QuestionView(type: .affiliation, selectionValue: $selectAffiliation)
-                    QuestionView(type: .dogOrCat, selectionValue: $selectDogOrCat)
-                    QuestionView(type: .activity, selectionValue: $selectActivity)
-                    QuestionView(type: .personality, selectionValue: $selectPersonality)
+                    QuestionTextFieldView(nickName: $nickName)
+                    QuestionPickerView(type: .age, selectionValue: $selectAge)
+                    QuestionPickerView(type: .sex, selectionValue: $selectSex)
+                    QuestionPickerView(type: .affiliation, selectionValue: $selectAffiliation)
+                    QuestionPickerView(type: .dogOrCat, selectionValue: $selectDogOrCat)
+                    QuestionPickerView(type: .activity, selectionValue: $selectActivity)
+                    QuestionPickerView(type: .personality, selectionValue: $selectPersonality)
                 }
             }
 
@@ -72,7 +74,22 @@ public struct UserBasicInfoView: View {
         .padding(.top, 24)
     }
 
-    private func QuestionView(type: UserBasicInfo, selectionValue: Binding<String>) -> some View {
+    private func QuestionTextFieldView(nickName: Binding<String>) -> some View {
+        VStack(spacing: 4) {
+            HStack {
+                Text("ニックネーム")
+                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                Spacer()
+                TextField("8文字以内で入力", text: nickName)
+                    .frame(maxWidth: 150, alignment: .trailing)
+            }
+            Divider()
+                .frame(height: 1)
+                .background(.gray)
+        }
+    }
+
+    private func QuestionPickerView(type: UserBasicInfo, selectionValue: Binding<String>) -> some View {
         VStack(spacing: 4) {
             HStack {
                 Text(type.question.title)
