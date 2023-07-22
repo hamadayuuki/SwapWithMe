@@ -70,8 +70,10 @@ public struct SelectUserCardImageView: View {
             label: {
                 Image(systemName: "plus.circle.fill")
                     .resizable()
-                    .frame(width: 60, height: 60)
                     .foregroundColor(.green)
+                    .background(Color.white)
+                    .frame(width: 60, height: 60)
+                    .cornerRadius(30)
             })
     }
 
