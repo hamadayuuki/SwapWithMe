@@ -19,20 +19,24 @@ public struct SelectUserCardImageView: View {
 
     public var body: some View {
         VStack(spacing: 24) {
-            VStack(alignment: .leading, spacing: 24) {
-                Text("カード画像")
-                    .font(.system(size: 24, weight: .bold, design: .rounded))
+            ScrollView {
+                VStack(spacing: 24) {
+                    VStack(alignment: .leading, spacing: 24) {
+                        Text("カード画像")
+                            .font(.system(size: 24, weight: .bold, design: .rounded))
 
-                Text("他のユーザーに表示する画像です。満足のいく1枚を選びましょう。登録後に変更可能です。")
-                    .font(.system(size: 12, weight: .regular, design: .rounded))
-            }
+                        Text("他のユーザーに表示する画像です。満足のいく1枚を選びましょう。登録後に変更可能です。")
+                            .font(.system(size: 12, weight: .regular, design: .rounded))
+                    }
 
-            ZStack(alignment: .bottomTrailing) {
-                cardImage()
-                selectCardPicButton()
-                    .offset(x: 24, y: 24)
+                    ZStack(alignment: .bottomTrailing) {
+                        cardImage()
+                        selectCardPicButton()
+                            .offset(x: 24, y: 24)
+                    }
+                    .frame(width: 250, height: 400)
+                }
             }
-            .frame(width: 250, height: 400)
         }
         .fitToReadableContentGuide()
         .sheet(isPresented: $showImagePicker, onDismiss: toImage) {
