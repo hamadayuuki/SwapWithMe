@@ -30,14 +30,20 @@ public struct SelectUserCardImageView: View {
             ZStack(alignment: .bottomTrailing) {
                 cardImage()
                 selectCardPicButton()
+                    .offset(x: 24, y: 24)
             }
-            .frame(width: 250, height: 250)
+            .frame(width: 250, height: 400)
         }
         .fitToReadableContentGuide()
         .sheet(isPresented: $showImagePicker, onDismiss: toImage) {
             ImagePicker(image: self.$inputImage)
+                .onDisappear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {  // cropImage を表示させるため必要
+                        showCropImage = true
+                    }
+                }
         }
-        .sheet(isPresented: $showCropImage) {
+        .sheet(isPresented: $showCropImage, onDismiss: toImage) {
             CropImage(image: self.$inputImage)
         }
     }
@@ -45,13 +51,13 @@ public struct SelectUserCardImageView: View {
     private func cardImage() -> some View {
         Group {
             if image == nil {
-                Circle()
-                    .foregroundColor(Color.gray.opacity(0.5))
+                Rectangle()
+                    .fill(.gray.opacity(0.5))
+                    .cornerRadius(20)
             } else {
                 image?
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .clipShape(Circle())
+                    .cornerRadius(20)
             }
         }
     }
@@ -72,9 +78,6 @@ public struct SelectUserCardImageView: View {
     func toImage() {
         guard let inputImage = inputImage else { return }
         image = Image(uiImage: inputImage)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {  // cropImage を表示させるため必要
-            showCropImage = true
-        }
     }
 }
 

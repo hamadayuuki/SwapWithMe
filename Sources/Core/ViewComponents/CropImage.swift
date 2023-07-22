@@ -49,7 +49,7 @@ public struct CropImage: UIViewControllerRepresentable {
     }
 
     private func setupCropViewController(cropViewController: CropViewController) {
-        cropViewController.customAspectRatio = CGSize(width: 100, height: 200)  // トリミングするアスペクト比
+        cropViewController.customAspectRatio = CGSize(width: 250, height: 400)  // トリミングするアスペクト比
         cropViewController.cropView.cropBoxResizeEnabled = false  // アスペクト比を固定する
 
         // ボタンの表示/非表示
