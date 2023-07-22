@@ -16,6 +16,7 @@ public struct UserBasicInfoView: View {
     @State var selectDogOrCat: String = "-"
     @State var selectActivity: String = "-"
     @State var selectPersonality: String = "-"
+    @State var tappedTransButton = false
 
     private var isButtonEnable: Bool {
         if !nickName.isEmpty && nickName.count <= 8 && selectAge != "-" && selectSex != "-" && selectAffiliation != "-" && selectDogOrCat != "-" && selectActivity != "-" && selectPersonality != "-" {
@@ -55,7 +56,7 @@ public struct UserBasicInfoView: View {
 
             Button(
                 action: {
-                    print("Tapped user basic info button")
+                    tappedTransButton = true
                 },
                 label: {
                     Text("次へ")
@@ -67,9 +68,15 @@ public struct UserBasicInfoView: View {
                 }
             )
             .padding(.top, 40)
-            .disabled(true)
-        }
+            .disabled(!isButtonEnable)
 
+            NavigationLink(
+                destination: SelectUserCardImageView(),
+                isActive: $tappedTransButton
+            ) {
+                EmptyView()
+            }
+        }
         .fitToReadableContentGuide()
         .padding(.top, 24)
     }
