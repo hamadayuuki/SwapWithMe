@@ -12,8 +12,22 @@ import ViewComponents
 public struct SelectUserCardImageView: View {
     @State private var showImagePicker: Bool = false
     @State private var showCropImage: Bool = false
+    @State private var isCropImage: Bool = false
     @State private var inputImage: UIImage?
     @State private var image: Image?
+
+    private var isButtonEnable: Bool {
+        if inputImage != nil && isCropImage {
+            return true
+        }
+        return false
+    }
+    private var transButtonBackground: Color {
+        if isButtonEnable {
+            return Color.green
+        }
+        return Color.gray.opacity(0.5)
+    }
 
     public init() {}
 
@@ -37,8 +51,25 @@ public struct SelectUserCardImageView: View {
                     .frame(width: 250, height: 400)
                 }
             }
+
+            Button(
+                action: {
+                    print("Tapped user basic info button")
+                },
+                label: {
+                    Text("次へ")
+                        .foregroundColor(.white)
+                        .font(.system(size: 24, weight: .bold, design: .rounded))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                        .background(transButtonBackground)
+                        .cornerRadius(10)
+                }
+            )
+            .padding(.top, 40)
+            .disabled(true)
         }
         .fitToReadableContentGuide()
+        .padding(.top, 24)
         .sheet(isPresented: $showImagePicker, onDismiss: toImage) {
             ImagePicker(image: self.$inputImage)
                 .onDisappear {
@@ -49,6 +80,9 @@ public struct SelectUserCardImageView: View {
         }
         .sheet(isPresented: $showCropImage, onDismiss: toImage) {
             CropImage(image: self.$inputImage)
+                .onDisappear {
+                    isCropImage = true
+                }
         }
     }
 
