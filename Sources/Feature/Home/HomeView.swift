@@ -30,7 +30,7 @@ public struct HomeView: View {
                 partnerCard()
                 VStack(spacing: 24) {
                     swapedTextAnimation()
-                    userInfo(name: "ながのめいですす", age: 23, affiliation: "フレンドリー")
+                    partnerInfo(name: "ながのめいですす", age: 23, affiliation: "フレンドリー")
                 }
                 .offset(x: 0, y: 100)
             } else {
@@ -149,7 +149,7 @@ public struct HomeView: View {
         }
     }
 
-    private func userInfo(name: String, age: Int, affiliation: String) -> some View {
+    private func partnerInfo(name: String, age: Int, affiliation: String) -> some View {
         VStack(spacing: 12) {
             Text("\(name)")
                 .font(.system(size: 36, weight: .bold, design: .rounded))
