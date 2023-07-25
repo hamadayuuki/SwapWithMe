@@ -16,9 +16,11 @@ public struct HomeView: View {
     @State private var isMatch = false
     @State private var imageScale = 0.2
     @State private var swapImagesOpacity = [0.0, 0.0, 0.0]
+    @State private var userInfoOpacity = 0.0
 
     private let swapIconSize = CGSize(width: 1527 / 7, height: 522 / 7)
     private let swapTimer = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
+    private let nameTimer = Timer.publish(every: 0.8, on: .main, in: .common).autoconnect()  // swapアニメーションが終わるのを待つ
 
     public init() {}
 
@@ -26,8 +28,11 @@ public struct HomeView: View {
         ZStack {
             if isMatch {
                 animationCard()
-                swapedTextAnimation()
-                    .offset(x: 0, y: 100)
+                VStack(spacing: 24) {
+                    swapedTextAnimation()
+                    userInfo(name: "ながのめいですす", age: 23, affiliation: "フレンドリー")
+                }
+                .offset(x: 0, y: 100)
             } else {
                 card()
             }
@@ -118,6 +123,27 @@ public struct HomeView: View {
                             }
                         }
                     }
+            }
+        }
+    }
+
+    private func userInfo(name: String, age: Int, affiliation: String) -> some View {
+        VStack(spacing: 12) {
+            Text("\(name)")
+                .font(.system(size: 36, weight: .bold, design: .rounded))
+
+            HStack(spacing: 12) {
+                Text("\(age)歳")
+
+                Text("\(affiliation)")
+            }
+            .font(.system(size: 18, weight: .medium, design: .rounded))
+        }
+        .foregroundColor(.white)
+        .opacity(self.userInfoOpacity)
+        .onReceive(nameTimer) { _ in
+            withAnimation(.easeInOut(duration: 0.4)) {
+                self.userInfoOpacity = 1.0
             }
         }
     }
