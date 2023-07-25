@@ -15,14 +15,26 @@ public struct HomeView: View {
     public init() {}
 
     public var body: some View {
+        ZStack {
+            card()
+        }
+        .fitToReadableContentGuide()
+        .onAppear {
+            loadCardImage()
+        }
+    }
+
+    private func card() -> some View {
         GeometryReader { (proxy: GeometryProxy) in
-            ZStack {
+            Group {
                 cardImage
+                    // UI
                     .resizable()
                     .scaledToFill()
                     .frame(width: 250 * 1.2, height: 400 * 1.2)
                     .cornerRadius(20)
                     .shadow(radius: 5)
+                    // animation
                     .offset(CGSize(width: 0, height: self.translation.height))
                     .rotationEffect(.degrees(Double(self.translation.width / 300) * 20), anchor: .bottom)
                     .gesture(
@@ -40,11 +52,7 @@ public struct HomeView: View {
                             }
                     )
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)  // GeometryReaderによる初期位置が左上になる問題を解決
-        }
-        .fitToReadableContentGuide()
-        .onAppear {
-            loadCardImage()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 
