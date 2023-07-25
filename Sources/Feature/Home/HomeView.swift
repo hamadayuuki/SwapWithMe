@@ -12,12 +12,18 @@ public struct HomeView: View {
     @State var cardImage: Image = Image(uiImage: UIImage())
     @State private var translation: CGSize = .zero
     @State private var isFeedback = false
+    @State private var isMatch = false
+    @State private var imageScale = 0.2
 
     public init() {}
 
     public var body: some View {
         ZStack {
-            card()
+            if isMatch {
+                animationCard()
+            } else {
+                card()
+            }
         }
         .fitToReadableContentGuide()
         .onAppear {
@@ -57,6 +63,7 @@ public struct HomeView: View {
                                     switch value.translation.height {
                                     case let height where height < -300:
                                         self.translation = CGSize(width: 0, height: -1000)
+                                        self.isMatch = true
                                     default:
                                         self.translation = .zero
                                     }
@@ -66,6 +73,23 @@ public struct HomeView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+    }
+
+    private func animationCard() -> some View {
+        ZStack {
+            cardImage
+                .resizable()
+                .scaledToFill()
+                .frame(width: 250 * 1.2, height: 400 * 1.2)
+                .cornerRadius(20)
+                .scaleEffect(imageScale)
+                .onAppear {
+                    withAnimation(Animation.easeInOut(duration: 0.8)) {
+                        imageScale = 1.8
+                    }
+                }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     private func loadCardImage() {
