@@ -16,6 +16,7 @@
 		D45CA13D2A5929EE00C787D6 /* SignUp in Frameworks */ = {isa = PBXBuildFile; productRef = D45CA13C2A5929EE00C787D6 /* SignUp */; };
 		D45CA13F2A597C3E00C787D6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D45CA13E2A597C3E00C787D6 /* GoogleService-Info.plist */; };
 		D4A1F78D2A5EF80B0053DB95 /* ViewComponents in Frameworks */ = {isa = PBXBuildFile; productRef = D4A1F78C2A5EF80B0053DB95 /* ViewComponents */; };
+		D4BC152D2A6999000029787F /* UserInfo in Frameworks */ = {isa = PBXBuildFile; productRef = D4BC152C2A6999000029787F /* UserInfo */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D45CA13D2A5929EE00C787D6 /* SignUp in Frameworks */,
+				D4BC152D2A6999000029787F /* UserInfo in Frameworks */,
 				D4A1F78D2A5EF80B0053DB95 /* ViewComponents in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,6 +167,7 @@
 			packageProductDependencies = (
 				D45CA13C2A5929EE00C787D6 /* SignUp */,
 				D4A1F78C2A5EF80B0053DB95 /* ViewComponents */,
+				D4BC152C2A6999000029787F /* UserInfo */,
 			);
 			productName = SwapWithMe;
 			productReference = D431A89C2A4848EE00109710 /* SwapWithMe.app */;
@@ -644,6 +647,10 @@
 		D4A1F78C2A5EF80B0053DB95 /* ViewComponents */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ViewComponents;
+		};
+		D4BC152C2A6999000029787F /* UserInfo */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = UserInfo;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

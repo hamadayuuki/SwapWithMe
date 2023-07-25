@@ -15,7 +15,8 @@ let packageDependencies: [PackageDependency] = [
     .package(url: "https://github.com/yazio/ReadabilityModifier", from: .init(1, 0, 0)),
     .package(url: "https://github.com/exyte/PopupView", from: .init(2, 5, 7)),
     .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: .init(0, 55, 1)),
-    .package(url: "https://github.com/pointfreeco/swift-dependencies", from: .init(0, 5, 1))
+    .package(url: "https://github.com/pointfreeco/swift-dependencies", from: .init(0, 5, 1)),
+    .package(url: "https://github.com/TimOliver/TOCropViewController.git", from: .init(2, 6, 1))
 ]
 
 let readabilityModifier: TargetDependency = .product(name: "ReadabilityModifier", package: "ReadabilityModifier")
@@ -25,6 +26,7 @@ let fireStore: TargetDependency = .product(name: "FirebaseFirestore", package: "
 let popupView: TargetDependency = .product(name: "PopupView", package: "PopupView")
 let composableArchitecture: TargetDependency = .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
 let dependencies: TargetDependency = .product(name: "Dependencies", package: "Dependencies")
+let cropViewController: TargetDependency = .product(name: "CropViewController", package: "TOCropViewController")
 
 // MARK: - Targets
 
@@ -41,7 +43,9 @@ extension Target {
 // MARK: Feature
 
 let coreTargets: [Target] = [
-    .core(name: "ViewComponents", dependencies: [])
+    .core(name: "ViewComponents", dependencies: [
+        cropViewController
+    ])
 ]
 
 let featureTargets: [Target] = [
@@ -52,6 +56,11 @@ let featureTargets: [Target] = [
         readabilityModifier,
         popupView,
         composableArchitecture
+    ]),
+    .feature(name: "UserInfo", dependencies: [
+        "ViewComponents",
+        readabilityModifier,
+        popupView,
     ])
 ]
 
@@ -69,12 +78,15 @@ let package = Package(
     targets: [
         .target(
             name: "ViewComponents",
-            dependencies: [],
+            dependencies: [
+                cropViewController
+            ],
             path: "Sources/Core/ViewComponents"
         ),
         .target(
             name: "SignUp",
             dependencies: [
+                "ViewComponents",
                 fireAuth,
                 fireStore,
                 readabilityModifier,
@@ -82,6 +94,15 @@ let package = Package(
                 composableArchitecture
             ],
             path: "Sources/Feature/SignUp"
+        ),
+        .target(
+            name: "UserInfo",
+            dependencies: [
+                "ViewComponents",
+                readabilityModifier,
+                popupView,
+            ],
+            path: "Sources/Feature/UserInfo"
         )
     ]
 )
