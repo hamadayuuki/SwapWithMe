@@ -92,18 +92,21 @@ public struct HomeView: View {
             cardImage
                 .resizable()
                 .scaledToFill()
-                .frame(width: 250 * 1.2, height: 400 * 1.2)
-                .cornerRadius(20)
-                .scaleEffect(imageScale)
-                .onAppear {
-                    withAnimation(Animation.easeInOut(duration: 0.8)) {
-                        imageScale = 1.8
-                    }
-                }
+
+            LinearGradient(
+                gradient: Gradient(colors: [.clear, .black.opacity(0.7)]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .frame(width: 250 * 1.2, height: 400 * 1.2)
+        .cornerRadius(20)
+        .scaleEffect(imageScale)
         .onAppear {
             cardImage = Image("nagano")
+            withAnimation(Animation.easeInOut(duration: 0.8)) {
+                imageScale = 1.8
+            }
         }
     }
 
