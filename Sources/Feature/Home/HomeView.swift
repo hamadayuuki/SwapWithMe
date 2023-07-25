@@ -5,6 +5,7 @@
 //  Created by 濵田　悠樹 on 2023/07/25.
 //
 
+import AudioToolbox
 import ReadabilityModifier
 import SwiftUI
 
@@ -113,6 +114,7 @@ public struct HomeView: View {
                         withAnimation(Animation.easeInOut.delay(CGFloat(i) * 0.2)) {
                             if self.swapImagesOpacity[i] == 0.0 {
                                 self.swapImagesOpacity[i] = 1.0
+                                AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
                             }
                         }
                     }
