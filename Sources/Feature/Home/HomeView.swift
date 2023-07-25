@@ -14,6 +14,10 @@ public struct HomeView: View {
     @State private var isFeedback = false
     @State private var isMatch = false
     @State private var imageScale = 0.2
+    @State private var swapImagesOpacity = [0.0, 0.0, 0.0]
+
+    private let swapIconSize = CGSize(width: 1527 / 7, height: 522 / 7)
+    private let swapTimer = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
 
     public init() {}
 
@@ -21,6 +25,8 @@ public struct HomeView: View {
         ZStack {
             if isMatch {
                 animationCard()
+                swapedTextAnimation()
+                    .offset(x: 0, y: 100)
             } else {
                 card()
             }
@@ -90,6 +96,25 @@ public struct HomeView: View {
                 }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private func swapedTextAnimation() -> some View {
+        ZStack {
+            ForEach(0..<3) { i in
+                Image("swap-\(i)")
+                    .resizable()
+                    .frame(width: self.swapIconSize.width * (1.0 + CGFloat(i) * 0.3), height: self.swapIconSize.height * (1.0 + CGFloat(i) * 0.3))
+                    .opacity(swapImagesOpacity[i])
+                    .offset(x: 0, y: CGFloat(-i * 30))
+                    .onReceive(swapTimer) { _ in
+                        withAnimation(Animation.easeInOut.delay(CGFloat(i) * 0.2)) {
+                            if self.swapImagesOpacity[i] == 0.0 {
+                                self.swapImagesOpacity[i] = 1.0
+                            }
+                        }
+                    }
+            }
+        }
     }
 
     private func loadCardImage() {
