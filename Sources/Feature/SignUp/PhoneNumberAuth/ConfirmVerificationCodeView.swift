@@ -100,25 +100,6 @@ struct ConfirmVerificationCodeView: View {
             }
         }
     }
-
-    //    private func authWithSMS() {
-    //        guard let verificationID = UserDefaults.standard.string(forKey: "verificationID") else {
-    //            return
-    //        }
-    //
-    //        let credential = PhoneAuthProvider.provider().credential(
-    //            withVerificationID: verificationID,
-    //            verificationCode: verificationCode
-    //        )
-    //
-    //        Auth.auth().signIn(with: credential) { authResult, error in
-    //            if let error = error {
-    //                isErrorBanner = true
-    //                return
-    //            }
-    //            isShowUserSettingView = true
-    //        }
-    //    }
 }
 
 struct ConfirmVerificationCodeView_Previews: PreviewProvider {
