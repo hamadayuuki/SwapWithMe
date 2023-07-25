@@ -96,6 +96,9 @@ public struct HomeView: View {
                 }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .onAppear {
+            cardImage = Image("nagano")
+        }
     }
 
     private func swapedTextAnimation() -> some View {
