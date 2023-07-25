@@ -13,6 +13,7 @@
 		D431A8B12A4848EF00109710 /* SwapWithMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D431A8B02A4848EF00109710 /* SwapWithMeTests.swift */; };
 		D431A8BB2A4848EF00109710 /* SwapWithMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D431A8BA2A4848EF00109710 /* SwapWithMeUITests.swift */; };
 		D431A8BD2A4848EF00109710 /* SwapWithMeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D431A8BC2A4848EF00109710 /* SwapWithMeUITestsLaunchTests.swift */; };
+		D4433AA92A6F8F3A000FA106 /* Home in Frameworks */ = {isa = PBXBuildFile; productRef = D4433AA82A6F8F3A000FA106 /* Home */; };
 		D45CA13D2A5929EE00C787D6 /* SignUp in Frameworks */ = {isa = PBXBuildFile; productRef = D45CA13C2A5929EE00C787D6 /* SignUp */; };
 		D45CA13F2A597C3E00C787D6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D45CA13E2A597C3E00C787D6 /* GoogleService-Info.plist */; };
 		D4A1F78D2A5EF80B0053DB95 /* ViewComponents in Frameworks */ = {isa = PBXBuildFile; productRef = D4A1F78C2A5EF80B0053DB95 /* ViewComponents */; };
@@ -58,6 +59,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D45CA13D2A5929EE00C787D6 /* SignUp in Frameworks */,
+				D4433AA92A6F8F3A000FA106 /* Home in Frameworks */,
 				D4BC152D2A6999000029787F /* UserInfo in Frameworks */,
 				D4A1F78D2A5EF80B0053DB95 /* ViewComponents in Frameworks */,
 			);
@@ -168,6 +170,7 @@
 				D45CA13C2A5929EE00C787D6 /* SignUp */,
 				D4A1F78C2A5EF80B0053DB95 /* ViewComponents */,
 				D4BC152C2A6999000029787F /* UserInfo */,
+				D4433AA82A6F8F3A000FA106 /* Home */,
 			);
 			productName = SwapWithMe;
 			productReference = D431A89C2A4848EE00109710 /* SwapWithMe.app */;
@@ -640,6 +643,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D4433AA82A6F8F3A000FA106 /* Home */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Home;
+		};
 		D45CA13C2A5929EE00C787D6 /* SignUp */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SignUp;
