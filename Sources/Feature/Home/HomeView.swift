@@ -35,6 +35,8 @@ public struct HomeView: View {
                 .offset(x: 0, y: 100)
             } else {
                 card()
+                myInfo(name: "きよはらしょうう", age: 25, affiliation: "人見知り")
+                    .offset(x: 0, y: (250 * 0.6) - 12)
             }
         }
         .fitToReadableContentGuide()
@@ -45,46 +47,71 @@ public struct HomeView: View {
 
     private func card() -> some View {
         GeometryReader { (proxy: GeometryProxy) in
-            Group {
+            ZStack {
                 cardImage
-                    // UI
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 250 * 1.2, height: 400 * 1.2)
-                    .cornerRadius(20)
-                    .shadow(radius: 5)
-                    .blur(radius: -self.translation.height / 100)
-                    // animation
-                    .offset(CGSize(width: 0, height: self.translation.height))
-                    .rotationEffect(.degrees(Double(self.translation.width / 300) * 20), anchor: .bottom)
-                    .gesture(
-                        DragGesture()
-                            .onChanged { value in
-                                self.translation = value.translation
-                                if value.translation.height < -300 {
-                                    if !isFeedback {
-                                        UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
-                                        isFeedback = true
-                                    }
-                                } else {
-                                    isFeedback = false
-                                }
-                            }
-                            .onEnded { value in
-                                withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100, damping: 10, initialVelocity: 0)) {
-                                    switch value.translation.height {
-                                    case let height where height < -300:
-                                        self.translation = CGSize(width: 0, height: -1000)
-                                        self.isMatch = true
-                                    default:
-                                        self.translation = .zero
-                                    }
-                                }
-                            }
-                    )
+
+                LinearGradient(
+                    gradient: Gradient(colors: [.clear, .black.opacity(0.7)]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
             }
+            // UI
+            .frame(width: 250 * 1.2, height: 400 * 1.2)
+            .cornerRadius(20)
+            .shadow(radius: 5)
+            .blur(radius: -self.translation.height / 100)
+            // animation
+            .offset(CGSize(width: 0, height: self.translation.height))
+            .rotationEffect(.degrees(Double(self.translation.width / 300) * 20), anchor: .bottom)
+            .gesture(
+                DragGesture()
+                    .onChanged { value in
+                        self.translation = value.translation
+                        if value.translation.height < -300 {
+                            if !isFeedback {
+                                UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+                                isFeedback = true
+                            }
+                        } else {
+                            isFeedback = false
+                        }
+                    }
+                    .onEnded { value in
+                        withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100, damping: 10, initialVelocity: 0)) {
+                            switch value.translation.height {
+                            case let height where height < -300:
+                                self.translation = CGSize(width: 0, height: -1000)
+                                self.isMatch = true
+                            default:
+                                self.translation = .zero
+                            }
+                        }
+                    }
+            )
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+    }
+
+    private func myInfo(name: String, age: Int, affiliation: String) -> some View {
+        VStack(spacing: 6) {
+            Text("\(name)")
+                .font(.system(size: 24, weight: .bold, design: .rounded))
+
+            HStack(spacing: 6) {
+                Text("\(age)歳")
+
+                Text("\(affiliation)")
+            }
+            .font(.system(size: 12, weight: .medium, design: .rounded))
+        }
+        .foregroundColor(.white)
+        .blur(radius: -self.translation.height / 100)
+        // animation
+        .offset(CGSize(width: 0, height: self.translation.height))
+        .rotationEffect(.degrees(Double(self.translation.width / 300) * 20), anchor: .bottom)
     }
 
     private func animationCard() -> some View {
