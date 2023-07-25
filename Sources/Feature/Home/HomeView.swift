@@ -45,6 +45,7 @@ public struct HomeView: View {
         }
     }
 
+    // 共通化
     private func card() -> some View {
         ZStack {
             cardImage
@@ -60,6 +61,8 @@ public struct HomeView: View {
         .frame(width: 250 * 1.2, height: 400 * 1.2)
         .cornerRadius(20)
     }
+
+    // MARK: - My card
 
     private func myCard() -> some View {
         GeometryReader { (proxy: GeometryProxy) in
@@ -118,6 +121,8 @@ public struct HomeView: View {
         .rotationEffect(.degrees(Double(self.translation.width / 300) * 20), anchor: .bottom)
     }
 
+    // MARK: - Partner card
+
     private func partnerCard() -> some View {
         card()
             .scaleEffect(imageScale)
@@ -169,6 +174,8 @@ public struct HomeView: View {
             }
         }
     }
+
+    // MARK: - Function
 
     private func loadCardImage() {
         cardImage = Image("kiyohara")
