@@ -35,6 +35,7 @@ public struct HomeView: View {
                     .frame(width: 250 * 1.2, height: 400 * 1.2)
                     .cornerRadius(20)
                     .shadow(radius: 5)
+                    .blur(radius: -self.translation.height / 100)
                     // animation
                     .offset(CGSize(width: 0, height: self.translation.height))
                     .rotationEffect(.degrees(Double(self.translation.width / 300) * 20), anchor: .bottom)
