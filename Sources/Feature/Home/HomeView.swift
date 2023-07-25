@@ -11,6 +11,7 @@ import SwiftUI
 public struct HomeView: View {
     @State var cardImage: Image = Image(uiImage: UIImage())
     @State private var translation: CGSize = .zero
+    @State private var isFeedback = false
 
     public init() {}
 
@@ -39,7 +40,17 @@ public struct HomeView: View {
                     .rotationEffect(.degrees(Double(self.translation.width / 300) * 20), anchor: .bottom)
                     .gesture(
                         DragGesture()
-                            .onChanged({ self.translation = $0.translation })
+                            .onChanged { value in
+                                self.translation = value.translation
+                                if value.translation.height < -300 {
+                                    if !isFeedback {
+                                        UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+                                        isFeedback = true
+                                    }
+                                } else {
+                                    isFeedback = false
+                                }
+                            }
                             .onEnded { value in
                                 withAnimation(.interpolatingSpring(mass: 1.0, stiffness: 100, damping: 10, initialVelocity: 0)) {
                                     switch value.translation.height {
