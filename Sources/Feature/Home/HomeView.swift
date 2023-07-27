@@ -6,8 +6,10 @@
 //
 
 import AudioToolbox
+import PopupView
 import ReadabilityModifier
 import SwiftUI
+import ViewComponents
 
 public struct HomeView: View {
     @State var cardImage: Image = Image(uiImage: UIImage())
@@ -17,6 +19,7 @@ public struct HomeView: View {
     @State private var imageScale = 0.2
     @State private var swapImagesOpacity = [0.0, 0.0, 0.0]
     @State private var userInfoOpacity = 0.0
+    @State private var isQuestionPopup = false
 
     private let swapIconSize = CGSize(width: 1527 / 7, height: 522 / 7)
     private let swapTimer = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
@@ -33,6 +36,12 @@ public struct HomeView: View {
                     partnerInfo(name: "ながのめいですす", age: 23, affiliation: "フレンドリー")
                 }
                 .offset(x: 0, y: 100)
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                        isQuestionPopup = true
+                    }
+                }
+
             } else {
                 myCard()
                 myInfo(name: "きよはらしょうう", age: 25, affiliation: "人見知り")
@@ -40,6 +49,17 @@ public struct HomeView: View {
             }
         }
         .fitToReadableContentGuide()
+        .popup(
+            isPresented: $isQuestionPopup
+        ) {
+            SwapedPopup()
+        } customize: {
+            $0
+                .type(.default)
+                .animation(.easeOut(duration: 0.5))
+                .closeOnTap(false)
+                .backgroundColor(.black.opacity(0.3))
+        }
         .onAppear {
             loadCardImage()
         }
