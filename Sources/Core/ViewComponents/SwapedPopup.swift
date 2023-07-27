@@ -10,8 +10,11 @@ import SwiftUI
 public struct SwapedPopup: View {
     @State private var myCardImage = Image(uiImage: UIImage())
     @State private var partnerCardImage = Image(uiImage: UIImage())
+    var isQuestionPopup: Binding<Bool>
 
-    public init() {}
+    public init(isQuestionPopup: Binding<Bool>) {
+        self.isQuestionPopup = isQuestionPopup
+    }
 
     public var body: some View {
         VStack(spacing: 32) {
@@ -52,7 +55,7 @@ public struct SwapedPopup: View {
 
                 Button(
                     action: {
-                        print("キャンセル")
+                        self.isQuestionPopup.wrappedValue = false
                     },
                     label: {
                         cancelButtonText()
@@ -98,6 +101,6 @@ public struct SwapedPopup: View {
 
 struct SwapedPopup_Previews: PreviewProvider {
     static var previews: some View {
-        SwapedPopup()
+        SwapedPopup(isQuestionPopup: .constant(true))
     }
 }

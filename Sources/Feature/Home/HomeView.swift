@@ -52,7 +52,7 @@ public struct HomeView: View {
         .popup(
             isPresented: $isQuestionPopup
         ) {
-            SwapedPopup()
+            SwapedPopup(isQuestionPopup: $isQuestionPopup)
         } customize: {
             $0
                 .type(.default)
