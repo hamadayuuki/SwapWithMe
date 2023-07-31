@@ -66,6 +66,11 @@ let featureTargets: [Target] = [
         "ViewComponents",
         readabilityModifier,
         popupView,
+    ]),
+    .feature(name: "QuestionList", dependencies: [
+        "ViewComponents",
+        readabilityModifier,
+        popupView,
     ])
 ]
 
@@ -117,6 +122,15 @@ let package = Package(
                 popupView,
             ],
             path: "Sources/Feature/Home"
+        ),
+        .target(
+            name: "QuestionList",
+            dependencies: [
+                "ViewComponents",
+                readabilityModifier,
+                popupView,
+            ],
+            path: "Sources/Feature/QuestionList"
         )
     ]
 )

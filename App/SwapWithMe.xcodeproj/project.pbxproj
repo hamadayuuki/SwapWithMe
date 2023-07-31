@@ -17,6 +17,7 @@
 		D45CA13D2A5929EE00C787D6 /* SignUp in Frameworks */ = {isa = PBXBuildFile; productRef = D45CA13C2A5929EE00C787D6 /* SignUp */; };
 		D45CA13F2A597C3E00C787D6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D45CA13E2A597C3E00C787D6 /* GoogleService-Info.plist */; };
 		D4A1F78D2A5EF80B0053DB95 /* ViewComponents in Frameworks */ = {isa = PBXBuildFile; productRef = D4A1F78C2A5EF80B0053DB95 /* ViewComponents */; };
+		D4B2E5712A78038800E5850E /* QuestionList in Frameworks */ = {isa = PBXBuildFile; productRef = D4B2E5702A78038800E5850E /* QuestionList */; };
 		D4BC152D2A6999000029787F /* UserInfo in Frameworks */ = {isa = PBXBuildFile; productRef = D4BC152C2A6999000029787F /* UserInfo */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4B2E5712A78038800E5850E /* QuestionList in Frameworks */,
 				D45CA13D2A5929EE00C787D6 /* SignUp in Frameworks */,
 				D4433AA92A6F8F3A000FA106 /* Home in Frameworks */,
 				D4BC152D2A6999000029787F /* UserInfo in Frameworks */,
@@ -88,9 +90,9 @@
 				D431A89E2A4848EE00109710 /* SwapWithMe */,
 				D431A8AF2A4848EF00109710 /* SwapWithMeTests */,
 				D431A8B92A4848EF00109710 /* SwapWithMeUITests */,
-				D4BB2BE42A543271007C9ADB /* SwapWithMe */,
 				D431A89D2A4848EE00109710 /* Products */,
 				D44C3A7D2A543AC700A634F1 /* Frameworks */,
+				D4BB2BE42A543271007C9ADB /* SwapWithMe */,
 			);
 			sourceTree = "<group>";
 		};
@@ -171,6 +173,7 @@
 				D4A1F78C2A5EF80B0053DB95 /* ViewComponents */,
 				D4BC152C2A6999000029787F /* UserInfo */,
 				D4433AA82A6F8F3A000FA106 /* Home */,
+				D4B2E5702A78038800E5850E /* QuestionList */,
 			);
 			productName = SwapWithMe;
 			productReference = D431A89C2A4848EE00109710 /* SwapWithMe.app */;
@@ -654,6 +657,10 @@
 		D4A1F78C2A5EF80B0053DB95 /* ViewComponents */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ViewComponents;
+		};
+		D4B2E5702A78038800E5850E /* QuestionList */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = QuestionList;
 		};
 		D4BC152C2A6999000029787F /* UserInfo */ = {
 			isa = XCSwiftPackageProductDependency;
