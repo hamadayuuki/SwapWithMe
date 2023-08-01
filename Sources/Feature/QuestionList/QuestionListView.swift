@@ -21,6 +21,14 @@ public struct QuestionListView: View {
                     .offset(x: 0, y: 400 * 0.7 * 0.25)
             }
             questionText(questionNum: 1)
+            questionText(questionNum: 2)
+            questionText(questionNum: 3)
+            questionText(questionNum: 4)
+            questionText(questionNum: 5)
+            questionText(questionNum: 6)
+            questionText(questionNum: 7)
+            questionText(questionNum: 8)
+            questionText(questionNum: 9)
         }
         .fitToReadableContentGuide()
         .onAppear {
