@@ -11,9 +11,11 @@ public struct SwapedPopup: View {
     @State private var myCardImage = Image(uiImage: UIImage())
     @State private var partnerCardImage = Image(uiImage: UIImage())
     var isQuestionPopup: Binding<Bool>
+    var isTransQuestionList: Binding<Bool>
 
-    public init(isQuestionPopup: Binding<Bool>) {
+    public init(isQuestionPopup: Binding<Bool>, isTransQuestionList: Binding<Bool>) {
         self.isQuestionPopup = isQuestionPopup
+        self.isTransQuestionList = isTransQuestionList
     }
 
     public var body: some View {
@@ -47,7 +49,7 @@ public struct SwapedPopup: View {
             VStack(spacing: 0) {
                 Button(
                     action: {
-                        print("質問画面へ遷移")
+                        isTransQuestionList.wrappedValue = true
                     },
                     label: {
                         toQuestionButtonText()
@@ -101,6 +103,6 @@ public struct SwapedPopup: View {
 
 struct SwapedPopup_Previews: PreviewProvider {
     static var previews: some View {
-        SwapedPopup(isQuestionPopup: .constant(true))
+        SwapedPopup(isQuestionPopup: .constant(true), isTransQuestionList: .constant(true))
     }
 }
