@@ -13,19 +13,21 @@ public struct QuestionListView: View {
     public init() {}
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("趣味についての質問")
-                .font(.system(size: 24, weight: .bold, design: .rounded))
-                .foregroundColor(.green)
+        VStack(spacing: 32) {
+            questionText(questionNum: 1)
+        }
+        .fitToReadableContentGuide()
+    }
 
-            Text("好きなサッカーチームは？")
+    private func questionText(questionNum: Int) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Q\(questionNum) : 好きなサッカーチームは？")
                 .font(.system(size: 18, weight: .semibold, design: .rounded))
 
             Text("2人ともサッカーが好きという共通点があります。このことから好きなサッカーチームについて話をするのが良いと思います。")
                 .font(.system(size: 16, weight: .regular, design: .rounded))
                 .foregroundColor(.gray)
         }
-        .fitToReadableContentGuide()
     }
 }
 
