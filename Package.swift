@@ -64,6 +64,7 @@ let featureTargets: [Target] = [
     ]),
     .feature(name: "Home", dependencies: [
         "ViewComponents",
+        "QuestionList",
         readabilityModifier,
         popupView,
     ]),
