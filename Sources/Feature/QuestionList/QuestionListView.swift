@@ -14,23 +14,25 @@ public struct QuestionListView: View {
     public init() {}
 
     public var body: some View {
-        VStack(spacing: 32) {
-            ZStack {
-                card()
-                partnerInfo(name: "ながのめいですす", age: 24, affiliation: "フレンドリー")
-                    .offset(x: 0, y: 400 * 0.7 * 0.25)
+        ScrollView {
+            VStack(spacing: 32) {
+                ZStack {
+                    card()
+                    partnerInfo(name: "ながのめいですす", age: 24, affiliation: "フレンドリー")
+                        .offset(x: 0, y: 400 * 0.7 * 0.25)
+                }
+                questionText(questionNum: 1)
+                questionText(questionNum: 2)
+                questionText(questionNum: 3)
+                questionText(questionNum: 4)
+                questionText(questionNum: 5)
+                questionText(questionNum: 6)
+                questionText(questionNum: 7)
+                questionText(questionNum: 8)
+                questionText(questionNum: 9)
             }
-            questionText(questionNum: 1)
-            questionText(questionNum: 2)
-            questionText(questionNum: 3)
-            questionText(questionNum: 4)
-            questionText(questionNum: 5)
-            questionText(questionNum: 6)
-            questionText(questionNum: 7)
-            questionText(questionNum: 8)
-            questionText(questionNum: 9)
+            .fitToReadableContentGuide()
         }
-        .fitToReadableContentGuide()
         .onAppear {
             cardImage = Image("nagano")
         }
