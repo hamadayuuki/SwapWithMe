@@ -7,6 +7,7 @@
 
 import AudioToolbox
 import PopupView
+import QuestionList
 import ReadabilityModifier
 import SwiftUI
 import ViewComponents
@@ -20,6 +21,7 @@ public struct HomeView: View {
     @State private var swapImagesOpacity = [0.0, 0.0, 0.0]
     @State private var userInfoOpacity = 0.0
     @State private var isQuestionPopup = false
+    @State private var isTransQuestionList = false
 
     private let swapIconSize = CGSize(width: 1527 / 7, height: 522 / 7)
     private let swapTimer = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
@@ -47,12 +49,19 @@ public struct HomeView: View {
                 myInfo(name: "きよはらしょうう", age: 25, affiliation: "人見知り")
                     .offset(x: 0, y: (250 * 0.6) - 12)
             }
+
+            NavigationLink(
+                destination: QuestionListView(),
+                isActive: $isTransQuestionList
+            ) {
+                EmptyView()
+            }
         }
         .fitToReadableContentGuide()
         .popup(
             isPresented: $isQuestionPopup
         ) {
-            SwapedPopup(isQuestionPopup: $isQuestionPopup)
+            SwapedPopup(isQuestionPopup: $isQuestionPopup, isTransQuestionList: $isTransQuestionList)
         } customize: {
             $0
                 .type(.default)
