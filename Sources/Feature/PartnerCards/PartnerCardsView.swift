@@ -9,37 +9,45 @@ import ReadabilityModifier
 import SwiftUI
 
 public struct PartnerCardsView: View {
-    @State var cardImage: Image = Image(uiImage: UIImage())
+    private var cardImages: [Image] = []
+    private let partners = ["nagano", "hotta", "kiyohara", "narita"]
 
-    public init() {}
+    public init() {
+        for partnerIndex in 0..<4 {
+            for imageIndex in 0..<5 {
+                if imageIndex == 0 {
+                    cardImages.append(Image("\(partners[partnerIndex])"))
+                } else {
+                    cardImages.append(Image("\(partners[partnerIndex])" + "\(imageIndex + 1)"))
+                }
+            }
+        }
+    }
 
     public var body: some View {
         ScrollView {
             VStack(spacing: 18) {
-                ForEach(0..<5) { i in
+                ForEach(0..<6) { i in
                     HStack(spacing: 12) {
-                        ForEach(0..<3) { i in
-                            partnerCard()
+                        ForEach(0..<3) { j in
+                            partnerCard(index: i * 3 + j)
                         }
                     }
                 }
             }
             .fitToReadableContentGuide()
         }
-        .onAppear {
-            cardImage = Image("nagano")
-        }
     }
 
-    private func partnerCard() -> some View {
+    private func partnerCard(index: Int) -> some View {
         ZStack {
-            card()
+            card(cardImage: cardImages[index])
             partnerInfo(name: "ながのめいですす", age: 24, affiliation: "フレンドリー")
                 .offset(x: 0, y: 400 * 0.42 * 0.25)
         }
     }
 
-    private func card() -> some View {
+    private func card(cardImage: Image) -> some View {
         ZStack {
             cardImage
                 .resizable()
