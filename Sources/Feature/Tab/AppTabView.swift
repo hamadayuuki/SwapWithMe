@@ -14,16 +14,18 @@ public struct AppTabView: View {
     public init() {}
 
     public var body: some View {
-        TabView {
-            PartnerCardsView()
-                .tabItem {
-                    Label("Home", systemImage: "house")
-                }
+        NavigationView {
+            TabView {
+                PartnerCardsView()
+                    .tabItem {
+                        Label("Home", systemImage: "house")
+                    }
 
-            HomeView()
-                .tabItem {
-                    Label("Search", systemImage: "magnifyingglass")
-                }
+                HomeView()
+                    .tabItem {
+                        Label("Search", systemImage: "magnifyingglass")
+                    }
+            }
         }
     }
 }
