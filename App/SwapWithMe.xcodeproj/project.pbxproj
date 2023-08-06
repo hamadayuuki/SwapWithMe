@@ -17,6 +17,7 @@
 		D45CA13D2A5929EE00C787D6 /* SignUp in Frameworks */ = {isa = PBXBuildFile; productRef = D45CA13C2A5929EE00C787D6 /* SignUp */; };
 		D45CA13F2A597C3E00C787D6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D45CA13E2A597C3E00C787D6 /* GoogleService-Info.plist */; };
 		D4A1F78D2A5EF80B0053DB95 /* ViewComponents in Frameworks */ = {isa = PBXBuildFile; productRef = D4A1F78C2A5EF80B0053DB95 /* ViewComponents */; };
+		D4AAF5D12A7F857F00DD3D55 /* Tab in Frameworks */ = {isa = PBXBuildFile; productRef = D4AAF5D02A7F857F00DD3D55 /* Tab */; };
 		D4B2E5712A78038800E5850E /* QuestionList in Frameworks */ = {isa = PBXBuildFile; productRef = D4B2E5702A78038800E5850E /* QuestionList */; };
 		D4B2E5732A7BF1C700E5850E /* PartnerCards in Frameworks */ = {isa = PBXBuildFile; productRef = D4B2E5722A7BF1C700E5850E /* PartnerCards */; };
 		D4BC152D2A6999000029787F /* UserInfo in Frameworks */ = {isa = PBXBuildFile; productRef = D4BC152C2A6999000029787F /* UserInfo */; };
@@ -65,6 +66,7 @@
 				D4433AA92A6F8F3A000FA106 /* Home in Frameworks */,
 				D4B2E5732A7BF1C700E5850E /* PartnerCards in Frameworks */,
 				D4BC152D2A6999000029787F /* UserInfo in Frameworks */,
+				D4AAF5D12A7F857F00DD3D55 /* Tab in Frameworks */,
 				D4A1F78D2A5EF80B0053DB95 /* ViewComponents in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -177,6 +179,7 @@
 				D4433AA82A6F8F3A000FA106 /* Home */,
 				D4B2E5702A78038800E5850E /* QuestionList */,
 				D4B2E5722A7BF1C700E5850E /* PartnerCards */,
+				D4AAF5D02A7F857F00DD3D55 /* Tab */,
 			);
 			productName = SwapWithMe;
 			productReference = D431A89C2A4848EE00109710 /* SwapWithMe.app */;
@@ -660,6 +663,10 @@
 		D4A1F78C2A5EF80B0053DB95 /* ViewComponents */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ViewComponents;
+		};
+		D4AAF5D02A7F857F00DD3D55 /* Tab */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Tab;
 		};
 		D4B2E5702A78038800E5850E /* QuestionList */ = {
 			isa = XCSwiftPackageProductDependency;
