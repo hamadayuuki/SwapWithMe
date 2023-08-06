@@ -58,6 +58,7 @@ public struct PartnerCardsView: View {
                 }
             }
             .fitToReadableContentGuide()
+            .padding(.top, 36)
         }
     }
 
