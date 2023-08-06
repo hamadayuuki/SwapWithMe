@@ -9,9 +9,11 @@ import ReadabilityModifier
 import SwiftUI
 
 public struct QuestionListView: View {
-    @State var cardImage: Image = Image(uiImage: UIImage())
+    @State var cardImage: Image
 
-    public init() {}
+    public init(cardImage: Image) {
+        self.cardImage = cardImage
+    }
 
     public var body: some View {
         ScrollView {
@@ -32,9 +34,6 @@ public struct QuestionListView: View {
                 questionText(questionNum: 9)
             }
             .fitToReadableContentGuide()
-        }
-        .onAppear {
-            cardImage = Image("nagano")
         }
     }
 
@@ -87,6 +86,6 @@ public struct QuestionListView: View {
 
 struct QuestionListView_Previews: PreviewProvider {
     static var previews: some View {
-        QuestionListView()
+        QuestionListView(cardImage: Image("nagano"))
     }
 }

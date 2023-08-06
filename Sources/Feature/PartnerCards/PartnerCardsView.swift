@@ -5,12 +5,16 @@
 //  Created by 濵田　悠樹 on 2023/08/03.
 //
 
+import QuestionList
 import ReadabilityModifier
 import SwiftUI
 
 public struct PartnerCardsView: View {
     private var cardImages: [Image] = []
     private let partners = ["nagano", "hotta", "kiyohara", "narita"]
+
+    @State private var isTransQuestionListView = false
+    @State private var tappedImage = Image("")
 
     public init() {
         for partnerIndex in 0..<4 {
@@ -31,8 +35,19 @@ public struct PartnerCardsView: View {
                     HStack(spacing: 12) {
                         ForEach(0..<3) { j in
                             partnerCard(index: i * 3 + j)
+                                .onTapGesture {
+                                    tappedImage = cardImages[i * 3 + j]
+                                    isTransQuestionListView = true
+                                }
                         }
                     }
+                }
+
+                NavigationLink(
+                    destination: QuestionListView(cardImage: tappedImage),
+                    isActive: $isTransQuestionListView
+                ) {
+                    EmptyView()
                 }
             }
             .fitToReadableContentGuide()
