@@ -84,6 +84,10 @@ let featureTargets: [Target] = [
         "PartnerCards",
         readabilityModifier,
         popupView,
+    ]),
+    .feature(name: "Search", dependencies: [
+        "Home",
+        readabilityModifier,
     ])
 ]
 
@@ -165,6 +169,14 @@ let package = Package(
                 popupView,
             ],
             path: "Sources/Feature/Tab"
+        ),
+        .target(
+            name: "Search",
+            dependencies: [
+                "Home",
+                readabilityModifier,
+            ],
+            path: "Sources/Feature/Search"
         )
     ]
 )
