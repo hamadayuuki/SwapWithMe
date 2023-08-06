@@ -72,6 +72,12 @@ let featureTargets: [Target] = [
         "ViewComponents",
         readabilityModifier,
         popupView,
+    ]),
+    .feature(name: "PartnerCards", dependencies: [
+        "ViewComponents",
+        "QuestionList",
+        readabilityModifier,
+        popupView,
     ])
 ]
 
@@ -132,6 +138,16 @@ let package = Package(
                 popupView,
             ],
             path: "Sources/Feature/QuestionList"
+        ),
+        .target(
+            name: "PartnerCards",
+            dependencies: [
+                "ViewComponents",
+                "QuestionList",
+                readabilityModifier,
+                popupView,
+            ],
+            path: "Sources/Feature/PartnerCards"
         )
     ]
 )

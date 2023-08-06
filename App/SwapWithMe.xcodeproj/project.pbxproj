@@ -18,6 +18,7 @@
 		D45CA13F2A597C3E00C787D6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D45CA13E2A597C3E00C787D6 /* GoogleService-Info.plist */; };
 		D4A1F78D2A5EF80B0053DB95 /* ViewComponents in Frameworks */ = {isa = PBXBuildFile; productRef = D4A1F78C2A5EF80B0053DB95 /* ViewComponents */; };
 		D4B2E5712A78038800E5850E /* QuestionList in Frameworks */ = {isa = PBXBuildFile; productRef = D4B2E5702A78038800E5850E /* QuestionList */; };
+		D4B2E5732A7BF1C700E5850E /* PartnerCards in Frameworks */ = {isa = PBXBuildFile; productRef = D4B2E5722A7BF1C700E5850E /* PartnerCards */; };
 		D4BC152D2A6999000029787F /* UserInfo in Frameworks */ = {isa = PBXBuildFile; productRef = D4BC152C2A6999000029787F /* UserInfo */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 				D4B2E5712A78038800E5850E /* QuestionList in Frameworks */,
 				D45CA13D2A5929EE00C787D6 /* SignUp in Frameworks */,
 				D4433AA92A6F8F3A000FA106 /* Home in Frameworks */,
+				D4B2E5732A7BF1C700E5850E /* PartnerCards in Frameworks */,
 				D4BC152D2A6999000029787F /* UserInfo in Frameworks */,
 				D4A1F78D2A5EF80B0053DB95 /* ViewComponents in Frameworks */,
 			);
@@ -174,6 +176,7 @@
 				D4BC152C2A6999000029787F /* UserInfo */,
 				D4433AA82A6F8F3A000FA106 /* Home */,
 				D4B2E5702A78038800E5850E /* QuestionList */,
+				D4B2E5722A7BF1C700E5850E /* PartnerCards */,
 			);
 			productName = SwapWithMe;
 			productReference = D431A89C2A4848EE00109710 /* SwapWithMe.app */;
@@ -661,6 +664,10 @@
 		D4B2E5702A78038800E5850E /* QuestionList */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = QuestionList;
+		};
+		D4B2E5722A7BF1C700E5850E /* PartnerCards */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PartnerCards;
 		};
 		D4BC152C2A6999000029787F /* UserInfo */ = {
 			isa = XCSwiftPackageProductDependency;
