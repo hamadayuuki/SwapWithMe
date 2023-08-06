@@ -30,7 +30,14 @@ public struct PartnerCardsView: View {
 
     public var body: some View {
         ScrollView {
-            VStack(spacing: 18) {
+            VStack(alignment: .leading, spacing: 18) {
+                Text("Swapしたユーザー")
+                    .font(.system(size: 24, weight: .bold, design: .rounded))
+
+                Text("これまでカードを交換したユーザーが表示されています。カードをタップすると質問が表示されます。")
+                    .font(.system(size: 12, weight: .regular, design: .rounded))
+                    .padding(.bottom, 24)
+
                 ForEach(0..<6) { i in
                     HStack(spacing: 12) {
                         ForEach(0..<3) { j in
