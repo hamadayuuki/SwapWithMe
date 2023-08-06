@@ -24,7 +24,17 @@ struct SwapWithMeApp: App {
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        // TabView
+        UITabBar.appearance().backgroundColor = UIColor.white
+        UITabBar.appearance().barTintColor = UIColor.white
+        UITabBar.appearance().unselectedItemTintColor = .gray
+        UITabBar.appearance().shadowImage = UIImage()
+        UITabBar.appearance().backgroundImage = UIImage()
+        UITabBar.appearance().isTranslucent = false
+
+        // Firebase
         FirebaseApp.configure()
+
         return true
     }
 
