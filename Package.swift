@@ -38,6 +38,10 @@ extension Target {
     static func feature(name: String, dependencies: [TargetDependency], resources: [Resource]? = nil, plugins: [Target.PluginUsage]? = nil) -> Target {
         .target(name: name, dependencies: dependencies, path: "Sources/Feature/\(name)", resources: resources, plugins: plugins)
     }
+
+    static func entity(name: String, dependencies: [TargetDependency], resources: [Resource]? = nil, plugins: [Target.PluginUsage]? = nil) -> Target {
+        .target(name: name, dependencies: dependencies, path: "Sources/Entity/\(name)", resources: resources, plugins: plugins)
+    }
 }
 
 // MARK: Feature
@@ -92,9 +96,15 @@ let featureTargets: [Target] = [
     ])
 ]
 
+let entityTargets: [Target] = [
+    .feature(name: "User", dependencies: [
+        fireAuth
+    ])
+]
+
 // MARK: - Package
 
-let allTargets = coreTargets + featureTargets
+let allTargets = coreTargets + featureTargets + entityTargets
 
 let package = Package(
     name: "SwapWithMe",
@@ -104,6 +114,9 @@ let package = Package(
         .map{ .library(name: $0, targets: [$0]) },
     dependencies: packageDependencies,
     targets: [
+
+        // MARK: Core
+
         .target(
             name: "ViewComponents",
             dependencies: [
@@ -111,6 +124,9 @@ let package = Package(
             ],
             path: "Sources/Core/ViewComponents"
         ),
+
+        // MARK: Core
+
         .target(
             name: "SignUp",
             dependencies: [
@@ -179,6 +195,16 @@ let package = Package(
                 readabilityModifier,
             ],
             path: "Sources/Feature/Search"
-        )
+        ),
+
+        // MARK: Entity
+
+        .target(
+            name: "User",
+            dependencies: [
+                fireAuth
+            ],
+            path: "Sources/Entity/User"
+        ),
     ]
 )
