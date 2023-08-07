@@ -9,15 +9,17 @@ import FirebaseStorage
 import SwiftUI
 
 public protocol ImageRequestProtocol {
-    static func set(uiImage: UIImage, id: String) async throws
+    static func set(uiImage: UIImage, id: String) async throws -> URL
 }
 
 public class ImageRequest: ImageRequestProtocol {
-    public static func set(uiImage: UIImage, id: String) async throws {
-        guard let imageData = uiImage.pngData() else { return }
+    public static func set(uiImage: UIImage, id: String) async throws -> URL {
+        guard let imageData = uiImage.pngData() else { fatalError("Error ImageRequest.set()") }
         let storageRef = Storage.storage().reference()
 
         let imageRef = storageRef.child("Users/icon/\(id).png")
         let _ = try await imageRef.putDataAsync(imageData)
+        let url = try await imageRef.downloadURL()
+        return url
     }
 }
