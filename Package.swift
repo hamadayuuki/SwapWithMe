@@ -113,7 +113,8 @@ let dataTargets: [Target] = [
     .feature(name: "Request", dependencies: [
         "User",
         fireStore,
-        fireStoreSwift
+        fireStoreSwift,
+        fireStorage
     ])
 ]
 
@@ -230,7 +231,8 @@ let package = Package(
             dependencies: [
                 "User",
                 fireStore,
-                fireStoreSwift
+                fireStoreSwift,
+                fireStorage
             ],
             path: "Sources/Data/Request"
         ),
