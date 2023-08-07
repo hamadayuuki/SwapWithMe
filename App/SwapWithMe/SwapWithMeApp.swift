@@ -30,7 +30,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         UITabBar.appearance().unselectedItemTintColor = .gray
         UITabBar.appearance().shadowImage = UIImage()
         UITabBar.appearance().backgroundImage = UIImage()
-        UITabBar.appearance().isTranslucent = false
 
         // Firebase
         FirebaseApp.configure()
