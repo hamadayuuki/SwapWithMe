@@ -43,6 +43,10 @@ extension Target {
     static func entity(name: String, dependencies: [TargetDependency], resources: [Resource]? = nil, plugins: [Target.PluginUsage]? = nil) -> Target {
         .target(name: name, dependencies: dependencies, path: "Sources/Entity/\(name)", resources: resources, plugins: plugins)
     }
+
+    static func data(name: String, dependencies: [TargetDependency], resources: [Resource]? = nil, plugins: [Target.PluginUsage]? = nil) -> Target {
+        .target(name: name, dependencies: dependencies, path: "Sources/Data/\(name)", resources: resources, plugins: plugins)
+    }
 }
 
 // MARK: Feature
@@ -99,6 +103,14 @@ let featureTargets: [Target] = [
 
 let entityTargets: [Target] = [
     .feature(name: "User", dependencies: [
+        fireStore,
+        fireStoreSwift
+    ])
+]
+
+let dataTargets: [Target] = [
+    .feature(name: "Request", dependencies: [
+        "User",
         fireStore,
         fireStoreSwift
     ])
@@ -208,6 +220,18 @@ let package = Package(
                 fireStoreSwift
             ],
             path: "Sources/Entity/User"
+        ),
+
+        // MARK: Data
+
+        .target(
+            name: "Request",
+            dependencies: [
+                "User",
+                fireStore,
+                fireStoreSwift
+            ],
+            path: "Sources/Data/Request"
         ),
     ]
 )
