@@ -9,21 +9,19 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 import Swift
 
-struct User: Codable {
-    @DocumentID var id: String?
-    var iconURL: URL
-    var name: String
-    var age: Int
-    var sex: Sex
-    var affiliation: Affiliation
-    var animal: Animal
-    var personality: Personality
-    var description: String
-    var createdAt: Timestamp {
-        Timestamp()
-    }
+public struct User: Codable, Identifiable {
+    @DocumentID public var id: String?
+    public var iconURL: URL
+    public var name: String
+    public var age: Int
+    public var sex: Sex
+    public var affiliation: Affiliation
+    public var animal: Animal
+    public var personality: Personality
+    public var description: String
+    public var createdAt: Timestamp = Timestamp()
 
-    init(id: String? = nil, iconURL: URL, name: String, age: Int, sex: Sex, affiliation: Affiliation, animal: Animal, personality: Personality, description: String) {
+    public init(id: String? = nil, iconURL: URL, name: String, age: Int, sex: Sex, affiliation: Affiliation, animal: Animal, personality: Personality, description: String) {
         self.id = id
         self.iconURL = iconURL
         self.name = name
@@ -36,12 +34,12 @@ struct User: Codable {
     }
 }
 
-enum Sex: String, Codable {
+public enum Sex: String, Codable {
     case man
     case woman
 }
 
-enum Affiliation: String, Codable {
+public enum Affiliation: String, Codable {
     case juniorHigh
     case high
     case university
@@ -49,12 +47,12 @@ enum Affiliation: String, Codable {
     case others
 }
 
-enum Animal: String, Codable {
+public enum Animal: String, Codable {
     case dog
     case cat
 }
 
-enum Personality: String, Codable {
+public enum Personality: String, Codable {
     case shy
     case friendly
 }
