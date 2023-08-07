@@ -99,7 +99,8 @@ let featureTargets: [Target] = [
 
 let entityTargets: [Target] = [
     .feature(name: "User", dependencies: [
-        fireAuth
+        fireStore,
+        fireStoreSwift
     ])
 ]
 
@@ -203,7 +204,8 @@ let package = Package(
         .target(
             name: "User",
             dependencies: [
-                fireAuth
+                fireStore,
+                fireStoreSwift
             ],
             path: "Sources/Entity/User"
         ),
