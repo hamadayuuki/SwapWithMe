@@ -82,6 +82,7 @@ let featureTargets: [Target] = [
     .feature(name: "Tab", dependencies: [
         "Home",
         "PartnerCards",
+        "Search",
         readabilityModifier,
         popupView,
     ]),
@@ -165,6 +166,7 @@ let package = Package(
             dependencies: [
                 "Home",
                 "PartnerCards",
+                "Search",
                 readabilityModifier,
                 popupView,
             ],

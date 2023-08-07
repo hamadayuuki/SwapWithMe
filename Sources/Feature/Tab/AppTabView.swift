@@ -7,6 +7,7 @@
 
 import Home
 import PartnerCards
+import Search
 import SwiftUI
 
 private enum Tab {
@@ -20,22 +21,20 @@ public struct AppTabView: View {
     public init() {}
 
     public var body: some View {
-        NavigationView {
-            TabView(selection: $selection) {
-                PartnerCardsView()
-                    .tabItem {
-                        Label("ホーム", systemImage: selection == .home ? "house.fill" : "house")
-                    }
-                    .tag(Tab.home)
+        TabView(selection: $selection) {
+            PartnerCardsView()
+                .tabItem {
+                    Label("ホーム", systemImage: selection == .home ? "house.fill" : "house")
+                }
+                .tag(Tab.home)
 
-                HomeView()
-                    .tabItem {
-                        Label("探す", systemImage: "magnifyingglass")
-                    }
-                    .tag(Tab.search)
-            }
-            .accentColor(.green)
+            PartnerSearchView()
+                .tabItem {
+                    Label("探す", systemImage: "magnifyingglass")
+                }
+                .tag(Tab.search)
         }
+        .accentColor(.green)
     }
 }
 
