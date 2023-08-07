@@ -27,7 +27,7 @@ public class UserRequest: UserRequestProtocol {
 
     public static func fetch(id: String) async throws -> User {
         let db = Firestore.firestore()
-        let user = try await db.collection("users").document(id).getDocument(as: User.self)
+        let user = try await db.collection("Users").document(id).getDocument(as: User.self)
         return user
     }
 
