@@ -10,6 +10,8 @@ import FirebaseFirestoreSwift
 import Swift
 
 public struct User: Codable, Identifiable, Equatable {
+    // @DocumentID に準拠した場合 型をString?にする必要がある
+    // Firestoreからデータ取得するとき 自動的にidへ値が代入される
     @DocumentID public var id: String?
     public var iconURL: URL?
     public var name: String
@@ -21,8 +23,8 @@ public struct User: Codable, Identifiable, Equatable {
     public var description: String
     public var createdAt: Timestamp = Timestamp()
 
-    public init(id: String? = nil, iconURL: URL?, name: String, age: Int, sex: Sex, affiliation: Affiliation, animal: Animal, personality: Personality, description: String) {
-        self.id = id
+    public init(iconURL: URL?, name: String, age: Int, sex: Sex, affiliation: Affiliation, animal: Animal, personality: Personality, description: String) {
+        self.id = UUID().uuidString
         self.iconURL = iconURL
         self.name = name
         self.age = age
