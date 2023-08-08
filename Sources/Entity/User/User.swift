@@ -9,9 +9,9 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 import Swift
 
-public struct User: Codable, Identifiable {
+public struct User: Codable, Identifiable, Equatable {
     @DocumentID public var id: String?
-    public var iconURL: URL
+    public var iconURL: URL?
     public var name: String
     public var age: Int
     public var sex: Sex
@@ -21,7 +21,7 @@ public struct User: Codable, Identifiable {
     public var description: String
     public var createdAt: Timestamp = Timestamp()
 
-    public init(id: String? = nil, iconURL: URL, name: String, age: Int, sex: Sex, affiliation: Affiliation, animal: Animal, personality: Personality, description: String) {
+    public init(id: String? = nil, iconURL: URL?, name: String, age: Int, sex: Sex, affiliation: Affiliation, animal: Animal, personality: Personality, description: String) {
         self.id = id
         self.iconURL = iconURL
         self.name = name
