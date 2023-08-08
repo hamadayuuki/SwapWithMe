@@ -69,8 +69,11 @@ let featureTargets: [Target] = [
     ]),
     .feature(name: "UserInfo", dependencies: [
         "ViewComponents",
+        "User",
+        "Tab",
         readabilityModifier,
         popupView,
+        composableArchitecture
     ]),
     .feature(name: "Home", dependencies: [
         "ViewComponents",
@@ -159,8 +162,11 @@ let package = Package(
             name: "UserInfo",
             dependencies: [
                 "ViewComponents",
+                "User",
+                "Tab",
                 readabilityModifier,
                 popupView,
+                composableArchitecture,
             ],
             path: "Sources/Feature/UserInfo"
         ),

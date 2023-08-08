@@ -5,10 +5,14 @@
 //  Created by 濵田　悠樹 on 2023/07/21.
 //
 
+import ComposableArchitecture
 import ReadabilityModifier
 import SwiftUI
+import User
 
 public struct UserBasicInfoView: View {
+    var store: StoreOf<UserBasicInfoStore>
+
     @State var nickName: String = ""
     @State var selectAge: String = "-"
     @State var selectSex: String = "-"
@@ -16,7 +20,7 @@ public struct UserBasicInfoView: View {
     @State var selectDogOrCat: String = "-"
     @State var selectActivity: String = "-"
     @State var selectPersonality: String = "-"
-    @State var tappedTransButton = false
+    @State var user: User?
 
     private var isButtonEnable: Bool {
         if !nickName.isEmpty && nickName.count <= 8 && selectAge != "-" && selectSex != "-" && selectAffiliation != "-" && selectDogOrCat != "-" && selectActivity != "-" && selectPersonality != "-" {
@@ -31,54 +35,62 @@ public struct UserBasicInfoView: View {
         return Color.gray.opacity(0.5)
     }
 
-    public init() {}
+    public init(store: StoreOf<UserBasicInfoStore>) {
+        self.store = store
+    }
 
     public var body: some View {
-        VStack(spacing: 24) {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 24) {
-                    Text("基本情報")
-                        .font(.system(size: 24, weight: .bold, design: .rounded))
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
+            VStack(spacing: 24) {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 24) {
+                        Text("基本情報")
+                            .font(.system(size: 24, weight: .bold, design: .rounded))
 
-                    Text("ユーザー情報を登録するための質問です。気軽に回答してください。")
-                        .font(.system(size: 12, weight: .regular, design: .rounded))
-                        .padding(.bottom, 24)
+                        Text("ユーザー情報を登録するための質問です。気軽に回答してください。")
+                            .font(.system(size: 12, weight: .regular, design: .rounded))
+                            .padding(.bottom, 24)
 
-                    QuestionTextFieldView(nickName: $nickName)
-                    QuestionPickerView(type: .age, selectionValue: $selectAge)
-                    QuestionPickerView(type: .sex, selectionValue: $selectSex)
-                    QuestionPickerView(type: .affiliation, selectionValue: $selectAffiliation)
-                    QuestionPickerView(type: .dogOrCat, selectionValue: $selectDogOrCat)
-                    QuestionPickerView(type: .activity, selectionValue: $selectActivity)
-                    QuestionPickerView(type: .personality, selectionValue: $selectPersonality)
+                        QuestionTextFieldView(nickName: $nickName)
+                        QuestionPickerView(type: .age, selectionValue: $selectAge)
+                        QuestionPickerView(type: .sex, selectionValue: $selectSex)
+                        QuestionPickerView(type: .affiliation, selectionValue: $selectAffiliation)
+                        QuestionPickerView(type: .dogOrCat, selectionValue: $selectDogOrCat)
+                        QuestionPickerView(type: .activity, selectionValue: $selectActivity)
+                        QuestionPickerView(type: .personality, selectionValue: $selectPersonality)
+                    }
+                }
+
+                Button(
+                    action: {
+                        self.user = User.init(iconURL: nil, name: nickName, age: 0, sex: .man, affiliation: .juniorHigh, animal: .dog, personality: .shy, description: "よろしくお願いします")
+                        viewStore.send(.tappedButton(self.user))
+                    },
+                    label: {
+                        Text("次へ")
+                            .foregroundColor(.white)
+                            .font(.system(size: 24, weight: .bold, design: .rounded))
+                            .frame(maxWidth: .infinity, maxHeight: 50)
+                            .background(transButtonBackground)
+                            .cornerRadius(10)
+                    }
+                )
+                .padding(.top, 40)
+                .disabled(!isButtonEnable)
+
+                NavigationLink(
+                    destination: SelectUserCardImageView(user: self.user),
+                    isActive: viewStore.binding(
+                        get: { $0.tappedTransButton },
+                        send: .bindingTappedTransButton(viewStore.tappedTransButton)
+                    )
+                ) {
+                    EmptyView()
                 }
             }
-
-            Button(
-                action: {
-                    tappedTransButton = true
-                },
-                label: {
-                    Text("次へ")
-                        .foregroundColor(.white)
-                        .font(.system(size: 24, weight: .bold, design: .rounded))
-                        .frame(maxWidth: .infinity, maxHeight: 50)
-                        .background(transButtonBackground)
-                        .cornerRadius(10)
-                }
-            )
-            .padding(.top, 40)
-            .disabled(!isButtonEnable)
-
-            NavigationLink(
-                destination: SelectUserCardImageView(),
-                isActive: $tappedTransButton
-            ) {
-                EmptyView()
-            }
+            .fitToReadableContentGuide()
+            .padding(.top, 24)
         }
-        .fitToReadableContentGuide()
-        .padding(.top, 24)
     }
 
     private func QuestionTextFieldView(nickName: Binding<String>) -> some View {
@@ -132,6 +144,9 @@ struct CustomPicker: View {
 
 struct UserBasicInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        UserBasicInfoView()
+        UserBasicInfoView(
+            store: Store(initialState: UserBasicInfoStore.State()) {
+                UserBasicInfoStore()
+            })
     }
 }
