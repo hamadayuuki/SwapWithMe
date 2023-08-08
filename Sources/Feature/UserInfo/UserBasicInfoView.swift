@@ -20,7 +20,6 @@ public struct UserBasicInfoView: View {
     @State var selectDogOrCat: String = "-"
     @State var selectActivity: String = "-"
     @State var selectPersonality: String = "-"
-    @State var user: User?
 
     private var isButtonEnable: Bool {
         if !nickName.isEmpty && nickName.count <= 8 && selectAge != "-" && selectSex != "-" && selectAffiliation != "-" && selectDogOrCat != "-" && selectActivity != "-" && selectPersonality != "-" {
@@ -63,8 +62,9 @@ public struct UserBasicInfoView: View {
 
                 Button(
                     action: {
-                        self.user = User.init(iconURL: nil, name: nickName, age: 0, sex: .man, affiliation: .juniorHigh, animal: .dog, personality: .shy, description: "よろしくお願いします")
-                        viewStore.send(.tappedButton(self.user))
+                        // TODO: 入力した情報をUserの項目に合わせて変換する
+                        let user = User.init(iconURL: nil, name: nickName, age: 0, sex: .man, affiliation: .juniorHigh, animal: .dog, personality: .shy, description: "よろしくお願いします")
+                        viewStore.send(.tappedButton(user))
                     },
                     label: {
                         Text("次へ")
@@ -79,7 +79,12 @@ public struct UserBasicInfoView: View {
                 .disabled(!isButtonEnable)
 
                 NavigationLink(
-                    destination: SelectUserCardImageView(user: self.user),
+                    destination: SelectUserCardImageView(
+                        store: Store(initialState: SelectUserCardImageStore.State()) {
+                            SelectUserCardImageStore()
+                        },
+                        user: viewStore.user
+                    ),
                     isActive: viewStore.binding(
                         get: { $0.tappedTransButton },
                         send: .bindingTappedTransButton(viewStore.tappedTransButton)
