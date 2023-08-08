@@ -71,6 +71,7 @@ let featureTargets: [Target] = [
         "ViewComponents",
         "User",
         "Tab",
+        "Request",
         readabilityModifier,
         popupView,
         composableArchitecture
@@ -164,6 +165,7 @@ let package = Package(
                 "ViewComponents",
                 "User",
                 "Tab",
+                "Request",
                 readabilityModifier,
                 popupView,
                 composableArchitecture,
