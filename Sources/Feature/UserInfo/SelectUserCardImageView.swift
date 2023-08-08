@@ -95,7 +95,7 @@ public struct SelectUserCardImageView: View {
                         isCropImage = true
                     }
             }
-            .sheet(
+            .fullScreenCover(
                 isPresented: viewStore.binding(
                     get: { $0.isTransAppTabView },
                     send: .bindingIsTransAppTabView(!viewStore.isTransAppTabView)
