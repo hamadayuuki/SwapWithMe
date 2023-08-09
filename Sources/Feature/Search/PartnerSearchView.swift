@@ -12,6 +12,7 @@ import User
 
 public struct PartnerSearchView: View {
     @State private var searchText = ""
+    @State private var myInfo: User = .init(iconURL: nil, name: "", age: 0, sex: .man, affiliation: .juniorHigh, animal: .dog, activity: .indoor, personality: .shy, description: "")
     @State private var users: [User] = []
 
     public init() {}
@@ -26,8 +27,16 @@ public struct PartnerSearchView: View {
                 if searchText.count <= 8 {
                     Task {
                         self.users = try await UserRequest.fetchWithName(name: searchText)
+                        print(self.users)
                     }
                 }
+            }
+        }
+        .onAppear {
+            Task {
+                // TODO: uid はログインしているユーザー情報から取得してくる
+                // 現在の uid はテストユーザー
+                self.myInfo = try await UserRequest.fetch(id: "8FA167F4-E3CD-449A-92F2-7FC2CB5CB0B4")
             }
         }
     }
