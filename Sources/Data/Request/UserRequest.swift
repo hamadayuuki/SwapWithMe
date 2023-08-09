@@ -37,6 +37,10 @@ public class UserRequest: UserRequestProtocol {
         var users: [User] = []
         let db = Firestore.firestore()
         let userCollection = db.collection("Users")
+        /// ユーザー名の部分一致検索
+        /// 注意点 :
+        ///    - 部分検索を可能としているためクエリ量が多くなる
+        ///    - 検索文字 = クエリ量
         let querySnapshot = try await userCollection.order(by: "name").start(at: [name]).end(at: [name + "\u{f8ff}"]).getDocuments()
         for document in querySnapshot.documents {
             let user = try document.data(as: User.self)
