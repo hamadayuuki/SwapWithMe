@@ -6,7 +6,9 @@
 //
 
 import ReadabilityModifier
+import Request
 import SwiftUI
+import User
 
 private struct Partner: Hashable {
     var uid: Int
@@ -24,25 +26,37 @@ public struct PartnerSearchView: View {
         .init(uid: 3, iconURL: "hotta", name: "ほったまゆですす", description: "ども！笑顔が素敵と言われます。よろしくお願いしますっ！"),
         .init(uid: 4, iconURL: "nagano2", name: "ながのめいで2", description: "こんにちは。ながのめいです。女優をやっています。２"),
     ]
+    @State private var users: [User] = []
 
     public init() {}
 
     public var body: some View {
         NavigationView {
-            List(partners, id: \.self) { partner in
-                partnerCell(partner: partner)
+            List(users, id: \.self) { user in
+                partnerCell(partner: user)
             }
             .searchable(text: $searchText)
+            .onSubmit(of: .search) {
+                if searchText.count <= 8 {
+                    Task {
+                        self.users = try await UserRequest.fetchWithName(name: searchText)
+                    }
+                }
+            }
         }
     }
 
-    private func partnerCell(partner: Partner) -> some View {
+    private func partnerCell(partner: User) -> some View {
         HStack(spacing: 18) {
-            Image(partner.iconURL)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 42, height: 42)
-                .cornerRadius(42 * 0.5)
+            AsyncImage(url: partner.iconURL!) { image in
+                image
+                    .resizable()
+                    .scaledToFill()
+            } placeholder: {
+                ProgressView()
+            }
+            .frame(width: 42, height: 42)
+            .cornerRadius(42 * 0.5)
 
             VStack(alignment: .leading, spacing: 6) {
                 Text(partner.name)

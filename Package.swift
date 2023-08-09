@@ -102,6 +102,8 @@ let featureTargets: [Target] = [
     ]),
     .feature(name: "Search", dependencies: [
         "Home",
+        "Request",
+        "User",
         readabilityModifier,
     ])
 ]
@@ -216,6 +218,8 @@ let package = Package(
             name: "Search",
             dependencies: [
                 "Home",
+                "Request",
+                "User",
                 readabilityModifier,
             ],
             path: "Sources/Feature/Search"

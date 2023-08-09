@@ -9,7 +9,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 import Swift
 
-public struct User: Codable, Identifiable, Equatable {
+public struct User: Codable, Identifiable, Equatable, Hashable {
     // @DocumentID に準拠した場合 型をString?にする必要がある
     // Firestoreからデータ取得するとき 自動的にidへ値が代入される
     @DocumentID public var id: String?
