@@ -66,7 +66,7 @@ public struct PartnerSearchView: View {
                     .foregroundColor(.gray)
             }
         }
-        .padding(.top, 12)
+        .padding(.vertical, 12)
     }
 }
 
