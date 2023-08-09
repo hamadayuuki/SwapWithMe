@@ -13,6 +13,7 @@ public protocol UserRequestProtocol {
     static func set(data: User) throws
     static func update(data: User) async throws
     static func fetch(id: String) async throws -> User
+    static func fetchWithName(name: String) async throws -> [User]
 }
 
 public class UserRequest: UserRequestProtocol {
@@ -30,6 +31,18 @@ public class UserRequest: UserRequestProtocol {
         let db = Firestore.firestore()
         let user = try await db.collection("Users").document(id).getDocument(as: User.self)
         return user
+    }
+
+    public static func fetchWithName(name: String) async throws -> [User] {
+        var users: [User] = []
+        let db = Firestore.firestore()
+        let userCollection = db.collection("Users")
+        let querySnapshot = try await userCollection.order(by: "name").start(at: [name]).end(at: [name + "\u{f8ff}"]).getDocuments()
+        for document in querySnapshot.documents {
+            let user = try document.data(as: User.self)
+            users.append(user)
+        }
+        return users
     }
 
 }
