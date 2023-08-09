@@ -20,6 +20,47 @@ public struct UserBasicInfoView: View {
     @State var selectDogOrCat: String = "-"
     @State var selectActivity: String = "-"
     @State var selectPersonality: String = "-"
+    @State var description: String = ""
+
+    private var sex: Sex {
+        switch selectSex {
+        case "男性": return .man
+        case "女性": return .woman
+        case "未回答": return .noGender
+        default: return .noGender
+        }
+    }
+    private var affiliation: Affiliation {
+        switch selectAffiliation {
+        case "中学生": return .juniorHigh
+        case "高校生": return .high
+        case "大学生": return .university
+        case "社会人": return .society
+        case "その他": return .others
+        default: return .others
+        }
+    }
+    private var animal: Animal {
+        switch selectDogOrCat {
+        case "🐶": return .dog
+        case "😺": return .cat
+        default: return .dog
+        }
+    }
+    private var activity: Activity {
+        switch selectActivity {
+        case "インドア": return .indoor
+        case "アウトドア": return .outdoor
+        default: return .indoor
+        }
+    }
+    private var personality: Personality {
+        switch selectPersonality {
+        case "人見知り": return .shy
+        case "フレンドリー": return .friendly
+        default: return .shy
+        }
+    }
 
     private var isButtonEnable: Bool {
         if !nickName.isEmpty && nickName.count <= 8 && selectAge != "-" && selectSex != "-" && selectAffiliation != "-" && selectDogOrCat != "-" && selectActivity != "-" && selectPersonality != "-" {
@@ -50,20 +91,21 @@ public struct UserBasicInfoView: View {
                             .font(.system(size: 12, weight: .regular, design: .rounded))
                             .padding(.bottom, 24)
 
-                        QuestionTextFieldView(nickName: $nickName)
+                        QuestionTextFieldView(title: "ニックネーム", placeholder: "8文字以内で入力", nickName: $nickName)
                         QuestionPickerView(type: .age, selectionValue: $selectAge)
                         QuestionPickerView(type: .sex, selectionValue: $selectSex)
                         QuestionPickerView(type: .affiliation, selectionValue: $selectAffiliation)
                         QuestionPickerView(type: .dogOrCat, selectionValue: $selectDogOrCat)
                         QuestionPickerView(type: .activity, selectionValue: $selectActivity)
                         QuestionPickerView(type: .personality, selectionValue: $selectPersonality)
+                        QuestionTextFieldView(title: "ひとこと", placeholder: "自由に入力", nickName: $description)
                     }
                 }
 
                 Button(
                     action: {
                         // TODO: 入力した情報をUserの項目に合わせて変換する
-                        let user = User.init(iconURL: nil, name: nickName, age: 0, sex: .man, affiliation: .juniorHigh, animal: .dog, personality: .shy, description: "よろしくお願いします")
+                        let user = User.init(iconURL: nil, name: nickName, age: Int(selectAge)!, sex: self.sex, affiliation: self.affiliation, animal: self.animal, activity: self.activity, personality: self.personality, description: description)
                         viewStore.send(.tappedButton(user))
                     },
                     label: {
@@ -98,13 +140,13 @@ public struct UserBasicInfoView: View {
         }
     }
 
-    private func QuestionTextFieldView(nickName: Binding<String>) -> some View {
+    private func QuestionTextFieldView(title: String, placeholder: String, nickName: Binding<String>) -> some View {
         VStack(spacing: 4) {
             HStack {
-                Text("ニックネーム")
+                Text(title)
                     .font(.system(size: 16, weight: .semibold, design: .rounded))
                 Spacer()
-                TextField("8文字以内で入力", text: nickName)
+                TextField(placeholder, text: nickName)
                     .frame(maxWidth: 150, alignment: .trailing)
             }
             Divider()

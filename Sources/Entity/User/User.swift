@@ -19,11 +19,12 @@ public struct User: Codable, Identifiable, Equatable, Hashable {
     public var sex: Sex
     public var affiliation: Affiliation
     public var animal: Animal
+    public var activity: Activity
     public var personality: Personality
     public var description: String
     public var createdAt: Timestamp = Timestamp()
 
-    public init(iconURL: URL?, name: String, age: Int, sex: Sex, affiliation: Affiliation, animal: Animal, personality: Personality, description: String) {
+    public init(iconURL: URL?, name: String, age: Int, sex: Sex, affiliation: Affiliation, animal: Animal, activity: Activity, personality: Personality, description: String) {
         self.id = UUID().uuidString
         self.iconURL = iconURL
         self.name = name
@@ -31,6 +32,7 @@ public struct User: Codable, Identifiable, Equatable, Hashable {
         self.sex = sex
         self.affiliation = affiliation
         self.animal = animal
+        self.activity = activity
         self.personality = personality
         self.description = description
     }
@@ -39,6 +41,7 @@ public struct User: Codable, Identifiable, Equatable, Hashable {
 public enum Sex: String, Codable {
     case man
     case woman
+    case noGender
 }
 
 public enum Affiliation: String, Codable {
@@ -47,6 +50,11 @@ public enum Affiliation: String, Codable {
     case university
     case society
     case others
+}
+
+public enum Activity: String, Codable {
+    case indoor
+    case outdoor
 }
 
 public enum Animal: String, Codable {
