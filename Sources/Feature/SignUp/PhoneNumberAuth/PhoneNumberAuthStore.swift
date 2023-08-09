@@ -10,7 +10,11 @@ import FirebaseAuth
 import Foundation
 
 public struct PhoneNumberAuth: ReducerProtocol {
+    public init() {}
+
     public struct State: Equatable {
+        public init() {}
+
         var isShowConfirmVerificationCodeView = false
         var isErrorBanner = false
     }
