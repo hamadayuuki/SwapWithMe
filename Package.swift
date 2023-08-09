@@ -61,6 +61,7 @@ let coreTargets: [Target] = [
 let featureTargets: [Target] = [
     .feature(name: "SignUp", dependencies: [
         "ViewComponents",
+        "UserInfo",
         fireAuth,
         fireStore,
         readabilityModifier,
@@ -94,7 +95,6 @@ let featureTargets: [Target] = [
         popupView,
     ]),
     .feature(name: "Tab", dependencies: [
-        "Home",
         "PartnerCards",
         "Search",
         readabilityModifier,
@@ -153,6 +153,7 @@ let package = Package(
             name: "SignUp",
             dependencies: [
                 "ViewComponents",
+                "UserInfo",
                 fireAuth,
                 fireStore,
                 readabilityModifier,
@@ -206,7 +207,6 @@ let package = Package(
         .target(
             name: "Tab",
             dependencies: [
-                "Home",
                 "PartnerCards",
                 "Search",
                 readabilityModifier,
