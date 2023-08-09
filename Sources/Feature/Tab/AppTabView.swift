@@ -5,7 +5,6 @@
 //  Created by 濵田　悠樹 on 2023/08/06.
 //
 
-import Home
 import PartnerCards
 import Search
 import SwiftUI

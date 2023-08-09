@@ -5,6 +5,13 @@
 //  Created by 濵田　悠樹 on 2023/08/03.
 //
 
+/*
+TODO: カードに載せる情報を増やす
+    - Swapした日付
+    - どこで出会ったか
+    (- 相手の特徴的なものも？)
+ */
+
 import QuestionList
 import ReadabilityModifier
 import SwiftUI
