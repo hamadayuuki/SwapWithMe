@@ -10,6 +10,7 @@ import PopupView
 import QuestionList
 import ReadabilityModifier
 import SwiftUI
+import User
 import ViewComponents
 
 public struct HomeView: View {
@@ -23,11 +24,17 @@ public struct HomeView: View {
     @State private var isQuestionPopup = false
     @State private var isTransQuestionList = false
 
+    let myInfo: User
+    let partner: User
+
     private let swapIconSize = CGSize(width: 1527 / 7, height: 522 / 7)
     private let swapTimer = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
     private let nameTimer = Timer.publish(every: 0.8, on: .main, in: .common).autoconnect()  // swapアニメーションが終わるのを待つ
 
-    public init() {}
+    public init(myInfo: User, partner: User) {
+        self.myInfo = myInfo
+        self.partner = partner
+    }
 
     public var body: some View {
         ZStack {
@@ -208,11 +215,5 @@ public struct HomeView: View {
 
     private func loadCardImage() {
         cardImage = Image("kiyohara")
-    }
-}
-
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
     }
 }

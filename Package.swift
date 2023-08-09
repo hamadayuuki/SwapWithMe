@@ -80,6 +80,7 @@ let featureTargets: [Target] = [
     .feature(name: "Home", dependencies: [
         "ViewComponents",
         "QuestionList",
+        "User",
         readabilityModifier,
         popupView,
     ]),
@@ -180,6 +181,7 @@ let package = Package(
             dependencies: [
                 "ViewComponents",
                 "QuestionList",
+                "User",
                 readabilityModifier,
                 popupView,
             ],
