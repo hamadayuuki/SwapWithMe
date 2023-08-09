@@ -82,11 +82,25 @@ public struct HomeView: View {
     }
 
     // 共通化
-    private func card() -> some View {
+    private func card(isPartner: Bool) -> some View {
         ZStack {
-            cardImage
-                .resizable()
-                .scaledToFill()
+            if isPartner {
+                AsyncImage(url: self.partner.iconURL!) { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                } placeholder: {
+                    ProgressView()
+                }
+            } else {
+                AsyncImage(url: self.myInfo.iconURL!) { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                } placeholder: {
+                    ProgressView()
+                }
+            }
 
             LinearGradient(
                 gradient: Gradient(colors: [.clear, .black.opacity(0.7)]),
@@ -102,7 +116,7 @@ public struct HomeView: View {
 
     private func myCard() -> some View {
         GeometryReader { (proxy: GeometryProxy) in
-            card()
+            card(isPartner: false)
                 // UI
                 .shadow(radius: 5)
                 .blur(radius: -self.translation.height / 100)
@@ -160,7 +174,7 @@ public struct HomeView: View {
     // MARK: - Partner card
 
     private func partnerCard() -> some View {
-        card()
+        card(isPartner: true)
             .scaleEffect(imageScale)
             .onAppear {
                 cardImage = Image("nagano")
