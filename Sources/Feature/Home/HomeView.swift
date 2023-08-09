@@ -68,7 +68,7 @@ public struct HomeView: View {
         .popup(
             isPresented: $isQuestionPopup
         ) {
-            SwapedPopup(isQuestionPopup: $isQuestionPopup, isTransQuestionList: $isTransQuestionList)
+            SwapedPopup(myCardURL: self.myInfo.iconURL, partnerCardURL: self.partner.iconURL, isQuestionPopup: $isQuestionPopup, isTransQuestionList: $isTransQuestionList)
         } customize: {
             $0
                 .type(.default)

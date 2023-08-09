@@ -8,12 +8,14 @@
 import SwiftUI
 
 public struct SwapedPopup: View {
-    @State private var myCardImage = Image(uiImage: UIImage())
-    @State private var partnerCardImage = Image(uiImage: UIImage())
+    let myCardURL: URL?
+    let partnerCardURL: URL?
     var isQuestionPopup: Binding<Bool>
     var isTransQuestionList: Binding<Bool>
 
-    public init(isQuestionPopup: Binding<Bool>, isTransQuestionList: Binding<Bool>) {
+    public init(myCardURL: URL?, partnerCardURL: URL?, isQuestionPopup: Binding<Bool>, isTransQuestionList: Binding<Bool>) {
+        self.myCardURL = myCardURL
+        self.partnerCardURL = partnerCardURL
         self.isQuestionPopup = isQuestionPopup
         self.isTransQuestionList = isTransQuestionList
     }
@@ -22,9 +24,9 @@ public struct SwapedPopup: View {
         VStack(spacing: 32) {
             ZStack {
                 HStack(spacing: 12) {
-                    card(cardImage: myCardImage)
+                    card(isPartner: false)
                         .rotationEffect(.degrees(-20))
-                    card(cardImage: partnerCardImage)
+                    card(isPartner: true)
                         .rotationEffect(.degrees(20))
                 }
 
@@ -68,17 +70,27 @@ public struct SwapedPopup: View {
         .background(.white)
         .cornerRadius(20)
         .shadow(radius: 5)
-        .onAppear {
-            myCardImage = Image("kiyohara")
-            partnerCardImage = Image("nagano")
-        }
     }
 
-    private func card(cardImage: Image) -> some View {
+    private func card(isPartner: Bool) -> some View {
         ZStack {
-            cardImage
-                .resizable()
-                .scaledToFill()
+            if isPartner {
+                AsyncImage(url: self.partnerCardURL!) { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                } placeholder: {
+                    ProgressView()
+                }
+            } else {
+                AsyncImage(url: self.myCardURL!) { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                } placeholder: {
+                    ProgressView()
+                }
+            }
         }
         .frame(width: 250 * 0.4, height: 400 * 0.4)
         .cornerRadius(20)
@@ -98,11 +110,5 @@ public struct SwapedPopup: View {
             .font(.system(size: 14, weight: .bold, design: .rounded))
             .frame(width: 250, height: 40)
             .foregroundColor(.gray)
-    }
-}
-
-struct SwapedPopup_Previews: PreviewProvider {
-    static var previews: some View {
-        SwapedPopup(isQuestionPopup: .constant(true), isTransQuestionList: .constant(true))
     }
 }
