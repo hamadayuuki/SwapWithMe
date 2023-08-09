@@ -17,8 +17,9 @@ public protocol UserRequestProtocol {
 
 public class UserRequest: UserRequestProtocol {
     public static func set(data: User) throws {
+        guard let id = data.id else { fatalError("Error UserRequest.set") }
         let db = Firestore.firestore()
-        try db.collection("Users").addDocument(from: data)
+        try db.collection("Users").document(id).setData(from: data)
     }
 
     public static func update(data: User) async throws {
