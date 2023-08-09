@@ -11,7 +11,7 @@ import PopupView
 import SwiftUI
 import ViewComponents
 
-struct PhoneNumberAuthView: View {
+public struct PhoneNumberAuthView: View {
     let store: StoreOf<PhoneNumberAuth>
 
     @State private var phoneNumber = ""
@@ -29,7 +29,11 @@ struct PhoneNumberAuthView: View {
         return Color.gray.opacity(0.5)
     }
 
-    var body: some View {
+    public init(store: StoreOf<PhoneNumberAuth>) {
+        self.store = store
+    }
+
+    public var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             VStack(spacing: 18) {
                 VStack(alignment: .leading, spacing: 18) {

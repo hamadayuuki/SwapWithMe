@@ -5,17 +5,26 @@
 //  Created by 濵田　悠樹 on 2023/06/25.
 //
 
+import ComposableArchitecture
 import FirebaseAuth
 import FirebaseCore
 import SignUp
 import SwiftUI
+import Tab
+import UserInfo
 
 @main
 struct SwapWithMeApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
-            SelectSignUpMethodView()
+            AppTabView()
+//            NavigationView {
+//                UserBasicInfoView(
+//                    store: Store(initialState: UserBasicInfoStore.State()) {
+//                        UserBasicInfoStore()
+//                    })
+//            }
         }
     }
 }
@@ -30,7 +39,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         UITabBar.appearance().unselectedItemTintColor = .gray
         UITabBar.appearance().shadowImage = UIImage()
         UITabBar.appearance().backgroundImage = UIImage()
-        UITabBar.appearance().isTranslucent = false
 
         // Firebase
         FirebaseApp.configure()

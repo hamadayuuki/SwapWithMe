@@ -5,6 +5,13 @@
 //  Created by 濵田　悠樹 on 2023/08/03.
 //
 
+/*
+TODO: カードに載せる情報を増やす
+    - Swapした日付
+    - どこで出会ったか
+    (- 相手の特徴的なものも？)
+ */
+
 import QuestionList
 import ReadabilityModifier
 import SwiftUI
@@ -29,35 +36,38 @@ public struct PartnerCardsView: View {
     }
 
     public var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 18) {
-                Text("Swapしたユーザー")
-                    .font(.system(size: 24, weight: .bold, design: .rounded))
+        NavigationView {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 18) {
+                    Text("Swapしたユーザー")
+                        .font(.system(size: 24, weight: .bold, design: .rounded))
 
-                Text("これまでカードを交換したユーザーが表示されています。カードをタップすると質問が表示されます。")
-                    .font(.system(size: 12, weight: .regular, design: .rounded))
-                    .padding(.bottom, 24)
+                    Text("これまでカードを交換したユーザーが表示されています。カードをタップすると質問が表示されます。")
+                        .font(.system(size: 12, weight: .regular, design: .rounded))
+                        .padding(.bottom, 24)
 
-                ForEach(0..<6) { i in
-                    HStack(spacing: 12) {
-                        ForEach(0..<3) { j in
-                            partnerCard(index: i * 3 + j)
-                                .onTapGesture {
-                                    tappedImage = cardImages[i * 3 + j]
-                                    isTransQuestionListView = true
-                                }
+                    ForEach(0..<6) { i in
+                        HStack(spacing: 12) {
+                            ForEach(0..<3) { j in
+                                partnerCard(index: i * 3 + j)
+                                    .onTapGesture {
+                                        tappedImage = cardImages[i * 3 + j]
+                                        isTransQuestionListView = true
+                                    }
+                            }
                         }
                     }
-                }
 
-                NavigationLink(
-                    destination: QuestionListView(cardImage: tappedImage),
-                    isActive: $isTransQuestionListView
-                ) {
-                    EmptyView()
+                    NavigationLink(
+                        destination: QuestionListView(cardImage: tappedImage),
+                        isActive: $isTransQuestionListView
+                    ) {
+                        EmptyView()
+                    }
                 }
+                .fitToReadableContentGuide()
+                .padding(.top, 36)
             }
-            .fitToReadableContentGuide()
         }
     }
 

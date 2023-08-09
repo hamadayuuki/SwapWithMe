@@ -23,6 +23,8 @@ let readabilityModifier: TargetDependency = .product(name: "ReadabilityModifier"
 let analytics: TargetDependency = .product(name: "FirebaseAnalytics", package: "firebase-ios-sdk")
 let fireAuth: TargetDependency = .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
 let fireStore: TargetDependency = .product(name: "FirebaseFirestore", package: "firebase-ios-sdk")
+let fireStoreSwift: TargetDependency = .product(name: "FirebaseFirestoreSwift", package: "firebase-ios-sdk")
+let fireStorage: TargetDependency = .product(name: "FirebaseStorage", package: "firebase-ios-sdk")
 let popupView: TargetDependency = .product(name: "PopupView", package: "PopupView")
 let composableArchitecture: TargetDependency = .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
 let dependencies: TargetDependency = .product(name: "Dependencies", package: "Dependencies")
@@ -38,6 +40,14 @@ extension Target {
     static func feature(name: String, dependencies: [TargetDependency], resources: [Resource]? = nil, plugins: [Target.PluginUsage]? = nil) -> Target {
         .target(name: name, dependencies: dependencies, path: "Sources/Feature/\(name)", resources: resources, plugins: plugins)
     }
+
+    static func entity(name: String, dependencies: [TargetDependency], resources: [Resource]? = nil, plugins: [Target.PluginUsage]? = nil) -> Target {
+        .target(name: name, dependencies: dependencies, path: "Sources/Entity/\(name)", resources: resources, plugins: plugins)
+    }
+
+    static func data(name: String, dependencies: [TargetDependency], resources: [Resource]? = nil, plugins: [Target.PluginUsage]? = nil) -> Target {
+        .target(name: name, dependencies: dependencies, path: "Sources/Data/\(name)", resources: resources, plugins: plugins)
+    }
 }
 
 // MARK: Feature
@@ -51,6 +61,7 @@ let coreTargets: [Target] = [
 let featureTargets: [Target] = [
     .feature(name: "SignUp", dependencies: [
         "ViewComponents",
+        "UserInfo",
         fireAuth,
         fireStore,
         readabilityModifier,
@@ -59,8 +70,12 @@ let featureTargets: [Target] = [
     ]),
     .feature(name: "UserInfo", dependencies: [
         "ViewComponents",
+        "User",
+        "Tab",
+        "Request",
         readabilityModifier,
         popupView,
+        composableArchitecture
     ]),
     .feature(name: "Home", dependencies: [
         "ViewComponents",
@@ -80,16 +95,38 @@ let featureTargets: [Target] = [
         popupView,
     ]),
     .feature(name: "Tab", dependencies: [
-        "Home",
         "PartnerCards",
+        "Search",
         readabilityModifier,
         popupView,
+    ]),
+    .feature(name: "Search", dependencies: [
+        "Home",
+        "Request",
+        "User",
+        readabilityModifier,
+    ])
+]
+
+let entityTargets: [Target] = [
+    .feature(name: "User", dependencies: [
+        fireStore,
+        fireStoreSwift
+    ])
+]
+
+let dataTargets: [Target] = [
+    .feature(name: "Request", dependencies: [
+        "User",
+        fireStore,
+        fireStoreSwift,
+        fireStorage
     ])
 ]
 
 // MARK: - Package
 
-let allTargets = coreTargets + featureTargets
+let allTargets = coreTargets + featureTargets + entityTargets
 
 let package = Package(
     name: "SwapWithMe",
@@ -99,6 +136,9 @@ let package = Package(
         .map{ .library(name: $0, targets: [$0]) },
     dependencies: packageDependencies,
     targets: [
+
+        // MARK: Core
+
         .target(
             name: "ViewComponents",
             dependencies: [
@@ -106,10 +146,14 @@ let package = Package(
             ],
             path: "Sources/Core/ViewComponents"
         ),
+
+        // MARK: Core
+
         .target(
             name: "SignUp",
             dependencies: [
                 "ViewComponents",
+                "UserInfo",
                 fireAuth,
                 fireStore,
                 readabilityModifier,
@@ -122,8 +166,12 @@ let package = Package(
             name: "UserInfo",
             dependencies: [
                 "ViewComponents",
+                "User",
+                "Tab",
+                "Request",
                 readabilityModifier,
                 popupView,
+                composableArchitecture,
             ],
             path: "Sources/Feature/UserInfo"
         ),
@@ -159,12 +207,46 @@ let package = Package(
         .target(
             name: "Tab",
             dependencies: [
-                "Home",
                 "PartnerCards",
+                "Search",
                 readabilityModifier,
                 popupView,
             ],
             path: "Sources/Feature/Tab"
-        )
+        ),
+        .target(
+            name: "Search",
+            dependencies: [
+                "Home",
+                "Request",
+                "User",
+                readabilityModifier,
+            ],
+            path: "Sources/Feature/Search"
+        ),
+
+        // MARK: Entity
+
+        .target(
+            name: "User",
+            dependencies: [
+                fireStore,
+                fireStoreSwift
+            ],
+            path: "Sources/Entity/User"
+        ),
+
+        // MARK: Data
+
+        .target(
+            name: "Request",
+            dependencies: [
+                "User",
+                fireStore,
+                fireStoreSwift,
+                fireStorage
+            ],
+            path: "Sources/Data/Request"
+        ),
     ]
 )

@@ -5,11 +5,18 @@
 //  Created by 濵田　悠樹 on 2023/07/21.
 //
 
+import ComposableArchitecture
 import ReadabilityModifier
 import SwiftUI
+import Tab
+import User
 import ViewComponents
 
 public struct SelectUserCardImageView: View {
+    var store: StoreOf<SelectUserCardImageStore>
+
+    let user: User?
+
     @State private var showImagePicker: Bool = false
     @State private var showCropImage: Bool = false
     @State private var isCropImage: Bool = false
@@ -29,60 +36,76 @@ public struct SelectUserCardImageView: View {
         return Color.gray.opacity(0.5)
     }
 
-    public init() {}
+    public init(store: StoreOf<SelectUserCardImageStore>, user: User?) {
+        self.store = store
+        self.user = user
+    }
 
     public var body: some View {
-        VStack(spacing: 24) {
-            ScrollView {
-                VStack(spacing: 24) {
-                    VStack(alignment: .leading, spacing: 24) {
-                        Text("カード画像")
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
+            VStack(spacing: 24) {
+                ScrollView {
+                    VStack(spacing: 24) {
+                        VStack(alignment: .leading, spacing: 24) {
+                            Text("カード画像")
+                                .font(.system(size: 24, weight: .bold, design: .rounded))
+
+                            Text("他のユーザーに表示する画像です。満足のいく1枚を選びましょう。登録後に変更可能です。")
+                                .font(.system(size: 12, weight: .regular, design: .rounded))
+                        }
+
+                        ZStack(alignment: .bottomTrailing) {
+                            cardImage()
+                            selectCardPicButton()
+                                .offset(x: 24, y: 24)
+                        }
+                        .frame(width: 250, height: 400)
+                    }
+                }
+
+                Button(
+                    action: {
+                        viewStore.send(.tappedButton(inputImage))
+                    },
+                    label: {
+                        Text("次へ")
+                            .foregroundColor(.white)
                             .font(.system(size: 24, weight: .bold, design: .rounded))
-
-                        Text("他のユーザーに表示する画像です。満足のいく1枚を選びましょう。登録後に変更可能です。")
-                            .font(.system(size: 12, weight: .regular, design: .rounded))
+                            .frame(maxWidth: .infinity, maxHeight: 50)
+                            .background(transButtonBackground)
+                            .cornerRadius(10)
                     }
-
-                    ZStack(alignment: .bottomTrailing) {
-                        cardImage()
-                        selectCardPicButton()
-                            .offset(x: 24, y: 24)
-                    }
-                    .frame(width: 250, height: 400)
-                }
+                )
+                .padding(.top, 40)
+                .disabled(!isButtonEnable)
             }
-
-            Button(
-                action: {
-                    print("Tapped user basic info button")
-                },
-                label: {
-                    Text("次へ")
-                        .foregroundColor(.white)
-                        .font(.system(size: 24, weight: .bold, design: .rounded))
-                        .frame(maxWidth: .infinity, maxHeight: 50)
-                        .background(transButtonBackground)
-                        .cornerRadius(10)
-                }
-            )
-            .padding(.top, 40)
-            .disabled(true)
-        }
-        .fitToReadableContentGuide()
-        .padding(.top, 24)
-        .sheet(isPresented: $showImagePicker, onDismiss: toImage) {
-            ImagePicker(image: self.$inputImage)
-                .onDisappear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {  // cropImage を表示させるため必要
-                        showCropImage = true
+            .fitToReadableContentGuide()
+            .padding(.top, 24)
+            .sheet(isPresented: $showImagePicker, onDismiss: toImage) {
+                ImagePicker(image: self.$inputImage)
+                    .onDisappear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {  // cropImage を表示させるため必要
+                            showCropImage = true
+                        }
                     }
-                }
-        }
-        .sheet(isPresented: $showCropImage, onDismiss: toImage) {
-            CropImage(image: self.$inputImage)
-                .onDisappear {
-                    isCropImage = true
-                }
+            }
+            .sheet(isPresented: $showCropImage, onDismiss: toImage) {
+                CropImage(image: self.$inputImage)
+                    .onDisappear {
+                        isCropImage = true
+                    }
+            }
+            .fullScreenCover(
+                isPresented: viewStore.binding(
+                    get: { $0.isTransAppTabView },
+                    send: .bindingIsTransAppTabView(!viewStore.isTransAppTabView)
+                )
+            ) {
+                AppTabView()
+            }
+            .onAppear {
+                viewStore.send(.onAppear(self.user))
+            }
         }
     }
 
@@ -118,11 +141,5 @@ public struct SelectUserCardImageView: View {
     func toImage() {
         guard let inputImage = inputImage else { return }
         image = Image(uiImage: inputImage)
-    }
-}
-
-struct SelectUserCardImageView_Previews: PreviewProvider {
-    static var previews: some View {
-        SelectUserCardImageView()
     }
 }
