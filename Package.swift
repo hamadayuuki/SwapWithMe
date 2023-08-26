@@ -16,7 +16,8 @@ let packageDependencies: [PackageDependency] = [
     .package(url: "https://github.com/exyte/PopupView", from: .init(2, 5, 7)),
     .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: .init(0, 55, 1)),
     .package(url: "https://github.com/pointfreeco/swift-dependencies", from: .init(0, 5, 1)),
-    .package(url: "https://github.com/TimOliver/TOCropViewController.git", from: .init(2, 6, 1))
+    .package(url: "https://github.com/TimOliver/TOCropViewController.git", from: .init(2, 6, 1)),
+    .package(url: "https://github.com/kean/Nuke.git", from: .init(12, 1, 5))
 ]
 
 let readabilityModifier: TargetDependency = .product(name: "ReadabilityModifier", package: "ReadabilityModifier")
@@ -29,6 +30,7 @@ let popupView: TargetDependency = .product(name: "PopupView", package: "PopupVie
 let composableArchitecture: TargetDependency = .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
 let dependencies: TargetDependency = .product(name: "Dependencies", package: "Dependencies")
 let cropViewController: TargetDependency = .product(name: "CropViewController", package: "TOCropViewController")
+let nuke: TargetDependency = .product(name: "Nuke", package: "Nuke")
 
 // MARK: - Targets
 
@@ -83,6 +85,7 @@ let featureTargets: [Target] = [
         "User",
         readabilityModifier,
         popupView,
+        nuke,
     ]),
     .feature(name: "QuestionList", dependencies: [
         "ViewComponents",
@@ -105,6 +108,7 @@ let featureTargets: [Target] = [
         "Home",
         "Request",
         "User",
+        "ViewComponents",
         readabilityModifier,
     ])
 ]
@@ -184,6 +188,7 @@ let package = Package(
                 "User",
                 readabilityModifier,
                 popupView,
+                nuke,
             ],
             path: "Sources/Feature/Home"
         ),
@@ -222,6 +227,7 @@ let package = Package(
                 "Home",
                 "Request",
                 "User",
+                "ViewComponents",
                 readabilityModifier,
             ],
             path: "Sources/Feature/Search"

@@ -10,6 +10,7 @@ import ReadabilityModifier
 import Request
 import SwiftUI
 import User
+import ViewComponents
 
 public struct PartnerSearchView: View {
     @State private var searchText = ""

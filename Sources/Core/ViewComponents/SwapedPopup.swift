@@ -75,21 +75,27 @@ public struct SwapedPopup: View {
     private func card(isPartner: Bool) -> some View {
         ZStack {
             if isPartner {
-                AsyncImage(url: self.partnerCardURL!) { image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                } placeholder: {
-                    ProgressView()
-                }
+                Image("partner")
+                    .resizable()
+                    .scaledToFill()
+                //                AsyncImage(url: self.partnerCardURL!) { image in
+                //                    image
+                //                        .resizable()
+                //                        .scaledToFill()
+                //                } placeholder: {
+                //                    ProgressView()
+                //                }
             } else {
-                AsyncImage(url: self.myCardURL!) { image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                } placeholder: {
-                    ProgressView()
-                }
+                Image("my")
+                    .resizable()
+                    .scaledToFill()
+                //                AsyncImage(url: self.myCardURL!) { image in
+                //                    image
+                //                        .resizable()
+                //                        .scaledToFill()
+                //                } placeholder: {
+                //                    ProgressView()
+                //                }
             }
         }
         .frame(width: 250 * 0.4, height: 400 * 0.4)
