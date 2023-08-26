@@ -18,13 +18,14 @@ struct SwapWithMeApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
-            AppTabView()
-//            NavigationView {
-//                UserBasicInfoView(
-//                    store: Store(initialState: UserBasicInfoStore.State()) {
-//                        UserBasicInfoStore()
-//                    })
-//            }
+            //            AppTabView()
+            //            NavigationView {
+            //                UserBasicInfoView(
+            //                    store: Store(initialState: UserBasicInfoStore.State()) {
+            //                        UserBasicInfoStore()
+            //                    })
+            //            }
+            SelectSignUpMethodView()
         }
     }
 }

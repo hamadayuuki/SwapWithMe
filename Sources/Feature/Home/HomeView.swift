@@ -10,6 +10,7 @@ import PopupView
 import QuestionList
 import ReadabilityModifier
 import SwiftUI
+import User
 import ViewComponents
 
 public struct HomeView: View {
@@ -23,11 +24,17 @@ public struct HomeView: View {
     @State private var isQuestionPopup = false
     @State private var isTransQuestionList = false
 
+    let myInfo: User
+    let partner: User
+
     private let swapIconSize = CGSize(width: 1527 / 7, height: 522 / 7)
     private let swapTimer = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
     private let nameTimer = Timer.publish(every: 0.8, on: .main, in: .common).autoconnect()  // swapアニメーションが終わるのを待つ
 
-    public init() {}
+    public init(myInfo: User, partner: User) {
+        self.myInfo = myInfo
+        self.partner = partner
+    }
 
     public var body: some View {
         ZStack {
@@ -35,7 +42,7 @@ public struct HomeView: View {
                 partnerCard()
                 VStack(spacing: 24) {
                     swapedTextAnimation()
-                    partnerInfo(name: "ながのめいですす", age: 23, affiliation: "フレンドリー")
+                    partnerInfo(name: "テスト3", age: 23, affiliation: "フレンドリー")
                 }
                 .offset(x: 0, y: 100)
                 .onAppear {
@@ -46,7 +53,7 @@ public struct HomeView: View {
 
             } else {
                 myCard()
-                myInfo(name: "きよはらしょうう", age: 25, affiliation: "人見知り")
+                myInfo(name: "だーはま", age: 25, affiliation: "フレンドリー")
                     .offset(x: 0, y: (250 * 0.6) - 12)
             }
 
@@ -61,7 +68,7 @@ public struct HomeView: View {
         .popup(
             isPresented: $isQuestionPopup
         ) {
-            SwapedPopup(isQuestionPopup: $isQuestionPopup, isTransQuestionList: $isTransQuestionList)
+            SwapedPopup(myCardURL: self.myInfo.iconURL, partnerCardURL: self.partner.iconURL, isQuestionPopup: $isQuestionPopup, isTransQuestionList: $isTransQuestionList)
         } customize: {
             $0
                 .type(.default)
@@ -75,11 +82,31 @@ public struct HomeView: View {
     }
 
     // 共通化
-    private func card() -> some View {
+    private func card(isPartner: Bool) -> some View {
         ZStack {
-            cardImage
-                .resizable()
-                .scaledToFill()
+            if isPartner {
+                Image("partner")
+                    .resizable()
+                    .scaledToFill()
+                //                AsyncImage(url: self.partner.iconURL!) { image in
+                //                    image
+                //                        .resizable()
+                //                        .scaledToFill()
+                //                } placeholder: {
+                //                    ProgressView()
+                //                }
+            } else {
+                Image("my")
+                    .resizable()
+                    .scaledToFill()
+                //                AsyncImage(url: self.myInfo.iconURL!) { image in
+                //                    image
+                //                        .resizable()
+                //                        .scaledToFill()
+                //                } placeholder: {
+                //                    ProgressView()
+                //                }
+            }
 
             LinearGradient(
                 gradient: Gradient(colors: [.clear, .black.opacity(0.7)]),
@@ -95,7 +122,7 @@ public struct HomeView: View {
 
     private func myCard() -> some View {
         GeometryReader { (proxy: GeometryProxy) in
-            card()
+            card(isPartner: false)
                 // UI
                 .shadow(radius: 5)
                 .blur(radius: -self.translation.height / 100)
@@ -153,7 +180,7 @@ public struct HomeView: View {
     // MARK: - Partner card
 
     private func partnerCard() -> some View {
-        card()
+        card(isPartner: true)
             .scaleEffect(imageScale)
             .onAppear {
                 cardImage = Image("nagano")
@@ -208,11 +235,5 @@ public struct HomeView: View {
 
     private func loadCardImage() {
         cardImage = Image("kiyohara")
-    }
-}
-
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
     }
 }
