@@ -50,6 +50,10 @@ extension Target {
     static func data(name: String, dependencies: [TargetDependency], resources: [Resource]? = nil, plugins: [Target.PluginUsage]? = nil) -> Target {
         .target(name: name, dependencies: dependencies, path: "Sources/Data/\(name)", resources: resources, plugins: plugins)
     }
+
+    static func featureTest(name: String, dependencies: [TargetDependency], resources: [Resource]? = nil, plugins: [Target.PluginUsage]? = nil) -> Target {
+        .testTarget(name: name, dependencies: dependencies, path: "Tests/Feature/\(name)", resources: resources, plugins: plugins)
+    }
 }
 
 // MARK: Feature
@@ -129,14 +133,23 @@ let dataTargets: [Target] = [
     ])
 ]
 
+let featureTestTargets: [Target] = [
+    .featureTest(
+        name: "UserInfoTest",
+        dependencies: [
+            composableArchitecture
+        ])
+]
+
 // MARK: - Package
 
-let allTargets = coreTargets + featureTargets + entityTargets + dataTargets
+let allTargets = coreTargets + featureTargets + entityTargets + dataTargets + featureTestTargets
 
 let package = Package(
     name: "SwapWithMe",
     platforms: [.iOS(.v15)],
     products: allTargets
+        .filter { $0.isTest == false }   // リリースするパッケージにテストを含めない
         .map{ $0.name }
         .map{ .library(name: $0, targets: [$0]) },
     dependencies: packageDependencies,
