@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "DC52414B-08D5-4466-B475-E22D0F823703",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:..",
+        "identifier" : "UserInfoTest",
+        "name" : "UserInfoTest"
+      }
+    }
+  ],
+  "version" : 1
+}
