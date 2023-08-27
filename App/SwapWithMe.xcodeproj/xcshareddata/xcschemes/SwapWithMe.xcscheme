@@ -29,7 +29,8 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:SwapWithMe.xctestplan">
+            reference = "container:SwapWithMe.xctestplan"
+            default = "YES">
          </TestPlanReference>
       </TestPlans>
       <Testables>
