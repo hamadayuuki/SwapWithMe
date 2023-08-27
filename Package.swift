@@ -50,6 +50,10 @@ extension Target {
     static func data(name: String, dependencies: [TargetDependency], resources: [Resource]? = nil, plugins: [Target.PluginUsage]? = nil) -> Target {
         .target(name: name, dependencies: dependencies, path: "Sources/Data/\(name)", resources: resources, plugins: plugins)
     }
+
+    static func featureTest(name: String, dependencies: [TargetDependency], resources: [Resource]? = nil, plugins: [Target.PluginUsage]? = nil) -> Target {
+        .testTarget(name: name, dependencies: dependencies, path: "Tests/Feature/\(name)", resources: resources, plugins: plugins)
+    }
 }
 
 // MARK: Feature
@@ -114,14 +118,14 @@ let featureTargets: [Target] = [
 ]
 
 let entityTargets: [Target] = [
-    .feature(name: "User", dependencies: [
+    .entity(name: "User", dependencies: [
         fireStore,
         fireStoreSwift
     ])
 ]
 
 let dataTargets: [Target] = [
-    .feature(name: "Request", dependencies: [
+    .data(name: "Request", dependencies: [
         "User",
         fireStore,
         fireStoreSwift,
@@ -129,132 +133,27 @@ let dataTargets: [Target] = [
     ])
 ]
 
+let featureTestTargets: [Target] = [
+    .featureTest(
+        name: "UserInfoTest",
+        dependencies: [
+            "UserInfo",
+            "User",
+            composableArchitecture
+        ])
+]
+
 // MARK: - Package
 
-let allTargets = coreTargets + featureTargets + entityTargets
+let allTargets = coreTargets + featureTargets + entityTargets + dataTargets + featureTestTargets
 
 let package = Package(
     name: "SwapWithMe",
     platforms: [.iOS(.v15)],
     products: allTargets
+        .filter { $0.isTest == false }   // リリースするパッケージにテストを含めない
         .map{ $0.name }
         .map{ .library(name: $0, targets: [$0]) },
     dependencies: packageDependencies,
-    targets: [
-
-        // MARK: Core
-
-        .target(
-            name: "ViewComponents",
-            dependencies: [
-                cropViewController
-            ],
-            path: "Sources/Core/ViewComponents"
-        ),
-
-        // MARK: Core
-
-        .target(
-            name: "SignUp",
-            dependencies: [
-                "ViewComponents",
-                "UserInfo",
-                fireAuth,
-                fireStore,
-                readabilityModifier,
-                popupView,
-                composableArchitecture
-            ],
-            path: "Sources/Feature/SignUp"
-        ),
-        .target(
-            name: "UserInfo",
-            dependencies: [
-                "ViewComponents",
-                "User",
-                "Tab",
-                "Request",
-                readabilityModifier,
-                popupView,
-                composableArchitecture,
-            ],
-            path: "Sources/Feature/UserInfo"
-        ),
-        .target(
-            name: "Home",
-            dependencies: [
-                "ViewComponents",
-                "QuestionList",
-                "User",
-                readabilityModifier,
-                popupView,
-                nuke,
-            ],
-            path: "Sources/Feature/Home"
-        ),
-        .target(
-            name: "QuestionList",
-            dependencies: [
-                "ViewComponents",
-                readabilityModifier,
-                popupView,
-            ],
-            path: "Sources/Feature/QuestionList"
-        ),
-        .target(
-            name: "PartnerCards",
-            dependencies: [
-                "ViewComponents",
-                "QuestionList",
-                readabilityModifier,
-                popupView,
-            ],
-            path: "Sources/Feature/PartnerCards"
-        ),
-        .target(
-            name: "Tab",
-            dependencies: [
-                "PartnerCards",
-                "Search",
-                readabilityModifier,
-                popupView,
-            ],
-            path: "Sources/Feature/Tab"
-        ),
-        .target(
-            name: "Search",
-            dependencies: [
-                "Home",
-                "Request",
-                "User",
-                "ViewComponents",
-                readabilityModifier,
-            ],
-            path: "Sources/Feature/Search"
-        ),
-
-        // MARK: Entity
-
-        .target(
-            name: "User",
-            dependencies: [
-                fireStore,
-                fireStoreSwift
-            ],
-            path: "Sources/Entity/User"
-        ),
-
-        // MARK: Data
-
-        .target(
-            name: "Request",
-            dependencies: [
-                "User",
-                fireStore,
-                fireStoreSwift,
-                fireStorage
-            ],
-            path: "Sources/Data/Request"
-        ),
-    ]
+    targets: allTargets
 )

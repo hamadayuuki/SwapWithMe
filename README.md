@@ -3,7 +3,7 @@
 ## SPMマルチモジュール構成
 
 プロジェクトの構成として SPMを中心としたマルチモジュール を採用しています。[pointfreeco/isowords](https://github.com/pointfreeco/isowords)を参考にしています。
-プロジェクト構成は以下の通りです。
+プロジェクト構成は以下の通りです。構成を確認したい場合は、[Package.swift](https://github.com/hamadayuuki/SwapWithMe/blob/main/Package.swift) から確認してください。
 
 ```
 .
@@ -19,7 +19,35 @@
 │   └── Feature   // Module
 └── Tests
 ```
+※ 現在 Feature同士がお互いの存在を知っている状態で画面遷移を実装しています。今後 `MainAppにて画面遷移を実装` + `抽象化 `+ `Swift-dependenciesを用いたDI` によって画面遷移を実装予定です。
 
+### テストについて
+
+#### TestPlan を作成しテストを実行する
+
+SPMマルチモジュール構成を採用するとモジュールとしてテストを書くため、`TestPlan` を作り モジュール(テスト)毎にテストするかを明示的に指定する必要があります
+指定しない場合、テストコード上に `♦︎マーク` が出てこないため、テストを実行できません
+
+ 1: `Product` > `Test Plan` > `New Test Plan ...`
+ 2: 作成された Test Plan へ移動
+ 3: 画面左下の + を押し > `対象のテストモジュール` を追加
+ 
+ #### Pakage.swift の変更
+ 
+ テストをリリースするパッケージ(今回でいうとSwapWithMeというアプリ)にテストを含めないようにする
+ 
+ ```diff
+ Package(
+    name: "SwapWithMe",
+    platforms: [.iOS(.v15)],
+    products: allTargets
++        .filter { $0.isTest == false }   // リリースするパッケージにテストを含めない
+        .map{ $0.name }
+        .map{ .library(name: $0, targets: [$0]) },
+    dependencies: packageDependencies,
+    targets: allTargets
+)
+```
 
 ## 実行環境設定
 

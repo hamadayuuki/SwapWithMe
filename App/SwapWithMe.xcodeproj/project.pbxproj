@@ -55,6 +55,7 @@
 		D45CA1402A59C4E200C787D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D45CA1412A59C53400C787D6 /* SwapWithMe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwapWithMe.entitlements; sourceTree = "<group>"; };
 		D4BB2BE42A543271007C9ADB /* SwapWithMe */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwapWithMe; path = ..; sourceTree = "<group>"; };
+		D4D019DD2A99E51E00BCFFBA /* SwapWithMe.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SwapWithMe.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +94,7 @@
 		D431A8932A4848EE00109710 = {
 			isa = PBXGroup;
 			children = (
+				D4D019DD2A99E51E00BCFFBA /* SwapWithMe.xctestplan */,
 				D431A89E2A4848EE00109710 /* SwapWithMe */,
 				D431A8AF2A4848EF00109710 /* SwapWithMeTests */,
 				D431A8B92A4848EF00109710 /* SwapWithMeUITests */,
