@@ -50,6 +50,14 @@ SPMマルチモジュール構成を採用するとモジュールとしてテ�
 )
 ```
 
+
+### Bitrise
+Bitrise にてテストの自動実行を行なっています。
+Workflow は以下の通り。2つのScriptはそれぞれ `brew install mint`, `mint bootstrap` です。
+
+<img width = 200 src = "https://github.com/hamadayuuki/SwapWithMe/assets/55442055/be56e1c8-3d69-40bf-8cd6-b979b662b2eb">
+
+
 ## 実行環境設定
 
 ### Xcode
