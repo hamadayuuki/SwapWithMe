@@ -1,22 +1,25 @@
 //
 //  PartnerSearchStore.swift
-//  
+//
 //
 //  Created by 濵田　悠樹 on 2023/10/25.
 //
 
 import ComposableArchitecture
-import User
 import Request
+import User
 
 public struct PartnerSearchStore: ReducerProtocol {
     public struct State: Equatable {
         var myInfo: User = .init(iconURL: nil, name: "", age: 0, sex: .man, affiliation: .juniorHigh, animal: .dog, activity: .indoor, personality: .shy, description: "")
+        var partner: User = .init(iconURL: nil, name: "", age: 0, sex: .man, affiliation: .juniorHigh, animal: .dog, activity: .indoor, personality: .shy, description: "")
+        var isTransHomeView = false
     }
 
     public enum Action: Equatable {
         case onAppear
         case setMyInfo(User)
+        case tappedPartnerCell(User)
     }
 
     public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
@@ -28,13 +31,15 @@ public struct PartnerSearchStore: ReducerProtocol {
                 let myInfo = try await UserRequest.fetch(id: "8FA167F4-E3CD-449A-92F2-7FC2CB5CB0B4")
                 await send(.setMyInfo(myInfo))
             }
-        case let .setMyInfo(myInfo):
+        case .setMyInfo(let myInfo):
             state.myInfo = myInfo
             return .none
-            
+        case .tappedPartnerCell(let partner):
+            state.partner = partner
+            state.isTransHomeView = true
+            return .none
         }
     }
 
     public init() {}
 }
-

@@ -14,9 +14,7 @@ import ViewComponents
 
 public struct PartnerSearchView: View {
     @State private var searchText = ""
-    @State private var partner: User = .init(iconURL: nil, name: "", age: 0, sex: .man, affiliation: .juniorHigh, animal: .dog, activity: .indoor, personality: .shy, description: "")
     @State private var users: [User] = []
-    @State private var isTransHomeView = false
 
     public init() {}
 
@@ -26,8 +24,7 @@ public struct PartnerSearchView: View {
                 List(users, id: \.self) { user in
                     partnerCell(partner: user)
                         .onTapGesture {
-                            self.partner = user
-                            self.isTransHomeView = true
+                            // tappedPartnerCell()
                         }
                 }
                 .searchable(text: $searchText)
@@ -39,12 +36,12 @@ public struct PartnerSearchView: View {
                     }
                 }
 
-//                NavigationLink(
-//                    destination: HomeView(myInfo: self.myInfo, partner: self.partner),
-//                    isActive: $isTransHomeView
-//                ) {
-//                    EmptyView()
-//                }
+                //                NavigationLink(
+                //                    destination: HomeView(myInfo: self.myInfo, partner: self.partner),
+                //                    isActive: $isTransHomeView
+                //                ) {
+                //                    EmptyView()
+                //                }
             }
         }
     }
