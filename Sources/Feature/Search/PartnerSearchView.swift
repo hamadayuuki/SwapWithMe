@@ -14,14 +14,13 @@ import ViewComponents
 
 public struct PartnerSearchView: View {
     @State private var searchText = ""
-    @State private var users: [User] = []
 
     public init() {}
 
     public var body: some View {
         NavigationView {
             ZStack {
-                List(users, id: \.self) { user in
+                List([], id: \.self) { user in
                     partnerCell(partner: user)
                         .onTapGesture {
                             // tappedPartnerCell()
@@ -30,9 +29,7 @@ public struct PartnerSearchView: View {
                 .searchable(text: $searchText)
                 .onSubmit(of: .search) {
                     if searchText.count <= 8 {
-                        Task {
-                            self.users = try await UserRequest.fetchWithName(name: searchText)
-                        }
+                        // search()
                     }
                 }
 
