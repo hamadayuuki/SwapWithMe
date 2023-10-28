@@ -5,6 +5,7 @@
 //  Created by 濵田　悠樹 on 2023/08/06.
 //
 
+import ComposableArchitecture
 import PartnerCards
 import Search
 import SwiftUI
@@ -27,11 +28,15 @@ public struct AppTabView: View {
                 }
                 .tag(Tab.home)
 
-            PartnerSearchView()
-                .tabItem {
-                    Label("探す", systemImage: "magnifyingglass")
+            PartnerSearchView(
+                store: Store(initialState: PartnerSearchStore.State()) {
+                    PartnerSearchStore()
                 }
-                .tag(Tab.search)
+            )
+            .tabItem {
+                Label("探す", systemImage: "magnifyingglass")
+            }
+            .tag(Tab.search)
         }
         .accentColor(.green)
     }

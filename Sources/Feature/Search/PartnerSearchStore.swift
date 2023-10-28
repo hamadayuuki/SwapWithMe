@@ -15,6 +15,8 @@ public struct PartnerSearchStore: ReducerProtocol {
         var myInfo: User = .init(iconURL: nil, name: "", age: 0, sex: .man, affiliation: .juniorHigh, animal: .dog, activity: .indoor, personality: .shy, description: "")
         var partner: User = .init(iconURL: nil, name: "", age: 0, sex: .man, affiliation: .juniorHigh, animal: .dog, activity: .indoor, personality: .shy, description: "")
         var isTransHomeView = false
+
+        public init() {}
     }
 
     public enum Action: Equatable {
@@ -23,6 +25,7 @@ public struct PartnerSearchStore: ReducerProtocol {
         case tappedPartnerCell(User)
         case search(String)
         case setUsers([User])
+        case bindingIsTransHomeView(Bool)
     }
 
     public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
@@ -48,6 +51,9 @@ public struct PartnerSearchStore: ReducerProtocol {
             }
         case .setUsers(let users):
             state.users = users
+            return .none
+        case .bindingIsTransHomeView(let ver):
+            state.isTransHomeView = ver
             return .none
         }
     }

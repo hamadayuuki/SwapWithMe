@@ -5,6 +5,7 @@
 //  Created by 濵田　悠樹 on 2023/08/06.
 //
 
+import ComposableArchitecture
 import Home
 import ReadabilityModifier
 import Request
@@ -15,30 +16,39 @@ import ViewComponents
 public struct PartnerSearchView: View {
     @State private var searchText = ""
 
-    public init() {}
+    let store: StoreOf<PartnerSearchStore>
+
+    public init(store: StoreOf<PartnerSearchStore>) {
+        self.store = store
+    }
 
     public var body: some View {
-        NavigationView {
-            ZStack {
-                List([], id: \.self) { user in
-                    partnerCell(partner: user)
-                        .onTapGesture {
-                            // tappedPartnerCell()
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
+            NavigationView {
+                ZStack {
+                    List(viewStore.users, id: \.self) { user in
+                        partnerCell(partner: user)
+                            .onTapGesture {
+                                viewStore.send(.tappedPartnerCell(user))
+                            }
+                    }
+                    .searchable(text: $searchText)
+                    .onSubmit(of: .search) {
+                        if searchText.count <= 8 {
+                            viewStore.send(.search(searchText))
                         }
-                }
-                .searchable(text: $searchText)
-                .onSubmit(of: .search) {
-                    if searchText.count <= 8 {
-                        // search()
+                    }
+
+                    NavigationLink(
+                        destination: HomeView(myInfo: viewStore.myInfo, partner: viewStore.partner),
+                        isActive: viewStore.binding(
+                            get: { $0.isTransHomeView },
+                            send: .bindingIsTransHomeView(viewStore.isTransHomeView)
+                        )
+                    ) {
+                        EmptyView()
                     }
                 }
-
-                //                NavigationLink(
-                //                    destination: HomeView(myInfo: self.myInfo, partner: self.partner),
-                //                    isActive: $isTransHomeView
-                //                ) {
-                //                    EmptyView()
-                //                }
             }
         }
     }
@@ -69,6 +79,9 @@ public struct PartnerSearchView: View {
 
 struct PartnerSearchView_Previews: PreviewProvider {
     static var previews: some View {
-        PartnerSearchView()
+        PartnerSearchView(
+            store: Store(initialState: PartnerSearchStore.State()) {
+                PartnerSearchStore()
+            })
     }
 }
