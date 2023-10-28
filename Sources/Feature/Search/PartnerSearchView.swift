@@ -14,8 +14,6 @@ import User
 import ViewComponents
 
 public struct PartnerSearchView: View {
-    @State private var searchText = ""
-
     let store: StoreOf<PartnerSearchStore>
 
     public init(store: StoreOf<PartnerSearchStore>) {
@@ -32,10 +30,10 @@ public struct PartnerSearchView: View {
                                 viewStore.send(.tappedPartnerCell(user))
                             }
                     }
-                    .searchable(text: $searchText)
+                    .searchable(text: viewStore.$searchText)
                     .onSubmit(of: .search) {
-                        if searchText.count <= 8 {
-                            viewStore.send(.search(searchText))
+                        if viewStore.searchText.count <= 8 {
+                            viewStore.send(.search(viewStore.searchText))
                         }
                     }
 

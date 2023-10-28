@@ -15,17 +15,19 @@ public struct PartnerSearchStore: ReducerProtocol {
         var myInfo: User = .init(iconURL: nil, name: "", age: 0, sex: .man, affiliation: .juniorHigh, animal: .dog, activity: .indoor, personality: .shy, description: "")
         var partner: User = .init(iconURL: nil, name: "", age: 0, sex: .man, affiliation: .juniorHigh, animal: .dog, activity: .indoor, personality: .shy, description: "")
         var isTransHomeView = false
+        @BindingState var searchText = ""
 
         public init() {}
     }
 
-    public enum Action: Equatable {
+    public enum Action: Equatable, BindableAction {
         case onAppear
         case setMyInfo(User)
         case tappedPartnerCell(User)
         case search(String)
         case setUsers([User])
         case bindingIsTransHomeView(Bool)
+        case binding(BindingAction<State>)
     }
 
     public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
@@ -54,6 +56,8 @@ public struct PartnerSearchStore: ReducerProtocol {
             return .none
         case .bindingIsTransHomeView(let ver):
             state.isTransHomeView = ver
+            return .none
+        case .binding:
             return .none
         }
     }
