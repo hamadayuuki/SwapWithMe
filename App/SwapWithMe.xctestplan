@@ -19,6 +19,13 @@
         "identifier" : "UserInfoTest",
         "name" : "UserInfoTest"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "SearchTest",
+        "name" : "SearchTest"
+      }
     }
   ],
   "version" : 1
