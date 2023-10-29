@@ -29,6 +29,8 @@ public struct SelectUserCardImageStore: Reducer {
     }
 
     public var body: some ReducerOf<Self> {
+        @Dependency(\.userRequestClient) var userRequestClient
+
         Reduce { state, action in
             switch action {
             case .onAppear(let user):
@@ -48,7 +50,7 @@ public struct SelectUserCardImageStore: Reducer {
                 state.user?.iconURL = iconURL
                 guard let user = state.user else { fatalError("Error .successSetImage") }
                 return .run { send in
-                    try UserRequest.set(data: user)
+                    try userRequestClient.set(user)
                     await send(.successSetUser)
                 }
 
