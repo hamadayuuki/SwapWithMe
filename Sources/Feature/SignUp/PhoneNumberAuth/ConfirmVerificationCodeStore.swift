@@ -9,7 +9,7 @@ import ComposableArchitecture
 import FirebaseAuth
 import Foundation
 
-public struct ConfirmVerificationCode: ReducerProtocol {
+public struct ConfirmVerificationCode: Reducer {
     public struct State: Equatable {
         var verificationID = ""
         var isShowUserSettingView = false
@@ -25,45 +25,47 @@ public struct ConfirmVerificationCode: ReducerProtocol {
         case bindingIsErrorBanner(Bool)
     }
 
-    public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
-        switch action {
-        case .initVerificationID:
-            if let verificationID = UserDefaults.standard.string(forKey: "verificationID") {
-                state.verificationID = verificationID
-            } else {
-                state.isErrorBanner = true
-            }
-            return .none
+    public var body: some ReducerOf<Self> {
+        Reduce { state, action in
+            switch action {
+            case .initVerificationID:
+                if let verificationID = UserDefaults.standard.string(forKey: "verificationID") {
+                    state.verificationID = verificationID
+                } else {
+                    state.isErrorBanner = true
+                }
+                return .none
 
-        case .tappedAuthButton(let verificationCode):
-            let credential = PhoneAuthProvider.provider().credential(
-                withVerificationID: state.verificationID,
-                verificationCode: verificationCode
-            )
+            case .tappedAuthButton(let verificationCode):
+                let credential = PhoneAuthProvider.provider().credential(
+                    withVerificationID: state.verificationID,
+                    verificationCode: verificationCode
+                )
 
-            return .run { send in
-                Auth.auth().signIn(with: credential) { authResult, error in
-                    if let error = error {
-                        send(.authFailure)
-                    } else {
-                        send(.authSuccess)
+                return .run { send in
+                    Auth.auth().signIn(with: credential) { authResult, error in
+                        if let error = error {
+                            send(.authFailure)
+                        } else {
+                            send(.authSuccess)
+                        }
                     }
                 }
+
+            case .authSuccess:
+                state.isShowUserSettingView = true
+                return .none
+            case .authFailure:
+                state.isErrorBanner = true
+                return .none
+
+            case .bindingIsShowUserSettingView(let ver):
+                state.isShowUserSettingView = ver
+                return .none
+            case .bindingIsErrorBanner(let ver):
+                state.isErrorBanner = ver
+                return .none
             }
-
-        case .authSuccess:
-            state.isShowUserSettingView = true
-            return .none
-        case .authFailure:
-            state.isErrorBanner = true
-            return .none
-
-        case .bindingIsShowUserSettingView(let ver):
-            state.isShowUserSettingView = ver
-            return .none
-        case .bindingIsErrorBanner(let ver):
-            state.isErrorBanner = ver
-            return .none
         }
     }
 }

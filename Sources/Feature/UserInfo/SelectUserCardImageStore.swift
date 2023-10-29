@@ -10,7 +10,7 @@ import Request
 import SwiftUI
 import User
 
-public struct SelectUserCardImageStore: ReducerProtocol {
+public struct SelectUserCardImageStore: Reducer {
     public init() {}
 
     public struct State: Equatable {
@@ -28,36 +28,38 @@ public struct SelectUserCardImageStore: ReducerProtocol {
         case bindingIsTransAppTabView(Bool)
     }
 
-    public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
-        switch action {
-        case .onAppear(let user):
-            state.user = user
-            return .none
+    public var body: some ReducerOf<Self> {
+        Reduce { state, action in
+            switch action {
+            case .onAppear(let user):
+                state.user = user
+                return .none
 
-        case .tappedButton(let inputImage):
-            guard let id = state.user?.id else { fatalError("Error SelectUserCardImageStore.tappedButton") }
-            return .run { send in
-                Task {
-                    let iconURL = try await ImageRequest.set(uiImage: inputImage!, id: id)
-                    await send(.successSetImage(iconURL))
+            case .tappedButton(let inputImage):
+                guard let id = state.user?.id else { fatalError("Error SelectUserCardImageStore.tappedButton") }
+                return .run { send in
+                    Task {
+                        let iconURL = try await ImageRequest.set(uiImage: inputImage!, id: id)
+                        await send(.successSetImage(iconURL))
+                    }
                 }
+
+            case .successSetImage(let iconURL):
+                state.user?.iconURL = iconURL
+                guard let user = state.user else { fatalError("Error .successSetImage") }
+                return .run { send in
+                    try UserRequest.set(data: user)
+                    await send(.successSetUser)
+                }
+
+            case .successSetUser:
+                state.isTransAppTabView = true
+                return .none
+
+            case .bindingIsTransAppTabView(let ver):
+                state.isTransAppTabView = ver
+                return .none
             }
-
-        case .successSetImage(let iconURL):
-            state.user?.iconURL = iconURL
-            guard let user = state.user else { fatalError("Error .successSetImage") }
-            return .run { send in
-                try UserRequest.set(data: user)
-                await send(.successSetUser)
-            }
-
-        case .successSetUser:
-            state.isTransAppTabView = true
-            return .none
-
-        case .bindingIsTransAppTabView(let ver):
-            state.isTransAppTabView = ver
-            return .none
         }
     }
 }

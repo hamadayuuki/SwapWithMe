@@ -50,15 +50,15 @@ public struct PartnerSearchView: View {
             }
             // 画面遷移 今後実装
             // HomeView にTCAを導入してから実装
-//            .navigationDestination(
-//                store: store.scope(
-//                    state: \.$destination,
-//                    action: { .destination($0) }
-//                ),
-//                state: /PartnerSearchStore.Destination.State.homeView,
-//                action: PartnerSearchStore.Destination.Action.homeView,
-//                destination: HomeView.init(store:)
-//            )
+            //            .navigationDestination(
+            //                store: store.scope(
+            //                    state: \.$destination,
+            //                    action: { .destination($0) }
+            //                ),
+            //                state: /PartnerSearchStore.Destination.State.homeView,
+            //                action: PartnerSearchStore.Destination.Action.homeView,
+            //                destination: HomeView.init(store:)
+            //            )
         }
     }
 

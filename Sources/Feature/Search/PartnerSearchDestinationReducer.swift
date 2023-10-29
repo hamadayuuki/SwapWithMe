@@ -1,13 +1,13 @@
 //
 //  PartnerSearchDestinationReducer.swift
-//  
+//
 //
 //  Created by 濵田　悠樹 on 2023/10/28.
 //
 
+import ComposableArchitecture
 import Home
 import User
-import ComposableArchitecture
 
 extension PartnerSearchStore {
     /// 画面遷移用

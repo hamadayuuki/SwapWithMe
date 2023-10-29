@@ -9,7 +9,7 @@ import ComposableArchitecture
 import Foundation
 import User
 
-public struct UserBasicInfoStore: ReducerProtocol {
+public struct UserBasicInfoStore: Reducer {
     public init() {}
 
     public struct State: Equatable {
@@ -24,16 +24,18 @@ public struct UserBasicInfoStore: ReducerProtocol {
         case bindingTappedTransButton(Bool)
     }
 
-    public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
-        switch action {
-        case .tappedButton(let user):
-            state.user = user
-            state.tappedTransButton = true
-            return .none
+    public var body: some ReducerOf<Self> {
+        Reduce { state, action in
+            switch action {
+            case .tappedButton(let user):
+                state.user = user
+                state.tappedTransButton = true
+                return .none
 
-        case .bindingTappedTransButton(let ver):
-            state.tappedTransButton = ver
-            return .none
+            case .bindingTappedTransButton(let ver):
+                state.tappedTransButton = ver
+                return .none
+            }
         }
     }
 }
