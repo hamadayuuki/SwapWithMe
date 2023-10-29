@@ -33,6 +33,8 @@ public struct PartnerSearchStore: Reducer {
     }
 
     public var body: some ReducerOf<Self> {
+        @Dependency(\.userRequestClient) var userRequestClient
+
         BindingReducer()
         Reduce { state, action in
             switch action {
@@ -40,7 +42,7 @@ public struct PartnerSearchStore: Reducer {
                 return .run { send in
                     // TODO: uid はログインしているユーザー情報から取得してくる
                     /// 現在の uid はテストユーザー
-                    let myInfo = try await UserRequest.fetch(id: "8FA167F4-E3CD-449A-92F2-7FC2CB5CB0B4")
+                    let myInfo = try await userRequestClient.fetch("8FA167F4-E3CD-449A-92F2-7FC2CB5CB0B4")
                     await send(.setMyInfo(myInfo))
                 }
             case .setMyInfo(let myInfo):
@@ -52,7 +54,7 @@ public struct PartnerSearchStore: Reducer {
                 return .none
             case .search(let text):
                 return .run { send in
-                    let users = try await UserRequest.fetchWithName(name: text)
+                    let users = try await userRequestClient.fetchWithName(text)
                     await send(.setUsers(users))
                 }
             case .setUsers(let users):
