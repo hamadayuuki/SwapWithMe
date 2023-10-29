@@ -115,6 +115,7 @@ let featureTargets: [Target] = [
         "User",
         "ViewComponents",
         readabilityModifier,
+        composableArchitecture
     ])
 ]
 
