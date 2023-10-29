@@ -61,7 +61,8 @@ extension Target {
 let coreTargets: [Target] = [
     .core(name: "ViewComponents", dependencies: [
         cropViewController
-    ])
+    ]),
+    .core(name: "Error", dependencies: [])
 ]
 
 let featureTargets: [Target] = [
@@ -127,6 +128,7 @@ let entityTargets: [Target] = [
 let dataTargets: [Target] = [
     .data(name: "Request", dependencies: [
         "User",
+        "Error",
         fireStore,
         fireStoreSwift,
         fireStorage
