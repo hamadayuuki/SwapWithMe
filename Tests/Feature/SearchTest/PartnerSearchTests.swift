@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  PartnerSearchTests.swift
 //  
 //
 //  Created by 濵田　悠樹 on 2023/10/29.
@@ -12,11 +12,13 @@ import User
 @testable import Search
 
 @MainActor
-final class UserInfoTest: XCTestCase {
+final class PartnerSearchTests: XCTestCase {
 
     // MARK: - Stub
 
     private let user = User(iconURL: nil, name: "", age: 0, sex: .man, affiliation: .juniorHigh, animal: .dog, activity: .indoor, personality: .shy, description: "")
+    /// エラーを再現する
+    private struct ErrorResult: Error, Equatable {}
 
     // MARK: - Tests
 
@@ -32,8 +34,25 @@ final class UserInfoTest: XCTestCase {
         }
 
         await testStore.send(.onAppear)
-        await testStore.receive(.setMyInfo(user)) {
+        await testStore.receive(.setMyInfo(.success(user))) {
             $0.myInfo = self.user
+        }
+    }
+
+    func test_onAppear_myInfo取得時にエラー発生() async {
+        let testStore = TestStore(
+            initialState: PartnerSearchStore.State()
+        ) {
+            PartnerSearchStore()
+        } withDependencies: {
+            $0.userRequestClient.fetch = { id in
+                throw ErrorResult()
+            }
+        }
+
+        await testStore.send(.onAppear)
+        await testStore.receive(.setMyInfo(.failure(ErrorResult()))) {
+            $0.showsError = true
         }
     }
 
@@ -49,8 +68,25 @@ final class UserInfoTest: XCTestCase {
         }
 
         await testStore.send(.search(""))
-        await testStore.receive(.setUsers([self.user])) {
+        await testStore.receive(.setUsers(.success([self.user]))) {
             $0.users = [self.user]
+        }
+    }
+
+    func test_onAppear_Users取得時にエラー発生() async {
+        let testStore = TestStore(
+            initialState: PartnerSearchStore.State()
+        ) {
+            PartnerSearchStore()
+        } withDependencies: {
+            $0.userRequestClient.fetchWithName = { name in
+                throw ErrorResult()
+            }
+        }
+
+        await testStore.send(.search(""))
+        await testStore.receive(.setUsers(.failure(ErrorResult()))) {
+            $0.showsError = true
         }
     }
 }
