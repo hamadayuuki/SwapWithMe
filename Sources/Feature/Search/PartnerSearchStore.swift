@@ -15,6 +15,7 @@ public struct PartnerSearchStore: Reducer {
         var myInfo: User = .init(iconURL: nil, name: "", age: 0, sex: .man, affiliation: .juniorHigh, animal: .dog, activity: .indoor, personality: .shy, description: "")
         var partner: User = .init(iconURL: nil, name: "", age: 0, sex: .man, affiliation: .juniorHigh, animal: .dog, activity: .indoor, personality: .shy, description: "")
         var isTransHomeView = false
+        var showsError = false
         @BindingState var searchText = ""
         @PresentationState var destination: Destination.State?
 
@@ -23,10 +24,10 @@ public struct PartnerSearchStore: Reducer {
 
     public enum Action: Equatable, BindableAction {
         case onAppear
-        case setMyInfo(User)
+        case setMyInfo(TaskResult<User>)
         case tappedPartnerCell(User)
         case search(String)
-        case setUsers([User])
+        case setUsers(TaskResult<[User]>)
         case bindingIsTransHomeView(Bool)
         case binding(BindingAction<State>)
         case destination(PresentationAction<Destination.Action>)
@@ -40,26 +41,54 @@ public struct PartnerSearchStore: Reducer {
             switch action {
             case .onAppear:
                 return .run { send in
-                    // TODO: uid はログインしているユーザー情報から取得してくる
-                    /// 現在の uid はテストユーザー
-                    let myInfo = try await userRequestClient.fetch("8FA167F4-E3CD-449A-92F2-7FC2CB5CB0B4")
-                    await send(.setMyInfo(myInfo))
+                    await send(
+                        .setMyInfo(
+                            TaskResult {
+                                // TODO: uid はログインしているユーザー情報から取得してくる
+                                /// 現在の uid はテストユーザー
+                                let myInfo = try await userRequestClient.fetch("8FA167F4-E3CD-449A-92F2-7FC2CB5CB0B4")
+                                return myInfo
+                            }
+                        )
+                    )
                 }
-            case .setMyInfo(let myInfo):
-                state.myInfo = myInfo
-                return .none
+            case .setMyInfo(let result):
+                switch result {
+                case .success(let myInfo):
+                    state.myInfo = myInfo
+                    return .none
+                case .failure(let error):
+                    // エラーをキャッチすることは確認済み
+                    // 例 : Error Domain=FIRFirestoreErrorDomain Code=14
+                    // TODO: エラーハンドリング
+                    state.showsError = true
+                    return .none
+                }
             case .tappedPartnerCell(let partner):
                 state.partner = partner
                 state.isTransHomeView = true
                 return .none
             case .search(let text):
                 return .run { send in
-                    let users = try await userRequestClient.fetchWithName(text)
-                    await send(.setUsers(users))
+                    await send(
+                        .setUsers(
+                            TaskResult {
+                                let users = try await userRequestClient.fetchWithName(text)
+                                return users
+                            }
+                        )
+                    )
                 }
-            case .setUsers(let users):
-                state.users = users
-                return .none
+            case .setUsers(let result):
+                switch result {
+                case .success(let users):
+                    state.users = users
+                    return .none
+                case .failure(let error):
+                    // TODO: エラーハンドリング
+                    state.showsError = true
+                    return .none
+                }
             case .bindingIsTransHomeView(let ver):
                 state.isTransHomeView = ver
                 return .none

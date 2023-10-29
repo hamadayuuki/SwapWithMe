@@ -48,6 +48,9 @@ public struct PartnerSearchView: View {
                     }
                 }
             }
+            .onAppear {
+                viewStore.send(.onAppear)
+            }
             // 画面遷移 今後実装
             // HomeView にTCAを導入してから実装
             //            .navigationDestination(
