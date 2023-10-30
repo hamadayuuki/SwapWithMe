@@ -28,10 +28,10 @@
 SPMマルチモジュール構成を採用するとモジュールとしてテストを書くため、`TestPlan` を作り モジュール(テスト)毎にテストするかを明示的に指定する必要があります
 指定しない場合、テストコード上に `♦︎マーク` が出てこないため、テストを実行できません
 
- 1: `Product` > `Test Plan` > `New Test Plan ...`
- 2: 作成された Test Plan へ移動
- 3: 画面左下の + を押し > `対象のテストモジュール` を追加
- 4: スキームセルを押す > スキームを Project(SwapWithMe)にセット > `Edit Scheme` > `Test` > Test Plan に1で作成した`対象のTestPlan`が含まれているか確認 > 含まれていない場合 `+ボタン(Add Exisiting Test Plan` から追加
+ 1: `Product` > `Test Plan` > `New Test Plan ...`<br>
+ 2: 作成された Test Plan へ移動<br>
+ 3: 画面左下の + を押し > `対象のテストモジュール` を追加<br>
+ 4: スキームセルを押す > スキームを Project(SwapWithMe)にセット > `Edit Scheme` > `Test` > Test Plan に1で作成した`対象のTestPlan`が含まれているか確認 > 含まれていない場合 `+ボタン(Add Exisiting Test Plan` から追加<br>
  
  #### Pakage.swift の変更
  
