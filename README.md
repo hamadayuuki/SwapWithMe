@@ -1,5 +1,124 @@
 # SwapWithMe
 
+
+## TCA
+
+
+<img width = 80% src = "README/TCA-architecture.png">
+
+SwapWithMe では`TCA`を採用しています。`TCA`はpointfreeの[README](https://github.com/pointfreeco/swift-composable-architecture#user-content-what-is-the-composable-architecture)にあるように、状態管理を目的としたフレームワークです。
+`View`, `Action`, `State`, `Reducer` によって画面の状態を管理しています。アーキテクチャとしては SwiftUI版のRedux のような立ち位置だと考えています。
+
+TCAの採用理由としては以下の3点です。
+- 実装方針を限定できること
+    - `Action` や `State` 等 状態の定義が限定されているため、長期的 や 複数人 での実装を考えると実装者による癖がコードに反映されにくい
+        - 制約が多い分実装のブレが生じにくい
+- テストの書きやすさ
+    - Action に沿って State の変化をテストするという流れが明確である
+    - DI の体制も整っている
+- キャッチアップのため
+    - ドキュメントが整っている
+
+### オンボーディング
+TCAの入門となるオンボーディングを作成してみました。
+TCA を用いた開発を行う前に、一度確認してみてください。
+
+`概要` : GitHubリポジトリ一覧を表示する ※<br>
+`内容` : 画面を開いた時にGitHubAPIからリポジトリを取得する<br>
+※ Viewの実装は行いません。以下に示す実装内容としてはTCAによるデータフローの確認を行う程度のものです。
+
+**RepositoryView.swift**
+
+`View`
+
+```RepositoryView.swift
+import ComposableArchitecture
+import SwiftUI
+
+// MARK: - View
+
+struct RepositoryView: View {
+    // store の初期化
+    let store: StoreOf<RepositoryStore>
+    public init(store: StoreOf<RepositoryStore>) {
+        self.store = store
+    }
+
+    var body: some View {
+        // Store の呼び出しを可能にする
+        // Action や State へのアクセスが可能となる
+        // State に変更があると 自動的にViewへ反映される
+        // viewStore : let viewStore: ViewStore<RepositoryStore.State, RepositoryStore.Action>
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
+            ZStack {
+                // State を View へ反映させる
+                Text(viewStore.ripositories[0])
+            }
+            .onAppear {
+                // Action の発行
+                viewStore.send(.onAppear)
+            }
+        }
+    }
+}
+
+// Preview
+struct RepositoryView_Previews: PreviewProvider {
+    static var previews: some View {
+        // Store を渡す必要がある
+        RepositoryView(
+            store: Store(initialState: RepositoryStore.State()) {
+                RepositoryStore()
+            }
+        )
+    }
+}
+```
+
+**RepositoryStore.swift**
+
+`State`, `Action`, `Reducer`
+
+```RepositoryStore.swift
+import ComposableArchitecture
+
+// MARK: - Store (State, Action, Reducer)
+
+public struct RepositoryStore: Reducer {
+    // Store を外部からアクセス可能にする
+    public init() {}
+
+    // MARK: - State
+
+    public struct State: Equatable {
+        public init() {}
+
+        var ripositories: [String] = [""]
+    }
+
+    // MARK: - Action
+
+    public enum Action: Equatable {
+        case onAppear
+    }
+
+    // MARK: - Reducer
+
+    public var body: some ReducerOf<Self> {
+        Reduce { state, action in
+            // 1 : Action に応じて
+            switch action {
+            case .onAppear:
+                // 2 : State を変更する
+                state.ripositories = ["repository1"]
+                return .none
+            }
+        }
+    }
+}
+```
+
+
 ## SPMマルチモジュール構成
 
 プロジェクトの構成として SPMを中心としたマルチモジュール を採用しています。[pointfreeco/isowords](https://github.com/pointfreeco/isowords)を参考にしています。
@@ -28,10 +147,10 @@
 SPMマルチモジュール構成を採用するとモジュールとしてテストを書くため、`TestPlan` を作り モジュール(テスト)毎にテストするかを明示的に指定する必要があります
 指定しない場合、テストコード上に `♦︎マーク` が出てこないため、テストを実行できません
 
- 1: `Product` > `Test Plan` > `New Test Plan ...`
- 2: 作成された Test Plan へ移動
- 3: 画面左下の + を押し > `対象のテストモジュール` を追加
- 4: スキームセルを押す > スキームを Project(SwapWithMe)にセット > `Edit Scheme` > `Test` > Test Plan に1で作成した`対象のTestPlan`が含まれているか確認 > 含まれていない場合 `+ボタン(Add Exisiting Test Plan` から追加
+ 1: `Product` > `Test Plan` > `New Test Plan ...`<br>
+ 2: 作成された Test Plan へ移動<br>
+ 3: 画面左下の + を押し > `対象のテストモジュール` を追加<br>
+ 4: スキームセルを押す > スキームを Project(SwapWithMe)にセット > `Edit Scheme` > `Test` > Test Plan に1で作成した`対象のTestPlan`が含まれているか確認 > 含まれていない場合 `+ボタン(Add Exisiting Test Plan` から追加<br>
  
  #### Pakage.swift の変更
  
