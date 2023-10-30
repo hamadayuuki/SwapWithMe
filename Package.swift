@@ -14,8 +14,8 @@ let packageDependencies: [PackageDependency] = [
     .package(url: "https://github.com/firebase/firebase-ios-sdk", from: .init(10, 11, 0)),
     .package(url: "https://github.com/yazio/ReadabilityModifier", from: .init(1, 0, 0)),
     .package(url: "https://github.com/exyte/PopupView", from: .init(2, 5, 7)),
-    .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: .init(0, 55, 1)),
-    .package(url: "https://github.com/pointfreeco/swift-dependencies", from: .init(0, 5, 1)),
+    .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: .init(1, 2, 0)),
+    .package(url: "https://github.com/pointfreeco/swift-dependencies", from: .init(1, 0, 0)),
     .package(url: "https://github.com/TimOliver/TOCropViewController.git", from: .init(2, 6, 1)),
     .package(url: "https://github.com/kean/Nuke.git", from: .init(12, 1, 5))
 ]
@@ -28,7 +28,7 @@ let fireStoreSwift: TargetDependency = .product(name: "FirebaseFirestoreSwift", 
 let fireStorage: TargetDependency = .product(name: "FirebaseStorage", package: "firebase-ios-sdk")
 let popupView: TargetDependency = .product(name: "PopupView", package: "PopupView")
 let composableArchitecture: TargetDependency = .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
-let dependencies: TargetDependency = .product(name: "Dependencies", package: "Dependencies")
+let dependencies: TargetDependency = .product(name: "Dependencies", package: "swift-dependencies")
 let cropViewController: TargetDependency = .product(name: "CropViewController", package: "TOCropViewController")
 let nuke: TargetDependency = .product(name: "Nuke", package: "Nuke")
 
@@ -61,7 +61,8 @@ extension Target {
 let coreTargets: [Target] = [
     .core(name: "ViewComponents", dependencies: [
         cropViewController
-    ])
+    ]),
+    .core(name: "Error", dependencies: [])
 ]
 
 let featureTargets: [Target] = [
@@ -114,6 +115,7 @@ let featureTargets: [Target] = [
         "User",
         "ViewComponents",
         readabilityModifier,
+        composableArchitecture
     ])
 ]
 
@@ -127,9 +129,11 @@ let entityTargets: [Target] = [
 let dataTargets: [Target] = [
     .data(name: "Request", dependencies: [
         "User",
+        "Error",
         fireStore,
         fireStoreSwift,
-        fireStorage
+        fireStorage,
+        dependencies
     ])
 ]
 
@@ -138,6 +142,13 @@ let featureTestTargets: [Target] = [
         name: "UserInfoTest",
         dependencies: [
             "UserInfo",
+            "User",
+            composableArchitecture
+        ]),
+    .featureTest(
+        name: "SearchTest",
+        dependencies: [
+            "Search",
             "User",
             composableArchitecture
         ])

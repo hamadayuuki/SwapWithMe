@@ -5,6 +5,7 @@
 //  Created by 濵田　悠樹 on 2023/08/06.
 //
 
+import ComposableArchitecture
 import Home
 import ReadabilityModifier
 import Request
@@ -13,47 +14,54 @@ import User
 import ViewComponents
 
 public struct PartnerSearchView: View {
-    @State private var searchText = ""
-    @State private var myInfo: User = .init(iconURL: nil, name: "", age: 0, sex: .man, affiliation: .juniorHigh, animal: .dog, activity: .indoor, personality: .shy, description: "")
-    @State private var partner: User = .init(iconURL: nil, name: "", age: 0, sex: .man, affiliation: .juniorHigh, animal: .dog, activity: .indoor, personality: .shy, description: "")
-    @State private var users: [User] = []
-    @State private var isTransHomeView = false
+    let store: StoreOf<PartnerSearchStore>
 
-    public init() {}
+    public init(store: StoreOf<PartnerSearchStore>) {
+        self.store = store
+    }
 
     public var body: some View {
-        NavigationView {
-            ZStack {
-                List(users, id: \.self) { user in
-                    partnerCell(partner: user)
-                        .onTapGesture {
-                            self.partner = user
-                            self.isTransHomeView = true
-                        }
-                }
-                .searchable(text: $searchText)
-                .onSubmit(of: .search) {
-                    if searchText.count <= 8 {
-                        Task {
-                            self.users = try await UserRequest.fetchWithName(name: searchText)
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
+            NavigationView {
+                ZStack {
+                    List(viewStore.users, id: \.self) { user in
+                        partnerCell(partner: user)
+                            .onTapGesture {
+                                viewStore.send(.tappedPartnerCell(user))
+                            }
+                    }
+                    .searchable(text: viewStore.$searchText)
+                    .onSubmit(of: .search) {
+                        if viewStore.searchText.count <= 8 {
+                            viewStore.send(.search(viewStore.searchText))
                         }
                     }
-                }
 
-                NavigationLink(
-                    destination: HomeView(myInfo: self.myInfo, partner: self.partner),
-                    isActive: $isTransHomeView
-                ) {
-                    EmptyView()
+                    NavigationLink(
+                        destination: HomeView(myInfo: viewStore.myInfo, partner: viewStore.partner),
+                        isActive: viewStore.binding(
+                            get: { $0.isTransHomeView },
+                            send: .bindingIsTransHomeView(viewStore.isTransHomeView)
+                        )
+                    ) {
+                        EmptyView()
+                    }
                 }
             }
-        }
-        .onAppear {
-            Task {
-                // TODO: uid はログインしているユーザー情報から取得してくる
-                // 現在の uid はテストユーザー
-                self.myInfo = try await UserRequest.fetch(id: "8FA167F4-E3CD-449A-92F2-7FC2CB5CB0B4")
+            .onAppear {
+                viewStore.send(.onAppear)
             }
+            // 画面遷移 今後実装
+            // HomeView にTCAを導入してから実装
+            //            .navigationDestination(
+            //                store: store.scope(
+            //                    state: \.$destination,
+            //                    action: { .destination($0) }
+            //                ),
+            //                state: /PartnerSearchStore.Destination.State.homeView,
+            //                action: PartnerSearchStore.Destination.Action.homeView,
+            //                destination: HomeView.init(store:)
+            //            )
         }
     }
 
@@ -83,6 +91,9 @@ public struct PartnerSearchView: View {
 
 struct PartnerSearchView_Previews: PreviewProvider {
     static var previews: some View {
-        PartnerSearchView()
+        PartnerSearchView(
+            store: Store(initialState: PartnerSearchStore.State()) {
+                PartnerSearchStore()
+            })
     }
 }

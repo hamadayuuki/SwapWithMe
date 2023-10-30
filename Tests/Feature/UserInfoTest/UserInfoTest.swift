@@ -32,9 +32,10 @@ final class UserInfoTest: XCTestCase {
     func test_ユーザー情報が入力され_Stateに反映される() async {
         /// Given (前提条件)：操作を実行する前の状態
         let testStore = TestStore(
-            initialState: UserBasicInfoStore.State(),
-            reducer: UserBasicInfoStore()
-        )
+            initialState: UserBasicInfoStore.State()
+        ) {
+            UserBasicInfoStore()
+        }
 
         /// When (操作): メソッドの呼び出し
         await testStore.send(.tappedButton(user)) {
@@ -47,9 +48,10 @@ final class UserInfoTest: XCTestCase {
     func test_画面遷移ボタンが押され_Stateに反映される() async {
         /// Given (前提条件)
         let testStore = TestStore(
-            initialState: UserBasicInfoStore.State(),
-            reducer: UserBasicInfoStore()
-        )
+            initialState: UserBasicInfoStore.State()
+        ) {
+            UserBasicInfoStore()
+        }
 
         /// When (操作)
         await testStore.send(.bindingTappedTransButton(true)) {
@@ -61,9 +63,10 @@ final class UserInfoTest: XCTestCase {
     func test_ユーザー情報入力が完了し画面遷移ボタンが押された時_Stateに反映される() async {
         /// Given (前提条件)
         let testStore = TestStore(
-            initialState: UserBasicInfoStore.State(),
-            reducer: UserBasicInfoStore()
-        )
+            initialState: UserBasicInfoStore.State()
+        ) {
+            UserBasicInfoStore()
+        }
 
         /// When (操作)
         await testStore.send(.tappedButton(user)) {

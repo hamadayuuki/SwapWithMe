@@ -9,7 +9,7 @@ import ComposableArchitecture
 import FirebaseAuth
 import Foundation
 
-public struct PhoneNumberAuth: ReducerProtocol {
+public struct PhoneNumberAuth: Reducer {
     public init() {}
 
     public struct State: Equatable {
@@ -28,40 +28,42 @@ public struct PhoneNumberAuth: ReducerProtocol {
         case onDisappear
     }
 
-    public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
-        switch action {
-        case .tappedSMSButton(let phoneNumber):
-            return .run { send in
-                // Firebase Auth のテストデータとして私用の電話番号を設定済み
-                PhoneAuthProvider.provider()
-                    .verifyPhoneNumber("+81" + phoneNumber, uiDelegate: nil) { verificationID, error in
-                        if let verificationID = verificationID {
-                            send(.smsSuccessed(verificationID))
-                        } else {
-                            send(.smsFailured)
+    public var body: some ReducerOf<Self> {
+        Reduce { state, action in
+            switch action {
+            case .tappedSMSButton(let phoneNumber):
+                return .run { send in
+                    // Firebase Auth のテストデータとして私用の電話番号を設定済み
+                    PhoneAuthProvider.provider()
+                        .verifyPhoneNumber("+81" + phoneNumber, uiDelegate: nil) { verificationID, error in
+                            if let verificationID = verificationID {
+                                send(.smsSuccessed(verificationID))
+                            } else {
+                                send(.smsFailured)
+                            }
                         }
-                    }
+                }
+
+            case .smsSuccessed(let verificationID):
+                UserDefaults.standard.set(verificationID, forKey: "verificationID")
+                state.isShowConfirmVerificationCodeView = !state.isShowConfirmVerificationCodeView
+                return .none
+
+            case .smsFailured:
+                state.isErrorBanner = true
+                return .none
+
+            case .bindingIsShowConfirmVerificationCodeView(let ver):
+                state.isShowConfirmVerificationCodeView = ver
+                return .none
+            case .bindingIsErrorBanner(let ver):  // バナーを閉じる時呼ばれる
+                state.isErrorBanner = ver
+                return .none
+
+            case .onDisappear:
+                state.isErrorBanner = false
+                return .none
             }
-
-        case .smsSuccessed(let verificationID):
-            UserDefaults.standard.set(verificationID, forKey: "verificationID")
-            state.isShowConfirmVerificationCodeView = !state.isShowConfirmVerificationCodeView
-            return .none
-
-        case .smsFailured:
-            state.isErrorBanner = true
-            return .none
-
-        case .bindingIsShowConfirmVerificationCodeView(let ver):
-            state.isShowConfirmVerificationCodeView = ver
-            return .none
-        case .bindingIsErrorBanner(let ver):  // バナーを閉じる時呼ばれる
-            state.isErrorBanner = ver
-            return .none
-
-        case .onDisappear:
-            state.isErrorBanner = false
-            return .none
         }
     }
 }
