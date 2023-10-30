@@ -28,7 +28,7 @@ let fireStoreSwift: TargetDependency = .product(name: "FirebaseFirestoreSwift", 
 let fireStorage: TargetDependency = .product(name: "FirebaseStorage", package: "firebase-ios-sdk")
 let popupView: TargetDependency = .product(name: "PopupView", package: "PopupView")
 let composableArchitecture: TargetDependency = .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
-let dependencies: TargetDependency = .product(name: "Dependencies", package: "Dependencies")
+let dependencies: TargetDependency = .product(name: "Dependencies", package: "swift-dependencies")
 let cropViewController: TargetDependency = .product(name: "CropViewController", package: "TOCropViewController")
 let nuke: TargetDependency = .product(name: "Nuke", package: "Nuke")
 
@@ -132,7 +132,8 @@ let dataTargets: [Target] = [
         "Error",
         fireStore,
         fireStoreSwift,
-        fireStorage
+        fireStorage,
+        dependencies
     ])
 ]
 
