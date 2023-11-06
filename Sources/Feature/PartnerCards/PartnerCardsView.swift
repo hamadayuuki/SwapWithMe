@@ -12,6 +12,7 @@ TODO: カードに載せる情報を増やす
     (- 相手の特徴的なものも？)
  */
 
+import ComposableArchitecture
 import QuestionList
 import ReadabilityModifier
 import SwiftUI
@@ -23,7 +24,8 @@ private struct PartnerInfo {
 }
 
 public struct PartnerCardsView: View {
-    private var cardImages: [Image] = []
+    let store: StoreOf<PartnerCardsStore>
+
     private let partners = ["nagano", "hotta", "kiyohara", "narita"]
     private var partnerInfos: [PartnerInfo] = [
         .init(name: "かえぽん", age: 30, personality: "フレンドリー"),
@@ -46,61 +48,55 @@ public struct PartnerCardsView: View {
     @State private var isTransQuestionListView = false
     @State private var tappedImage = Image("")
 
-    public init() {
-        //        for partnerIndex in 0..<4 {
-        //            for imageIndex in 0..<5 {
-        //                if imageIndex == 0 {
-        //                    cardImages.append(Image("\(partners[partnerIndex])"))
-        //                } else {
-        //                    cardImages.append(Image("\(partners[partnerIndex])" + "\(imageIndex + 1)"))
-        //                }
-        //            }
-        //        }
-        for i in 1..<16 {
-            cardImages.append(Image("mock-\(i)"))
-        }
+    public init(store: StoreOf<PartnerCardsStore>) {
+        self.store = store
     }
 
     public var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 18) {
-                    Text("Swapしたユーザー")
-                        .font(.system(size: 24, weight: .bold, design: .rounded))
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
+            NavigationView {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 18) {
+                        Text("Swapしたユーザー")
+                            .font(.system(size: 24, weight: .bold, design: .rounded))
 
-                    Text("これまでカードを交換したユーザーが表示されています。カードをタップすると質問が表示されます。")
-                        .font(.system(size: 12, weight: .regular, design: .rounded))
-                        .padding(.bottom, 24)
+                        Text("これまでカードを交換したユーザーが表示されています。カードをタップすると質問が表示されます。")
+                            .font(.system(size: 12, weight: .regular, design: .rounded))
+                            .padding(.bottom, 24)
 
-                    ForEach(0..<5) { i in
-                        HStack(spacing: 12) {
-                            ForEach(0..<3) { j in
-                                partnerCard(index: i * 3 + j)
-                                    .onTapGesture {
-                                        tappedImage = cardImages[i * 3 + j]
-                                        isTransQuestionListView = true
-                                    }
+                        ForEach(0..<5) { i in
+                            HStack(spacing: 12) {
+                                ForEach(0..<3) { j in
+                                    partnerCard(cardImage: viewStore.cardImages[i * 3 + j], partner: partnerInfos[i * 3 + j])
+                                        .onTapGesture {
+                                            tappedImage = viewStore.cardImages[i * 3 + j]
+                                            isTransQuestionListView = true
+                                        }
+                                }
                             }
                         }
+                        
+                        NavigationLink(
+                            destination: QuestionListView(cardImage: tappedImage),
+                            isActive: $isTransQuestionListView
+                        ) {
+                            EmptyView()
+                        }
                     }
-
-                    NavigationLink(
-                        destination: QuestionListView(cardImage: tappedImage),
-                        isActive: $isTransQuestionListView
-                    ) {
-                        EmptyView()
-                    }
+                    .fitToReadableContentGuide()
+                    .padding(.top, 36)
                 }
-                .fitToReadableContentGuide()
-                .padding(.top, 36)
+            }
+            .onAppear {
+                viewStore.send(.onAppear)
             }
         }
     }
 
-    private func partnerCard(index: Int) -> some View {
+    private func partnerCard(cardImage: Image, partner: PartnerInfo) -> some View {
         ZStack {
-            card(cardImage: cardImages[index])
-            partnerInfo(name: partnerInfos[index].name, age: partnerInfos[index].age, affiliation: partnerInfos[index].personality)
+            card(cardImage: cardImage)
+            partnerInfo(name: partner.name, age: partner.age, affiliation: partner.personality)
                 .offset(x: 0, y: 400 * 0.42 * 0.25)
         }
     }
@@ -139,6 +135,10 @@ public struct PartnerCardsView: View {
 
 struct PartnerCardsView_Previews: PreviewProvider {
     static var previews: some View {
-        PartnerCardsView()
+        PartnerCardsView(
+            store: Store(initialState: PartnerCardsStore.State()) {
+                PartnerCardsStore()
+            }
+        )
     }
 }
