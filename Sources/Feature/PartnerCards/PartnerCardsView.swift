@@ -16,34 +16,10 @@ import ComposableArchitecture
 import QuestionList
 import ReadabilityModifier
 import SwiftUI
-
-private struct PartnerInfo {
-    let name: String
-    let age: Int
-    let personality: String
-}
+import User
 
 public struct PartnerCardsView: View {
     let store: StoreOf<PartnerCardsStore>
-
-    private let partners = ["nagano", "hotta", "kiyohara", "narita"]
-    private var partnerInfos: [PartnerInfo] = [
-        .init(name: "かえぽん", age: 30, personality: "フレンドリー"),
-        .init(name: "るいるい", age: 22, personality: "人見知り"),
-        .init(name: "れんたん", age: 25, personality: "人見知り"),
-        .init(name: "ユウスケ", age: 19, personality: "フレンドリー"),
-        .init(name: "さくたん", age: 20, personality: "人見知り"),
-        .init(name: "しげしげ", age: 29, personality: "フレンドリー"),
-        .init(name: "ビルケイツ", age: 23, personality: "フレンドリー"),
-        .init(name: "かっきー", age: 30, personality: "人見知り"),
-        .init(name: "アイフォン", age: 22, personality: "フレンドリー"),
-        .init(name: "トランペット", age: 22, personality: "人見知り"),
-        .init(name: "いくた", age: 30, personality: "フレンドリー"),
-        .init(name: "コスメ", age: 28, personality: "人見知り"),
-        .init(name: "りこ", age: 25, personality: "人見知り"),
-        .init(name: "あかり", age: 34, personality: "フレンドリー"),
-        .init(name: "ラーメン", age: 39, personality: "人見知り"),
-    ]
 
     @State private var isTransQuestionListView = false
     @State private var tappedImage = Image("")
@@ -67,7 +43,7 @@ public struct PartnerCardsView: View {
                         ForEach(0..<5) { i in
                             HStack(spacing: 12) {
                                 ForEach(0..<3) { j in
-                                    partnerCard(cardImage: viewStore.cardImages[i * 3 + j], partner: partnerInfos[i * 3 + j])
+                                    partnerCard(cardImage: viewStore.cardImages[i * 3 + j], partner: viewStore.partnerInfos[i * 3 + j])
                                         .onTapGesture {
                                             tappedImage = viewStore.cardImages[i * 3 + j]
                                             isTransQuestionListView = true
@@ -75,7 +51,7 @@ public struct PartnerCardsView: View {
                                 }
                             }
                         }
-                        
+
                         NavigationLink(
                             destination: QuestionListView(cardImage: tappedImage),
                             isActive: $isTransQuestionListView

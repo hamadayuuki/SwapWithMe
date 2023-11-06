@@ -100,6 +100,7 @@ let featureTargets: [Target] = [
     .feature(name: "PartnerCards", dependencies: [
         "ViewComponents",
         "QuestionList",
+        "User",
         readabilityModifier,
         popupView,
     ]),
