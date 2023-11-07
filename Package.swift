@@ -103,6 +103,7 @@ let featureTargets: [Target] = [
         "User",
         readabilityModifier,
         popupView,
+        composableArchitecture
     ]),
     .feature(name: "Tab", dependencies: [
         "PartnerCards",
