@@ -38,24 +38,15 @@ public struct PartnerCardsView: View {
                             .padding(.bottom, 24)
 
                         // カードが11枚を想定して、値は決め打ち
-                        ForEach(0..<3) { i in
+                        ForEach(0..<5) { i in
                             HStack(spacing: 12) {
-                                // 最終行の時
-                                if i == (3 - 1) {
-                                    ForEach(0..<11 % 3) { j in
-                                        partnerCard(cardImage: viewStore.cardImages[i * 3 + j], partner: viewStore.partnerInfos[i * 3 + j])
+                                ForEach(0..<3) { j in
+                                    if let cardImage = viewStore.cardImages[safe: i * 3 + j],
+                                        let partnerInfo = viewStore.partnerInfos[safe: i * 3 + j]
+                                    {
+                                        partnerCard(cardImage: cardImage, partner: partnerInfo)
                                             .onTapGesture {
-                                                viewStore.send(.tappedPartnerCard(viewStore.cardImages[i * 3 + j]))
-                                            }
-                                    }
-                                } else {
-                                    ForEach(0..<3) { j in
-                                        partnerCard(cardImage: viewStore.cardImages[i * 3 + j], partner: viewStore.partnerInfos[i * 3 + j])
-                                            .onTapGesture {
-                                                viewStore.send(.tappedPartnerCard(viewStore.cardImages[i * 3 + j]))
-                                            }
-                                            .onAppear {
-                                                print(i * 3 + j)
+                                                viewStore.send(.tappedPartnerCard(cardImage))
                                             }
                                     }
                                 }
