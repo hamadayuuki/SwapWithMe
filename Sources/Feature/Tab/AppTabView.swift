@@ -22,11 +22,15 @@ public struct AppTabView: View {
 
     public var body: some View {
         TabView(selection: $selection) {
-            PartnerCardsView()
-                .tabItem {
-                    Label("ホーム", systemImage: selection == .home ? "house.fill" : "house")
+            PartnerCardsView(
+                store: Store(initialState: PartnerCardsStore.State()) {
+                    PartnerCardsStore()
                 }
-                .tag(Tab.home)
+            )
+            .tabItem {
+                Label("ホーム", systemImage: selection == .home ? "house.fill" : "house")
+            }
+            .tag(Tab.home)
 
             PartnerSearchView(
                 store: Store(initialState: PartnerSearchStore.State()) {
