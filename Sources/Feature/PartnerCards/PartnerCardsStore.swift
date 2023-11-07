@@ -15,13 +15,19 @@ public struct PartnerCardsStore: Reducer {
 
         var cardImages: [Image] = []
         var partnerInfos: [PartnerInfo] = []
+        var tappedImage: Image = Image("")
+        @BindingState var isTransQuestionListView = false
     }
 
-    public enum Action: Equatable {
+    public enum Action: Equatable, BindableAction {
         case onAppear
+        case tappedPartnerCard(Image)
+        case binding(BindingAction<State>)
     }
 
     public var body: some ReducerOf<Self> {
+        BindingReducer()
+
         Reduce { state, action in
             switch action {
             case .onAppear:
@@ -49,6 +55,14 @@ public struct PartnerCardsStore: Reducer {
                     .init(name: "ラーメン", age: 39, personality: "人見知り"),
                 ]
 
+                return .none
+
+            case .tappedPartnerCard(let partnerImage):
+                state.tappedImage = partnerImage
+                state.isTransQuestionListView = true
+                return .none
+
+            case .binding:
                 return .none
             }
         }

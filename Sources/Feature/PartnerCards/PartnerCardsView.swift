@@ -21,9 +21,6 @@ import User
 public struct PartnerCardsView: View {
     let store: StoreOf<PartnerCardsStore>
 
-    @State private var isTransQuestionListView = false
-    @State private var tappedImage = Image("")
-
     public init(store: StoreOf<PartnerCardsStore>) {
         self.store = store
     }
@@ -40,21 +37,34 @@ public struct PartnerCardsView: View {
                             .font(.system(size: 12, weight: .regular, design: .rounded))
                             .padding(.bottom, 24)
 
-                        ForEach(0..<5) { i in
+                        // カードが11枚を想定して、値は決め打ち
+                        ForEach(0..<3) { i in
                             HStack(spacing: 12) {
-                                ForEach(0..<3) { j in
-                                    partnerCard(cardImage: viewStore.cardImages[i * 3 + j], partner: viewStore.partnerInfos[i * 3 + j])
-                                        .onTapGesture {
-                                            tappedImage = viewStore.cardImages[i * 3 + j]
-                                            isTransQuestionListView = true
-                                        }
+                                // 最終行の時
+                                if i == (3 - 1) {
+                                    ForEach(0..<11 % 3) { j in
+                                        partnerCard(cardImage: viewStore.cardImages[i * 3 + j], partner: viewStore.partnerInfos[i * 3 + j])
+                                            .onTapGesture {
+                                                viewStore.send(.tappedPartnerCard(viewStore.cardImages[i * 3 + j]))
+                                            }
+                                    }
+                                } else {
+                                    ForEach(0..<3) { j in
+                                        partnerCard(cardImage: viewStore.cardImages[i * 3 + j], partner: viewStore.partnerInfos[i * 3 + j])
+                                            .onTapGesture {
+                                                viewStore.send(.tappedPartnerCard(viewStore.cardImages[i * 3 + j]))
+                                            }
+                                            .onAppear {
+                                                print(i * 3 + j)
+                                            }
+                                    }
                                 }
                             }
                         }
 
                         NavigationLink(
-                            destination: QuestionListView(cardImage: tappedImage),
-                            isActive: $isTransQuestionListView
+                            destination: QuestionListView(cardImage: viewStore.tappedImage),
+                            isActive: viewStore.$isTransQuestionListView
                         ) {
                             EmptyView()
                         }
