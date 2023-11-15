@@ -9,33 +9,35 @@ import Error
 import Foundation
 
 public protocol HTTPClientProtocol {
-    func request<D: Decodable>(apiRequest: APIRequest) async throws -> Result<D, HTTPClientError>
+    func request<D: Decodable>(apiRequest: any APIRequest) async throws -> Result<D, HTTPClientError>
 }
 
 public class HTTPClient: HTTPClientProtocol {
-    private static let decoder: JSONDecoder {
+    private static var decoder: JSONDecoder {
         let jsonDecoder = JSONDecoder()
         return jsonDecoder
     }
 
-    func request<D: Decodable>(apiRequest: APIRequest) async throws -> Result<D, HTTPClientError> {
+    public func request<D: Decodable>(apiRequest: any APIRequest) async throws -> Result<D, HTTPClientError> {
         let request = apiRequest.buildURLRequest()
         let (data, response) = try await URLSession.shared.data(for: request)
-        guard let httpStatus = urlResponse as? HTTPURLResponse else {
-            throw HTTPClientError.responseError
+        guard let httpStatus = response as? HTTPURLResponse else {
+            return .failure(.responseError)
         }
 
         switch httpStatus.statusCode {
         case 200..<300:
             do {
-                return try decoder.decode(D.self, from: data)
+                let decodedData = try HTTPClient.decoder.decode(D.self, from: data)
+                return .success(decodedData)
             } catch {
-                throw HTTPClientError.decodeError
+                return .failure(.decodeError)
             }
         case 400..<600:
-            errorHandling(statusCode: httpStatus.statusCode)
+            let error = errorHandling(statusCode: httpStatus.statusCode)
+            return .failure(error)
         default:
-            throw HTTPClientError.unknownError
+            return .failure(.unknownError)
         }
     }
 }
@@ -44,40 +46,42 @@ public class HTTPClient: HTTPClientProtocol {
 
 extension HTTPClient {
     /// 400, 500番台のエラーハンドリング
-    public func errorHandling(statusCode: Int) throws {
+    public func errorHandling(statusCode: Int) -> HTTPClientError {
         switch statusCode {
         // 4xx クライアントエラー
         case 400:
-            throw HTTPClientError.badRequest
+            return .badRequest
         case 401:
-            throw HTTPClientError.unauthorized
+            return .unauthorized
         case 403:
-            throw HTTPClientError.forbidden
+            return .forbidden
         case 404:
-            throw HTTPClientError.notFound
+            return .notFound
         case 405:
-            throw HTTPClientError.methodNotAllowed
+            return .methodNotAllowed
         case 408:
-            throw HTTPClientError.requestTimeout
+            return .requestTimeout
         case 409:
-            throw HTTPClientError.conflict
+            return .conflict
         case 429:
-            throw HTTPClientError.tooManyRequests
+            return .tooManyRequests
         case 400...499:
-            throw HTTPClientError.clientError(statusCode)
+            return .clientError(statusCode)
         // 5xx サーバーエラー
         case 500:
-            throw HTTPClientError.internalServerError
+            return .internalServerError
         case 501:
-            throw HTTPClientError.notImplemented
+            return .notImplemented
         case 502:
-            throw HTTPClientError.badGateway
+            return .badGateway
         case 503:
-            throw HTTPClientError.serviceUnavailable
+            return .serviceUnavailable
         case 504:
-            throw HTTPClientError.gatewayTimeout
+            return .gatewayTimeout
         case 500...599:
-            throw HTTPClientError.serverError(statusCode)
+            return .serverError(statusCode)
+        default:
+            return .unknownError
         }
     }
 }

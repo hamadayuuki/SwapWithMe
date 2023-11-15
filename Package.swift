@@ -139,7 +139,10 @@ let dataTargets: [Target] = [
         fireStoreSwift,
         fireStorage,
         dependencies
-    ])
+    ]),
+    .data(name: "API", dependencies: [
+        "Error"
+    ]),
 ]
 
 let featureTestTargets: [Target] = [

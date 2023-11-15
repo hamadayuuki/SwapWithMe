@@ -23,7 +23,7 @@ public final class GithubAPIRequest {
         public typealias Response = SearchRepositoryResponse
 
         public var baseURL: URL {
-            guard let baseURL = URL(string: "https://api.github.com") else { assert("error baseURL") }
+            guard let baseURL = URL(string: "https://api.github.com") else { fatalError("error baseURL") }
             return baseURL
         }
 
@@ -35,8 +35,12 @@ public final class GithubAPIRequest {
             return .get
         }
 
+        public var body: Encodable? {
+            return nil
+        }
+
         public var urlQueryItem: URLQueryItem {
-            return [URLQueryItem(name: "q", value: searchWord)]
+            return URLQueryItem(name: "q", value: searchWord)
         }
     }
 }
