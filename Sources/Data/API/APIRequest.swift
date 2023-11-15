@@ -11,6 +11,7 @@ public protocol APIRequest {
     associatedtype Response: Decodable
 
     // 外部から変更されることはないため getter
+    var baseURL: String { get }
     var path: String { get }
     var method: HTTPMethod { get }
     var urlQueryItem: URLQueryItem { get }  // https://〜?hoge=1&hage=2 のクエリ
@@ -20,7 +21,7 @@ public protocol APIRequest {
 // MARK: - extension
 
 extension APIRequest {
-    public func buildURLRequest(baseURL: URL) -> URLRequest {
+    public func buildURLRequest() -> URLRequest {
         let url = baseURL.appendingPathComponent(path)
         var components = URLComponents(url: url)
 

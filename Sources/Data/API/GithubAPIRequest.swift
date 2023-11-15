@@ -13,7 +13,6 @@ public struct SearchRepositoryResponse: Decodable {
 }
 
 public final class GithubAPIRequest {
-    private let baseURL = URL(string: "https://api.github.com")!
 
     // MARK: - SearchRepository
 
@@ -22,6 +21,11 @@ public final class GithubAPIRequest {
         let searchWord: String
 
         public typealias Response = SearchRepositoryResponse
+
+        public var baseURL: URL {
+            guard let baseURL = URL(string: "https://api.github.com") else { assert("error baseURL") }
+            return baseURL
+        }
 
         public var path: String {
             return "/search/repositories"
