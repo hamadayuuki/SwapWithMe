@@ -13,12 +13,28 @@ public protocol APIRequest {
     // 外部から変更されることはないため getter
     var path: String { get }
     var method: HTTPMethod { get }
-    var urlQueryItem: URLQueryItem { get }   // https://〜?hoge=1&hage=2 のクエリ
+    var urlQueryItem: URLQueryItem { get }  // https://〜?hoge=1&hage=2 のクエリ
     var body: Encodable? { get }
 }
 
 // MARK: - extension
 
-public extension APIRequest {
+extension APIRequest {
+    public func buildURLRequest(baseURL: URL) -> URLRequest {
+        let url = baseURL.appendingPathComponent(path)
+        var components = URLComponents(url: url)
 
+        switch method {
+        case .get:
+            components.queryItems = urlQueryItem
+        case .post:
+            // TODO: header や body にPOST時に必要なデータを追加
+            break
+        }
+
+        var urlRequest = URLRequest(url: url)
+        urlRequest.url = components.url
+        urlRequest.httpMethod = method.rawValue
+        return urlRequest
+    }
 }
