@@ -54,6 +54,11 @@ extension Target {
     static func featureTest(name: String, dependencies: [TargetDependency], resources: [Resource]? = nil, plugins: [Target.PluginUsage]? = nil) -> Target {
         .testTarget(name: name, dependencies: dependencies, path: "Tests/Feature/\(name)", resources: resources, plugins: plugins)
     }
+
+    // TODO: - test に統合
+    static func dataTest(name: String, dependencies: [TargetDependency], resources: [Resource]? = nil, plugins: [Target.PluginUsage]? = nil) -> Target {
+        .testTarget(name: name, dependencies: dependencies, path: "Tests/Data/\(name)", resources: resources, plugins: plugins)
+    }
 }
 
 // MARK: Feature
@@ -154,9 +159,17 @@ let featureTestTargets: [Target] = [
         ])
 ]
 
+let dataTestTargets: [Target] = [
+    .dataTest(
+        name: "API",
+        dependencies: [
+            "Error"
+        ])
+]
+
 // MARK: - Package
 
-let allTargets = coreTargets + featureTargets + entityTargets + dataTargets + featureTestTargets
+let allTargets = coreTargets + featureTargets + entityTargets + dataTargets + featureTestTargets + dataTestTargets
 
 let package = Package(
     name: "SwapWithMe",
