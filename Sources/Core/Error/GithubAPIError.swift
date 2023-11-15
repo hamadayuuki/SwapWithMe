@@ -27,17 +27,17 @@ extension GithubAPIError {
     /// GithubAPIのレスポンスを想定
     static public var stubJSON: String {
         return """
-        {
-            "message": "Validation Failed",
-            "errors": [
-                {
-                    "resource": "Search",
-                    "field": "q",
-                    "code": "missing",
-                }
-            ]
+            {
+                "message": "Validation Failed",
+                "errors": [
+                    {
+                        "resource": "Search",
+                        "field": "q",
+                        "code": "missing",
+                    }
+                ]
 
-        }
-        """
+            }
+            """
     }
 }
