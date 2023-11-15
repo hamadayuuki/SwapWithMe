@@ -164,7 +164,7 @@ let featureTestTargets: [Target] = [
 
 let dataTestTargets: [Target] = [
     .dataTest(
-        name: "API",
+        name: "APITest",
         dependencies: [
             "Error"
         ])
