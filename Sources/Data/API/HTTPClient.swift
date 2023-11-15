@@ -15,9 +15,15 @@ public protocol HTTPClientProtocol {
 public class HTTPClient: HTTPClientProtocol {
     private static var decoder: JSONDecoder {
         let jsonDecoder = JSONDecoder()
+        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase  // total_count -> totalCount
         return jsonDecoder
     }
 
+    public init() {}
+
+    ///Task {
+    ///    let response: Result<SearchRepositoryResponse, HTTPClientError> = try await httpClient.request(apiRequest: apiRequest)
+    ///}
     public func request<D: Decodable>(apiRequest: any APIRequest) async throws -> Result<D, HTTPClientError> {
         let request = apiRequest.buildURLRequest()
         let (data, response) = try await URLSession.shared.data(for: request)

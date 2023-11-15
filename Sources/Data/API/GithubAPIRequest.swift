@@ -20,6 +20,10 @@ public final class GithubAPIRequest {
     public struct SearchRepository: APIRequest {
         let searchWord: String
 
+        public init(searchWord: String) {
+            self.searchWord = searchWord
+        }
+
         public typealias Response = SearchRepositoryResponse
 
         public var baseURL: URL {
