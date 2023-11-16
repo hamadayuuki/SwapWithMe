@@ -26,6 +26,13 @@
         "identifier" : "SearchTest",
         "name" : "SearchTest"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..",
+        "identifier" : "APITest",
+        "name" : "APITest"
+      }
     }
   ],
   "version" : 1
