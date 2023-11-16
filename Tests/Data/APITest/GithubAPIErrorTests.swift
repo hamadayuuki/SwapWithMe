@@ -17,7 +17,7 @@ final class GithubAPIErrorTests: XCTestCase {
 
         XCTAssertEqual(error.message, "Validation Failed")
         XCTAssertEqual(firstError?.resource, "Search")
-        XCTAssertEqual(firstError?.resource, "q")
-        XCTAssertEqual(firstError?.resource, "missing")
+        XCTAssertEqual(firstError?.field, "q")
+        XCTAssertEqual(firstError?.code, "missing")
     }
 }
