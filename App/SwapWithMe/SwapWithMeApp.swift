@@ -20,7 +20,7 @@ struct SwapWithMeApp: App {
     var body: some Scene {
         WindowGroup {
             FirstView()
-                .environment(\.viewBuilding, AppViewBuilding())   // DIを使い モジュールの画面遷移を上書き(モジュール内から画面遷移できるようになる)
+                .environment(\.viewBuilding, AppViewBuilding())  // DIを使い モジュールの画面遷移を上書き(モジュール内から画面遷移できるようになる)
             //            AppTabView()
             //            NavigationView {
             //                UserBasicInfoView(

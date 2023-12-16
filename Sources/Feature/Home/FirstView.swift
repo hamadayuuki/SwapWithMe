@@ -5,6 +5,7 @@
 //  Created by 濵田　悠樹 on 2023/11/23.
 //
 
+import Routing
 import SwiftUI
 
 public struct FirstView: View {

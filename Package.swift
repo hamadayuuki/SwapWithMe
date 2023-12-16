@@ -67,7 +67,8 @@ let coreTargets: [Target] = [
     .core(name: "ViewComponents", dependencies: [
         cropViewController
     ]),
-    .core(name: "Error", dependencies: [])
+    .core(name: "Error", dependencies: []),
+    .core(name: "Routing", dependencies: [])
 ]
 
 let featureTargets: [Target] = [
@@ -93,6 +94,7 @@ let featureTargets: [Target] = [
         "ViewComponents",
         "QuestionList",
         "User",
+        "Routing",
         readabilityModifier,
         popupView,
         nuke,
