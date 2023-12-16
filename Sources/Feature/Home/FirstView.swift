@@ -8,16 +8,16 @@
 import SwiftUI
 
 public struct FirstView: View {
-    @Environment(\.appViewBuilding) var appViewBuilding
+    @Environment(\.viewBuilding) var viewBuilding
 
     public init() {}
 
     public var body: some View {
         NavigationView {
             NavigationLink {
-                //appViewBuilding.build(viewType: .firstView(id: 0))
+                AnyView(viewBuilding.build(viewType: .secondView))
             } label: {
-                Text("FirstView(EmptyView())")
+                Text("to Second View")
             }
         }
     }

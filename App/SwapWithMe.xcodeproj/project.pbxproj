@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D412A5362B1C4317006D64C2 /* HogeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D412A5352B1C4317006D64C2 /* HogeView.swift */; };
-		D4236C762B18E45500CC6599 /* ViewBuilding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4236C752B18E45500CC6599 /* ViewBuilding.swift */; };
+		D4236C762B18E45500CC6599 /* AppViewBuilding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4236C752B18E45500CC6599 /* AppViewBuilding.swift */; };
 		D431A8A02A4848EE00109710 /* SwapWithMeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D431A89F2A4848EE00109710 /* SwapWithMeApp.swift */; };
 		D431A8A42A4848EF00109710 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D431A8A32A4848EF00109710 /* Assets.xcassets */; };
 		D431A8A72A4848EF00109710 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D431A8A62A4848EF00109710 /* Preview Assets.xcassets */; };
@@ -44,8 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D412A5352B1C4317006D64C2 /* HogeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HogeView.swift; sourceTree = "<group>"; };
-		D4236C752B18E45500CC6599 /* ViewBuilding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBuilding.swift; sourceTree = "<group>"; };
+		D4236C752B18E45500CC6599 /* AppViewBuilding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewBuilding.swift; sourceTree = "<group>"; };
 		D431A89C2A4848EE00109710 /* SwapWithMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwapWithMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D431A89F2A4848EE00109710 /* SwapWithMeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapWithMeApp.swift; sourceTree = "<group>"; };
 		D431A8A32A4848EF00109710 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -124,8 +122,7 @@
 				D45CA1412A59C53400C787D6 /* SwapWithMe.entitlements */,
 				D45CA1402A59C4E200C787D6 /* Info.plist */,
 				D431A89F2A4848EE00109710 /* SwapWithMeApp.swift */,
-				D412A5352B1C4317006D64C2 /* HogeView.swift */,
-				D4236C752B18E45500CC6599 /* ViewBuilding.swift */,
+				D4236C752B18E45500CC6599 /* AppViewBuilding.swift */,
 				D431A8A32A4848EF00109710 /* Assets.xcassets */,
 				D45CA13E2A597C3E00C787D6 /* GoogleService-Info.plist */,
 				D431A8A52A4848EF00109710 /* Preview Content */,
@@ -328,8 +325,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D412A5362B1C4317006D64C2 /* HogeView.swift in Sources */,
-				D4236C762B18E45500CC6599 /* ViewBuilding.swift in Sources */,
+				D4236C762B18E45500CC6599 /* AppViewBuilding.swift in Sources */,
 				D431A8A02A4848EE00109710 /* SwapWithMeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

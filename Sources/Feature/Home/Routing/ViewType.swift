@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// 画面遷移する際に使用する
+/// 画面遷移先の定義
 public enum ViewType {
     case firstView(id: Int)
     case secondView
