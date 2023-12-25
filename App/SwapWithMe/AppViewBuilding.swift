@@ -17,7 +17,7 @@ struct AppViewBuilding: ViewBuildingProtocol {
         case .firstView(let id):
             return AnyView(FirstView())
         case .secondView:
-            return AnyView(SwiftUIView())
+            return AnyView(SecondView())
         }
     }
 }
