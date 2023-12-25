@@ -17,12 +17,21 @@ public struct FirstView: View {
 
     public var body: some View {
         NavigationView {
-            NavigationLink {
-                //                AnyView(viewBuilding.build(viewType: .secondView))
-                secondView()
-            } label: {
-                Text("to Second View")
+            VStack(spacing: 24) {
+                Text("First View")
+                    .foregroundStyle(.white)
+                    .font(.system(size: 48, weight: .bold, design: .rounded))
+
+                NavigationLink {
+                    //                AnyView(viewBuilding.build(viewType: .secondView))
+                    secondView()
+                } label: {
+                    Text("to Second View")
+                        .foregroundStyle(.blue)
+                }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(.red.opacity(0.6))
         }
     }
 }

@@ -10,26 +10,26 @@ import SwiftUI
 
 public struct SecondView: View {
     @Dependency(\.viewBuildingClient.firstView) var firstView
-    @State private var showSheet = false
 
     public init() {}
 
     public var body: some View {
-        VStack(spacing: 24) {
-            NavigationLink {
-                firstView(0)
-            } label: {
-                Text("to First View")
-            }
+        NavigationView {
+            VStack(spacing: 24) {
+                Text("Second View")
+                    .foregroundStyle(.white)
+                    .font(.system(size: 48, weight: .bold, design: .rounded))
 
-            Button(action: {
-                showSheet.toggle()
-            }) {
-                Text("show Sheet")
+                NavigationLink {
+                    //                AnyView(viewBuilding.build(viewType: .secondView))
+                    firstView(0)
+                } label: {
+                    Text("to First View")
+                        .foregroundStyle(.red)
+                }
             }
-        }
-        .sheet(isPresented: $showSheet) {
-            firstView(0)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(.blue.opacity(0.6))
         }
     }
 }
