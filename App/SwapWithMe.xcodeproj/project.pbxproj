@@ -16,8 +16,8 @@
 		D431A8BD2A4848EF00109710 /* SwapWithMeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D431A8BC2A4848EF00109710 /* SwapWithMeUITestsLaunchTests.swift */; };
 		D4433AA92A6F8F3A000FA106 /* Home in Frameworks */ = {isa = PBXBuildFile; productRef = D4433AA82A6F8F3A000FA106 /* Home */; };
 		D45CA13D2A5929EE00C787D6 /* SignUp in Frameworks */ = {isa = PBXBuildFile; productRef = D45CA13C2A5929EE00C787D6 /* SignUp */; };
-		D45CA13F2A597C3E00C787D6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D45CA13E2A597C3E00C787D6 /* GoogleService-Info.plist */; };
 		D46BF3472B382732003EEDC3 /* ViewBuildingClient+Impl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46BF3462B382732003EEDC3 /* ViewBuildingClient+Impl.swift */; };
+		D46BF34C2B39A7A0003EEDC3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D46BF34B2B39A7A0003EEDC3 /* GoogleService-Info.plist */; };
 		D491F86A2B2DA9380017FE80 /* Routing in Frameworks */ = {isa = PBXBuildFile; productRef = D491F8692B2DA9380017FE80 /* Routing */; };
 		D4A1F78D2A5EF80B0053DB95 /* ViewComponents in Frameworks */ = {isa = PBXBuildFile; productRef = D4A1F78C2A5EF80B0053DB95 /* ViewComponents */; };
 		D4AAF5D12A7F857F00DD3D55 /* Tab in Frameworks */ = {isa = PBXBuildFile; productRef = D4AAF5D02A7F857F00DD3D55 /* Tab */; };
@@ -55,10 +55,10 @@
 		D431A8B62A4848EF00109710 /* SwapWithMeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwapWithMeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D431A8BA2A4848EF00109710 /* SwapWithMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapWithMeUITests.swift; sourceTree = "<group>"; };
 		D431A8BC2A4848EF00109710 /* SwapWithMeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapWithMeUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		D45CA13E2A597C3E00C787D6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D45CA1402A59C4E200C787D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D45CA1412A59C53400C787D6 /* SwapWithMe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwapWithMe.entitlements; sourceTree = "<group>"; };
 		D46BF3462B382732003EEDC3 /* ViewBuildingClient+Impl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewBuildingClient+Impl.swift"; sourceTree = "<group>"; };
+		D46BF34B2B39A7A0003EEDC3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Secret/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D4BB2BE42A543271007C9ADB /* SwapWithMe */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwapWithMe; path = ..; sourceTree = "<group>"; };
 		D4D019DD2A99E51E00BCFFBA /* SwapWithMe.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SwapWithMe.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,7 +129,7 @@
 				D4236C752B18E45500CC6599 /* AppViewBuilding.swift */,
 				D46BF3462B382732003EEDC3 /* ViewBuildingClient+Impl.swift */,
 				D431A8A32A4848EF00109710 /* Assets.xcassets */,
-				D45CA13E2A597C3E00C787D6 /* GoogleService-Info.plist */,
+				D46BF34B2B39A7A0003EEDC3 /* GoogleService-Info.plist */,
 				D431A8A52A4848EF00109710 /* Preview Content */,
 			);
 			path = SwapWithMe;
@@ -284,8 +284,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D431A8A72A4848EF00109710 /* Preview Assets.xcassets in Resources */,
+				D46BF34C2B39A7A0003EEDC3 /* GoogleService-Info.plist in Resources */,
 				D431A8A42A4848EF00109710 /* Assets.xcassets in Resources */,
-				D45CA13F2A597C3E00C787D6 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
