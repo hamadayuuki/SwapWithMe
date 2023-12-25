@@ -9,7 +9,5 @@ import SwiftUI
 
 // Module へ MainAppの画面遷移実装 を差し込むために定義
 public protocol ViewBuildingProtocol {
-    associatedtype V: View
-
-    func build(viewType: ViewType) -> V
+    func build(viewType: ViewType) -> AnyView
 }
