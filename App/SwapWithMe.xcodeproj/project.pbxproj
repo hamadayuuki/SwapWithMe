@@ -123,11 +123,10 @@
 		D431A89E2A4848EE00109710 /* SwapWithMe */ = {
 			isa = PBXGroup;
 			children = (
+				D46BF34D2B39A82F003EEDC3 /* Routing */,
 				D45CA1412A59C53400C787D6 /* SwapWithMe.entitlements */,
 				D45CA1402A59C4E200C787D6 /* Info.plist */,
 				D431A89F2A4848EE00109710 /* SwapWithMeApp.swift */,
-				D4236C752B18E45500CC6599 /* AppViewBuilding.swift */,
-				D46BF3462B382732003EEDC3 /* ViewBuildingClient+Impl.swift */,
 				D431A8A32A4848EF00109710 /* Assets.xcassets */,
 				D46BF34B2B39A7A0003EEDC3 /* GoogleService-Info.plist */,
 				D431A8A52A4848EF00109710 /* Preview Content */,
@@ -165,6 +164,31 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D46BF34D2B39A82F003EEDC3 /* Routing */ = {
+			isa = PBXGroup;
+			children = (
+				D46BF34F2B39A844003EEDC3 /* Dependencies */,
+				D46BF34E2B39A839003EEDC3 /* Environment */,
+			);
+			path = Routing;
+			sourceTree = "<group>";
+		};
+		D46BF34E2B39A839003EEDC3 /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				D4236C752B18E45500CC6599 /* AppViewBuilding.swift */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
+		D46BF34F2B39A844003EEDC3 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				D46BF3462B382732003EEDC3 /* ViewBuildingClient+Impl.swift */,
+			);
+			path = Dependencies;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
