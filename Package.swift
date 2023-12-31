@@ -68,7 +68,9 @@ let coreTargets: [Target] = [
         cropViewController
     ]),
     .core(name: "Error", dependencies: []),
-    .core(name: "Routing", dependencies: [])
+    .core(name: "Routing", dependencies: [
+        dependencies,
+    ])
 ]
 
 let featureTargets: [Target] = [
