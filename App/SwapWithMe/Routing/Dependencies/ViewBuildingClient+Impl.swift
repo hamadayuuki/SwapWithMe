@@ -7,6 +7,7 @@
 
 import Dependencies
 import Home
+import QuestionList
 import Routing
 import SwiftUI
 
@@ -18,6 +19,9 @@ extension ViewBuildingClient: DependencyKey {
             },
             secondView: {
                 return AnyView(SecondView())
+            },
+            questionListView: { cardImage in
+                return AnyView(QuestionListView(cardImage: cardImage))
             }
         )
     }

@@ -13,12 +13,15 @@ TODO: カードに載せる情報を増やす
  */
 
 import ComposableArchitecture
-import QuestionList
+import Dependencies
 import ReadabilityModifier
+import Routing
 import SwiftUI
 import User
 
 public struct PartnerCardsView: View {
+    @Dependency(\.viewBuildingClient.questionListView) var questionListView
+
     let store: StoreOf<PartnerCardsStore>
 
     public init(store: StoreOf<PartnerCardsStore>) {
@@ -54,7 +57,7 @@ public struct PartnerCardsView: View {
                         }
 
                         NavigationLink(
-                            destination: QuestionListView(cardImage: viewStore.tappedImage),
+                            destination: questionListView(viewStore.tappedImage),
                             isActive: viewStore.$isTransQuestionListView
                         ) {
                             EmptyView()

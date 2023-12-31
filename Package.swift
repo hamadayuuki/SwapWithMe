@@ -94,7 +94,6 @@ let featureTargets: [Target] = [
     ]),
     .feature(name: "Home", dependencies: [
         "ViewComponents",
-        "QuestionList",
         "User",
         "Routing",
         readabilityModifier,
@@ -108,11 +107,12 @@ let featureTargets: [Target] = [
     ]),
     .feature(name: "PartnerCards", dependencies: [
         "ViewComponents",
-        "QuestionList",
         "User",
+        "Routing",
         readabilityModifier,
         popupView,
-        composableArchitecture
+        composableArchitecture,
+        dependencies
     ]),
     .feature(name: "Tab", dependencies: [
         "PartnerCards",

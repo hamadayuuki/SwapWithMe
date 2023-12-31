@@ -19,9 +19,9 @@ struct SwapWithMeApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
-            FirstView()
-                .environment(\.viewBuilding, AppViewBuilding())  // DIを使い モジュールの画面遷移を上書き(モジュール内から画面遷移できるようになる)
-            //            AppTabView()
+            //            FirstView()
+            //                .environment(\.viewBuilding, AppViewBuilding())  // DIを使い モジュールの画面遷移を上書き(モジュール内から画面遷移できるようになる)
+            AppTabView()
             //            NavigationView {
             //                UserBasicInfoView(
             //                    store: Store(initialState: UserBasicInfoStore.State()) {
