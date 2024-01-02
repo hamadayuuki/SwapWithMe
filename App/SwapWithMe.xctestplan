@@ -1,0 +1,39 @@
+{
+  "configurations" : [
+    {
+      "id" : "DC52414B-08D5-4466-B475-E22D0F823703",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:..",
+        "identifier" : "UserInfoTest",
+        "name" : "UserInfoTest"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "SearchTest",
+        "name" : "SearchTest"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..",
+        "identifier" : "APITest",
+        "name" : "APITest"
+      }
+    }
+  ],
+  "version" : 1
+}
