@@ -10,6 +10,7 @@ import PartnerCards
 import PartnerCardsStore
 import Routing
 import Search
+import SearchStore
 import SwiftUI
 
 private enum Tab {
@@ -24,26 +25,25 @@ public struct AppTabView: View {
     @State private var partnerCardsStore: StoreOf<PartnerCardsStore> = Store(initialState: PartnerCardsStore.State()) {
         PartnerCardsStore()
     }
+    @State private var partnerSearchStore: StoreOf<PartnerSearchStore> = Store(initialState: PartnerSearchStore.State()) {
+        PartnerSearchStore()
+    }
 
     public init() {}
 
     public var body: some View {
         TabView(selection: $selection) {
             partnerCardsView(partnerCardsStore)
-            .tabItem {
-                Label("ホーム", systemImage: selection == .home ? "house.fill" : "house")
-            }
-            .tag(Tab.home)
-
-            PartnerSearchView(
-                store: Store(initialState: PartnerSearchStore.State()) {
-                    PartnerSearchStore()
+                .tabItem {
+                    Label("ホーム", systemImage: selection == .home ? "house.fill" : "house")
                 }
-            )
-            .tabItem {
-                Label("探す", systemImage: "magnifyingglass")
-            }
-            .tag(Tab.search)
+                .tag(Tab.home)
+
+            PartnerSearchView(store: partnerSearchStore)
+                .tabItem {
+                    Label("探す", systemImage: "magnifyingglass")
+                }
+                .tag(Tab.search)
         }
         .accentColor(.green)
     }

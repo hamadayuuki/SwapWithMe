@@ -123,7 +123,9 @@ let featureTargets: [Target] = [
     ]),
     .feature(name: "Tab", dependencies: [
         "PartnerCards",
+        "PartnerCardsStore",
         "Search",
+        "SearchStore",
         "Routing",
         readabilityModifier,
         popupView,
@@ -134,9 +136,15 @@ let featureTargets: [Target] = [
         "Request",
         "User",
         "ViewComponents",
+        "SearchStore",
         readabilityModifier,
         composableArchitecture,
         dependencies
+    ]),
+    .feature(name: "SearchStore", dependencies: [
+        "Request",
+        "User",
+        composableArchitecture
     ])
 ]
 

@@ -11,13 +11,13 @@ import User
 
 public struct PartnerSearchStore: Reducer {
     public struct State: Equatable {
-        var users: [User] = []
-        var myInfo: User = .init(iconURL: nil, name: "", age: 0, sex: .man, affiliation: .juniorHigh, animal: .dog, activity: .indoor, personality: .shy, description: "")
-        var partner: User = .init(iconURL: nil, name: "", age: 0, sex: .man, affiliation: .juniorHigh, animal: .dog, activity: .indoor, personality: .shy, description: "")
-        var isTransHomeView = false
-        var showsError = false
-        @BindingState var searchText = ""
-        @PresentationState var destination: Destination.State?
+        public var users: [User] = []
+        public var myInfo: User = .init(iconURL: nil, name: "", age: 0, sex: .man, affiliation: .juniorHigh, animal: .dog, activity: .indoor, personality: .shy, description: "")
+        public var partner: User = .init(iconURL: nil, name: "", age: 0, sex: .man, affiliation: .juniorHigh, animal: .dog, activity: .indoor, personality: .shy, description: "")
+        public var isTransHomeView = false
+        public var showsError = false
+        @BindingState public var searchText = ""
+        @PresentationState public var destination: Destination.State?
 
         public init() {}
     }

@@ -6,6 +6,7 @@
 //
 
 import ComposableArchitecture
+import SearchStore
 import SwiftUI
 
 // MARK: - View
@@ -43,39 +44,5 @@ struct RepositoryView_Previews: PreviewProvider {
                 RepositoryStore()
             }
         )
-    }
-}
-
-// MARK: - Store
-
-public struct RepositoryStore: Reducer {
-    public init() {}
-
-    // MARK: - State
-
-    public struct State: Equatable {
-        public init() {}
-
-        var ripositories: [String] = [""]
-    }
-
-    // MARK: - Action
-
-    public enum Action: Equatable {
-        case onAppear
-    }
-
-    // MARK: - Reducer
-
-    public var body: some ReducerOf<Self> {
-        Reduce { state, action in
-            // 1 : Action に応じて
-            switch action {
-            case .onAppear:
-                // 2 : State を変更する
-                state.ripositories = ["repository1"]
-                return .none
-            }
-        }
     }
 }

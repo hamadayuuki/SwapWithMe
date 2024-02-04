@@ -10,6 +10,7 @@ import Dependencies
 import ReadabilityModifier
 import Request
 import Routing
+import SearchStore
 import SwiftUI
 import User
 import ViewComponents
@@ -39,7 +40,7 @@ public struct PartnerSearchView: View {
                             viewStore.send(.search(viewStore.searchText))
                         }
                     }
-
+                    
                     NavigationLink(
                         destination: homeView(viewStore.myInfo, viewStore.partner),
                         isActive: viewStore.binding(
