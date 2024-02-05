@@ -8,6 +8,7 @@
 import ComposableArchitecture
 import PopupView
 import ReadabilityModifier
+import SignUpStore
 import SwiftUI
 
 public struct SelectSignUpMethodView: View {
