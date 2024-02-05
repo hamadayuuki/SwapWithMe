@@ -123,10 +123,12 @@ let featureTargets: [Target] = [
         "PartnerCards",
         "PartnerCardsStore",
         "Search",
+        "SearchStore",
         readabilityModifier,
         popupView,
     ]),
     .feature(name: "Search", dependencies: [
+        "SearchStore",
         "Home",
         "Request",
         "User",
@@ -138,6 +140,11 @@ let featureTargets: [Target] = [
 
 let featureStoreTargets: [Target] = [
     .featureStore(name: "PartnerCardsStore", dependencies: [
+        "User",
+        composableArchitecture,
+    ]),
+    .featureStore(name: "SearchStore", dependencies: [
+        "Request",
         "User",
         composableArchitecture,
     ]),
