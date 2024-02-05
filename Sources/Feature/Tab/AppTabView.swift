@@ -7,6 +7,7 @@
 
 import ComposableArchitecture
 import PartnerCards
+import PartnerCardsStore
 import Search
 import SwiftUI
 

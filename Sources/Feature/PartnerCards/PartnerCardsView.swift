@@ -14,6 +14,7 @@ TODO: カードに載せる情報を増やす
 
 import ComposableArchitecture
 import Dependencies
+import PartnerCardsStore
 import ReadabilityModifier
 import Routing
 import SwiftUI

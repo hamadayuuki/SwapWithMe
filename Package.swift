@@ -110,6 +110,7 @@ let featureTargets: [Target] = [
         popupView,
     ]),
     .feature(name: "PartnerCards", dependencies: [
+        "PartnerCardsStore",
         "ViewComponents",
         "User",
         "Routing",
@@ -120,6 +121,7 @@ let featureTargets: [Target] = [
     ]),
     .feature(name: "Tab", dependencies: [
         "PartnerCards",
+        "PartnerCardsStore",
         "Search",
         readabilityModifier,
         popupView,
@@ -132,6 +134,13 @@ let featureTargets: [Target] = [
         readabilityModifier,
         composableArchitecture
     ])
+]
+
+let featureStoreTargets: [Target] = [
+    .featureStore(name: "PartnerCardsStore", dependencies: [
+        "User",
+        composableArchitecture,
+    ]),
 ]
 
 let entityTargets: [Target] = [
@@ -182,7 +191,7 @@ let dataTestTargets: [Target] = [
 
 // MARK: - Package
 
-let allTargets = coreTargets + featureTargets + entityTargets + dataTargets + featureTestTargets + dataTestTargets
+let allTargets = coreTargets + featureTargets + featureStoreTargets + entityTargets + dataTargets + featureTestTargets + dataTestTargets
 
 let package = Package(
     name: "SwapWithMe",
