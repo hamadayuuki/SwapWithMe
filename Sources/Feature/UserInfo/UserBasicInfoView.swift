@@ -9,6 +9,7 @@ import ComposableArchitecture
 import ReadabilityModifier
 import SwiftUI
 import User
+import UserInfoStore
 
 public struct UserBasicInfoView: View {
     var store: StoreOf<UserBasicInfoStore>

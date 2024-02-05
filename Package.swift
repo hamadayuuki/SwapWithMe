@@ -89,6 +89,7 @@ let featureTargets: [Target] = [
         composableArchitecture
     ]),
     .feature(name: "UserInfo", dependencies: [
+        "UserInfoStore",
         "ViewComponents",
         "User",
         "Tab",
@@ -150,6 +151,11 @@ let featureStoreTargets: [Target] = [
     ]),
     .featureStore(name: "SignUpStore", dependencies: [
         fireAuth,
+        composableArchitecture,
+    ]),
+    .featureStore(name: "UserInfoStore", dependencies: [
+        "Request",
+        "User",
         composableArchitecture,
     ]),
 ]

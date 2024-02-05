@@ -15,8 +15,8 @@ public struct UserBasicInfoStore: Reducer {
     public struct State: Equatable {
         public init() {}
 
-        var user: User? = nil
-        var tappedTransButton = false
+        public var user: User? = nil
+        public var tappedTransButton = false
     }
 
     public enum Action: Equatable {

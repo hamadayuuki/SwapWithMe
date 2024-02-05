@@ -16,8 +16,8 @@ public struct SelectUserCardImageStore: Reducer {
     public struct State: Equatable {
         public init() {}
 
-        var user: User? = nil
-        var isTransAppTabView = false
+        public var user: User? = nil
+        public var isTransAppTabView = false
     }
 
     public enum Action: Equatable {

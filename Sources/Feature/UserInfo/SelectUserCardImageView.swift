@@ -10,6 +10,7 @@ import ReadabilityModifier
 import SwiftUI
 import Tab
 import User
+import UserInfoStore
 import ViewComponents
 
 public struct SelectUserCardImageView: View {
