@@ -185,6 +185,7 @@ let featureTestTargets: [Target] = [
     .featureTest(
         name: "UserInfoTest",
         dependencies: [
+            "UserInfoStore",
             "UserInfo",
             "User",
             composableArchitecture
@@ -192,6 +193,7 @@ let featureTestTargets: [Target] = [
     .featureTest(
         name: "SearchTest",
         dependencies: [
+            "SearchStore",
             "Search",
             "User",
             composableArchitecture

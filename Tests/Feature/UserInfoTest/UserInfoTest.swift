@@ -16,6 +16,7 @@ Test Plan の作成
 import XCTest
 import ComposableArchitecture
 import User
+import UserInfoStore
 
 @testable import UserInfo
 
