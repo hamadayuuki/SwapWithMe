@@ -14,12 +14,6 @@ import SwiftUI
 extension ViewBuildingClient: DependencyKey {
     public static var liveValue: ViewBuildingClient {
         return .init(
-            firstView: { id in
-                return AnyView(FirstView())
-            },
-            secondView: {
-                return AnyView(SecondView())
-            },
             questionListView: { cardImage in
                 return AnyView(QuestionListView(cardImage: cardImage))
             }
