@@ -130,7 +130,6 @@ let featureTargets: [Target] = [
     .feature(name: "Search", dependencies: [
         "SearchStore",
         "Home",
-        "Request",
         "User",
         "ViewComponents",
         readabilityModifier,

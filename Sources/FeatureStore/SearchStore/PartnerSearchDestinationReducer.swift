@@ -6,8 +6,6 @@
 //
 
 import ComposableArchitecture
-import Home
-import User
 
 extension PartnerSearchStore {
     /// 画面遷移用
