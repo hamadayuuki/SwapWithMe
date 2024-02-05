@@ -6,7 +6,6 @@
 //
 
 import ComposableArchitecture
-import FirebaseAuth
 import PopupView
 import SignUpStore
 import SwiftUI
