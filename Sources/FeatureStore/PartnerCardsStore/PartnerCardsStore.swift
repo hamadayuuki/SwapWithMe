@@ -13,10 +13,10 @@ public struct PartnerCardsStore: Reducer {
     public struct State: Equatable {
         public init() {}
 
-        var cardImages: [Image] = []
-        var partnerInfos: [PartnerInfo] = []
-        var tappedImage: Image = Image("")
-        @BindingState var isTransQuestionListView = false
+        public var cardImages: [Image] = []
+        public var partnerInfos: [PartnerInfo] = []
+        public var tappedImage: Image = Image("")
+        @BindingState public var isTransQuestionListView = false
     }
 
     public enum Action: Equatable, BindableAction {

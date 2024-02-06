@@ -43,6 +43,10 @@ extension Target {
         .target(name: name, dependencies: dependencies, path: "Sources/Feature/\(name)", resources: resources, plugins: plugins)
     }
 
+    static func featureStore(name: String, dependencies: [TargetDependency], resources: [Resource]? = nil, plugins: [Target.PluginUsage]? = nil) -> Target {
+        .target(name: name, dependencies: dependencies, path: "Sources/FeatureStore/\(name)", resources: resources, plugins: plugins)
+    }
+
     static func entity(name: String, dependencies: [TargetDependency], resources: [Resource]? = nil, plugins: [Target.PluginUsage]? = nil) -> Target {
         .target(name: name, dependencies: dependencies, path: "Sources/Entity/\(name)", resources: resources, plugins: plugins)
     }
@@ -75,6 +79,7 @@ let coreTargets: [Target] = [
 
 let featureTargets: [Target] = [
     .feature(name: "SignUp", dependencies: [
+        "SignUpStore",
         "ViewComponents",
         "UserInfo",
         fireAuth,
@@ -84,6 +89,7 @@ let featureTargets: [Target] = [
         composableArchitecture
     ]),
     .feature(name: "UserInfo", dependencies: [
+        "UserInfoStore",
         "ViewComponents",
         "User",
         "Tab",
@@ -94,7 +100,6 @@ let featureTargets: [Target] = [
     ]),
     .feature(name: "Home", dependencies: [
         "ViewComponents",
-        "QuestionList",
         "User",
         "Routing",
         readabilityModifier,
@@ -107,27 +112,52 @@ let featureTargets: [Target] = [
         popupView,
     ]),
     .feature(name: "PartnerCards", dependencies: [
+        "PartnerCardsStore",
         "ViewComponents",
-        "QuestionList",
         "User",
+        "Routing",
         readabilityModifier,
         popupView,
-        composableArchitecture
+        composableArchitecture,
+        dependencies
     ]),
     .feature(name: "Tab", dependencies: [
         "PartnerCards",
+        "PartnerCardsStore",
         "Search",
+        "SearchStore",
         readabilityModifier,
         popupView,
     ]),
     .feature(name: "Search", dependencies: [
+        "SearchStore",
         "Home",
-        "Request",
         "User",
         "ViewComponents",
         readabilityModifier,
         composableArchitecture
     ])
+]
+
+let featureStoreTargets: [Target] = [
+    .featureStore(name: "PartnerCardsStore", dependencies: [
+        "User",
+        composableArchitecture,
+    ]),
+    .featureStore(name: "SearchStore", dependencies: [
+        "Request",
+        "User",
+        composableArchitecture,
+    ]),
+    .featureStore(name: "SignUpStore", dependencies: [
+        fireAuth,
+        composableArchitecture,
+    ]),
+    .featureStore(name: "UserInfoStore", dependencies: [
+        "Request",
+        "User",
+        composableArchitecture,
+    ]),
 ]
 
 let entityTargets: [Target] = [
@@ -155,6 +185,7 @@ let featureTestTargets: [Target] = [
     .featureTest(
         name: "UserInfoTest",
         dependencies: [
+            "UserInfoStore",
             "UserInfo",
             "User",
             composableArchitecture
@@ -162,6 +193,7 @@ let featureTestTargets: [Target] = [
     .featureTest(
         name: "SearchTest",
         dependencies: [
+            "SearchStore",
             "Search",
             "User",
             composableArchitecture
@@ -178,7 +210,7 @@ let dataTestTargets: [Target] = [
 
 // MARK: - Package
 
-let allTargets = coreTargets + featureTargets + entityTargets + dataTargets + featureTestTargets + dataTestTargets
+let allTargets = coreTargets + featureTargets + featureStoreTargets + entityTargets + dataTargets + featureTestTargets + dataTestTargets
 
 let package = Package(
     name: "SwapWithMe",

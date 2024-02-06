@@ -10,13 +10,11 @@ import FirebaseAuth
 import Foundation
 
 public struct PhoneNumberAuth: Reducer {
-    public init() {}
-
     public struct State: Equatable {
         public init() {}
 
-        var isShowConfirmVerificationCodeView = false
-        var isErrorBanner = false
+        public var isShowConfirmVerificationCodeView = false
+        public var isErrorBanner = false
     }
 
     public enum Action: Equatable {
@@ -66,4 +64,6 @@ public struct PhoneNumberAuth: Reducer {
             }
         }
     }
+
+    public init() {}
 }

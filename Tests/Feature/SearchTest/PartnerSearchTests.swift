@@ -8,6 +8,7 @@
 import XCTest
 import ComposableArchitecture
 import User
+import SearchStore
 
 @testable import Search
 

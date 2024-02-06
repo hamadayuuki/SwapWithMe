@@ -9,15 +9,17 @@ import Home
 import Routing
 import SwiftUI
 
+/// Deplicted
 /// 画面遷移の実装
 /// モジュールへDIする
 struct AppViewBuilding: ViewBuildingProtocol {
     func build(viewType: ViewType) -> AnyView {
-        switch viewType {
-        case .firstView(let id):
-            return AnyView(FirstView())
-        case .secondView:
-            return AnyView(SecondView())
-        }
+        //        switch viewType {
+        //        case .firstView(let id):
+        //            return AnyView(FirstView())
+        //        case .secondView:
+        //            return AnyView(SecondView())
+        //        }
+        return AnyView(EmptyView())
     }
 }

@@ -7,7 +7,9 @@
 
 import ComposableArchitecture
 import PartnerCards
+import PartnerCardsStore
 import Search
+import SearchStore
 import SwiftUI
 
 private enum Tab {

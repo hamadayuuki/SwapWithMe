@@ -11,9 +11,11 @@ import Foundation
 
 public struct ConfirmVerificationCode: Reducer {
     public struct State: Equatable {
-        var verificationID = ""
-        var isShowUserSettingView = false
-        var isErrorBanner = false
+        public var verificationID = ""
+        public var isShowUserSettingView = false
+        public var isErrorBanner = false
+
+        public init() {}
     }
 
     public enum Action: Equatable {
@@ -68,4 +70,6 @@ public struct ConfirmVerificationCode: Reducer {
             }
         }
     }
+
+    public init() {}
 }

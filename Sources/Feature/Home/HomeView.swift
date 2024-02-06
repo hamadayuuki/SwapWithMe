@@ -6,14 +6,17 @@
 //
 
 import AudioToolbox
+import Dependencies
 import PopupView
-import QuestionList
 import ReadabilityModifier
+import Routing
 import SwiftUI
 import User
 import ViewComponents
 
 public struct HomeView: View {
+    @Dependency(\.viewBuildingClient.questionListView) var questionListView
+
     @State var cardImage: Image = Image(uiImage: UIImage())
     @State private var translation: CGSize = .zero
     @State private var isFeedback = false
@@ -58,7 +61,7 @@ public struct HomeView: View {
             }
 
             NavigationLink(
-                destination: QuestionListView(cardImage: cardImage),
+                destination: questionListView(cardImage),
                 isActive: $isTransQuestionList
             ) {
                 EmptyView()
