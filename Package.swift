@@ -70,6 +70,7 @@ extension Target {
 
 let coreTargets: [Target] = [
     .core(name: "ViewComponents", dependencies: [
+        nuke,
         cropViewController
     ]),
     .core(name: "Error", dependencies: []),
@@ -193,7 +194,6 @@ let featureTestTargets: [Target] = [
         name: "UserInfoTest",
         dependencies: [
             "UserInfoStore",
-            "UserInfo",
             "User",
             composableArchitecture
         ]),
@@ -201,7 +201,6 @@ let featureTestTargets: [Target] = [
         name: "SearchTest",
         dependencies: [
             "SearchStore",
-            "Search",
             "User",
             composableArchitecture
         ])
