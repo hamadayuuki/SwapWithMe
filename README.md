@@ -176,6 +176,8 @@ Workflow は以下の通り。2つのScriptはそれぞれ `brew install mint`, 
 
 <img width = 200 src = "https://github.com/hamadayuuki/SwapWithMe/assets/55442055/be56e1c8-3d69-40bf-8cd6-b979b662b2eb">
 
+`追記(2024/2/7)` : 2つのScript後 に Scriptを追加 しています。追加したScriptは `defaults write com.apple.dt.Xcode IDESkipMacroFingerprintValidation -bool YES` で、追加理由は Macros をCI上で使用するためにCompiler Pluginの実行許可することです。
+
 
 ## 実行環境設定
 
