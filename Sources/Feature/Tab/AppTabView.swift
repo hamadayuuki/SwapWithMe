@@ -8,6 +8,7 @@
 import ComposableArchitecture
 import PartnerCards
 import PartnerCardsStore
+import Routing
 import Search
 import SearchStore
 import SwiftUI
@@ -18,21 +19,22 @@ private enum Tab {
 }
 
 public struct AppTabView: View {
+    @Dependency(\.viewBuildingClient.partnerCardsView) var partnerCardsView
+
     @State private var selection: Tab = .home
+    private var partnerCardsStore = Store(initialState: PartnerCardsStore.State()) {
+        PartnerCardsStore()
+    }
 
     public init() {}
 
     public var body: some View {
         TabView(selection: $selection) {
-            PartnerCardsView(
-                store: Store(initialState: PartnerCardsStore.State()) {
-                    PartnerCardsStore()
+            partnerCardsView(partnerCardsStore)
+                .tabItem {
+                    Label("ホーム", systemImage: selection == .home ? "house.fill" : "house")
                 }
-            )
-            .tabItem {
-                Label("ホーム", systemImage: selection == .home ? "house.fill" : "house")
-            }
-            .tag(Tab.home)
+                .tag(Tab.home)
 
             PartnerSearchView(
                 store: Store(initialState: PartnerSearchStore.State()) {

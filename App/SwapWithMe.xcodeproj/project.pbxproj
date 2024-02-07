@@ -21,6 +21,7 @@
 		D4A1F78D2A5EF80B0053DB95 /* ViewComponents in Frameworks */ = {isa = PBXBuildFile; productRef = D4A1F78C2A5EF80B0053DB95 /* ViewComponents */; };
 		D4AAF5D12A7F857F00DD3D55 /* Tab in Frameworks */ = {isa = PBXBuildFile; productRef = D4AAF5D02A7F857F00DD3D55 /* Tab */; };
 		D4AAF5D32A7F99E500DD3D55 /* Search in Frameworks */ = {isa = PBXBuildFile; productRef = D4AAF5D22A7F99E500DD3D55 /* Search */; };
+		D4AB35F52B735D030029491F /* PartnerCardsStore in Frameworks */ = {isa = PBXBuildFile; productRef = D4AB35F42B735D030029491F /* PartnerCardsStore */; };
 		D4B2E5712A78038800E5850E /* QuestionList in Frameworks */ = {isa = PBXBuildFile; productRef = D4B2E5702A78038800E5850E /* QuestionList */; };
 		D4B2E5732A7BF1C700E5850E /* PartnerCards in Frameworks */ = {isa = PBXBuildFile; productRef = D4B2E5722A7BF1C700E5850E /* PartnerCards */; };
 		D4B9FCD62B4145A200055F70 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D4B9FCD52B41443000055F70 /* GoogleService-Info.plist */; };
@@ -73,6 +74,7 @@
 				D4B2E5712A78038800E5850E /* QuestionList in Frameworks */,
 				D45CA13D2A5929EE00C787D6 /* SignUp in Frameworks */,
 				D4433AA92A6F8F3A000FA106 /* Home in Frameworks */,
+				D4AB35F52B735D030029491F /* PartnerCardsStore in Frameworks */,
 				D491F86A2B2DA9380017FE80 /* Routing in Frameworks */,
 				D4B2E5732A7BF1C700E5850E /* PartnerCards in Frameworks */,
 				D4AAF5D32A7F99E500DD3D55 /* Search in Frameworks */,
@@ -220,6 +222,7 @@
 				D4AAF5D02A7F857F00DD3D55 /* Tab */,
 				D4AAF5D22A7F99E500DD3D55 /* Search */,
 				D491F8692B2DA9380017FE80 /* Routing */,
+				D4AB35F42B735D030029491F /* PartnerCardsStore */,
 			);
 			productName = SwapWithMe;
 			productReference = D431A89C2A4848EE00109710 /* SwapWithMe.app */;
@@ -719,6 +722,10 @@
 		D4AAF5D22A7F99E500DD3D55 /* Search */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Search;
+		};
+		D4AB35F42B735D030029491F /* PartnerCardsStore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PartnerCardsStore;
 		};
 		D4B2E5702A78038800E5850E /* QuestionList */ = {
 			isa = XCSwiftPackageProductDependency;

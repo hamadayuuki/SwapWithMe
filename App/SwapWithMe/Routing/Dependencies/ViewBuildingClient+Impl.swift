@@ -5,8 +5,11 @@
 //  Created by 濵田　悠樹 on 2023/12/24.
 //
 
+import ComposableArchitecture
 import Dependencies
 import Home
+import PartnerCards
+import PartnerCardsStore
 import QuestionList
 import Routing
 import SwiftUI
@@ -19,6 +22,9 @@ extension ViewBuildingClient: DependencyKey {
             },
             homeView: { (myInfo, partner) in
                 return AnyView(HomeView(myInfo: myInfo, partner: partner))
+            },
+            partnerCardsView: { store in
+                return AnyView(PartnerCardsView(store: store))
             }
         )
     }
