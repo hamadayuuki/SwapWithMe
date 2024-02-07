@@ -20,6 +20,7 @@ public struct ViewBuildingClient {
     public var homeView: @Sendable (_ myInfo: User, _ partner: User) -> AnyView = { _, _ in AnyView(EmptyView()) }
     public var partnerCardsView: @Sendable (_ store: StoreOf<PartnerCardsStore>) -> AnyView = { _ in AnyView(EmptyView()) }
     public var partnerSearchView: @Sendable (_ store: StoreOf<PartnerSearchStore>) -> AnyView = { _ in AnyView(EmptyView()) }
+    public var appTabView: @Sendable () -> AnyView = { AnyView(EmptyView()) }
 }
 
 // MARK: - Dependnecies

@@ -14,6 +14,7 @@ import QuestionList
 import Routing
 import Search
 import SwiftUI
+import Tab
 
 extension ViewBuildingClient: DependencyKey {
     public static var liveValue: ViewBuildingClient {
@@ -29,6 +30,9 @@ extension ViewBuildingClient: DependencyKey {
             },
             partnerSearchView: { store in
                 return AnyView(PartnerSearchView(store: store))
+            },
+            appTabView: {
+                return AnyView(AppTabView())
             }
         )
     }

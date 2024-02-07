@@ -98,11 +98,12 @@ let featureTargets: [Target] = [
         "UserInfoStore",
         "ViewComponents",
         "User",
-        "Tab",
         "Request",
+        "Routing",
         readabilityModifier,
         popupView,
-        composableArchitecture
+        composableArchitecture,
+        dependencies,
     ]),
     .feature(name: "Home", dependencies: [
         "ViewComponents",
