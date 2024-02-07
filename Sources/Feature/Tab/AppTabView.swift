@@ -6,10 +6,9 @@
 //
 
 import ComposableArchitecture
-import PartnerCards
+import Dependencies
 import PartnerCardsStore
 import Routing
-import Search
 import SearchStore
 import SwiftUI
 

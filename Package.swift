@@ -87,7 +87,6 @@ let featureTargets: [Target] = [
     .feature(name: "SignUp", dependencies: [
         "SignUpStore",
         "ViewComponents",
-        "UserInfo",
         fireAuth,
         fireStore,
         readabilityModifier,
@@ -129,12 +128,12 @@ let featureTargets: [Target] = [
         dependencies
     ]),
     .feature(name: "Tab", dependencies: [
-        "PartnerCards",
         "PartnerCardsStore",
         "SearchStore",
         "Routing",
         readabilityModifier,
         popupView,
+        dependencies,
     ]),
     .feature(name: "Search", dependencies: [
         "SearchStore",
