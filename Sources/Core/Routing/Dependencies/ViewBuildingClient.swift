@@ -9,22 +9,16 @@ import Dependencies
 import DependenciesMacros
 import SwiftUI
 
+@DependencyClient
 public struct ViewBuildingClient {
-    public var questionListView: @Sendable (_ cardImage: Image) -> AnyView
-
-    public init(
-        questionListView: @escaping @Sendable (Image) -> AnyView
-    ) {
-        self.questionListView = questionListView
-    }
+    // Test でunimplemented()を使用するためデフォルト値が必要なため "= {}"を追加している
+    public var questionListView: @Sendable (_ cardImage: Image) -> AnyView = { _ in AnyView(EmptyView()) }
 }
 
 // MARK: - Dependnecies
 
 extension ViewBuildingClient: TestDependencyKey {
-    public static let testValue: ViewBuildingClient = .init(
-        questionListView: unimplemented()
-    )
+    public static let testValue = Self()
 }
 
 extension DependencyValues {
