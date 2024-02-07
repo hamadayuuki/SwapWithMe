@@ -20,10 +20,14 @@ private enum Tab {
 
 public struct AppTabView: View {
     @Dependency(\.viewBuildingClient.partnerCardsView) var partnerCardsView
+    @Dependency(\.viewBuildingClient.partnerSearchView) var partnerSearchView
 
     @State private var selection: Tab = .home
     private var partnerCardsStore = Store(initialState: PartnerCardsStore.State()) {
         PartnerCardsStore()
+    }
+    private var partnerSearchStore = Store(initialState: PartnerSearchStore.State()) {
+        PartnerSearchStore()
     }
 
     public init() {}
@@ -36,15 +40,11 @@ public struct AppTabView: View {
                 }
                 .tag(Tab.home)
 
-            PartnerSearchView(
-                store: Store(initialState: PartnerSearchStore.State()) {
-                    PartnerSearchStore()
+            partnerSearchView(partnerSearchStore)
+                .tabItem {
+                    Label("探す", systemImage: "magnifyingglass")
                 }
-            )
-            .tabItem {
-                Label("探す", systemImage: "magnifyingglass")
-            }
-            .tag(Tab.search)
+                .tag(Tab.search)
         }
         .accentColor(.green)
     }

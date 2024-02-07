@@ -76,6 +76,7 @@ let coreTargets: [Target] = [
     .core(name: "Routing", dependencies: [
         "User",
         "PartnerCardsStore",
+        "SearchStore",
         composableArchitecture,
         dependencies,
         dependenciesMacros,

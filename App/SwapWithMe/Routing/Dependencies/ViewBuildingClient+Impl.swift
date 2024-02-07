@@ -12,6 +12,7 @@ import PartnerCards
 import PartnerCardsStore
 import QuestionList
 import Routing
+import Search
 import SwiftUI
 
 extension ViewBuildingClient: DependencyKey {
@@ -25,6 +26,9 @@ extension ViewBuildingClient: DependencyKey {
             },
             partnerCardsView: { store in
                 return AnyView(PartnerCardsView(store: store))
+            },
+            partnerSearchView: { store in
+                return AnyView(PartnerSearchView(store: store))
             }
         )
     }

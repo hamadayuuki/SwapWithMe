@@ -9,6 +9,7 @@ import ComposableArchitecture
 import Dependencies
 import DependenciesMacros
 import PartnerCardsStore
+import SearchStore
 import SwiftUI
 import User
 
@@ -18,6 +19,7 @@ public struct ViewBuildingClient {
     public var questionListView: @Sendable (_ cardImage: Image) -> AnyView = { _ in AnyView(EmptyView()) }
     public var homeView: @Sendable (_ myInfo: User, _ partner: User) -> AnyView = { _, _ in AnyView(EmptyView()) }
     public var partnerCardsView: @Sendable (_ store: StoreOf<PartnerCardsStore>) -> AnyView = { _ in AnyView(EmptyView()) }
+    public var partnerSearchView: @Sendable (_ store: StoreOf<PartnerSearchStore>) -> AnyView = { _ in AnyView(EmptyView()) }
 }
 
 // MARK: - Dependnecies
