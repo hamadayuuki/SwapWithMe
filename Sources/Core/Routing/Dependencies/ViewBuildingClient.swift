@@ -8,11 +8,13 @@
 import Dependencies
 import DependenciesMacros
 import SwiftUI
+import User
 
 @DependencyClient
 public struct ViewBuildingClient {
     // Test でunimplemented()を使用するためデフォルト値が必要なため "= {}"を追加している
     public var questionListView: @Sendable (_ cardImage: Image) -> AnyView = { _ in AnyView(EmptyView()) }
+    public var homeView: @Sendable (_ myInfo: User, _ partner: User) -> AnyView = { _, _ in AnyView(EmptyView()) }
 }
 
 // MARK: - Dependnecies

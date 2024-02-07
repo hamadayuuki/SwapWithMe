@@ -74,6 +74,7 @@ let coreTargets: [Target] = [
     ]),
     .core(name: "Error", dependencies: []),
     .core(name: "Routing", dependencies: [
+        "User",
         dependencies,
         dependenciesMacros,
     ])
@@ -133,11 +134,12 @@ let featureTargets: [Target] = [
     ]),
     .feature(name: "Search", dependencies: [
         "SearchStore",
-        "Home",
         "User",
         "ViewComponents",
+        "Routing",
         readabilityModifier,
-        composableArchitecture
+        composableArchitecture,
+        dependencies,
     ])
 ]
 

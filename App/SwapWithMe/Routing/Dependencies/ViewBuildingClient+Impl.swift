@@ -16,6 +16,9 @@ extension ViewBuildingClient: DependencyKey {
         return .init(
             questionListView: { cardImage in
                 return AnyView(QuestionListView(cardImage: cardImage))
+            },
+            homeView: { (myInfo, partner) in
+                return AnyView(HomeView(myInfo: myInfo, partner: partner))
             }
         )
     }
