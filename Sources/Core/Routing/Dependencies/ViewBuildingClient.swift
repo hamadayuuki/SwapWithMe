@@ -6,6 +6,7 @@
 //
 
 import Dependencies
+import DependenciesMacros
 import SwiftUI
 
 public struct ViewBuildingClient {
