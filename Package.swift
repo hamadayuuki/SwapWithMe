@@ -70,10 +70,15 @@ extension Target {
 
 let coreTargets: [Target] = [
     .core(name: "ViewComponents", dependencies: [
+        nuke,
         cropViewController
     ]),
     .core(name: "Error", dependencies: []),
     .core(name: "Routing", dependencies: [
+        "User",
+        "PartnerCardsStore",
+        "SearchStore",
+        composableArchitecture,
         dependencies,
         dependenciesMacros,
     ])
@@ -83,7 +88,6 @@ let featureTargets: [Target] = [
     .feature(name: "SignUp", dependencies: [
         "SignUpStore",
         "ViewComponents",
-        "UserInfo",
         fireAuth,
         fireStore,
         readabilityModifier,
@@ -94,11 +98,12 @@ let featureTargets: [Target] = [
         "UserInfoStore",
         "ViewComponents",
         "User",
-        "Tab",
         "Request",
+        "Routing",
         readabilityModifier,
         popupView,
-        composableArchitecture
+        composableArchitecture,
+        dependencies,
     ]),
     .feature(name: "Home", dependencies: [
         "ViewComponents",
@@ -124,20 +129,21 @@ let featureTargets: [Target] = [
         dependencies
     ]),
     .feature(name: "Tab", dependencies: [
-        "PartnerCards",
         "PartnerCardsStore",
-        "Search",
         "SearchStore",
+        "Routing",
         readabilityModifier,
         popupView,
+        dependencies,
     ]),
     .feature(name: "Search", dependencies: [
         "SearchStore",
-        "Home",
         "User",
         "ViewComponents",
+        "Routing",
         readabilityModifier,
-        composableArchitecture
+        composableArchitecture,
+        dependencies,
     ])
 ]
 
@@ -188,7 +194,6 @@ let featureTestTargets: [Target] = [
         name: "UserInfoTest",
         dependencies: [
             "UserInfoStore",
-            "UserInfo",
             "User",
             composableArchitecture
         ]),
@@ -196,7 +201,6 @@ let featureTestTargets: [Target] = [
         name: "SearchTest",
         dependencies: [
             "SearchStore",
-            "Search",
             "User",
             composableArchitecture
         ])

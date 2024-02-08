@@ -6,14 +6,17 @@
 //
 
 import ComposableArchitecture
+import Dependencies
 import ReadabilityModifier
+import Routing
 import SwiftUI
-import Tab
 import User
 import UserInfoStore
 import ViewComponents
 
 public struct SelectUserCardImageView: View {
+    @Dependency(\.viewBuildingClient.appTabView) var appTabView
+
     var store: StoreOf<SelectUserCardImageStore>
 
     let user: User?
@@ -102,7 +105,7 @@ public struct SelectUserCardImageView: View {
                     send: .bindingIsTransAppTabView(!viewStore.isTransAppTabView)
                 )
             ) {
-                AppTabView()
+                appTabView()
             }
             .onAppear {
                 viewStore.send(.onAppear(self.user))

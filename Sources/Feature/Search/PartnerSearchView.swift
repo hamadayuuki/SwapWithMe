@@ -6,14 +6,17 @@
 //
 
 import ComposableArchitecture
-import Home
+import Dependencies
 import ReadabilityModifier
+import Routing
 import SearchStore
 import SwiftUI
 import User
 import ViewComponents
 
 public struct PartnerSearchView: View {
+    @Dependency(\.viewBuildingClient.homeView) var homeView
+
     let store: StoreOf<PartnerSearchStore>
 
     public init(store: StoreOf<PartnerSearchStore>) {
@@ -38,7 +41,7 @@ public struct PartnerSearchView: View {
                     }
 
                     NavigationLink(
-                        destination: HomeView(myInfo: viewStore.myInfo, partner: viewStore.partner),
+                        destination: homeView(viewStore.myInfo, viewStore.partner),
                         isActive: viewStore.binding(
                             get: { $0.isTransHomeView },
                             send: .bindingIsTransHomeView(viewStore.isTransHomeView)
