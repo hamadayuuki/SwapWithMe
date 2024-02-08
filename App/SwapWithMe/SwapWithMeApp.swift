@@ -9,6 +9,7 @@ import ComposableArchitecture
 import FirebaseAuth
 import FirebaseCore
 import Home
+import MyProfile
 import SignUp
 import SwiftUI
 import Tab
@@ -21,7 +22,8 @@ struct SwapWithMeApp: App {
         WindowGroup {
             //            FirstView()
             //                .environment(\.viewBuilding, AppViewBuilding())  // DIを使い モジュールの画面遷移を上書き(モジュール内から画面遷移できるようになる)
-            AppTabView()
+            //            AppTabView()
+            MyProfileView()
             //            NavigationView {
             //                UserBasicInfoView(
             //                    store: Store(initialState: UserBasicInfoStore.State()) {

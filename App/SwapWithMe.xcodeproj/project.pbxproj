@@ -19,6 +19,7 @@
 		D46BF3472B382732003EEDC3 /* ViewBuildingClient+Impl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46BF3462B382732003EEDC3 /* ViewBuildingClient+Impl.swift */; };
 		D491F86A2B2DA9380017FE80 /* Routing in Frameworks */ = {isa = PBXBuildFile; productRef = D491F8692B2DA9380017FE80 /* Routing */; };
 		D4A1F78D2A5EF80B0053DB95 /* ViewComponents in Frameworks */ = {isa = PBXBuildFile; productRef = D4A1F78C2A5EF80B0053DB95 /* ViewComponents */; };
+		D4A9C4452B746CA10008D012 /* MyProfile in Frameworks */ = {isa = PBXBuildFile; productRef = D4A9C4442B746CA10008D012 /* MyProfile */; };
 		D4AAF5D12A7F857F00DD3D55 /* Tab in Frameworks */ = {isa = PBXBuildFile; productRef = D4AAF5D02A7F857F00DD3D55 /* Tab */; };
 		D4AAF5D32A7F99E500DD3D55 /* Search in Frameworks */ = {isa = PBXBuildFile; productRef = D4AAF5D22A7F99E500DD3D55 /* Search */; };
 		D4B2E5712A78038800E5850E /* QuestionList in Frameworks */ = {isa = PBXBuildFile; productRef = D4B2E5702A78038800E5850E /* QuestionList */; };
@@ -70,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4A9C4452B746CA10008D012 /* MyProfile in Frameworks */,
 				D4B2E5712A78038800E5850E /* QuestionList in Frameworks */,
 				D45CA13D2A5929EE00C787D6 /* SignUp in Frameworks */,
 				D4433AA92A6F8F3A000FA106 /* Home in Frameworks */,
@@ -220,6 +222,7 @@
 				D4AAF5D02A7F857F00DD3D55 /* Tab */,
 				D4AAF5D22A7F99E500DD3D55 /* Search */,
 				D491F8692B2DA9380017FE80 /* Routing */,
+				D4A9C4442B746CA10008D012 /* MyProfile */,
 			);
 			productName = SwapWithMe;
 			productReference = D431A89C2A4848EE00109710 /* SwapWithMe.app */;
@@ -711,6 +714,10 @@
 		D4A1F78C2A5EF80B0053DB95 /* ViewComponents */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ViewComponents;
+		};
+		D4A9C4442B746CA10008D012 /* MyProfile */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MyProfile;
 		};
 		D4AAF5D02A7F857F00DD3D55 /* Tab */ = {
 			isa = XCSwiftPackageProductDependency;
