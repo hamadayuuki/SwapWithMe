@@ -145,7 +145,11 @@ let featureTargets: [Target] = [
         composableArchitecture,
         dependencies,
     ]),
-    .feature(name: "MyProfile", dependencies: []),
+    .feature(name: "MyProfile", dependencies: [
+        "User",
+        "ViewComponents",
+        readabilityModifier,
+    ]),
 ]
 
 let featureStoreTargets: [Target] = [
