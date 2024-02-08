@@ -70,6 +70,7 @@ extension Target {
 
 let coreTargets: [Target] = [
     .core(name: "ViewComponents", dependencies: [
+        "User",
         nuke,
         cropViewController
     ]),

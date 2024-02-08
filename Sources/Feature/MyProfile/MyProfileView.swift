@@ -8,6 +8,7 @@
 import ReadabilityModifier
 import SwiftUI
 import User
+import ViewComponents
 
 public struct MyProfileView: View {
     /// stub
@@ -90,7 +91,7 @@ public struct MyProfileView: View {
                 }
 
                 // SNSアイコン
-                HStack(spacing: 12) {
+                HStack(spacing: 16) {
                     ForEach(mySns, id: \.self) { sns in
                         sns.icon
                             .resizable()
@@ -127,12 +128,12 @@ public struct MyProfileView: View {
 
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 12) {
-                            partnerCard(cardImage: Image("nagano"), partner: PartnerInfo(name: "hotta mayu", age: 25, personality: "cute"))
-                            partnerCard(cardImage: Image("nagano2"), partner: PartnerInfo(name: "hotta mayu", age: 25, personality: "cute"))
-                            partnerCard(cardImage: Image("nagano3"), partner: PartnerInfo(name: "hotta mayu", age: 25, personality: "cute"))
-                            partnerCard(cardImage: Image("nagano4"), partner: PartnerInfo(name: "hotta mayu", age: 25, personality: "cute"))
-                            partnerCard(cardImage: Image("nagano5"), partner: PartnerInfo(name: "hotta mayu", age: 25, personality: "cute"))
-                            partnerCard(cardImage: Image("hotta"), partner: PartnerInfo(name: "hotta mayu", age: 25, personality: "cute"))
+                            CardView(cardImage: Image("nagano"), partner: PartnerInfo(name: "hotta mayu", age: 25, personality: "cute"))
+                            CardView(cardImage: Image("nagano2"), partner: PartnerInfo(name: "hotta mayu", age: 25, personality: "cute"))
+                            CardView(cardImage: Image("nagano3"), partner: PartnerInfo(name: "hotta mayu", age: 25, personality: "cute"))
+                            CardView(cardImage: Image("nagano4"), partner: PartnerInfo(name: "hotta mayu", age: 25, personality: "cute"))
+                            CardView(cardImage: Image("nagano5"), partner: PartnerInfo(name: "hotta mayu", age: 25, personality: "cute"))
+                            CardView(cardImage: Image("hotta"), partner: PartnerInfo(name: "hotta mayu", age: 25, personality: "cute"))
                         }
                     }
                 }
@@ -141,47 +142,6 @@ public struct MyProfileView: View {
             }
         }
         .fitToReadableContentGuide()
-    }
-
-    // MARK: - Card
-
-    private func partnerCard(cardImage: Image, partner: PartnerInfo) -> some View {
-        ZStack {
-            card(cardImage: cardImage)
-            partnerInfo(name: partner.name, age: partner.age, affiliation: partner.personality)
-                .offset(x: 0, y: 400 * 0.42 * 0.25)
-        }
-    }
-
-    private func card(cardImage: Image) -> some View {
-        ZStack {
-            cardImage
-                .resizable()
-                .scaledToFill()
-
-            LinearGradient(
-                gradient: Gradient(colors: [.clear, .black.opacity(0.7)]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-        }
-        .frame(width: 250 * 0.42, height: 400 * 0.42)
-        .cornerRadius(20)
-    }
-
-    private func partnerInfo(name: String, age: Int, affiliation: String) -> some View {
-        VStack(spacing: 6) {
-            Text("\(name)")
-                .font(.system(size: 12, weight: .bold, design: .rounded))
-
-            HStack(spacing: 6) {
-                Text("\(age)歳")
-
-                Text("\(affiliation)")
-            }
-            .font(.system(size: 8, weight: .medium, design: .rounded))
-        }
-        .foregroundColor(.white)
     }
 }
 

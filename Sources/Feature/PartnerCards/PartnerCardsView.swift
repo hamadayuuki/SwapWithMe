@@ -19,6 +19,7 @@ import ReadabilityModifier
 import Routing
 import SwiftUI
 import User
+import ViewComponents
 
 public struct PartnerCardsView: View {
     @Dependency(\.viewBuildingClient.questionListView) var questionListView
@@ -48,7 +49,7 @@ public struct PartnerCardsView: View {
                                     if let cardImage = viewStore.cardImages[safe: i * 3 + j],
                                         let partnerInfo = viewStore.partnerInfos[safe: i * 3 + j]
                                     {
-                                        partnerCard(cardImage: cardImage, partner: partnerInfo)
+                                        CardView(cardImage: cardImage, partner: partnerInfo)
                                             .onTapGesture {
                                                 viewStore.send(.tappedPartnerCard(cardImage))
                                             }
@@ -72,45 +73,6 @@ public struct PartnerCardsView: View {
                 viewStore.send(.onAppear)
             }
         }
-    }
-
-    private func partnerCard(cardImage: Image, partner: PartnerInfo) -> some View {
-        ZStack {
-            card(cardImage: cardImage)
-            partnerInfo(name: partner.name, age: partner.age, affiliation: partner.personality)
-                .offset(x: 0, y: 400 * 0.42 * 0.25)
-        }
-    }
-
-    private func card(cardImage: Image) -> some View {
-        ZStack {
-            cardImage
-                .resizable()
-                .scaledToFill()
-
-            LinearGradient(
-                gradient: Gradient(colors: [.clear, .black.opacity(0.7)]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-        }
-        .frame(width: 250 * 0.42, height: 400 * 0.42)
-        .cornerRadius(20)
-    }
-
-    private func partnerInfo(name: String, age: Int, affiliation: String) -> some View {
-        VStack(spacing: 6) {
-            Text("\(name)")
-                .font(.system(size: 12, weight: .bold, design: .rounded))
-
-            HStack(spacing: 6) {
-                Text("\(age)歳")
-
-                Text("\(affiliation)")
-            }
-            .font(.system(size: 8, weight: .medium, design: .rounded))
-        }
-        .foregroundColor(.white)
     }
 }
 
