@@ -172,6 +172,11 @@ let featureStoreTargets: [Target] = [
         "User",
         composableArchitecture,
     ]),
+    .featureStore(name: "MyProfileStore", dependencies: [
+        "Request",
+        "Relationship",
+        composableArchitecture,
+    ]),
 ]
 
 let entityTargets: [Target] = [
@@ -189,10 +194,12 @@ let dataTargets: [Target] = [
     .data(name: "Request", dependencies: [
         "User",
         "Error",
+        "Relationship",
         fireStore,
         fireStoreSwift,
         fireStorage,
-        dependencies
+        dependencies,
+        dependenciesMacros,
     ]),
     .data(name: "API", dependencies: [
         "Error"
