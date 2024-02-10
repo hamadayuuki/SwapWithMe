@@ -67,3 +67,22 @@ public enum Personality: String, Codable {
     case shy
     case friendly
 }
+
+// MARK: - extension
+
+extension User {
+    public static func stub() -> Self {
+        return Self(
+            id: "",
+            iconURL: URL(string: ""),
+            name: "",
+            age: 0,
+            sex: .man,
+            affiliation: .high,
+            animal: .dog,
+            activity: .outdoor,
+            personality: .friendly,
+            description: ""
+        )
+    }
+}

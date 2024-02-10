@@ -27,3 +27,16 @@ public struct Relationship: Codable {
         self.updateAt = updateAt
     }
 }
+
+// MARK: - extension
+
+extension Relationship {
+    public static func stub() -> Self {
+        return Self(
+            followersId: [""],
+            followingsId: [""],
+            createdAt: Timestamp(),
+            updateAt: Timestamp()
+        )
+    }
+}

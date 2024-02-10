@@ -18,3 +18,15 @@ public struct PartnerInfo: Equatable {
         self.personality = personality
     }
 }
+
+// MARK: - extension
+
+extension PartnerInfo {
+    public static func stub() -> Self {
+        return Self(
+            name: "",
+            age: 0,
+            personality: ""
+        )
+    }
+}
