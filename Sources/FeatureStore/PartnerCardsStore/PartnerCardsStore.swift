@@ -17,12 +17,14 @@ public struct PartnerCardsStore: Reducer {
         public var partnerInfos: [PartnerInfo] = []
         public var tappedImage: Image = Image("")
         @BindingState public var isTransQuestionListView = false
+        @BindingState public var isTransMyProfileView = false
     }
 
     public enum Action: Equatable, BindableAction {
         case onAppear
         case tappedPartnerCard(Image)
         case binding(BindingAction<State>)
+        case tappedMyProfileImage
     }
 
     public var body: some ReducerOf<Self> {
@@ -60,6 +62,10 @@ public struct PartnerCardsStore: Reducer {
             case .tappedPartnerCard(let partnerImage):
                 state.tappedImage = partnerImage
                 state.isTransQuestionListView = true
+                return .none
+
+            case .tappedMyProfileImage:
+                state.isTransMyProfileView = true
                 return .none
 
             case .binding:

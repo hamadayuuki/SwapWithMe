@@ -70,6 +70,7 @@ extension Target {
 
 let coreTargets: [Target] = [
     .core(name: "ViewComponents", dependencies: [
+        "User",
         nuke,
         cropViewController
     ]),
@@ -144,7 +145,12 @@ let featureTargets: [Target] = [
         readabilityModifier,
         composableArchitecture,
         dependencies,
-    ])
+    ]),
+    .feature(name: "MyProfile", dependencies: [
+        "User",
+        "ViewComponents",
+        readabilityModifier,
+    ]),
 ]
 
 let featureStoreTargets: [Target] = [

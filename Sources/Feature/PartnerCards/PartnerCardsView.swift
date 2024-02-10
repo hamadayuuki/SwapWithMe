@@ -19,9 +19,11 @@ import ReadabilityModifier
 import Routing
 import SwiftUI
 import User
+import ViewComponents
 
 public struct PartnerCardsView: View {
     @Dependency(\.viewBuildingClient.questionListView) var questionListView
+    @Dependency(\.viewBuildingClient.myProfileView) var myProfileView
 
     let store: StoreOf<PartnerCardsStore>
 
@@ -31,15 +33,16 @@ public struct PartnerCardsView: View {
 
     public var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            NavigationView {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 18) {
+            ZStack {
+                // カード一覧
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 6) {
                         Text("Swapしたユーザー")
                             .font(.system(size: 24, weight: .bold, design: .rounded))
 
                         Text("これまでカードを交換したユーザーが表示されています。カードをタップすると質問が表示されます。")
                             .font(.system(size: 12, weight: .regular, design: .rounded))
-                            .padding(.bottom, 24)
+                            .padding(.bottom, 18)
 
                         // カードが11枚を想定して、値は決め打ち
                         ForEach(0..<5) { i in
@@ -48,69 +51,65 @@ public struct PartnerCardsView: View {
                                     if let cardImage = viewStore.cardImages[safe: i * 3 + j],
                                         let partnerInfo = viewStore.partnerInfos[safe: i * 3 + j]
                                     {
-                                        partnerCard(cardImage: cardImage, partner: partnerInfo)
+                                        CardView(cardImage: cardImage, partner: partnerInfo)
                                             .onTapGesture {
                                                 viewStore.send(.tappedPartnerCard(cardImage))
                                             }
                                     }
                                 }
                             }
-                        }
-
-                        NavigationLink(
-                            destination: questionListView(viewStore.tappedImage),
-                            isActive: viewStore.$isTransQuestionListView
-                        ) {
-                            EmptyView()
+                            .frame(maxWidth: .infinity, alignment: .center)
                         }
                     }
-                    .fitToReadableContentGuide()
-                    .padding(.top, 36)
+                    .padding(.top, 80)
+                }
+
+                // 画面上部
+                HStack {
+                    Image(systemName: "person")
+                        .font(.system(size: 24, weight: .bold, design: .rounded))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                    Text("SwapWithMe")
+                        .font(.system(size: 24, weight: .bold, design: .rounded))
+                        .frame(width: 240)
+
+                    Button(action: {
+                        viewStore.send(.tappedMyProfileImage)
+                    }) {
+                        Image("hotta")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 30, height: 30)
+                            .cornerRadius(15)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 15).stroke(Color.black, lineWidth: 1)
+                            )
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                    }
+                }
+                .frame(maxHeight: .infinity, alignment: .top)
+
+                // 画面遷移
+                NavigationLink(
+                    destination: questionListView(viewStore.tappedImage),
+                    isActive: viewStore.$isTransQuestionListView
+                ) {
+                    EmptyView()
+                }
+
+                NavigationLink(
+                    destination: myProfileView(),
+                    isActive: viewStore.$isTransMyProfileView
+                ) {
+                    EmptyView()
                 }
             }
+            .fitToReadableContentGuide()
             .onAppear {
                 viewStore.send(.onAppear)
             }
         }
-    }
-
-    private func partnerCard(cardImage: Image, partner: PartnerInfo) -> some View {
-        ZStack {
-            card(cardImage: cardImage)
-            partnerInfo(name: partner.name, age: partner.age, affiliation: partner.personality)
-                .offset(x: 0, y: 400 * 0.42 * 0.25)
-        }
-    }
-
-    private func card(cardImage: Image) -> some View {
-        ZStack {
-            cardImage
-                .resizable()
-                .scaledToFill()
-
-            LinearGradient(
-                gradient: Gradient(colors: [.clear, .black.opacity(0.7)]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-        }
-        .frame(width: 250 * 0.42, height: 400 * 0.42)
-        .cornerRadius(20)
-    }
-
-    private func partnerInfo(name: String, age: Int, affiliation: String) -> some View {
-        VStack(spacing: 6) {
-            Text("\(name)")
-                .font(.system(size: 12, weight: .bold, design: .rounded))
-
-            HStack(spacing: 6) {
-                Text("\(age)歳")
-
-                Text("\(affiliation)")
-            }
-            .font(.system(size: 8, weight: .medium, design: .rounded))
-        }
-        .foregroundColor(.white)
     }
 }
 
