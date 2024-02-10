@@ -12,6 +12,7 @@ import Swift
 public struct User: Codable, Identifiable, Equatable, Hashable {
     // @DocumentID に準拠した場合 型をString?にする必要がある
     // Firestoreからデータ取得するとき 自動的にidへ値が代入される
+    // SwiftUI.List で id を使用することを考慮した実装。Firestore にidが格納されるわけではない。あくまで Firestore→App とデータが送られる際にAppの補助のため付与される情報
     @DocumentID public var id: String?
     public var iconURL: URL?
     public var name: String
@@ -24,8 +25,8 @@ public struct User: Codable, Identifiable, Equatable, Hashable {
     public var description: String
     public var createdAt: Timestamp = Timestamp()
 
-    public init(iconURL: URL?, name: String, age: Int, sex: Sex, affiliation: Affiliation, animal: Animal, activity: Activity, personality: Personality, description: String) {
-        self.id = UUID().uuidString
+    public init(id: String? = nil, iconURL: URL?, name: String, age: Int, sex: Sex, affiliation: Affiliation, animal: Animal, activity: Activity, personality: Personality, description: String) {
+        self.id = id
         self.iconURL = iconURL
         self.name = name
         self.age = age

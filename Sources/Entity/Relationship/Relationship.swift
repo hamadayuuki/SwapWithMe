@@ -19,9 +19,11 @@ public struct Relationship: Codable {
     public let updateAt: Timestamp
 
     
-    public init(followersId: [String], followingsId: [String], updateAt: Timestamp) {
+    public init(id: String? = nil, followersId: [String], followingsId: [String], createdAt: Timestamp, updateAt: Timestamp) {
+        self.id = id
         self.followersId = followersId
         self.followingsId = followingsId
+        self.createdAt = createdAt
         self.updateAt = updateAt
     }
 }
