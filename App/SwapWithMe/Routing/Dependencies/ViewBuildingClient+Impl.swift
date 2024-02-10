@@ -8,6 +8,7 @@
 import ComposableArchitecture
 import Dependencies
 import Home
+import MyProfile
 import PartnerCards
 import QuestionList
 import Routing
@@ -32,6 +33,9 @@ extension ViewBuildingClient: DependencyKey {
             },
             appTabView: {
                 return AnyView(AppTabView())
+            },
+            myProfileView: {
+                return AnyView(MyProfileView())
             }
         )
     }

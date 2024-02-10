@@ -23,6 +23,7 @@ import ViewComponents
 
 public struct PartnerCardsView: View {
     @Dependency(\.viewBuildingClient.questionListView) var questionListView
+    @Dependency(\.viewBuildingClient.myProfileView) var myProfileView
 
     let store: StoreOf<PartnerCardsStore>
 
@@ -73,15 +74,19 @@ public struct PartnerCardsView: View {
                         .font(.system(size: 24, weight: .bold, design: .rounded))
                         .frame(width: 240)
 
-                    Image("hotta")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 30, height: 30)
-                        .cornerRadius(15)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 15).stroke(Color.black, lineWidth: 1)
-                        )
-                        .frame(maxWidth: .infinity, alignment: .trailing)
+                    Button(action: {
+                        viewStore.send(.tappedMyProfileImage)
+                    }) {
+                        Image("hotta")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 30, height: 30)
+                            .cornerRadius(15)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 15).stroke(Color.black, lineWidth: 1)
+                            )
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                    }
                 }
                 .frame(maxHeight: .infinity, alignment: .top)
 
@@ -89,6 +94,13 @@ public struct PartnerCardsView: View {
                 NavigationLink(
                     destination: questionListView(viewStore.tappedImage),
                     isActive: viewStore.$isTransQuestionListView
+                ) {
+                    EmptyView()
+                }
+
+                NavigationLink(
+                    destination: myProfileView(),
+                    isActive: viewStore.$isTransMyProfileView
                 ) {
                     EmptyView()
                 }
