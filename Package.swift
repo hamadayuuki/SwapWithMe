@@ -178,6 +178,10 @@ let entityTargets: [Target] = [
     .entity(name: "User", dependencies: [
         fireStore,
         fireStoreSwift
+    ]),
+    .entity(name: "Relationship", dependencies: [
+        fireStore,
+        fireStoreSwift
     ])
 ]
 
