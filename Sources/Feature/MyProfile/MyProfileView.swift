@@ -5,12 +5,12 @@
 //  Created by 濵田　悠樹 on 2024/02/08.
 //
 
+import ComposableArchitecture
+import MyProfileStore
 import ReadabilityModifier
 import SwiftUI
 import User
 import ViewComponents
-import ComposableArchitecture
-import MyProfileStore
 
 public struct MyProfileView: View {
     let store: StoreOf<MyProfileStore>
@@ -45,7 +45,7 @@ public struct MyProfileView: View {
                     // SNSアイコン
                     HStack(spacing: 16) {
                         ForEach(viewStore.mySns, id: \.self) { sns in
-                            sns.icon
+                            Image(sns.iconName)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 50, height: 50)
@@ -66,7 +66,7 @@ public struct MyProfileView: View {
                                 Text(status.title)
                                     .font(.system(size: 12, weight: .regular, design: .rounded))
                             }
-                            if status == .follower || status == .following {
+                            if status == .follower(status.num) || status == .following(status.num) {
                                 Divider()
                             }
                         }
@@ -95,7 +95,7 @@ public struct MyProfileView: View {
             }
             .fitToReadableContentGuide()
             .onAppear {
-
+                viewStore.send(.onAppear)
             }
         }
     }

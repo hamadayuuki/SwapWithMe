@@ -15,9 +15,9 @@ public enum RelationStatus: Hashable, Equatable {
 
     public var title: String {
         switch self {
-        case .following: return "Following"
-        case .follower: return "Follower"
-        case .yahhos: return "やっほう数"
+        case .following(_): return "Following"
+        case .follower(_): return "Follower"
+        case .yahhos(_): return "やっほう数"
         }
     }
 
@@ -29,4 +29,3 @@ public enum RelationStatus: Hashable, Equatable {
         }
     }
 }
-

@@ -14,6 +14,7 @@ TODO: カードに載せる情報を増やす
 
 import ComposableArchitecture
 import Dependencies
+import MyProfileStore
 import PartnerCardsStore
 import ReadabilityModifier
 import Routing
@@ -99,7 +100,11 @@ public struct PartnerCardsView: View {
                 }
 
                 NavigationLink(
-                    destination: myProfileView(),
+                    destination: myProfileView(
+                        Store(initialState: MyProfileStore.State()) {
+                            MyProfileStore()
+                        }
+                    ),
                     isActive: viewStore.$isTransMyProfileView
                 ) {
                     EmptyView()

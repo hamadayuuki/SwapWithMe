@@ -16,12 +16,12 @@ public struct MyProfileStore: Reducer {
         public init() {}
     }
 
-    public  enum Action: Equatable {
+    public enum Action: Equatable {
         case onAppear
     }
 
     public var body: some ReducerOf<Self> {
-        Reduce { state, action  in
+        Reduce { state, action in
             switch action {
             case .onAppear:
                 // TODO: 動的にする, 今は表示用にデータを決めうちで定義

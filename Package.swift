@@ -79,6 +79,7 @@ let coreTargets: [Target] = [
         "User",
         "PartnerCardsStore",
         "SearchStore",
+        "MyProfileStore",
         composableArchitecture,
         dependencies,
         dependenciesMacros,
@@ -121,6 +122,7 @@ let featureTargets: [Target] = [
     ]),
     .feature(name: "PartnerCards", dependencies: [
         "PartnerCardsStore",
+        "MyProfileStore",
         "ViewComponents",
         "User",
         "Routing",
