@@ -32,15 +32,16 @@ public struct PartnerCardsView: View {
 
     public var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            NavigationView {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 18) {
+            ZStack {
+                // カード一覧
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 6) {
                         Text("Swapしたユーザー")
                             .font(.system(size: 24, weight: .bold, design: .rounded))
 
                         Text("これまでカードを交換したユーザーが表示されています。カードをタップすると質問が表示されます。")
                             .font(.system(size: 12, weight: .regular, design: .rounded))
-                            .padding(.bottom, 24)
+                            .padding(.bottom, 18)
 
                         // カードが11枚を想定して、値は決め打ち
                         ForEach(0..<5) { i in
@@ -56,19 +57,43 @@ public struct PartnerCardsView: View {
                                     }
                                 }
                             }
-                        }
-
-                        NavigationLink(
-                            destination: questionListView(viewStore.tappedImage),
-                            isActive: viewStore.$isTransQuestionListView
-                        ) {
-                            EmptyView()
+                            .frame(maxWidth: .infinity, alignment: .center)
                         }
                     }
-                    .fitToReadableContentGuide()
-                    .padding(.top, 36)
+                    .padding(.top, 80)
+                }
+
+                // 画面上部
+                HStack {
+                    Image(systemName: "person")
+                        .font(.system(size: 24, weight: .bold, design: .rounded))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                    Text("SwapWithMe")
+                        .font(.system(size: 24, weight: .bold, design: .rounded))
+                        .frame(width: 240)
+
+                    Image("hotta")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 30, height: 30)
+                        .cornerRadius(15)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 15).stroke(Color.black, lineWidth: 1)
+                        )
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                }
+                .frame(maxHeight: .infinity, alignment: .top)
+
+                // 画面遷移
+                NavigationLink(
+                    destination: questionListView(viewStore.tappedImage),
+                    isActive: viewStore.$isTransQuestionListView
+                ) {
+                    EmptyView()
                 }
             }
+            .fitToReadableContentGuide()
             .onAppear {
                 viewStore.send(.onAppear)
             }

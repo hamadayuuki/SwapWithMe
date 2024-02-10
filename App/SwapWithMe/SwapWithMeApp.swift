@@ -10,6 +10,8 @@ import FirebaseAuth
 import FirebaseCore
 import Home
 import MyProfile
+import PartnerCards
+import PartnerCardsStore
 import SignUp
 import SwiftUI
 import Tab
@@ -22,8 +24,13 @@ struct SwapWithMeApp: App {
         WindowGroup {
             //            FirstView()
             //                .environment(\.viewBuilding, AppViewBuilding())  // DIを使い モジュールの画面遷移を上書き(モジュール内から画面遷移できるようになる)
-            //            AppTabView()
-            MyProfileView()
+            NavigationView {
+                PartnerCardsView(
+                    store: Store(initialState: PartnerCardsStore.State()) {
+                        PartnerCardsStore()
+                    }
+                )
+            }
             //            NavigationView {
             //                UserBasicInfoView(
             //                    store: Store(initialState: UserBasicInfoStore.State()) {
