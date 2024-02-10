@@ -74,14 +74,14 @@ extension User {
     public static func stub() -> Self {
         return Self(
             id: "",
-            iconURL: URL(string: ""),
+            iconURL: nil,
             name: "",
             age: 0,
             sex: .man,
-            affiliation: .high,
+            affiliation: .juniorHigh,
             animal: .dog,
-            activity: .outdoor,
-            personality: .friendly,
+            activity: .indoor,
+            personality: .shy,
             description: ""
         )
     }

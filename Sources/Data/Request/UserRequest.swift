@@ -70,12 +70,12 @@ extension UserRequestClient: TestDependencyKey {
             //TODO: 処理追加
         },
         fetch: { id in
-            let user = User(iconURL: nil, name: "", age: 0, sex: .man, affiliation: .juniorHigh, animal: .dog, activity: .indoor, personality: .shy, description: "")
+            let user = User.stub()
             return user
         },
         fetchWithName: { name in
             var users: [User] = []
-            let user = User(iconURL: nil, name: "", age: 0, sex: .man, affiliation: .juniorHigh, animal: .dog, activity: .indoor, personality: .shy, description: "")
+            let user = User.stub()
             users.append(user)
             return users  // [User()]
         }
@@ -90,12 +90,12 @@ extension UserRequestClient: TestDependencyKey {
             //TODO: 処理追加
         },
         fetch: { id in
-            let user = User(iconURL: nil, name: "", age: 0, sex: .man, affiliation: .juniorHigh, animal: .dog, activity: .indoor, personality: .shy, description: "")
+            let user = User.stub()
             return user
         },
         fetchWithName: { name in
             var users: [User] = []
-            let user = User(iconURL: nil, name: "", age: 0, sex: .man, affiliation: .juniorHigh, animal: .dog, activity: .indoor, personality: .shy, description: "")
+            let user = User.stub()
             users.append(user)
             return users  // [User()]
         }

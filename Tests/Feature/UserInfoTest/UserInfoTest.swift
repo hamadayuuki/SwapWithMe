@@ -24,7 +24,7 @@ final class UserInfoTest: XCTestCase {
 
     // MARK: - Stub
 
-    let user = User.init(iconURL: nil, name: "", age: 0, sex: .man, affiliation: .others, animal: .dog, activity: .outdoor, personality: .shy, description: "")
+    let user = User.stub()
 
     // MARK: - Test
 
