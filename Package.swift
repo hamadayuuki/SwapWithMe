@@ -147,6 +147,7 @@ let featureTargets: [Target] = [
         dependencies,
     ]),
     .feature(name: "MyProfile", dependencies: [
+        "MyProfileStore",
         "User",
         "ViewComponents",
         readabilityModifier,
