@@ -100,7 +100,6 @@ let featureTargets: [Target] = [
         "UserInfoStore",
         "ViewComponents",
         "User",
-        "Request",
         "Routing",
         readabilityModifier,
         popupView,
@@ -176,7 +175,6 @@ let featureStoreTargets: [Target] = [
         composableArchitecture,
     ]),
     .featureStore(name: "MyProfileStore", dependencies: [
-        "Request",
         "Relationship",
         "Request",
         composableArchitecture,

@@ -7,7 +7,6 @@
 
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-import Swift
 
 public struct User: Codable, Identifiable, Equatable, Hashable {
     // @DocumentID に準拠した場合 型をString?にする必要がある
