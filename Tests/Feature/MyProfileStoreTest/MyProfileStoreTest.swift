@@ -13,7 +13,13 @@ import ComposableArchitecture
 
 @MainActor
 final class MyProfileStoreTest: XCTestCase {
+
+    // MARK: - Stub
+
     private let relationship = Relationship.stub()
+    private struct ErrorResult: Error, Equatable {}
+
+    // MARK: - Test
 
     func test_onAppear時に正常にデータが取得され格納できるか() async {
         let testStore = TestStore(
@@ -44,5 +50,28 @@ final class MyProfileStoreTest: XCTestCase {
         }
     }
 
-    // TODO: - エラーハンドリング実装後、エラーのテストを実装
+    func test_onAppear時にデータ取得に失敗した() async {
+        let testStore = TestStore(
+            initialState: MyProfileStore.State()
+        ) {
+            MyProfileStore()
+        } withDependencies: {
+            $0.relationshipRequest.fetch = { uid in
+                throw ErrorResult()
+            }
+        }
+
+        await testStore.send(.onAppear) {
+            // TODO: 動的にした場合はテストを変える必要あり
+            $0.mySns = [
+                SNS.twitter,
+                SNS.instagram,
+                SNS.line,
+                SNS.other("BeReal.")
+            ]
+        }
+        await testStore.receive(.fetchtRelationResponse(.failure(ErrorResult()))) {
+            $0.errorMessage = "データの取得に失敗しました"
+        }
+    }
 }
