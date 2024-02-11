@@ -179,11 +179,8 @@ let featureStoreTargets: [Target] = [
         "Request",
         "Relationship",
         "Request",
-        "Error",
         composableArchitecture,
         dependencies,
-        fireStore,
-        fireStoreSwift,
     ]),
 ]
 
