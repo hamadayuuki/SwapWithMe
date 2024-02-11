@@ -10,7 +10,7 @@ import FirebaseFirestoreSwift
 import Foundation
 
 /// フォロー, フォロワー機能で使用
-public struct Relationship: Codable {
+public struct Relationship: Codable, Equatable {
     @DocumentID public var id: String?
     public let followersId: [String]  // String ≒ User.id
     public let followingsId: [String]

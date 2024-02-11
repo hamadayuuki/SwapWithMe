@@ -178,7 +178,9 @@ let featureStoreTargets: [Target] = [
     .featureStore(name: "MyProfileStore", dependencies: [
         "Request",
         "Relationship",
+        "Request",
         composableArchitecture,
+        dependencies,
     ]),
 ]
 
