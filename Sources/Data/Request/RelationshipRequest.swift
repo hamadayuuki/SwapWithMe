@@ -28,68 +28,44 @@ extension RelationshipRequest: DependencyKey {
     public static let liveValue = Self(
         set: { myId, data in
             let db = Firestore.firestore()
-            do {
-                try db.collection("Relationship").document(myId).setData(from: data)
-                return true
-            } catch {
-                return false
-            }
+            try db.collection("Relationship").document(myId).setData(from: data)
+            return true
         },
         addFollower: { myId, friendId in
             let db = Firestore.firestore()
             let relationshipRef = db.collection("Relationship").document(myId)
-
-            do {
-                try await relationshipRef.updateData([
-                    "followersId": FieldValue.arrayUnion([friendId]),
-                    "updateAt": Timestamp(),
-                ])
-                return true
-            } catch {
-                return false
-            }
+            try await relationshipRef.updateData([
+                "followersId": FieldValue.arrayUnion([friendId]),
+                "updateAt": Timestamp(),
+            ])
+            return true
         },
         addFollowing: { myId, friendId in
             let db = Firestore.firestore()
             let relationshipRef = db.collection("Relationship").document(myId)
-
-            do {
-                try await relationshipRef.updateData([
-                    "followingsId": FieldValue.arrayUnion([friendId]),
-                    "updateAt": Timestamp(),
-                ])
-                return true
-            } catch {
-                return false
-            }
+            try await relationshipRef.updateData([
+                "followingsId": FieldValue.arrayUnion([friendId]),
+                "updateAt": Timestamp(),
+            ])
+            return true
         },
         removeFollower: { myId, friendId in
             let db = Firestore.firestore()
             let relationshipRef = db.collection("Relationship").document(myId)
-
-            do {
-                try await relationshipRef.updateData([
-                    "followersId": FieldValue.arrayRemove([friendId]),
-                    "updateAt": Timestamp(),
-                ])
-                return true
-            } catch {
-                return false
-            }
+            try await relationshipRef.updateData([
+                "followersId": FieldValue.arrayRemove([friendId]),
+                "updateAt": Timestamp(),
+            ])
+            return true
         },
         removeFollowing: { myId, friendId in
             let db = Firestore.firestore()
             let relationshipRef = db.collection("Relationship").document(myId)
-
-            do {
-                try await relationshipRef.updateData([
-                    "followingsId": FieldValue.arrayRemove([friendId]),
-                    "updateAt": Timestamp(),
-                ])
-                return true
-            } catch {
-                return false
-            }
+            try await relationshipRef.updateData([
+                "followingsId": FieldValue.arrayRemove([friendId]),
+                "updateAt": Timestamp(),
+            ])
+            return true
         },
         fetch: { uid in
             let db = Firestore.firestore()
