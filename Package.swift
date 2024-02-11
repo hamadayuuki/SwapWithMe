@@ -225,6 +225,13 @@ let featureTestTargets: [Target] = [
             "SearchStore",
             "User",
             composableArchitecture
+        ]),
+    .featureTest(
+        name: "MyProfileStoreTest",
+        dependencies: [
+            "MyProfileStore",
+            "Relationship",
+            composableArchitecture
         ])
 ]
 
