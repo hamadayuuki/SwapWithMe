@@ -91,10 +91,10 @@ extension RelationshipRequest: DependencyKey {
                 return false
             }
         },
-        fetch: { id in
+        fetch: { uid in
             let db = Firestore.firestore()
-            let user = try await db.collection("Relationship").document(id).getDocument(as: Relationship.self)
-            return user
+            let relationship = try await db.collection("Relationship").document(uid).getDocument(as: Relationship.self)
+            return relationship
         }
     )
 

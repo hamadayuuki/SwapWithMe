@@ -74,10 +74,7 @@ let coreTargets: [Target] = [
         nuke,
         cropViewController
     ]),
-    .core(name: "Error", dependencies: [
-        fireStore,
-        fireStoreSwift,
-    ]),
+    .core(name: "Error", dependencies: []),
     .core(name: "Routing", dependencies: [
         "User",
         "PartnerCardsStore",

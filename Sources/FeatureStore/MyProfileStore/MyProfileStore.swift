@@ -20,6 +20,7 @@ public struct MyProfileStore: Reducer {
     public struct State: Equatable {
         public var mySns: [SNS] = []
         public var relationStatus: [RelationStatus] = [.follower(0), .following(0), .yahhos(0)]
+        public var errorMessage: String? = nil
 
         public init() {}
     }
@@ -52,12 +53,9 @@ public struct MyProfileStore: Reducer {
                     .yahhos(500),
                 ]
                 return .none
-            case .fetchtRelationResponse(.failure(let error as NSError)):
-                if error.domain == FirestoreErrorDomain {
-                    return .none
-                } else {
-                    return .none
-                }
+            case .fetchtRelationResponse(.failure):
+                state.errorMessage = "データの取得に失敗しました"  // FireStoreのエラーハンドリングは細かく行う必要ないと判断したため断念
+                return .none
             }
         }
     }
