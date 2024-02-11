@@ -17,6 +17,7 @@
 		D4433AA92A6F8F3A000FA106 /* Home in Frameworks */ = {isa = PBXBuildFile; productRef = D4433AA82A6F8F3A000FA106 /* Home */; };
 		D45CA13D2A5929EE00C787D6 /* SignUp in Frameworks */ = {isa = PBXBuildFile; productRef = D45CA13C2A5929EE00C787D6 /* SignUp */; };
 		D46BF3472B382732003EEDC3 /* ViewBuildingClient+Impl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46BF3462B382732003EEDC3 /* ViewBuildingClient+Impl.swift */; };
+		D47BF7332B781813007D5705 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D47BF7322B781813007D5705 /* GoogleService-Info.plist */; };
 		D491F86A2B2DA9380017FE80 /* Routing in Frameworks */ = {isa = PBXBuildFile; productRef = D491F8692B2DA9380017FE80 /* Routing */; };
 		D4A1F78D2A5EF80B0053DB95 /* ViewComponents in Frameworks */ = {isa = PBXBuildFile; productRef = D4A1F78C2A5EF80B0053DB95 /* ViewComponents */; };
 		D4A9C4452B746CA10008D012 /* MyProfile in Frameworks */ = {isa = PBXBuildFile; productRef = D4A9C4442B746CA10008D012 /* MyProfile */; };
@@ -24,9 +25,6 @@
 		D4AAF5D32A7F99E500DD3D55 /* Search in Frameworks */ = {isa = PBXBuildFile; productRef = D4AAF5D22A7F99E500DD3D55 /* Search */; };
 		D4B2E5712A78038800E5850E /* QuestionList in Frameworks */ = {isa = PBXBuildFile; productRef = D4B2E5702A78038800E5850E /* QuestionList */; };
 		D4B2E5732A7BF1C700E5850E /* PartnerCards in Frameworks */ = {isa = PBXBuildFile; productRef = D4B2E5722A7BF1C700E5850E /* PartnerCards */; };
-		D4B9FCD62B4145A200055F70 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D4B9FCD52B41443000055F70 /* GoogleService-Info.plist */; };
-		D4B9FCD72B4145A300055F70 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D4B9FCD52B41443000055F70 /* GoogleService-Info.plist */; };
-		D4B9FCD82B4145A400055F70 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D4B9FCD52B41443000055F70 /* GoogleService-Info.plist */; };
 		D4BC152D2A6999000029787F /* UserInfo in Frameworks */ = {isa = PBXBuildFile; productRef = D4BC152C2A6999000029787F /* UserInfo */; };
 /* End PBXBuildFile section */
 
@@ -61,7 +59,7 @@
 		D45CA1402A59C4E200C787D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D45CA1412A59C53400C787D6 /* SwapWithMe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwapWithMe.entitlements; sourceTree = "<group>"; };
 		D46BF3462B382732003EEDC3 /* ViewBuildingClient+Impl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewBuildingClient+Impl.swift"; sourceTree = "<group>"; };
-		D4B9FCD52B41443000055F70 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D47BF7322B781813007D5705 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Secret/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D4BB2BE42A543271007C9ADB /* SwapWithMe */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwapWithMe; path = ..; sourceTree = "<group>"; };
 		D4D019DD2A99E51E00BCFFBA /* SwapWithMe.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SwapWithMe.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -131,8 +129,8 @@
 				D45CA1412A59C53400C787D6 /* SwapWithMe.entitlements */,
 				D45CA1402A59C4E200C787D6 /* Info.plist */,
 				D431A89F2A4848EE00109710 /* SwapWithMeApp.swift */,
+				D47BF7322B781813007D5705 /* GoogleService-Info.plist */,
 				D431A8A32A4848EF00109710 /* Assets.xcassets */,
-				D4B9FCD52B41443000055F70 /* GoogleService-Info.plist */,
 				D431A8A52A4848EF00109710 /* Preview Content */,
 			);
 			path = SwapWithMe;
@@ -314,7 +312,7 @@
 			files = (
 				D431A8A72A4848EF00109710 /* Preview Assets.xcassets in Resources */,
 				D431A8A42A4848EF00109710 /* Assets.xcassets in Resources */,
-				D4B9FCD62B4145A200055F70 /* GoogleService-Info.plist in Resources */,
+				D47BF7332B781813007D5705 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,7 +320,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4B9FCD72B4145A300055F70 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,7 +327,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4B9FCD82B4145A400055F70 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

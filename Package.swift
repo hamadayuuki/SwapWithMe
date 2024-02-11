@@ -79,6 +79,7 @@ let coreTargets: [Target] = [
         "User",
         "PartnerCardsStore",
         "SearchStore",
+        "MyProfileStore",
         composableArchitecture,
         dependencies,
         dependenciesMacros,
@@ -99,7 +100,6 @@ let featureTargets: [Target] = [
         "UserInfoStore",
         "ViewComponents",
         "User",
-        "Request",
         "Routing",
         readabilityModifier,
         popupView,
@@ -121,6 +121,7 @@ let featureTargets: [Target] = [
     ]),
     .feature(name: "PartnerCards", dependencies: [
         "PartnerCardsStore",
+        "MyProfileStore",
         "ViewComponents",
         "User",
         "Routing",
@@ -147,6 +148,7 @@ let featureTargets: [Target] = [
         dependencies,
     ]),
     .feature(name: "MyProfile", dependencies: [
+        "MyProfileStore",
         "User",
         "ViewComponents",
         readabilityModifier,
@@ -172,10 +174,20 @@ let featureStoreTargets: [Target] = [
         "User",
         composableArchitecture,
     ]),
+    .featureStore(name: "MyProfileStore", dependencies: [
+        "Relationship",
+        "Request",
+        composableArchitecture,
+        dependencies,
+    ]),
 ]
 
 let entityTargets: [Target] = [
     .entity(name: "User", dependencies: [
+        fireStore,
+        fireStoreSwift
+    ]),
+    .entity(name: "Relationship", dependencies: [
         fireStore,
         fireStoreSwift
     ])
@@ -185,10 +197,12 @@ let dataTargets: [Target] = [
     .data(name: "Request", dependencies: [
         "User",
         "Error",
+        "Relationship",
         fireStore,
         fireStoreSwift,
         fireStorage,
-        dependencies
+        dependencies,
+        dependenciesMacros,
     ]),
     .data(name: "API", dependencies: [
         "Error"
@@ -208,6 +222,13 @@ let featureTestTargets: [Target] = [
         dependencies: [
             "SearchStore",
             "User",
+            composableArchitecture
+        ]),
+    .featureTest(
+        name: "MyProfileStoreTest",
+        dependencies: [
+            "MyProfileStore",
+            "Relationship",
             composableArchitecture
         ])
 ]

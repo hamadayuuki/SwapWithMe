@@ -34,8 +34,8 @@ extension ViewBuildingClient: DependencyKey {
             appTabView: {
                 return AnyView(AppTabView())
             },
-            myProfileView: {
-                return AnyView(MyProfileView())
+            myProfileView: { store in
+                return AnyView(MyProfileView(store: store))
             }
         )
     }
