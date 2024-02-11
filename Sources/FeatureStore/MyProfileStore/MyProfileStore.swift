@@ -7,6 +7,9 @@
 
 import ComposableArchitecture
 import Dependencies
+import Error
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 import Relationship
 import Request
 import SwiftUI
@@ -23,7 +26,7 @@ public struct MyProfileStore: Reducer {
 
     public enum Action: Equatable {
         case onAppear
-        case setRelationStatus(Relationship)
+        case fetchtRelationResponse(TaskResult<Relationship>)
     }
 
     public var body: some ReducerOf<Self> {
@@ -34,16 +37,27 @@ public struct MyProfileStore: Reducer {
                 // 現在はstubしているだけ
                 state.mySns = [.twitter, .instagram, .line, .other("BeReal.")]
                 return .run { send in
-                    let relationship = try await relationshipRequest.fetch("relationship-stub")
-                    await send(.setRelationStatus(relationship))
+                    await send(
+                        .fetchtRelationResponse(
+                            TaskResult {
+                                try await relationshipRequest.fetch("relationship-stub")
+                            }
+                        ))
                 }
-            case let .setRelationStatus(relationship):
+
+            case .fetchtRelationResponse(.success(let relationship)):
                 state.relationStatus = [
                     .follower(relationship.followersId.count),
                     .following(relationship.followingsId.count),
                     .yahhos(500),
                 ]
                 return .none
+            case .fetchtRelationResponse(.failure(let error as NSError)):
+                if error.domain == FirestoreErrorDomain {
+                    return .none
+                } else {
+                    return .none
+                }
             }
         }
     }
