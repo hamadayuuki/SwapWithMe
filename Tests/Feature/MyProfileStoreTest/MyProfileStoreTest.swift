@@ -35,7 +35,7 @@ final class MyProfileStoreTest: XCTestCase {
                 SNS.other("BeReal.")
             ]
         }
-        await testStore.receive(.setRelationStatus(relationship)) {
+        await testStore.receive(.fetchtRelationResponse(.success(relationship))) {
             $0.relationStatus = [
                 RelationStatus.follower(self.relationship.followersId.count),
                 RelationStatus.following(self.relationship.followingsId.count),
