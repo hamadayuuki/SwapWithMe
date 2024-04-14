@@ -13,6 +13,8 @@ import User
 import ViewComponents
 
 public struct MyProfileView: View {
+    @State private var showsMyProfileEditView = false
+
     let store: StoreOf<MyProfileStore>
 
     public init(store: StoreOf<MyProfileStore>) {
@@ -96,6 +98,19 @@ public struct MyProfileView: View {
             .fitToReadableContentGuide()
             .onAppear {
                 viewStore.send(.onAppear)
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: {
+                        showsMyProfileEditView = true
+                    }) {
+                        Image(systemName: "gearshape")
+                            .frame(width: 20, height: 20)
+                    }
+                }
+            }
+            .sheet(isPresented: $showsMyProfileEditView) {
+                MyProfileEditView()
             }
         }
     }

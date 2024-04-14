@@ -6,10 +6,14 @@
 //
 
 import MyProfileStore
+import ReadabilityModifier
 import SwiftUI
+import ViewComponents
 
 public struct MyProfileEditView: View {
     private var mySns: [SNS] = [.twitter, .instagram, .line, .other("BeReal.")]
+    @State private var nickname = "hotta_mayu"
+    @State private var selfDescription = "こんにちは。モデルやってます。よろしくお願いします。"
 
     public var body: some View {
         VStack(spacing: 24) {
@@ -24,18 +28,18 @@ public struct MyProfileEditView: View {
                         RoundedRectangle(cornerRadius: 75).stroke(Color.black, lineWidth: 4)
                     )
 
-                Image(systemName: "camera.fill")
-                    .resizable()
-                    .frame(width: 50, height: 50)
-            }
+                ZStack {
+                    Circle()
+                        .fill(.white)
+                        .frame(width: 50, height: 50)
+                        .overlay {
+                            Circle().stroke(.black, lineWidth: 1).frame(width: 50, height: 50)
+                        }
 
-            // ユーザー情報
-            VStack(spacing: 12) {
-                Text("@hotta_mayu")
-                    .font(.system(size: 24, weight: .bold, design: .rounded))
-                Text("hello, my name is hotta mayu")
-                    .font(.system(size: 16, weight: .regular, design: .rounded))
-                    .foregroundStyle(.gray)
+                    Image(systemName: "camera.fill")
+                        .resizable()
+                        .frame(width: 30, height: 25)
+                }
             }
 
             // SNSアイコン
@@ -52,7 +56,11 @@ public struct MyProfileEditView: View {
                 }
             }
             .frame(maxWidth: .infinity)
+
+            QuestionTextField(title: "名前", placeholder: "", text: $nickname)
+            QuestionTextField(title: "自己紹介", placeholder: "", text: $selfDescription)
         }
+        .fitToReadableContentGuide()
     }
 }
 
