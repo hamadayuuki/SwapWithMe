@@ -58,7 +58,7 @@ public struct MyProfileEditView: View {
             .frame(maxWidth: .infinity)
 
             QuestionTextField(title: "名前", placeholder: "", text: $nickname)
-            QuestionTextField(title: "自己紹介", placeholder: "", text: $selfDescription)
+            QuestionTextEditor(title: "自己紹介", text: $selfDescription)
         }
         .fitToReadableContentGuide()
     }
