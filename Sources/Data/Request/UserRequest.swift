@@ -34,8 +34,14 @@ extension UserRequestClient: DependencyKey {
             }
         },
         update: { data in
-            return true
-            //TODO: 処理追加
+            guard let id = data.id else { fatalError("Error UserRequest.set") }
+            let db = Firestore.firestore()
+            do {
+                try db.collection("Users").document(id).setData(from: data, merge: true)
+                return true
+            } catch {
+                return false
+            }
         },
         fetch: { id in
             let db = Firestore.firestore()

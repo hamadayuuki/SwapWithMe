@@ -151,7 +151,9 @@ let featureTargets: [Target] = [
         "MyProfileStore",
         "User",
         "ViewComponents",
+        "Request",
         readabilityModifier,
+        dependencies,
     ]),
 ]
 
