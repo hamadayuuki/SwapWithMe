@@ -44,6 +44,7 @@ public struct MyProfileView: View {
                             .foregroundStyle(.gray)
                     }
 
+                    /*
                     // SNSアイコン
                     HStack(spacing: 16) {
                         ForEach(viewStore.mySns, id: \.self) { sns in
@@ -58,6 +59,7 @@ public struct MyProfileView: View {
                         }
                     }
                     .frame(maxWidth: .infinity)
+                     */
 
                     // フォロー, フォロワー, やっほう数
                     HStack(spacing: 24) {

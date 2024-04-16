@@ -49,6 +49,7 @@ public struct MyProfileEditView: View {
                     }
                 }
 
+                /*
                 // SNSアイコン
                 HStack(spacing: 16) {
                     ForEach(mySns, id: \.self) { sns in
@@ -63,6 +64,7 @@ public struct MyProfileEditView: View {
                     }
                 }
                 .frame(maxWidth: .infinity)
+                 */
 
                 QuestionTextField(title: "名前", placeholder: "", text: $nickname)
                 QuestionTextEditor(title: "自己紹介", text: $selfDescription)
