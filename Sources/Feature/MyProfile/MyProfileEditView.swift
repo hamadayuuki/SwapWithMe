@@ -21,12 +21,15 @@ public struct MyProfileEditView: View {
     @State private var nickname = "hotta_mayu"
     @State private var selfDescription = "こんにちは。モデルやってます。よろしくお願いします。"
 
+    @State private var isPresentedEditPhotoPickerView = false
+    @State private var iconUIImage: UIImage? = UIImage(named: "hotta")!
+
     public var body: some View {
         NavigationView {
             VStack(spacing: 24) {
                 // アイコン
                 ZStack(alignment: .bottomTrailing) {
-                    Image("hotta")
+                    Image(uiImage: iconUIImage!)
                         .resizable()
                         .scaledToFill()
                         .frame(width: 150, height: 150)
@@ -35,17 +38,21 @@ public struct MyProfileEditView: View {
                             RoundedRectangle(cornerRadius: 75).stroke(Color.black, lineWidth: 4)
                         )
 
-                    ZStack {
-                        Circle()
-                            .fill(.white)
-                            .frame(width: 50, height: 50)
-                            .overlay {
-                                Circle().stroke(.black, lineWidth: 1).frame(width: 50, height: 50)
-                            }
+                    Button(action: {
+                        isPresentedEditPhotoPickerView = true
+                    }) {
+                        ZStack {
+                            Circle()
+                                .fill(.white)
+                                .frame(width: 50, height: 50)
+                                .overlay {
+                                    Circle().stroke(.black, lineWidth: 1).frame(width: 50, height: 50)
+                                }
 
-                        Image(systemName: "camera.fill")
-                            .resizable()
-                            .frame(width: 30, height: 25)
+                            Image(systemName: "camera.fill")
+                                .resizable()
+                                .frame(width: 30, height: 25)
+                        }
                     }
                 }
 
@@ -97,7 +104,12 @@ public struct MyProfileEditView: View {
             .navigationTitle("ユーザー設定")
             .navigationBarTitleDisplayMode(.inline)
             .interactiveDismissDisabled()
+            .sheet(isPresented: $isPresentedEditPhotoPickerView) {
+                EditPhotoPickerView(image: $iconUIImage)
+                    .ignoresSafeArea()
+            }
         }
+
     }
 }
 
