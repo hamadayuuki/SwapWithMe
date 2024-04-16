@@ -21,7 +21,9 @@ public struct MyProfileEditView: View {
     @State private var nickname = "hotta_mayu"
     @State private var selfDescription = "こんにちは。モデルやってます。よろしくお願いします。"
 
-    @State private var isPresentedEditPhotoPickerView = false
+    @State private var showImagePicker: Bool = false
+    @State private var showCropImage: Bool = false
+    @State private var isCropImage: Bool = false
     @State private var iconUIImage: UIImage? = UIImage(named: "hotta")!
 
     public var body: some View {
@@ -39,7 +41,8 @@ public struct MyProfileEditView: View {
                         )
 
                     Button(action: {
-                        isPresentedEditPhotoPickerView = true
+                        showImagePicker = true
+                        showCropImage = false
                     }) {
                         ZStack {
                             Circle()
@@ -105,9 +108,17 @@ public struct MyProfileEditView: View {
             .navigationTitle("ユーザー設定")
             .navigationBarTitleDisplayMode(.inline)
             .interactiveDismissDisabled()
-            .sheet(isPresented: $isPresentedEditPhotoPickerView) {
-                EditPhotoPickerView(image: $iconUIImage)
-                    .ignoresSafeArea()
+            .sheet(isPresented: $showImagePicker) {
+                ImagePicker(image: $iconUIImage)
+            }
+            .sheet(isPresented: $showCropImage) {
+                CropImage(image: $iconUIImage)
+                    .onDisappear {
+                        isCropImage = true
+                    }
+            }
+            .onChange(of: iconUIImage) { _ in
+                showCropImage = true  // ImagePicker表示のタイミングでfalse
             }
         }
 
