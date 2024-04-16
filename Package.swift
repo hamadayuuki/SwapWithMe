@@ -249,7 +249,7 @@ let allTargets = coreTargets + featureTargets + featureStoreTargets + entityTarg
 
 let package = Package(
     name: "SwapWithMe",
-    platforms: [.iOS(.v15)],
+    platforms: [.iOS(.v16)],
     products: allTargets
         .filter { $0.isTest == false }   // リリースするパッケージにテストを含めない
         .map{ $0.name }
