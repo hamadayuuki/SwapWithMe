@@ -28,7 +28,7 @@ public struct MyProfileEditView: View {
 
     public var body: some View {
         NavigationView {
-            VStack(spacing: 24) {
+            VStack(spacing: 36) {
                 // アイコン
                 ZStack(alignment: .bottomTrailing) {
                     Image(uiImage: iconUIImage!)
@@ -108,8 +108,11 @@ public struct MyProfileEditView: View {
             .navigationTitle("ユーザー設定")
             .navigationBarTitleDisplayMode(.inline)
             .interactiveDismissDisabled()
+            .frame(maxHeight: .infinity, alignment: .top)
+            .padding(.top, 48)
             .sheet(isPresented: $showImagePicker) {
                 ImagePicker(image: $iconUIImage)
+                    .ignoresSafeArea()
             }
             .sheet(isPresented: $showCropImage) {
                 CropImage(image: $iconUIImage)
