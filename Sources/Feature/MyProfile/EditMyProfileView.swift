@@ -24,6 +24,7 @@ public struct EditMyProfileView: View {
     @State private var showImagePicker: Bool = false
     @State private var showCropImage: Bool = false
     @State private var iconUIImage: UIImage? = UIImage(named: "hotta")!
+    @State private var isUploading = false
 
     public var body: some View {
         NavigationView {
@@ -92,15 +93,22 @@ public struct EditMyProfileView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {
                         Task {
+                            isUploading = true
                             let uid = "18D93893-3CAC-41B3-82AA-3B8A3EFDEBD6"
+                            // TODO: エラーハンドリング
                             guard let uiImage = iconUIImage else { return }
                             let iconURL = try await ImageRequest.set(uiImage: uiImage, id: uid)
                             let user: User = .init(id: uid, iconURL: iconURL, name: nickname, age: 20, sex: .man, affiliation: .high, animal: .dog, activity: .indoor, personality: .shy, description: selfDescription)
                             _ = try await userRequestClient.update(user)
+                            isUploading = false
                             dismiss()
                         }
                     }) {
-                        Text("保存")
+                        if !isUploading {
+                            Text("保存")
+                        } else {
+                            ProgressView()
+                        }
                     }
                 }
             }
