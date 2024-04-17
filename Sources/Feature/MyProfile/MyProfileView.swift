@@ -112,7 +112,7 @@ public struct MyProfileView: View {
                 }
             }
             .sheet(isPresented: $showsMyProfileEditView) {
-                MyProfileEditView()
+                EditMyProfileView()
             }
         }
     }

@@ -13,7 +13,7 @@ import SwiftUI
 import User
 import ViewComponents
 
-public struct MyProfileEditView: View {
+public struct EditMyProfileView: View {
     @Environment(\.dismiss) private var dismiss
     @Dependency(\.userRequestClient) var userRequestClient
 
@@ -125,5 +125,5 @@ public struct MyProfileEditView: View {
 }
 
 #Preview {
-    MyProfileEditView()
+    EditMyProfileView()
 }
