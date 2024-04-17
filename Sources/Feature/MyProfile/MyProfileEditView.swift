@@ -23,7 +23,6 @@ public struct MyProfileEditView: View {
 
     @State private var showImagePicker: Bool = false
     @State private var showCropImage: Bool = false
-    @State private var isCropImage: Bool = false
     @State private var iconUIImage: UIImage? = UIImage(named: "hotta")!
 
     public var body: some View {
@@ -116,9 +115,6 @@ public struct MyProfileEditView: View {
             }
             .sheet(isPresented: $showCropImage) {
                 CropImage(image: $iconUIImage)
-                    .onDisappear {
-                        isCropImage = true
-                    }
             }
             .onChange(of: iconUIImage) { _ in
                 showCropImage = true  // ImagePicker表示のタイミングでfalse
