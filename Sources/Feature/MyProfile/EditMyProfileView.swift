@@ -89,6 +89,7 @@ public struct EditMyProfileView: View {
                             .resizable()
                             .frame(width: 15, height: 15)
                     }
+                    .disabled(isUploading)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {
@@ -110,6 +111,7 @@ public struct EditMyProfileView: View {
                             ProgressView()
                         }
                     }
+                    .disabled(isUploading)
                 }
             }
             .navigationTitle("ユーザー設定")
