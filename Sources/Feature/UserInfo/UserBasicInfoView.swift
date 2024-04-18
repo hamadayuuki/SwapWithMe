@@ -10,6 +10,7 @@ import ReadabilityModifier
 import SwiftUI
 import User
 import UserInfoStore
+import ViewComponents
 
 public struct UserBasicInfoView: View {
     var store: StoreOf<UserBasicInfoStore>
@@ -92,14 +93,14 @@ public struct UserBasicInfoView: View {
                             .font(.system(size: 12, weight: .regular, design: .rounded))
                             .padding(.bottom, 24)
 
-                        QuestionTextFieldView(title: "ニックネーム", placeholder: "8文字以内で入力", nickName: $nickName)
+                        QuestionTextField(title: "ニックネーム", placeholder: "8文字以内で入力", text: $nickName)
                         QuestionPickerView(type: .age, selectionValue: $selectAge)
                         QuestionPickerView(type: .sex, selectionValue: $selectSex)
                         QuestionPickerView(type: .affiliation, selectionValue: $selectAffiliation)
                         QuestionPickerView(type: .dogOrCat, selectionValue: $selectDogOrCat)
                         QuestionPickerView(type: .activity, selectionValue: $selectActivity)
                         QuestionPickerView(type: .personality, selectionValue: $selectPersonality)
-                        QuestionTextFieldView(title: "ひとこと", placeholder: "自由に入力", nickName: $description)
+                        QuestionTextField(title: "ひとこと", placeholder: "自由に入力", text: $description)
                     }
                 }
 
@@ -138,21 +139,6 @@ public struct UserBasicInfoView: View {
             }
             .fitToReadableContentGuide()
             .padding(.top, 24)
-        }
-    }
-
-    private func QuestionTextFieldView(title: String, placeholder: String, nickName: Binding<String>) -> some View {
-        VStack(spacing: 4) {
-            HStack {
-                Text(title)
-                    .font(.system(size: 16, weight: .semibold, design: .rounded))
-                Spacer()
-                TextField(placeholder, text: nickName)
-                    .frame(maxWidth: 150, alignment: .trailing)
-            }
-            Divider()
-                .frame(height: 1)
-                .background(.gray)
         }
     }
 

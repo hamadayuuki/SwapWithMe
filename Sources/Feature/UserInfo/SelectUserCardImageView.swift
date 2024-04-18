@@ -87,17 +87,15 @@ public struct SelectUserCardImageView: View {
             .padding(.top, 24)
             .sheet(isPresented: $showImagePicker, onDismiss: toImage) {
                 ImagePicker(image: self.$inputImage)
-                    .onDisappear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {  // cropImage を表示させるため必要
-                            showCropImage = true
-                        }
-                    }
             }
             .sheet(isPresented: $showCropImage, onDismiss: toImage) {
                 CropImage(image: self.$inputImage)
                     .onDisappear {
                         isCropImage = true
                     }
+            }
+            .onChange(of: self.inputImage) { _ in
+                showCropImage = true  // ImagePicker表示のタイミングでfalse
             }
             .fullScreenCover(
                 isPresented: viewStore.binding(
@@ -131,6 +129,7 @@ public struct SelectUserCardImageView: View {
         Button(
             action: {
                 self.showImagePicker.toggle()
+                showCropImage = false
             },
             label: {
                 Image(systemName: "plus.circle.fill")

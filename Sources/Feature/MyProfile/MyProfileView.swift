@@ -13,6 +13,8 @@ import User
 import ViewComponents
 
 public struct MyProfileView: View {
+    @State private var showsMyProfileEditView = false
+
     let store: StoreOf<MyProfileStore>
 
     public init(store: StoreOf<MyProfileStore>) {
@@ -42,6 +44,7 @@ public struct MyProfileView: View {
                             .foregroundStyle(.gray)
                     }
 
+                    /*
                     // SNSアイコン
                     HStack(spacing: 16) {
                         ForEach(viewStore.mySns, id: \.self) { sns in
@@ -56,6 +59,7 @@ public struct MyProfileView: View {
                         }
                     }
                     .frame(maxWidth: .infinity)
+                     */
 
                     // フォロー, フォロワー, やっほう数
                     HStack(spacing: 24) {
@@ -96,6 +100,19 @@ public struct MyProfileView: View {
             .fitToReadableContentGuide()
             .onAppear {
                 viewStore.send(.onAppear)
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: {
+                        showsMyProfileEditView = true
+                    }) {
+                        Image(systemName: "gearshape")
+                            .frame(width: 20, height: 20)
+                    }
+                }
+            }
+            .sheet(isPresented: $showsMyProfileEditView) {
+                EditMyProfileView()
             }
         }
     }
