@@ -7,6 +7,7 @@
 
 import ReadabilityModifier
 import SwiftUI
+import User
 
 private struct Question {
     let title: String
@@ -27,18 +28,20 @@ public struct QuestionListView: View {
         .init(title: "愛犬との思い出の写真", description: "愛犬とのアウトドアの思い出で、特にお気に入りの写真や場面はありますか？"),
         .init(title: "アウトドアファッション", description: "アウトドア活動時に気を付けているファッションやアクセサリーについて、何か特別なポイントやおすすめのブランドはありますか？"),
     ]
-    @State var cardImage: Image
+    var cardImage: Image
+    var partner: User
 
-    public init(cardImage: Image) {
+    public init(cardImage: Image, partner: User) {
         self.cardImage = cardImage
+        self.partner = partner
     }
 
     public var body: some View {
         ScrollView {
             VStack(spacing: 32) {
                 ZStack {
-                    card()
-                    partnerInfo(name: "テスト3", age: 24, affiliation: "フレンドリー")
+                    card(cardImage: cardImage)
+                    partnerInfo(name: partner.name, age: 24, affiliation: partner.affiliation.rawValue)
                         .offset(x: 0, y: 400 * 0.7 * 0.25)
                 }
 
@@ -50,16 +53,11 @@ public struct QuestionListView: View {
         }
     }
 
-    private func card() -> some View {
+    private func card(cardImage: Image) -> some View {
         ZStack(alignment: .top) {
-            Image("partner")
+            cardImage
                 .resizable()
                 .scaledToFill()
-
-            //            cardImage
-            //                .resizable()
-            //                .scaledToFill()
-
             LinearGradient(
                 gradient: Gradient(colors: [.clear, .black.opacity(0.7)]),
                 startPoint: .top,
@@ -109,6 +107,6 @@ public struct QuestionListView: View {
 
 struct QuestionListView_Previews: PreviewProvider {
     static var previews: some View {
-        QuestionListView(cardImage: Image("nagano"))
+        QuestionListView(cardImage: Image("nagano"), partner: User.stub())
     }
 }

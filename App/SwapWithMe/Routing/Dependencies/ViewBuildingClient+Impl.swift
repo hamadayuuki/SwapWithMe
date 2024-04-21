@@ -15,12 +15,13 @@ import Routing
 import Search
 import SwiftUI
 import Tab
+import User
 
 extension ViewBuildingClient: DependencyKey {
     public static var liveValue: ViewBuildingClient {
         return .init(
             questionListView: { cardImage in
-                return AnyView(QuestionListView(cardImage: cardImage))
+                return AnyView(QuestionListView(cardImage: cardImage, partner: User.stub()))
             },
             homeView: { (myInfo, partner) in
                 return AnyView(HomeView(myInfo: myInfo, partner: partner))
