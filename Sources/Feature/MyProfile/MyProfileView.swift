@@ -84,12 +84,7 @@ public struct MyProfileView: View {
 
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 12) {
-                                CardView(cardImage: Image("nagano"), partner: PartnerInfo(name: "hotta mayu", age: 25, personality: "cute"))
-                                CardView(cardImage: Image("nagano2"), partner: PartnerInfo(name: "hotta mayu", age: 25, personality: "cute"))
-                                CardView(cardImage: Image("nagano3"), partner: PartnerInfo(name: "hotta mayu", age: 25, personality: "cute"))
-                                CardView(cardImage: Image("nagano4"), partner: PartnerInfo(name: "hotta mayu", age: 25, personality: "cute"))
-                                CardView(cardImage: Image("nagano5"), partner: PartnerInfo(name: "hotta mayu", age: 25, personality: "cute"))
-                                CardView(cardImage: Image("hotta"), partner: PartnerInfo(name: "hotta mayu", age: 25, personality: "cute"))
+                                CardView(user: User.stub())
                             }
                         }
                     }

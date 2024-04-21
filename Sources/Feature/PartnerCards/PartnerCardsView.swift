@@ -15,6 +15,7 @@ TODO: カードに載せる情報を増やす
 import ComposableArchitecture
 import Dependencies
 import MyProfileStore
+import Nuke
 import PartnerCardsStore
 import ReadabilityModifier
 import Routing
@@ -45,21 +46,24 @@ public struct PartnerCardsView: View {
                             .font(.system(size: 12, weight: .regular, design: .rounded))
                             .padding(.bottom, 18)
 
-                        // カードが11枚を想定して、値は決め打ち
-                        ForEach(0..<5) { i in
-                            HStack(spacing: 12) {
-                                ForEach(0..<3) { j in
-                                    if let cardImage = viewStore.cardImages[safe: i * 3 + j],
-                                        let partnerInfo = viewStore.partnerInfos[safe: i * 3 + j]
-                                    {
-                                        CardView(cardImage: cardImage, partner: partnerInfo)
-                                            .onTapGesture {
-                                                viewStore.send(.tappedPartnerCard(cardImage))
-                                            }
+                        // 横3枚 × 縦x枚
+                        VStack(spacing: 12) {
+                            ForEach(0..<Int(viewStore.follows.count / 3) + 1) { i in
+                                HStack(spacing: 12) {
+                                    ForEach(0..<3) { j in
+                                        if let user = viewStore.follows[safe: i * 3 + j] {
+                                            CardView(user: user)
+                                                .onTapGesture {
+                                                    viewStore.send(.tappedPartnerCard(user))
+                                                }
+                                        } else {
+                                            Color(.clear)
+                                                .frame(width: 250 * 0.42, height: 400 * 0.42)
+                                        }
                                     }
                                 }
+                                .frame(maxWidth: .infinity, alignment: .center)
                             }
-                            .frame(maxWidth: .infinity, alignment: .center)
                         }
                     }
                     .padding(.top, 80)
@@ -93,7 +97,7 @@ public struct PartnerCardsView: View {
 
                 // 画面遷移
                 NavigationLink(
-                    destination: questionListView(viewStore.tappedImage),
+                    destination: questionListView(Image("kiyohara")),
                     isActive: viewStore.$isTransQuestionListView
                 ) {
                     EmptyView()
