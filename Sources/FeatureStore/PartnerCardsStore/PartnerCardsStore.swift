@@ -32,7 +32,7 @@ public struct PartnerCardsStore: Reducer {
         Reduce { state, action in
             switch action {
             case .onAppear:
-                state.follows = [User.stub(), User.stub(), User.stub(), User.stub(), User.stub()]
+                state.follows = [User.stub(), User.stub(), User.stub(), User.stub()]
                 return .none
 
             case .tappedPartnerCard(let partner):

@@ -48,7 +48,7 @@ public struct PartnerCardsView: View {
 
                         // 横3枚 × 縦x枚
                         VStack(spacing: 12) {
-                            ForEach(0..<Int(viewStore.follows.count / 3) + 1) { i in
+                            ForEach(0..<Int(viewStore.follows.count / 3) + 1, id: \.self) { i in
                                 HStack(spacing: 12) {
                                     ForEach(0..<3) { j in
                                         if let user = viewStore.follows[safe: i * 3 + j] {
