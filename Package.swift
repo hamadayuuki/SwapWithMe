@@ -161,8 +161,12 @@ let featureTargets: [Target] = [
 
 let featureStoreTargets: [Target] = [
     .featureStore(name: "PartnerCardsStore", dependencies: [
+        "Request",
         "User",
+        "Relationship",
+        fireStore,
         composableArchitecture,
+        dependencies,
     ]),
     .featureStore(name: "SearchStore", dependencies: [
         "Request",
