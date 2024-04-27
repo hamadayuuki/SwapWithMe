@@ -22,9 +22,9 @@ public struct User: Codable, Identifiable, Equatable, Hashable {
     public var activity: Activity
     public var personality: Personality
     public var description: String
-    public var createdAt: Timestamp = Timestamp()
+    public var createdAt: Timestamp
 
-    public init(id: String? = nil, iconURL: URL?, name: String, age: Int, sex: Sex, affiliation: Affiliation, animal: Animal, activity: Activity, personality: Personality, description: String) {
+    public init(id: String? = nil, iconURL: URL?, name: String, age: Int, sex: Sex, affiliation: Affiliation, animal: Animal, activity: Activity, personality: Personality, description: String, createdAt: Timestamp = .init()) {
         self.id = id
         self.iconURL = iconURL
         self.name = name
@@ -35,6 +35,7 @@ public struct User: Codable, Identifiable, Equatable, Hashable {
         self.activity = activity
         self.personality = personality
         self.description = description
+        self.createdAt = createdAt
     }
 }
 
@@ -81,7 +82,8 @@ extension User {
             animal: .dog,
             activity: .indoor,
             personality: .shy,
-            description: ""
+            description: "",
+            createdAt: .init(date: .init(timeIntervalSince1970: 0))
         )
     }
 }

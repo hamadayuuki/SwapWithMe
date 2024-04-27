@@ -243,7 +243,8 @@ let featureTestTargets: [Target] = [
         dependencies: [
             "PartnerCardsStore",
             "Relationship",
-            composableArchitecture
+            "User",
+            composableArchitecture,
         ]),
 ]
 
