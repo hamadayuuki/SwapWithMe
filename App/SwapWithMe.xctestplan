@@ -33,6 +33,13 @@
         "identifier" : "APITest",
         "name" : "APITest"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..",
+        "identifier" : "PartnerCardsTest",
+        "name" : "PartnerCardsTest"
+      }
     }
   ],
   "version" : 1

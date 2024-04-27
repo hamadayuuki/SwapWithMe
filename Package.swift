@@ -237,7 +237,14 @@ let featureTestTargets: [Target] = [
             "MyProfileStore",
             "Relationship",
             composableArchitecture
-        ])
+        ]),
+    .featureTest(
+        name: "PartnerCardsTest",
+        dependencies: [
+            "PartnerCardsStore",
+            "Relationship",
+            composableArchitecture
+        ]),
 ]
 
 let dataTestTargets: [Target] = [
