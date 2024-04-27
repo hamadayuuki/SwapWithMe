@@ -15,7 +15,6 @@ TODO: カードに載せる情報を増やす
 import ComposableArchitecture
 import Dependencies
 import MyProfileStore
-import Nuke
 import PartnerCardsStore
 import ReadabilityModifier
 import Routing
@@ -48,10 +47,10 @@ public struct PartnerCardsView: View {
 
                         // 横3枚 × 縦x枚
                         VStack(spacing: 12) {
-                            ForEach(0..<Int(viewStore.follows.count / 3) + 1, id: \.self) { i in
+                            ForEach(0..<Int(viewStore.followings.count / 3) + 1, id: \.self) { i in
                                 HStack(spacing: 12) {
                                     ForEach(0..<3) { j in
-                                        if let user = viewStore.follows[safe: i * 3 + j] {
+                                        if let user = viewStore.followings[safe: i * 3 + j] {
                                             CardView(user: user)
                                                 .onTapGesture {
                                                     viewStore.send(.tappedPartnerCard(user))
@@ -116,7 +115,7 @@ public struct PartnerCardsView: View {
             }
             .fitToReadableContentGuide()
             .onAppear {
-                viewStore.send(.onAppear)
+                viewStore.send(.onAppear("18D93893-3CAC-41B3-82AA-3B8A3EFDEBD6"))
             }
         }
     }

@@ -128,7 +128,6 @@ let featureTargets: [Target] = [
         "Routing",
         readabilityModifier,
         popupView,
-        nuke,
         composableArchitecture,
         dependencies
     ]),
