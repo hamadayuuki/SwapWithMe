@@ -18,6 +18,7 @@
 		D45CA13D2A5929EE00C787D6 /* SignUp in Frameworks */ = {isa = PBXBuildFile; productRef = D45CA13C2A5929EE00C787D6 /* SignUp */; };
 		D46BF3472B382732003EEDC3 /* ViewBuildingClient+Impl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46BF3462B382732003EEDC3 /* ViewBuildingClient+Impl.swift */; };
 		D47BF7332B781813007D5705 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D47BF7322B781813007D5705 /* GoogleService-Info.plist */; };
+		D482F9A92BD3CCD70049291E /* User in Frameworks */ = {isa = PBXBuildFile; productRef = D482F9A82BD3CCD70049291E /* User */; };
 		D491F86A2B2DA9380017FE80 /* Routing in Frameworks */ = {isa = PBXBuildFile; productRef = D491F8692B2DA9380017FE80 /* Routing */; };
 		D4A1F78D2A5EF80B0053DB95 /* ViewComponents in Frameworks */ = {isa = PBXBuildFile; productRef = D4A1F78C2A5EF80B0053DB95 /* ViewComponents */; };
 		D4A9C4452B746CA10008D012 /* MyProfile in Frameworks */ = {isa = PBXBuildFile; productRef = D4A9C4442B746CA10008D012 /* MyProfile */; };
@@ -72,6 +73,7 @@
 				D4A9C4452B746CA10008D012 /* MyProfile in Frameworks */,
 				D4B2E5712A78038800E5850E /* QuestionList in Frameworks */,
 				D45CA13D2A5929EE00C787D6 /* SignUp in Frameworks */,
+				D482F9A92BD3CCD70049291E /* User in Frameworks */,
 				D4433AA92A6F8F3A000FA106 /* Home in Frameworks */,
 				D491F86A2B2DA9380017FE80 /* Routing in Frameworks */,
 				D4B2E5732A7BF1C700E5850E /* PartnerCards in Frameworks */,
@@ -221,6 +223,7 @@
 				D4AAF5D22A7F99E500DD3D55 /* Search */,
 				D491F8692B2DA9380017FE80 /* Routing */,
 				D4A9C4442B746CA10008D012 /* MyProfile */,
+				D482F9A82BD3CCD70049291E /* User */,
 			);
 			productName = SwapWithMe;
 			productReference = D431A89C2A4848EE00109710 /* SwapWithMe.app */;
@@ -702,6 +705,10 @@
 		D45CA13C2A5929EE00C787D6 /* SignUp */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SignUp;
+		};
+		D482F9A82BD3CCD70049291E /* User */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = User;
 		};
 		D491F8692B2DA9380017FE80 /* Routing */ = {
 			isa = XCSwiftPackageProductDependency;

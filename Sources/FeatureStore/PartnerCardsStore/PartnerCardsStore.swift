@@ -6,6 +6,10 @@
 //
 
 import ComposableArchitecture
+import Dependencies
+import FirebaseFirestore  // Timestamp()
+import Relationship
+import Request
 import SwiftUI
 import User
 
@@ -13,54 +17,63 @@ public struct PartnerCardsStore: Reducer {
     public struct State: Equatable {
         public init() {}
 
-        public var cardImages: [Image] = []
-        public var partnerInfos: [PartnerInfo] = []
-        public var tappedImage: Image = Image("")
+        public var followings: [User] = []
+        public var tappedPartner: User? = nil
+        public var willLoadFollows = true  // onAppearで無駄なfetchを避けるためのフラグ
         @BindingState public var isTransQuestionListView = false
         @BindingState public var isTransMyProfileView = false
     }
 
     public enum Action: Equatable, BindableAction {
-        case onAppear
-        case tappedPartnerCard(Image)
+        case onAppear(String)
+        case fetchRelationshipSuccessed([String])
+        case fetchFollowsSuccessed([User])
+        case tappedPartnerCard(User)
         case binding(BindingAction<State>)
         case tappedMyProfileImage
     }
 
     public var body: some ReducerOf<Self> {
+        @Dependency(\.relationshipRequest) var relationshipRequest
+        @Dependency(\.userRequestClient) var userRequestClient
+
         BindingReducer()
 
         Reduce { state, action in
             switch action {
-            case .onAppear:
-                var saveCardImages: [Image] = []
-                for i in 1..<16 {
-                    saveCardImages.append(Image("mock-\(i)"))
+            case .onAppear(let myID):
+                if !state.willLoadFollows {
+                    return .none
                 }
-                state.cardImages = saveCardImages
 
-                state.partnerInfos = [
-                    .init(name: "かえぽん", age: 30, personality: "フレンドリー"),
-                    .init(name: "るいるい", age: 22, personality: "人見知り"),
-                    .init(name: "れんたん", age: 25, personality: "人見知り"),
-                    .init(name: "ユウスケ", age: 19, personality: "フレンドリー"),
-                    .init(name: "さくたん", age: 20, personality: "人見知り"),
-                    .init(name: "しげしげ", age: 29, personality: "フレンドリー"),
-                    .init(name: "ビルケイツ", age: 23, personality: "フレンドリー"),
-                    .init(name: "かっきー", age: 30, personality: "人見知り"),
-                    .init(name: "アイフォン", age: 22, personality: "フレンドリー"),
-                    .init(name: "トランペット", age: 22, personality: "人見知り"),
-                    .init(name: "いくた", age: 30, personality: "フレンドリー"),
-                    .init(name: "コスメ", age: 28, personality: "人見知り"),
-                    .init(name: "りこ", age: 25, personality: "人見知り"),
-                    .init(name: "あかり", age: 34, personality: "フレンドリー"),
-                    .init(name: "ラーメン", age: 39, personality: "人見知り"),
-                ]
-
+                return .run { send in
+                    do {
+                        let myRelationship: Relationship = try await relationshipRequest.fetch(id: myID)
+                        await send(.fetchRelationshipSuccessed(myRelationship.followingsId))
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+            case .fetchRelationshipSuccessed(let followingsId):
+                return .run { send in
+                    do {
+                        var follows: [User] = []
+                        for followingId in followingsId {
+                            let follow = try await userRequestClient.fetch(followingId)
+                            follows.append(follow)
+                        }
+                        await send(.fetchFollowsSuccessed(follows))
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+            case .fetchFollowsSuccessed(let follows):
+                state.followings = follows
+                state.willLoadFollows = false
                 return .none
 
-            case .tappedPartnerCard(let partnerImage):
-                state.tappedImage = partnerImage
+            case .tappedPartnerCard(let partner):
+                state.tappedPartner = partner
                 state.isTransQuestionListView = true
                 return .none
 

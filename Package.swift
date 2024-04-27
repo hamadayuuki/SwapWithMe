@@ -17,7 +17,7 @@ let packageDependencies: [PackageDependency] = [
     .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: .init(1, 2, 0)),
     .package(url: "https://github.com/pointfreeco/swift-dependencies", from: .init(1, 1, 0)),
     .package(url: "https://github.com/TimOliver/TOCropViewController.git", from: .init(2, 6, 1)),
-    .package(url: "https://github.com/kean/Nuke.git", from: .init(12, 1, 5))
+    .package(url: "https://github.com/kean/Nuke.git", from: .init(12, 5, 0)),
 ]
 
 let readabilityModifier: TargetDependency = .product(name: "ReadabilityModifier", package: "ReadabilityModifier")
@@ -116,6 +116,7 @@ let featureTargets: [Target] = [
     ]),
     .feature(name: "QuestionList", dependencies: [
         "ViewComponents",
+        "User",
         readabilityModifier,
         popupView,
     ]),
@@ -159,8 +160,12 @@ let featureTargets: [Target] = [
 
 let featureStoreTargets: [Target] = [
     .featureStore(name: "PartnerCardsStore", dependencies: [
+        "Request",
         "User",
+        "Relationship",
+        fireStore,
         composableArchitecture,
+        dependencies,
     ]),
     .featureStore(name: "SearchStore", dependencies: [
         "Request",

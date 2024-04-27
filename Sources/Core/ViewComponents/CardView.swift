@@ -9,21 +9,27 @@ import SwiftUI
 import User
 
 public struct CardView: View {
-    let cardImage: Image
-    let partner: PartnerInfo
+    @State private var cardImage: Image = Image("")
+    let user: User
     let cardSize: CGSize
 
-    public init(cardImage: Image, partner: PartnerInfo, cardSize: CGSize = .init(width: 250, height: 400)) {
-        self.cardImage = cardImage
-        self.partner = partner
+    public init(user: User, cardSize: CGSize = .init(width: 250, height: 400)) {
+        self.user = user
         self.cardSize = cardSize
     }
 
     public var body: some View {
         ZStack {
             card(cardImage: cardImage, cardSize: cardSize)
-            partnerInfo(name: partner.name, age: partner.age, affiliation: partner.personality)
+            partnerInfo(name: user.name, age: user.age, affiliation: user.personality.rawValue)
                 .offset(x: 0, y: cardSize.height * 0.42 * 0.25)
+        }
+        .onAppear {
+            Task {
+                guard let iconURL = user.iconURL else { return }
+                let uiImage = await nukeUIImage(url: iconURL)
+                self.cardImage = Image(uiImage: uiImage)
+            }
         }
     }
 
@@ -62,5 +68,5 @@ public struct CardView: View {
 }
 
 #Preview {
-    CardView(cardImage: Image(""), partner: .init(name: "hoge", age: 20, personality: "huga"))
+    CardView(user: User.stub())
 }

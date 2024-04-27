@@ -45,21 +45,24 @@ public struct PartnerCardsView: View {
                             .font(.system(size: 12, weight: .regular, design: .rounded))
                             .padding(.bottom, 18)
 
-                        // カードが11枚を想定して、値は決め打ち
-                        ForEach(0..<5) { i in
-                            HStack(spacing: 12) {
-                                ForEach(0..<3) { j in
-                                    if let cardImage = viewStore.cardImages[safe: i * 3 + j],
-                                        let partnerInfo = viewStore.partnerInfos[safe: i * 3 + j]
-                                    {
-                                        CardView(cardImage: cardImage, partner: partnerInfo)
-                                            .onTapGesture {
-                                                viewStore.send(.tappedPartnerCard(cardImage))
-                                            }
+                        // 横3枚 × 縦x枚
+                        VStack(spacing: 12) {
+                            ForEach(0..<Int(viewStore.followings.count / 3) + 1, id: \.self) { i in
+                                HStack(spacing: 12) {
+                                    ForEach(0..<3) { j in
+                                        if let user = viewStore.followings[safe: i * 3 + j] {
+                                            CardView(user: user)
+                                                .onTapGesture {
+                                                    viewStore.send(.tappedPartnerCard(user))
+                                                }
+                                        } else {
+                                            Color(.clear)
+                                                .frame(width: 250 * 0.42, height: 400 * 0.42)
+                                        }
                                     }
                                 }
+                                .frame(maxWidth: .infinity, alignment: .center)
                             }
-                            .frame(maxWidth: .infinity, alignment: .center)
                         }
                     }
                     .padding(.top, 80)
@@ -93,7 +96,7 @@ public struct PartnerCardsView: View {
 
                 // 画面遷移
                 NavigationLink(
-                    destination: questionListView(viewStore.tappedImage),
+                    destination: questionListView(Image("kiyohara")),
                     isActive: viewStore.$isTransQuestionListView
                 ) {
                     EmptyView()
@@ -112,7 +115,7 @@ public struct PartnerCardsView: View {
             }
             .fitToReadableContentGuide()
             .onAppear {
-                viewStore.send(.onAppear)
+                viewStore.send(.onAppear("18D93893-3CAC-41B3-82AA-3B8A3EFDEBD6"))
             }
         }
     }
