@@ -1,16 +1,16 @@
 //
 //  PartnerCardsStoreTest.swift
-//  
+//
 //
 //  Created by 濵田　悠樹 on 2024/04/28.
 //
 
-import XCTest
 import ComposableArchitecture
+import XCTest
 
+@testable import PartnerCardsStore
 @testable import Relationship
 @testable import User
-@testable import PartnerCardsStore
 
 @MainActor
 final class PartnerCardsStoreTest: XCTestCase {

@@ -1,6 +1,6 @@
 //
 //  UserInfoTest.swift
-//  
+//
 //
 //  Created by 濵田　悠樹 on 2023/08/26.
 //
@@ -13,9 +13,9 @@ Test Plan の作成
  3 : 画面左下の + を押し > UserInfoTest を追加
  */
 
-import XCTest
 import ComposableArchitecture
 import User
+import XCTest
 
 @testable import UserInfoStore
 

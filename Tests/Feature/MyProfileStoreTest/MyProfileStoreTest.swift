@@ -5,11 +5,11 @@
 //  Created by 濵田　悠樹 on 2024/02/11.
 //
 
-import XCTest
 import ComposableArchitecture
+import XCTest
 
-@testable import Relationship
 @testable import MyProfileStore
+@testable import Relationship
 
 @MainActor
 final class MyProfileStoreTest: XCTestCase {
@@ -38,14 +38,14 @@ final class MyProfileStoreTest: XCTestCase {
                 SNS.twitter,
                 SNS.instagram,
                 SNS.line,
-                SNS.other("BeReal.")
+                SNS.other("BeReal."),
             ]
         }
         await testStore.receive(.fetchtRelationResponse(.success(relationship))) {
             $0.relationStatus = [
                 RelationStatus.follower(self.relationship.followersId.count),
                 RelationStatus.following(self.relationship.followingsId.count),
-                RelationStatus.yahhos(500)
+                RelationStatus.yahhos(500),
             ]
         }
     }
@@ -67,7 +67,7 @@ final class MyProfileStoreTest: XCTestCase {
                 SNS.twitter,
                 SNS.instagram,
                 SNS.line,
-                SNS.other("BeReal.")
+                SNS.other("BeReal."),
             ]
         }
         await testStore.receive(.fetchtRelationResponse(.failure(ErrorResult()))) {
