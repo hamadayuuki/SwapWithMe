@@ -352,7 +352,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# `-p/--parallel` `-r/--recursive` `-i/--in-place` `-s/--strict`\n# ../Sources : SPM modules\nxcrun --sdk macosx mint run swift-format swift-format -p -r -i SwapWithMe ../Sources\nxcrun --sdk macosx mint run swift-format swift-format lint -p -r SwapWithMe ../Sources\n";
+			shellScript = "if [ -z \"${CI+x}\" ];then\n    # `-p/--parallel` `-r/--recursive` `-i/--in-place` `-s/--strict`\n    # ../Sources : SPM modules\n        \n    # Sources\n    xcrun --sdk macosx mint run swift-format swift-format -p -r -i SwapWithMe ../Sources\n    xcrun --sdk macosx mint run swift-format swift-format lint -p -r SwapWithMe ../Sources\n        \n    # Test\n    xcrun --sdk macosx mint run swift-format swift-format -p -r -i SwapWithMe ../Tests\n    xcrun --sdk macosx mint run swift-format swift-format lint -p -r SwapWithMe ../Tests\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

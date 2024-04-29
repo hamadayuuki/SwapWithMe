@@ -1,13 +1,13 @@
 //
 //  PartnerSearchTests.swift
-//  
+//
 //
 //  Created by 濵田　悠樹 on 2023/10/29.
 //
 
-import XCTest
 import ComposableArchitecture
 import User
+import XCTest
 
 @testable import SearchStore
 
