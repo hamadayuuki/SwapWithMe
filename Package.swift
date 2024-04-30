@@ -187,6 +187,12 @@ let featureStoreTargets: [Target] = [
         composableArchitecture,
         dependencies,
     ]),
+    .featureStore(name: "QuestionListStore", dependencies: [
+        "Request",
+        "User",
+        composableArchitecture,
+        dependencies,
+    ]),
 ]
 
 let entityTargets: [Target] = [

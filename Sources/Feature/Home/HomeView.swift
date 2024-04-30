@@ -61,7 +61,7 @@ public struct HomeView: View {
             }
 
             NavigationLink(
-                destination: questionListView(cardImage),
+                destination: questionListView(partner),
                 isActive: $isTransQuestionList
             ) {
                 EmptyView()

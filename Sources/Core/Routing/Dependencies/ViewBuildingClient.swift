@@ -17,7 +17,7 @@ import User
 @DependencyClient
 public struct ViewBuildingClient {
     // Test でunimplemented()を使用するためデフォルト値が必要なため "= {}"を追加している
-    public var questionListView: @Sendable (_ cardImage: Image) -> AnyView = { _ in AnyView(EmptyView()) }
+    public var questionListView: @Sendable (_ partner: User) -> AnyView = { _ in AnyView(EmptyView()) }
     public var homeView: @Sendable (_ myInfo: User, _ partner: User) -> AnyView = { _, _ in AnyView(EmptyView()) }
     public var partnerCardsView: @Sendable (_ store: StoreOf<PartnerCardsStore>) -> AnyView = { _ in AnyView(EmptyView()) }
     public var partnerSearchView: @Sendable (_ store: StoreOf<PartnerSearchStore>) -> AnyView = { _ in AnyView(EmptyView()) }

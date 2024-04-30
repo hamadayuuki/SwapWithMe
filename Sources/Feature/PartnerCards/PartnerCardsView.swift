@@ -70,7 +70,7 @@ public struct PartnerCardsView: View {
 
                 // 画面上部
                 HStack {
-                    Image(systemName: "person")
+                    Image(systemName: "person.fill.badge.plus")
                         .font(.system(size: 24, weight: .bold, design: .rounded))
                         .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -96,7 +96,7 @@ public struct PartnerCardsView: View {
 
                 // 画面遷移
                 NavigationLink(
-                    destination: questionListView(Image("kiyohara")),
+                    destination: questionListView(viewStore.tappedPartner),
                     isActive: viewStore.$isTransQuestionListView
                 ) {
                     EmptyView()

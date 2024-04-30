@@ -18,7 +18,7 @@ public struct PartnerCardsStore: Reducer {
         public init() {}
 
         public var followings: [User] = []
-        public var tappedPartner: User? = nil
+        public var tappedPartner: User = .stub()
         public var willLoadFollows = true  // onAppearで無駄なfetchを避けるためのフラグ
         @BindingState public var isTransQuestionListView = false
         @BindingState public var isTransMyProfileView = false
