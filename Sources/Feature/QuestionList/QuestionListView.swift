@@ -5,6 +5,8 @@
 //  Created by 濵田　悠樹 on 2023/07/31.
 //
 
+import ComposableArchitecture
+import QuestionListStore
 import ReadabilityModifier
 import SwiftUI
 import User
@@ -14,20 +16,28 @@ public struct QuestionListView: View {
     private let cardSize: CGSize = .init(width: 250 * 1.7, height: 400 * 1.7)
     var partner: User
 
-    public init(partner: User) {
+    let store: StoreOf<QuestionListStore>
+
+    public init(partner: User, store: StoreOf<QuestionListStore>) {
         self.partner = partner
+        self.store = store
     }
 
     public var body: some View {
-        ScrollView {
-            VStack(spacing: 32) {
-                ZStack {
-                    card(partner: partner)
-                }
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
+            ScrollView {
+                VStack(spacing: 32) {
+                    ZStack {
+                        card(partner: self.partner)
+                    }
 
-                // TODO: - ユーザー情報追加
+                    // TODO: - ユーザー情報追加
+                }
+                .fitToReadableContentGuide()
             }
-            .fitToReadableContentGuide()
+            .onAppear {
+                viewStore.send(.onAppear(self.partner))
+            }
         }
     }
 
@@ -67,6 +77,11 @@ public struct QuestionListView: View {
 
 struct QuestionListView_Previews: PreviewProvider {
     static var previews: some View {
-        QuestionListView(partner: User.stub())
+        QuestionListView(
+            partner: User.stub(),
+            store: Store(initialState: QuestionListStore.State()) {
+                QuestionListStore()
+            }
+        )
     }
 }

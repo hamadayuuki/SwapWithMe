@@ -16,6 +16,7 @@ import ComposableArchitecture
 import Dependencies
 import MyProfileStore
 import PartnerCardsStore
+import QuestionListStore
 import ReadabilityModifier
 import Routing
 import SwiftUI
@@ -96,7 +97,12 @@ public struct PartnerCardsView: View {
 
                 // 画面遷移
                 NavigationLink(
-                    destination: questionListView(viewStore.tappedPartner),
+                    destination: questionListView(
+                        viewStore.tappedPartner,
+                        Store(initialState: QuestionListStore.State()) {
+                            QuestionListStore()
+                        }
+                    ),
                     isActive: viewStore.$isTransQuestionListView
                 ) {
                     EmptyView()

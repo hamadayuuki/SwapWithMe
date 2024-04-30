@@ -16,25 +16,18 @@ public struct QuestionListStore: Reducer {
     public struct State: Equatable {
         public init() {}
 
-        public var user: User? = nil
-        public var tappedTransButton = false
+        public var partner: User = .stub()
     }
 
     public enum Action: Equatable {
-        case tappedButton(User?)
-        case bindingTappedTransButton(Bool)
+        case onAppear(User)
     }
 
     public var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
-            case .tappedButton(let user):
-                state.user = user
-                state.tappedTransButton = true
-                return .none
-
-            case .bindingTappedTransButton(let ver):
-                state.tappedTransButton = ver
+            case .onAppear(let partner):
+                state.partner = partner
                 return .none
             }
         }
