@@ -10,24 +10,7 @@ import SwiftUI
 import User
 import ViewComponents
 
-private struct Question {
-    let title: String
-    let description: String
-}
-
 public struct QuestionListView: View {
-    private let questions: [Question] = [
-        .init(title: "愛犬の名前と品種", description: "あなたの愛犬の名前と品種は何ですか？その子を選んだ理由や特徴を教えてください。"),
-        .init(title: "人付き合いの楽しみ", description: "だーはまさん と テスト3さん はどちらもフレンドリーな性格です。お互いの人付き合いや交友関係について話すことで、人に対するアプローチや友情について共有することができます。"),
-        .init(title: "おしゃれキャンプアイテム", description: "アウトドアに行く時、可愛いデザインや機能性で気に入っているアイテムはありますか？"),
-        .init(title: "新しい場所の発見", description: "新しい場所への興味を共有することができます。A8さんはアウトドア派なので、お互いに新しい場所やスポットの情報を交換し、未知の場所を訪れる楽しみを共有することができます。"),
-        .init(title: "ミュニケーションのスタイルについて", description: "コミュニケーションに対するアプローチや考え方について話すことができます。例えば、「シャイな方とお話しするとき、どのようなコミュニケーションが心地よいと思いますか？」と質問することで、お互いのコミュニケーションのスタイルについて共有することができます。"),
-        .init(title: "友情の大切さ", description: "どちらもフレンドリーな性格であり、友情について話すことができます。お互いの友情の価値や大切さについて語り、友人関係の築き方や維持方法についてアドバイスを交換することで、より豊かな友情を育むヒントを得ることができます。"),
-        .init(title: "ペットの話題", description: "テスト3さん はペットを飼っているため、お互いのペットについて話すことができます。例えば、「ペットを飼っているんですね。どんなペットを飼っているんですか？一緒に過ごす時間は楽しいですか？」と尋ねることで、ペットに関する共通の話題から会話が始まります。"),
-        .init(title: "おすすめの犬とのデートスポット", description: "犬と一緒に楽しめる、おしゃれや可愛いスポットのおすすめはありますか？"),
-        .init(title: "愛犬との思い出の写真", description: "愛犬とのアウトドアの思い出で、特にお気に入りの写真や場面はありますか？"),
-        .init(title: "アウトドアファッション", description: "アウトドア活動時に気を付けているファッションやアクセサリーについて、何か特別なポイントやおすすめのブランドはありますか？"),
-    ]
     private let cardSize: CGSize = .init(width: 250 * 1.7, height: 400 * 1.7)
     var partner: User
 
@@ -42,9 +25,7 @@ public struct QuestionListView: View {
                     card(partner: partner)
                 }
 
-                ForEach(0..<questions.count) { i in
-                    questionText(questionNum: i, question: questions[i])
-                }
+                // TODO: - ユーザー情報追加
             }
             .fitToReadableContentGuide()
         }
@@ -81,17 +62,6 @@ public struct QuestionListView: View {
             .font(.system(size: 12, weight: .medium, design: .rounded))
         }
         .foregroundColor(.white)
-    }
-
-    private func questionText(questionNum: Int, question: Question) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("Q\(questionNum + 1) : \(question.title)？")
-                .font(.system(size: 18, weight: .semibold, design: .rounded))
-
-            Text("\(question.description)")
-                .font(.system(size: 16, weight: .regular, design: .rounded))
-                .foregroundColor(.gray)
-        }
     }
 }
 
