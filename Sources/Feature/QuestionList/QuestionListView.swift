@@ -28,15 +28,15 @@ public struct QuestionListView: View {
             ScrollView {
                 VStack(spacing: 32) {
                     ZStack {
-                        card(partner: self.partner)
+                        card(partner: viewStore.partner)
                     }
 
                     // TODO: - ユーザー情報追加
                 }
+                .onAppear {
+                    viewStore.send(.onAppear(partner))
+                }
                 .fitToReadableContentGuide()
-            }
-            .onAppear {
-                viewStore.send(.onAppear(self.partner))
             }
         }
     }
