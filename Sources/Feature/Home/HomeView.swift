@@ -6,8 +6,10 @@
 //
 
 import AudioToolbox
+import ComposableArchitecture
 import Dependencies
 import PopupView
+import QuestionListStore
 import ReadabilityModifier
 import Routing
 import SwiftUI
@@ -61,7 +63,12 @@ public struct HomeView: View {
             }
 
             NavigationLink(
-                destination: questionListView(cardImage),
+                destination: questionListView(
+                    partner,
+                    Store(initialState: QuestionListStore.State()) {
+                        QuestionListStore()
+                    }
+                ),
                 isActive: $isTransQuestionList
             ) {
                 EmptyView()

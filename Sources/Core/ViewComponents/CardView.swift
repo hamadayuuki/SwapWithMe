@@ -12,10 +12,12 @@ public struct CardView: View {
     @State private var cardImage: Image = Image("")
     let user: User
     let cardSize: CGSize
+    let fontSize: CGFloat
 
-    public init(user: User, cardSize: CGSize = .init(width: 250, height: 400)) {
+    public init(user: User, cardSize: CGSize = .init(width: 250, height: 400), fontSize: CGFloat = 12.0) {
         self.user = user
         self.cardSize = cardSize
+        self.fontSize = fontSize
     }
 
     public var body: some View {
@@ -54,14 +56,14 @@ public struct CardView: View {
     private func partnerInfo(name: String, age: Int, affiliation: String) -> some View {
         VStack(spacing: 6) {
             Text("\(name)")
-                .font(.system(size: 12, weight: .bold, design: .rounded))
+                .font(.system(size: fontSize, weight: .bold, design: .rounded))
 
             HStack(spacing: 6) {
                 Text("\(age)歳")
 
                 Text("\(affiliation)")
             }
-            .font(.system(size: 8, weight: .medium, design: .rounded))
+            .font(.system(size: fontSize - 4.0, weight: .medium, design: .rounded))
         }
         .foregroundColor(.white)
     }

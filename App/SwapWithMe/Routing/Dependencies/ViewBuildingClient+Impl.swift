@@ -20,8 +20,8 @@ import User
 extension ViewBuildingClient: DependencyKey {
     public static var liveValue: ViewBuildingClient {
         return .init(
-            questionListView: { cardImage in
-                return AnyView(QuestionListView(cardImage: cardImage, partner: User.stub()))
+            questionListView: { partner, store in
+                return AnyView(QuestionListView(partner: partner, store: store))
             },
             homeView: { (myInfo, partner) in
                 return AnyView(HomeView(myInfo: myInfo, partner: partner))

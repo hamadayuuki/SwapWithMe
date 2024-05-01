@@ -80,6 +80,7 @@ let coreTargets: [Target] = [
         "PartnerCardsStore",
         "SearchStore",
         "MyProfileStore",
+        "QuestionListStore",
         composableArchitecture,
         dependencies,
         dependenciesMacros,
@@ -110,6 +111,8 @@ let featureTargets: [Target] = [
         "ViewComponents",
         "User",
         "Routing",
+        "QuestionListStore",
+        composableArchitecture,
         readabilityModifier,
         popupView,
         nuke,
@@ -117,11 +120,13 @@ let featureTargets: [Target] = [
     .feature(name: "QuestionList", dependencies: [
         "ViewComponents",
         "User",
+        "QuestionListStore",
         readabilityModifier,
         popupView,
     ]),
     .feature(name: "PartnerCards", dependencies: [
         "PartnerCardsStore",
+        "QuestionListStore",
         "MyProfileStore",
         "ViewComponents",
         "User",
@@ -184,6 +189,12 @@ let featureStoreTargets: [Target] = [
     .featureStore(name: "MyProfileStore", dependencies: [
         "Relationship",
         "Request",
+        composableArchitecture,
+        dependencies,
+    ]),
+    .featureStore(name: "QuestionListStore", dependencies: [
+        "Request",
+        "User",
         composableArchitecture,
         dependencies,
     ]),
