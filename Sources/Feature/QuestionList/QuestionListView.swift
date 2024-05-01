@@ -14,10 +14,9 @@ import ViewComponents
 
 public struct QuestionListView: View {
     private let cardSize: CGSize = .init(width: 250 * 1.7, height: 400 * 1.7)
-    var partner: User
 
+    let partner: User
     let store: StoreOf<QuestionListStore>
-
     public init(partner: User, store: StoreOf<QuestionListStore>) {
         self.partner = partner
         self.store = store
@@ -27,9 +26,7 @@ public struct QuestionListView: View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             ScrollView {
                 VStack(spacing: 32) {
-                    ZStack {
-                        card(partner: viewStore.partner)
-                    }
+                    card(partner: viewStore.partner)
 
                     // TODO: - ユーザー情報追加
                 }
