@@ -19,11 +19,14 @@ import PartnerCardsStore
 import QuestionListStore
 import ReadabilityModifier
 import Routing
+import Search  // QRScanView
 import SwiftUI
 import User
 import ViewComponents
 
 public struct PartnerCardsView: View {
+    @State private var transToQRScanView = false
+
     @Dependency(\.viewBuildingClient.questionListView) var questionListView
     @Dependency(\.viewBuildingClient.myProfileView) var myProfileView
 
@@ -71,9 +74,18 @@ public struct PartnerCardsView: View {
 
                 // 画面上部
                 HStack {
-                    Image(systemName: "person.fill.badge.plus")
-                        .font(.system(size: 24, weight: .bold, design: .rounded))
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    NavigationLink(
+                        destination: QRScanView(),
+                        isActive: $transToQRScanView
+                    ) {
+                        Button(action: {
+                            transToQRScanView = true
+                        }) {
+                            Image(systemName: "person.fill.badge.plus")
+                                .font(.system(size: 24, weight: .bold, design: .rounded))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                    }
 
                     Text("SwapWithMe")
                         .font(.system(size: 24, weight: .bold, design: .rounded))
