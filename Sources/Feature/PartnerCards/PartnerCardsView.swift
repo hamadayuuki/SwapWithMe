@@ -29,6 +29,7 @@ public struct PartnerCardsView: View {
 
     @Dependency(\.viewBuildingClient.questionListView) var questionListView
     @Dependency(\.viewBuildingClient.myProfileView) var myProfileView
+    @Dependency(\.viewBuildingClient.qrScanView) var qrScanView
 
     let store: StoreOf<PartnerCardsStore>
 
@@ -75,7 +76,7 @@ public struct PartnerCardsView: View {
                 // 画面上部
                 HStack {
                     NavigationLink(
-                        destination: QRScanView(),
+                        destination: qrScanView(),
                         isActive: $transToQRScanView
                     ) {
                         Button(action: {
