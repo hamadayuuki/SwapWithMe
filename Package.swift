@@ -153,6 +153,7 @@ let featureTargets: [Target] = [
         "ViewComponents",
         "Routing",
         codeScanner,
+        popupView,
         readabilityModifier,
         composableArchitecture,
         dependencies,

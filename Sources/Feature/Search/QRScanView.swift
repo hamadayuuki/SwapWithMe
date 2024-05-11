@@ -6,11 +6,15 @@
 //
 
 import CodeScanner
+import PopupView
 import SwiftUI
 import User
+import ViewComponents
 
 public struct QRScanView: View {
     private let user: User = .stub()
+    @State private var isNext = false
+    @State private var isConfirmPopup = false
 
     public init() {}
 
@@ -36,6 +40,7 @@ public struct QRScanView: View {
 
                 Button(action: {
                     print("tached partner search button")
+                    isConfirmPopup = true
                 }) {
                     Image(systemName: "magnifyingglass")
                         .frame(width: 20, height: 20)
@@ -44,6 +49,17 @@ public struct QRScanView: View {
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }
             }
+        }
+        .popup(
+            isPresented: $isConfirmPopup
+        ) {
+            ConfirmCard(title: "ユーザーが見つかりました", description: "ユーザー1", isNext: $isNext)
+        } customize: {
+            $0
+                .type(.default)
+                .animation(.easeOut(duration: 0.5))
+                .closeOnTap(false)
+                .backgroundColor(.black.opacity(0.3))
         }
         .ignoresSafeArea()
     }
