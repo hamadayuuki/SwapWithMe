@@ -11,11 +11,13 @@ public struct ConfirmCard: View {
     let title: String
     let description: String
     var isNext: Binding<Bool>
+    var onClose: () -> Void
 
-    public init(title: String, description: String, isNext: Binding<Bool>) {
+    public init(title: String, description: String, isNext: Binding<Bool>, onClose: @escaping () -> Void) {
         self.title = title
         self.description = description
         self.isNext = isNext
+        self.onClose = onClose
     }
 
     public var body: some View {
@@ -39,6 +41,7 @@ public struct ConfirmCard: View {
 
                 Button(action: {
                     print("move")
+                    onClose()
                 }) {
                     Text("閉じる")
                         .font(.system(size: 18, weight: .regular, design: .rounded))
@@ -59,5 +62,5 @@ public struct ConfirmCard: View {
 }
 
 #Preview {
-    ConfirmCard(title: "title", description: "description", isNext: .constant(false))
+    ConfirmCard(title: "title", description: "description", isNext: .constant(false), onClose: {})
 }

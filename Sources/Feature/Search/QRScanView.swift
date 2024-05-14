@@ -53,12 +53,17 @@ public struct QRScanView: View {
         .popup(
             isPresented: $isConfirmPopup
         ) {
-            ConfirmCard(title: "ユーザーが見つかりました", description: "ユーザー1", isNext: $isNext)
+            ConfirmCard(
+                title: "ユーザーが見つかりました", description: "ユーザー1", isNext: $isNext,
+                onClose: {
+                    isConfirmPopup = false
+                })
         } customize: {
             $0
                 .type(.default)
                 .animation(.easeOut(duration: 0.5))
                 .closeOnTap(false)
+                .dragToDismiss(false)
                 .backgroundColor(.black.opacity(0.3))
         }
         .ignoresSafeArea()
