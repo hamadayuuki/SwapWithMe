@@ -8,6 +8,7 @@
 import SwiftUI
 
 public struct ConfirmCard: View {
+    @Environment(\.dismiss) var dismiss
     let title: String
     let description: String
     var isNext: Binding<Bool>

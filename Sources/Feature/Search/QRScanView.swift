@@ -5,9 +5,9 @@
 //  Created by 濵田　悠樹 on 2024/05/11.
 //
 
-import CodeScanner
 import ComposableArchitecture
 import PopupView
+import QRScanner
 import SearchStore
 import SwiftUI
 import User
@@ -18,20 +18,15 @@ public struct QRScanView: View {
     @State private var isNext = false
     @State private var isConfirmPopup = false
     @State private var isTransPartnerSearchView = false
-    @State private var codeScannerViewID = 0
+    @State private var qrScannerViewID = 0
+    @State private var scannerResponse: Result<String, QRScanner.QRScannerError>?
 
     public init() {}
 
     public var body: some View {
         VStack(spacing: 0) {
-            // TODO: 読み取りが広角のみのため、メルカリのQRリーダーを使用する
-            CodeScannerView(codeTypes: [.qr]) { res in
-                if case let .success(res) = res {
-                    print(res.string)
-                    isConfirmPopup = true
-                }
-            }
-            .id(codeScannerViewID)
+            QRScannerViewControllerRepresentable(scannerRes: $scannerResponse)
+                .id(qrScannerViewID)
 
             VStack(spacing: 48) {
                 Text("QRコードをスキャンすると\n友だちを追加できます")
@@ -63,14 +58,27 @@ public struct QRScanView: View {
                 EmptyView()
             }
         }
+        .onChange(of: scannerResponse) { newValue in
+            switch newValue {
+            case .success(let code):
+                // TODO: - code(=UID) からユーザー情報取得
+                print(code)
+                isConfirmPopup = true
+            case .failure(let qrError):
+                print(qrError.localizedDescription)
+            case .none:
+                break
+            }
+        }
         .popup(
             isPresented: $isConfirmPopup
         ) {
             ConfirmCard(
                 title: "ユーザーが見つかりました", description: "ユーザー1", isNext: $isNext,
                 onClose: {
+                    scannerResponse = nil
                     isConfirmPopup = false
-                    codeScannerViewID += 1
+                    qrScannerViewID += 1
                 }
             )
         } customize: {
