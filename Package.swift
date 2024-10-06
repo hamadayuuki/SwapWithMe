@@ -18,6 +18,7 @@ let packageDependencies: [PackageDependency] = [
     .package(url: "https://github.com/pointfreeco/swift-dependencies", from: .init(1, 1, 0)),
     .package(url: "https://github.com/TimOliver/TOCropViewController.git", from: .init(2, 6, 1)),
     .package(url: "https://github.com/kean/Nuke.git", from: .init(12, 5, 0)),
+    .package(url: "https://github.com/mercari/QRScanner.git", from: .init(1, 9, 0)),
 ]
 
 let readabilityModifier: TargetDependency = .product(name: "ReadabilityModifier", package: "ReadabilityModifier")
@@ -32,6 +33,7 @@ let dependencies: TargetDependency = .product(name: "Dependencies", package: "sw
 let dependenciesMacros: TargetDependency = .product(name: "DependenciesMacros", package: "swift-dependencies")
 let cropViewController: TargetDependency = .product(name: "CropViewController", package: "TOCropViewController")
 let nuke: TargetDependency = .product(name: "Nuke", package: "Nuke")
+let qrScanner: TargetDependency = .product(name: "QRScanner", package: "QRScanner")
 
 // MARK: - Targets
 
@@ -131,6 +133,7 @@ let featureTargets: [Target] = [
         "ViewComponents",
         "User",
         "Routing",
+        "Search",
         readabilityModifier,
         popupView,
         composableArchitecture,
@@ -149,6 +152,8 @@ let featureTargets: [Target] = [
         "User",
         "ViewComponents",
         "Routing",
+        qrScanner,
+        popupView,
         readabilityModifier,
         composableArchitecture,
         dependencies,

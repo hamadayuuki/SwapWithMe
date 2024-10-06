@@ -24,6 +24,7 @@ public struct ViewBuildingClient {
     public var partnerSearchView: @Sendable (_ store: StoreOf<PartnerSearchStore>) -> AnyView = { _ in AnyView(EmptyView()) }
     public var appTabView: @Sendable () -> AnyView = { AnyView(EmptyView()) }
     public var myProfileView: @Sendable (_ store: StoreOf<MyProfileStore>) -> AnyView = { _ in AnyView(EmptyView()) }
+    public var qrScanView: @Sendable () -> AnyView = { AnyView(EmptyView()) }
 }
 
 // MARK: - Dependnecies
