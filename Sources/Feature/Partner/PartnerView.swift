@@ -40,7 +40,7 @@ public struct PartnerView: View {
 
     public var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            ScrollView {
+            ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 32) {
                     card(partner: viewStore.partner)
 
