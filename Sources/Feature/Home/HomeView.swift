@@ -8,8 +8,8 @@
 import AudioToolbox
 import ComposableArchitecture
 import Dependencies
+import PartnerStore
 import PopupView
-import QuestionListStore
 import ReadabilityModifier
 import Routing
 import SwiftUI
@@ -17,7 +17,7 @@ import User
 import ViewComponents
 
 public struct HomeView: View {
-    @Dependency(\.viewBuildingClient.questionListView) var questionListView
+    @Dependency(\.viewBuildingClient.partnerView) var partnerView
 
     @State var cardImage: Image = Image(uiImage: UIImage())
     @State private var translation: CGSize = .zero
@@ -27,7 +27,7 @@ public struct HomeView: View {
     @State private var swapImagesOpacity = [0.0, 0.0, 0.0]
     @State private var userInfoOpacity = 0.0
     @State private var isQuestionPopup = false
-    @State private var isTransQuestionList = false
+    @State private var isTransPartner = false
 
     let myInfo: User
     let partner: User
@@ -63,13 +63,13 @@ public struct HomeView: View {
             }
 
             NavigationLink(
-                destination: questionListView(
+                destination: partnerView(
                     partner,
-                    Store(initialState: QuestionListStore.State()) {
-                        QuestionListStore()
+                    Store(initialState: PartnerStore.State()) {
+                        PartnerStore()
                     }
                 ),
-                isActive: $isTransQuestionList
+                isActive: $isTransPartner
             ) {
                 EmptyView()
             }
@@ -78,7 +78,7 @@ public struct HomeView: View {
         .popup(
             isPresented: $isQuestionPopup
         ) {
-            SwapedPopup(myCardURL: self.myInfo.iconURL, partnerCardURL: self.partner.iconURL, isQuestionPopup: $isQuestionPopup, isTransQuestionList: $isTransQuestionList)
+            SwapedPopup(myCardURL: self.myInfo.iconURL, partnerCardURL: self.partner.iconURL, isQuestionPopup: $isQuestionPopup, isTransPartner: $isTransPartner)
         } customize: {
             $0
                 .type(.default)

@@ -16,7 +16,7 @@ import ComposableArchitecture
 import Dependencies
 import MyProfileStore
 import PartnerCardsStore
-import QuestionListStore
+import PartnerStore
 import ReadabilityModifier
 import Routing
 import Search  // QRScanView
@@ -25,9 +25,7 @@ import User
 import ViewComponents
 
 public struct PartnerCardsView: View {
-    @State private var transToQRScanView = false
-
-    @Dependency(\.viewBuildingClient.questionListView) var questionListView
+    @Dependency(\.viewBuildingClient.partnerView) var partnerView
     @Dependency(\.viewBuildingClient.myProfileView) var myProfileView
     @Dependency(\.viewBuildingClient.qrScanView) var qrScanView
 
@@ -110,13 +108,13 @@ public struct PartnerCardsView: View {
 
                 // 画面遷移
                 NavigationLink(
-                    destination: questionListView(
+                    destination: partnerView(
                         viewStore.tappedPartner,
-                        Store(initialState: QuestionListStore.State()) {
-                            QuestionListStore()
+                        Store(initialState: PartnerStore.State()) {
+                            PartnerStore()
                         }
                     ),
-                    isActive: viewStore.$isTransQuestionListView
+                    isActive: viewStore.$isTransPartnerView
                 ) {
                     EmptyView()
                 }

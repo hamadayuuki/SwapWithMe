@@ -11,13 +11,13 @@ public struct SwapedPopup: View {
     let myCardURL: URL?
     let partnerCardURL: URL?
     var isQuestionPopup: Binding<Bool>
-    var isTransQuestionList: Binding<Bool>
+    var isTransPartner: Binding<Bool>
 
-    public init(myCardURL: URL?, partnerCardURL: URL?, isQuestionPopup: Binding<Bool>, isTransQuestionList: Binding<Bool>) {
+    public init(myCardURL: URL?, partnerCardURL: URL?, isQuestionPopup: Binding<Bool>, isTransPartner: Binding<Bool>) {
         self.myCardURL = myCardURL
         self.partnerCardURL = partnerCardURL
         self.isQuestionPopup = isQuestionPopup
-        self.isTransQuestionList = isTransQuestionList
+        self.isTransPartner = isTransPartner
     }
 
     public var body: some View {
@@ -51,7 +51,7 @@ public struct SwapedPopup: View {
             VStack(spacing: 0) {
                 Button(
                     action: {
-                        isTransQuestionList.wrappedValue = true
+                        isTransPartner.wrappedValue = true
                     },
                     label: {
                         toQuestionButtonText()
