@@ -37,6 +37,9 @@ extension ViewBuildingClient: DependencyKey {
             },
             myProfileView: { store in
                 return AnyView(MyProfileView(store: store))
+            },
+            qrScanView: {
+                return AnyView(QRScanView())
             }
         )
     }
