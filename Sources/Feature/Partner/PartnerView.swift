@@ -1,12 +1,12 @@
 //
-//  QuestionListView.swift
+//  PartnerView.swift
 //
 //
 //  Created by 濵田　悠樹 on 2023/07/31.
 //
 
 import ComposableArchitecture
-import QuestionListStore
+import PartnerStore
 import ReadabilityModifier
 import SwiftUI
 import User
@@ -19,7 +19,7 @@ private struct Yahhou: Identifiable, Equatable {
     let user: String  // "myself" or "partner"
 }
 
-public struct QuestionListView: View {
+public struct PartnerView: View {
     private let cardSize: CGSize = .init(width: 250 * 1.7, height: 400 * 1.7)
     private let yahhous: [Yahhou] = [
         .init(message: "やっほう01", time: "12:00", user: "myself"),
@@ -32,8 +32,8 @@ public struct QuestionListView: View {
     ]
 
     let partner: User
-    let store: StoreOf<QuestionListStore>
-    public init(partner: User, store: StoreOf<QuestionListStore>) {
+    let store: StoreOf<PartnerStore>
+    public init(partner: User, store: StoreOf<PartnerStore>) {
         self.partner = partner
         self.store = store
     }
@@ -119,12 +119,12 @@ public struct QuestionListView: View {
     }
 }
 
-struct QuestionListView_Previews: PreviewProvider {
+struct PartnerView_Previews: PreviewProvider {
     static var previews: some View {
-        QuestionListView(
+        PartnerView(
             partner: User.stub(),
-            store: Store(initialState: QuestionListStore.State()) {
-                QuestionListStore()
+            store: Store(initialState: PartnerStore.State()) {
+                PartnerStore()
             }
         )
     }

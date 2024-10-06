@@ -16,6 +16,7 @@
 		D431A8BD2A4848EF00109710 /* SwapWithMeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D431A8BC2A4848EF00109710 /* SwapWithMeUITestsLaunchTests.swift */; };
 		D4433AA92A6F8F3A000FA106 /* Home in Frameworks */ = {isa = PBXBuildFile; productRef = D4433AA82A6F8F3A000FA106 /* Home */; };
 		D45CA13D2A5929EE00C787D6 /* SignUp in Frameworks */ = {isa = PBXBuildFile; productRef = D45CA13C2A5929EE00C787D6 /* SignUp */; };
+		D46932EC2CB2DFD20088F02A /* Partner in Frameworks */ = {isa = PBXBuildFile; productRef = D46932EB2CB2DFD20088F02A /* Partner */; };
 		D46BF3472B382732003EEDC3 /* ViewBuildingClient+Impl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46BF3462B382732003EEDC3 /* ViewBuildingClient+Impl.swift */; };
 		D47BF7332B781813007D5705 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D47BF7322B781813007D5705 /* GoogleService-Info.plist */; };
 		D482F9A92BD3CCD70049291E /* User in Frameworks */ = {isa = PBXBuildFile; productRef = D482F9A82BD3CCD70049291E /* User */; };
@@ -24,7 +25,6 @@
 		D4A9C4452B746CA10008D012 /* MyProfile in Frameworks */ = {isa = PBXBuildFile; productRef = D4A9C4442B746CA10008D012 /* MyProfile */; };
 		D4AAF5D12A7F857F00DD3D55 /* Tab in Frameworks */ = {isa = PBXBuildFile; productRef = D4AAF5D02A7F857F00DD3D55 /* Tab */; };
 		D4AAF5D32A7F99E500DD3D55 /* Search in Frameworks */ = {isa = PBXBuildFile; productRef = D4AAF5D22A7F99E500DD3D55 /* Search */; };
-		D4B2E5712A78038800E5850E /* QuestionList in Frameworks */ = {isa = PBXBuildFile; productRef = D4B2E5702A78038800E5850E /* QuestionList */; };
 		D4B2E5732A7BF1C700E5850E /* PartnerCards in Frameworks */ = {isa = PBXBuildFile; productRef = D4B2E5722A7BF1C700E5850E /* PartnerCards */; };
 		D4BC152D2A6999000029787F /* UserInfo in Frameworks */ = {isa = PBXBuildFile; productRef = D4BC152C2A6999000029787F /* UserInfo */; };
 /* End PBXBuildFile section */
@@ -71,8 +71,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4A9C4452B746CA10008D012 /* MyProfile in Frameworks */,
-				D4B2E5712A78038800E5850E /* QuestionList in Frameworks */,
 				D45CA13D2A5929EE00C787D6 /* SignUp in Frameworks */,
+				D46932EC2CB2DFD20088F02A /* Partner in Frameworks */,
 				D482F9A92BD3CCD70049291E /* User in Frameworks */,
 				D4433AA92A6F8F3A000FA106 /* Home in Frameworks */,
 				D491F86A2B2DA9380017FE80 /* Routing in Frameworks */,
@@ -217,13 +217,13 @@
 				D4A1F78C2A5EF80B0053DB95 /* ViewComponents */,
 				D4BC152C2A6999000029787F /* UserInfo */,
 				D4433AA82A6F8F3A000FA106 /* Home */,
-				D4B2E5702A78038800E5850E /* QuestionList */,
 				D4B2E5722A7BF1C700E5850E /* PartnerCards */,
 				D4AAF5D02A7F857F00DD3D55 /* Tab */,
 				D4AAF5D22A7F99E500DD3D55 /* Search */,
 				D491F8692B2DA9380017FE80 /* Routing */,
 				D4A9C4442B746CA10008D012 /* MyProfile */,
 				D482F9A82BD3CCD70049291E /* User */,
+				D46932EB2CB2DFD20088F02A /* Partner */,
 			);
 			productName = SwapWithMe;
 			productReference = D431A89C2A4848EE00109710 /* SwapWithMe.app */;
@@ -706,6 +706,10 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = SignUp;
 		};
+		D46932EB2CB2DFD20088F02A /* Partner */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Partner;
+		};
 		D482F9A82BD3CCD70049291E /* User */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = User;
@@ -729,10 +733,6 @@
 		D4AAF5D22A7F99E500DD3D55 /* Search */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Search;
-		};
-		D4B2E5702A78038800E5850E /* QuestionList */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = QuestionList;
 		};
 		D4B2E5722A7BF1C700E5850E /* PartnerCards */ = {
 			isa = XCSwiftPackageProductDependency;

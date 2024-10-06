@@ -16,7 +16,7 @@ import ComposableArchitecture
 import Dependencies
 import MyProfileStore
 import PartnerCardsStore
-import QuestionListStore
+import PartnerStore
 import ReadabilityModifier
 import Routing
 import SwiftUI
@@ -24,7 +24,7 @@ import User
 import ViewComponents
 
 public struct PartnerCardsView: View {
-    @Dependency(\.viewBuildingClient.questionListView) var questionListView
+    @Dependency(\.viewBuildingClient.partnerView) var partnerView
     @Dependency(\.viewBuildingClient.myProfileView) var myProfileView
 
     let store: StoreOf<PartnerCardsStore>
@@ -97,13 +97,13 @@ public struct PartnerCardsView: View {
 
                 // 画面遷移
                 NavigationLink(
-                    destination: questionListView(
+                    destination: partnerView(
                         viewStore.tappedPartner,
-                        Store(initialState: QuestionListStore.State()) {
-                            QuestionListStore()
+                        Store(initialState: PartnerStore.State()) {
+                            PartnerStore()
                         }
                     ),
-                    isActive: viewStore.$isTransQuestionListView
+                    isActive: viewStore.$isTransPartnerView
                 ) {
                     EmptyView()
                 }

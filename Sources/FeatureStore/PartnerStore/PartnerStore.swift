@@ -1,5 +1,5 @@
 //
-//  QuestionListStore.swift
+//  PartnerStore.swift
 //
 //
 //  Created by 濵田　悠樹 on 2024/05/01.
@@ -10,7 +10,7 @@ import Dependencies
 import Request
 import User
 
-public struct QuestionListStore: Reducer {
+public struct PartnerStore: Reducer {
     public init() {}
 
     public struct State: Equatable {

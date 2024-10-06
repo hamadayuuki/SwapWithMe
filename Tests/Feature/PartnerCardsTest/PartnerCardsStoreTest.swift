@@ -95,7 +95,7 @@ final class PartnerCardsStoreTest: XCTestCase {
 
         await testStore.send(.tappedPartnerCard(self.following)) { state in
             state.tappedPartner = self.following
-            state.isTransQuestionListView = true
+            state.isTransPartnerView = true
         }
     }
 }

@@ -9,8 +9,8 @@ import ComposableArchitecture
 import Dependencies
 import Home
 import MyProfile
+import Partner
 import PartnerCards
-import QuestionList
 import Routing
 import Search
 import SwiftUI
@@ -20,8 +20,8 @@ import User
 extension ViewBuildingClient: DependencyKey {
     public static var liveValue: ViewBuildingClient {
         return .init(
-            questionListView: { partner, store in
-                return AnyView(QuestionListView(partner: partner, store: store))
+            partnerView: { partner, store in
+                return AnyView(PartnerView(partner: partner, store: store))
             },
             homeView: { (myInfo, partner) in
                 return AnyView(HomeView(myInfo: myInfo, partner: partner))
