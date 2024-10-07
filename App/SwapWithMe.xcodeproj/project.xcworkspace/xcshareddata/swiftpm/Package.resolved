@@ -10,12 +10,12 @@
       }
     },
     {
-      "identity" : "codescanner",
+      "identity" : "alamofire",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/twostraws/CodeScanner",
+      "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
-        "revision" : "944a6a1ca030dbd890e647a678e718fc2115d35c",
-        "version" : "2.4.1"
+        "revision" : "f455c2975872ccd2d9c81594c658af65716e9b9a",
+        "version" : "5.9.1"
       }
     },
     {
@@ -124,6 +124,15 @@
       "state" : {
         "revision" : "ec957ccddbcc710ccc64c9dcbd4c7006fcf8b73a",
         "version" : "2.2.0"
+      }
+    },
+    {
+      "identity" : "qrscanner",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mercari/QRScanner.git",
+      "state" : {
+        "revision" : "b9bbcabf8ce54974b56a63f403abc43930684314",
+        "version" : "1.9.0"
       }
     },
     {

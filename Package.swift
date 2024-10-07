@@ -19,6 +19,7 @@ let packageDependencies: [PackageDependency] = [
     .package(url: "https://github.com/TimOliver/TOCropViewController.git", from: .init(2, 6, 1)),
     .package(url: "https://github.com/kean/Nuke.git", from: .init(12, 5, 0)),
     .package(url: "https://github.com/mercari/QRScanner.git", from: .init(1, 9, 0)),
+    .package(url: "https://github.com/Alamofire/Alamofire.git", from: .init(5, 9, 1)),
 ]
 
 let readabilityModifier: TargetDependency = .product(name: "ReadabilityModifier", package: "ReadabilityModifier")
@@ -27,6 +28,7 @@ let fireAuth: TargetDependency = .product(name: "FirebaseAuth", package: "fireba
 let fireStore: TargetDependency = .product(name: "FirebaseFirestore", package: "firebase-ios-sdk")
 let fireStoreSwift: TargetDependency = .product(name: "FirebaseFirestoreSwift", package: "firebase-ios-sdk")
 let fireStorage: TargetDependency = .product(name: "FirebaseStorage", package: "firebase-ios-sdk")
+let fireMessaging: TargetDependency = .product(name: "FirebaseMessaging", package: "firebase-ios-sdk")
 let popupView: TargetDependency = .product(name: "PopupView", package: "PopupView")
 let composableArchitecture: TargetDependency = .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
 let dependencies: TargetDependency = .product(name: "Dependencies", package: "swift-dependencies")
@@ -34,6 +36,7 @@ let dependenciesMacros: TargetDependency = .product(name: "DependenciesMacros", 
 let cropViewController: TargetDependency = .product(name: "CropViewController", package: "TOCropViewController")
 let nuke: TargetDependency = .product(name: "Nuke", package: "Nuke")
 let qrScanner: TargetDependency = .product(name: "QRScanner", package: "QRScanner")
+let alamofire: TargetDependency = .product(name: "Alamofire", package: "Alamofire")
 
 // MARK: - Targets
 
@@ -224,6 +227,8 @@ let dataTargets: [Target] = [
         fireStore,
         fireStoreSwift,
         fireStorage,
+        fireMessaging,   // TODO: メインでFCMリクエスト確認できたら消す
+        alamofire,   // TODO: メインでFCMリクエスト確認できたら消す
         dependencies,
         dependenciesMacros,
     ]),
