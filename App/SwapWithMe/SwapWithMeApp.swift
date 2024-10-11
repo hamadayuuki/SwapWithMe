@@ -31,8 +31,9 @@ struct SwapWithMeApp: App {
             ZStack {
                 Button(action: {
                     let fcmToken = "e5RzqRyTZ0ekm0qkefjCmA:APA91bE_qgtm2p_INWfH2XCusKmfB3cg0kv8_2r5UxgtXK_NKu3tORB8aA90XPWo2lparlR4vf2xRmRTNWvfuYya-Dxsn8E5itvvGI5L3IN6tU7BqoR6a8NFWfQ50rhCNddcbXeNvvBI"
+                    let imageURL = "https://firebasestorage.googleapis.com/v0/b/swapwithme-51570.appspot.com/o/Users%2Ficon%2Ficon-square.png?alt=media&token=25639758-efed-45e8-97f4-c7157bfa401d"
                     Task {
-                        try await PushNotification().post(fcmToken: fcmToken, title: "タイトル", body: "テキストが入ります")
+                        try await PushNotification().post(fcmToken: fcmToken, title: "タイトル", body: "テキストが入ります", imageURL: imageURL)
                     }
                 }) {
                     Text("FCM!!!")
@@ -52,6 +53,10 @@ struct SwapWithMeApp: App {
             //                    })
             //            }
             //            SelectSignUpMethodView()
+
+            //            NavigationView {
+            //                SelectSignUpMethodView()
+            //            }
         }
     }
 }
@@ -64,7 +69,7 @@ struct PushNotificationResponse: Codable {
 final class PushNotification {
 
     // POST
-    public func post(fcmToken: String, title: String, body: String) async throws -> PushNotificationResponse {
+    public func post(fcmToken: String, title: String, body: String, imageURL: String) async throws -> PushNotificationResponse {
         /// FCM用APIのURL
         let url = "https://fcm-push-notification-api.onrender.com/pushNotification/"
         let headers: HTTPHeaders = [
@@ -74,6 +79,7 @@ final class PushNotification {
             "user_fcm_token": fcmToken,
             "title": title,
             "body": body,
+            "imageURL": imageURL,
         ]
         return try await AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
             .serializingDecodable(PushNotificationResponse.self)
