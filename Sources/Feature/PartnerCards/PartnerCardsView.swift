@@ -29,6 +29,8 @@ public struct PartnerCardsView: View {
     @Dependency(\.viewBuildingClient.myProfileView) var myProfileView
     @Dependency(\.viewBuildingClient.qrScanView) var qrScanView
 
+    @State private var transToQRScanView = false
+
     let store: StoreOf<PartnerCardsStore>
 
     public init(store: StoreOf<PartnerCardsStore>) {
