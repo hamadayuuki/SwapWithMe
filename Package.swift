@@ -235,6 +235,7 @@ let dataTargets: [Target] = [
     .data(name: "API", dependencies: [
         "Error"
     ]),
+    .data(name: "Cache", dependencies: [])
 ]
 
 let featureTestTargets: [Target] = [
