@@ -16,6 +16,7 @@
 		D431A8BD2A4848EF00109710 /* SwapWithMeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D431A8BC2A4848EF00109710 /* SwapWithMeUITestsLaunchTests.swift */; };
 		D4433AA92A6F8F3A000FA106 /* Home in Frameworks */ = {isa = PBXBuildFile; productRef = D4433AA82A6F8F3A000FA106 /* Home */; };
 		D449ADCD2D3BB7B700FBC07E /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = D449ADCC2D3BB7B700FBC07E /* Cache */; };
+		D449ADCF2D3BE15200FBC07E /* Request in Frameworks */ = {isa = PBXBuildFile; productRef = D449ADCE2D3BE15200FBC07E /* Request */; };
 		D45CA13D2A5929EE00C787D6 /* SignUp in Frameworks */ = {isa = PBXBuildFile; productRef = D45CA13C2A5929EE00C787D6 /* SignUp */; };
 		D46932EC2CB2DFD20088F02A /* Partner in Frameworks */ = {isa = PBXBuildFile; productRef = D46932EB2CB2DFD20088F02A /* Partner */; };
 		D46BF3472B382732003EEDC3 /* ViewBuildingClient+Impl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46BF3462B382732003EEDC3 /* ViewBuildingClient+Impl.swift */; };
@@ -97,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D449ADCF2D3BE15200FBC07E /* Request in Frameworks */,
 				D4A9C4452B746CA10008D012 /* MyProfile in Frameworks */,
 				D45CA13D2A5929EE00C787D6 /* SignUp in Frameworks */,
 				D46932EC2CB2DFD20088F02A /* Partner in Frameworks */,
@@ -273,6 +275,7 @@
 				D482F9A82BD3CCD70049291E /* User */,
 				D46932EB2CB2DFD20088F02A /* Partner */,
 				D449ADCC2D3BB7B700FBC07E /* Cache */,
+				D449ADCE2D3BE15200FBC07E /* Request */,
 			);
 			productName = SwapWithMe;
 			productReference = D431A89C2A4848EE00109710 /* SwapWithMe.app */;
@@ -876,6 +879,10 @@
 		D449ADCC2D3BB7B700FBC07E /* Cache */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Cache;
+		};
+		D449ADCE2D3BE15200FBC07E /* Request */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Request;
 		};
 		D45CA13C2A5929EE00C787D6 /* SignUp */ = {
 			isa = XCSwiftPackageProductDependency;
