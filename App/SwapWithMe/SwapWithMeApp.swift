@@ -157,10 +157,8 @@ extension AppDelegate: MessagingDelegate {
         guard let fcmToken = fcmToken else { return }
 
         let userDefaultClient: UserDefaultsClientProtocol = UserDefaultsClient()
-        print(String(describing: fcmToken))
         Task {
             await userDefaultClient.setString(fcmToken, "fcmToken")
-            if let token = userDefaultClient.stringForKey("fcmToken") { print(token) }
         }
     }
 
