@@ -5,7 +5,7 @@
 //  Created by 濵田　悠樹 on 2023/06/25.
 //
 
-import Alamofire
+import Cache
 import ComposableArchitecture
 import FirebaseAuth
 import FirebaseCore
@@ -14,6 +14,7 @@ import Home
 import MyProfile
 import PartnerCards
 import PartnerCardsStore
+import Request
 import SignUp
 import SwiftUI
 import Tab
@@ -33,7 +34,8 @@ struct SwapWithMeApp: App {
                     let fcmToken = "e5RzqRyTZ0ekm0qkefjCmA:APA91bE_qgtm2p_INWfH2XCusKmfB3cg0kv8_2r5UxgtXK_NKu3tORB8aA90XPWo2lparlR4vf2xRmRTNWvfuYya-Dxsn8E5itvvGI5L3IN6tU7BqoR6a8NFWfQ50rhCNddcbXeNvvBI"
                     let imageURL = "https://firebasestorage.googleapis.com/v0/b/swapwithme-51570.appspot.com/o/Users%2Ficon%2Ficon-square.png?alt=media&token=25639758-efed-45e8-97f4-c7157bfa401d"
                     Task {
-                        try await PushNotification().post(fcmToken: fcmToken, title: "タイトル", body: "テキストが入ります", imageURL: imageURL)
+                        let pushNotification = PushNotification()
+                        let _ = try await pushNotification.post(fcmToken: fcmToken, title: "タイトル", body: "テキストが入ります", imageURL: imageURL)
                     }
                 }) {
                     Text("FCM!!!")
@@ -58,32 +60,6 @@ struct SwapWithMeApp: App {
             //                SelectSignUpMethodView()
             //            }
         }
-    }
-}
-
-struct PushNotificationResponse: Codable {
-    let id: Int
-    let result: String
-}
-
-final class PushNotification {
-
-    // POST
-    public func post(fcmToken: String, title: String, body: String, imageURL: String) async throws -> PushNotificationResponse {
-        /// FCM用APIのURL
-        let url = "https://fcm-push-notification-api.onrender.com/pushNotification/"
-        let headers: HTTPHeaders = [
-            "Contenttype": "application/json"
-        ]
-        let parameters: [String: Any] = [
-            "user_fcm_token": fcmToken,
-            "title": title,
-            "body": body,
-            "imageURL": imageURL,
-        ]
-        return try await AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
-            .serializingDecodable(PushNotificationResponse.self)
-            .value
     }
 }
 
@@ -154,7 +130,11 @@ extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("Firebase registration token: \(String(describing: fcmToken))")
         guard let fcmToken = fcmToken else { return }
-        print(String(describing: fcmToken))
+
+        let userDefaultClient: UserDefaultsClientProtocol = UserDefaultsClient()
+        Task {
+            await userDefaultClient.setString(fcmToken, "fcmToken")
+        }
     }
 
 }

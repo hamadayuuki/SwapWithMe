@@ -224,17 +224,18 @@ let dataTargets: [Target] = [
         "User",
         "Error",
         "Relationship",
+        alamofire,
+        fireMessaging,
         fireStore,
         fireStoreSwift,
         fireStorage,
-        fireMessaging,   // TODO: メインでFCMリクエスト確認できたら消す
-        alamofire,   // TODO: メインでFCMリクエスト確認できたら消す
         dependencies,
         dependenciesMacros,
     ]),
     .data(name: "API", dependencies: [
         "Error"
     ]),
+    .data(name: "Cache", dependencies: [])
 ]
 
 let featureTestTargets: [Target] = [
