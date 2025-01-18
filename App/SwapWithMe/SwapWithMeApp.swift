@@ -6,6 +6,7 @@
 //
 
 import Alamofire
+import Cache
 import ComposableArchitecture
 import FirebaseAuth
 import FirebaseCore
@@ -154,7 +155,13 @@ extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("Firebase registration token: \(String(describing: fcmToken))")
         guard let fcmToken = fcmToken else { return }
+
+        let userDefaultClient: UserDefaultsClientProtocol = UserDefaultsClient()
         print(String(describing: fcmToken))
+        Task {
+            await userDefaultClient.setString(fcmToken, "fcmToken")
+            if let token = userDefaultClient.stringForKey("fcmToken") { print(token) }
+        }
     }
 
 }

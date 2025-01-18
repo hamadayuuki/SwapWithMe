@@ -7,14 +7,16 @@
 
 import Foundation
 
-protocol UserDefaultsClientProtocol {
+public protocol UserDefaultsClientProtocol {
     // Get
+    var stringForKey: (String) -> String? { get }
     var boolForKey: (String) -> Bool { get }
     var dataForKey: (String) -> Data? { get }
     var doubleForKey: (String) -> Double { get }
     var integerForKey: (String) -> Int { get }
 
     // Set
+    var setString: (String, String) async -> Void { get }
     var setBool: (Bool, String) async -> Void { get }
     var setData: (Data?, String) async -> Void { get }
     var setDouble: (Double, String) async -> Void { get }
@@ -24,53 +26,65 @@ protocol UserDefaultsClientProtocol {
     var delete: (String) -> Void { get }
 }
 
-struct UserDefaultsClient: UserDefaultsClientProtocol {
-    
-    var boolForKey: (String) -> Bool = { key in
+public struct UserDefaultsClient: UserDefaultsClientProtocol {
+    public init() {}
+
+    public var stringForKey: (String) -> String? = { key in
+        UserDefaults.standard.string(forKey: key)
+    }
+
+    public var boolForKey: (String) -> Bool = { key in
         UserDefaults.standard.bool(forKey: key)
     }
 
-    var dataForKey: (String) -> Data? = { key in
+    public var dataForKey: (String) -> Data? = { key in
         UserDefaults.standard.data(forKey: key)
     }
 
-    var doubleForKey: (String) -> Double = { key in
+    public var doubleForKey: (String) -> Double = { key in
         UserDefaults.standard.double(forKey: key)
     }
 
-    var integerForKey: (String) -> Int = { key in
+    public var integerForKey: (String) -> Int = { key in
         UserDefaults.standard.integer(forKey: key)
     }
 
-    var setBool: (Bool, String) async -> Void = { value, key in
+    public var setBool: (Bool, String) async -> Void = { value, key in
         await withCheckedContinuation { continuation in
             UserDefaults.standard.set(value, forKey: key)
             continuation.resume()
         }
     }
 
-    var setData: (Data?, String) async -> Void = { value, key in
+    public var setString: (String, String) async -> Void = { value, key in
         await withCheckedContinuation { continuation in
             UserDefaults.standard.set(value, forKey: key)
             continuation.resume()
         }
     }
 
-    var setDouble: (Double, String) async -> Void = { value, key in
+    public var setData: (Data?, String) async -> Void = { value, key in
         await withCheckedContinuation { continuation in
             UserDefaults.standard.set(value, forKey: key)
             continuation.resume()
         }
     }
 
-    var setInteger: (Int, String) async -> Void = { value, key in
+    public var setDouble: (Double, String) async -> Void = { value, key in
         await withCheckedContinuation { continuation in
             UserDefaults.standard.set(value, forKey: key)
             continuation.resume()
         }
     }
 
-    var delete: (String) -> Void = { key in
+    public var setInteger: (Int, String) async -> Void = { value, key in
+        await withCheckedContinuation { continuation in
+            UserDefaults.standard.set(value, forKey: key)
+            continuation.resume()
+        }
+    }
+
+    public var delete: (String) -> Void = { key in
         UserDefaults.standard.removeObject(forKey: key)
     }
 
